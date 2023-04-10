@@ -1,0 +1,29 @@
+.container {
+    width: 500px;
+    height: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-top: 0;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    margin: 10px 0;
+  }
+ 
+  
+  .button-container button {
+    margin-left: 10px;
+  }
