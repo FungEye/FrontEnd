@@ -30,15 +30,17 @@ function Box() {
   return (
 
       <div class="container">
-        <h1>Thats certainly a box</h1>
+        <h1>Funghi Box</h1>
+        <div class="measurements">
         <ul> 
         <li>Humidity: {measurement.humidity}</li>
         <li>Temperature: {measurement.temperature}</li>
         <li>boxId: {measurement.boxId} </li>
         <li>timestamp: {measurement.timestamp}</li>
         </ul>
+          </div>
         <div class="button-container">
-        <button onClick={handleClick}>Fetch the conditions</button>
+        <button class="button-54" onClick={handleClick}>Fetch latest conditions</button>
         </div>
       </div>
   );
