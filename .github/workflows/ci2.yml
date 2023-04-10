@@ -27,6 +27,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: git config user.email ${{github.event.pusher.email}}
-    - run: git config user.name ${{github.event.pusher.name}}
+    - run: git config --global url.https://${{ secrets.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 }}@github.com/
     - run: npm run deploy
