@@ -40,7 +40,7 @@ function Box() {
         </ul>
           </div>
         <div class="button-container">
-        <button class="button-54" onClick={handleClick}>Fetch latest conditions</button>
+        <button class="button-md" onClick={handleClick}>Fetch latest conditions</button>
         </div>
       </div>
   );
