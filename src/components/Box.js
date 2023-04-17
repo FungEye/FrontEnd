@@ -1,48 +1,75 @@
 import "./css/Box.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Box() {
-  const initialMeasurement = {
-    temperature: 0,
-    humidity: 0,
-    timestamp: 0,
-    boxId: 0,
-  };
-  const [measurement, setMeasurement] = useState(initialMeasurement);
+  const [measurement, setMeasurement] = useState(null);
+  const [timestamp, setTimestamp] = useState(null);
 
-  function handleClick(event) {
-    fetch(`https://1rygl.wiremockapi.cloud/1/measurements/current`)
+  function handleClick() {
+    fetch(`https://fungeye-383609.ey.r.appspot.com/box1/measurements/latest`)
       .then((response) => {
         if (response.ok) return response.json();
       })
       .then((m) => {
-        const temp = {
-          temperature: m.temperature,
-          humidity: m.humidity,
-          timestamp: m.timestamp,
-          boxId: m.boxId,
-        };
-        setMeasurement({ ...measurement, ...temp });
+        setMeasurement(m);
+        setTimestamp(initTimestampString(m.id.dateTime));
       })
       .catch((err) => console.log(err));
   }
 
-  return (
+  useEffect(() => {
+    handleClick();
+  }, []);
 
-      <div class="container">
-        <h1>Funghi Box</h1>
-        <div class="measurements">
-        <ul> 
-        <li>Humidity: {measurement.humidity}</li>
-        <li>Temperature: {measurement.temperature}</li>
-        <li>boxId: {measurement.boxId} </li>
-        <li>timestamp: {measurement.timestamp}</li>
+  function initTimestampString(x) {
+    let result = ``;
+    if (x.day < 10) {
+      result += "0";
+    }
+    result += `${x.day}/`;
+    if (x.month < 10) {
+      result += "0";
+    }
+    result += `${x.month}/`;
+    result += `${x.year} `;
+    if (x.hour < 10) {
+      result += "0";
+    }
+    result += `${x.hour}:`;
+    if (x.minute < 10) {
+      result += "0";
+    }
+    result += `${x.minute}:`;
+
+    if (x.second < 10) {
+      result += "0";
+    }
+    result += `${x.second}`;
+
+    return result;
+  }
+
+  return (
+    <div className="container">
+      <h1>Funghi Box</h1>
+      <div className="measurements">
+        <ul>
+          <li>Humidity: {measurement == null ? -1 : measurement.humidity}</li>
+          <li>
+            Temperature: {measurement == null ? -1 : measurement.temperature}
+          </li>
+          <li>boxId: {measurement == null ? -1 : measurement.id.boxId} </li>
+          <li>
+            timestamp: {timestamp == null ? "Loading date..." : timestamp}
+          </li>
         </ul>
-          </div>
-        <div class="button-container">
-        <button class="button-md" onClick={handleClick}>Fetch latest conditions</button>
-        </div>
       </div>
+      <div className="button-container">
+        <button className="button-md" onClick={handleClick}>
+          Fetch latest conditions
+        </button>
+      </div>
+    </div>
   );
 }
 
