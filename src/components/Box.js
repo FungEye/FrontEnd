@@ -1,25 +1,26 @@
 import "./css/Box.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 function Box() {
   const [measurement, setMeasurement] = useState(null);
   const [timestamp, setTimestamp] = useState(null);
 
-  function handleClick() {
+  const handleClick = useCallback(() => {
     fetch(`https://fungeye-383609.ey.r.appspot.com/box1/measurements/latest`)
-      .then((response) => {
-        if (response.ok) return response.json();
-      })
-      .then((m) => {
-        setMeasurement(m);
-        setTimestamp(initTimestampString(m.id.dateTime));
-      })
-      .catch((err) => console.log(err));
-  }
+    .then((response) => {
+      if (response.ok) return response.json();
+    })
+    .then((m) => {
+      setMeasurement(m);
+      setTimestamp(initTimestampString(m.id.dateTime));
+    })
+    .catch((err) => console.log(err));
+  }, []
+  )
 
   useEffect(() => {
     handleClick();
-  }, []);
+  }, [handleClick]);
 
   function initTimestampString(x) {
     let result = ``;
