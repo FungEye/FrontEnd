@@ -7,16 +7,15 @@ function Box() {
 
   const handleClick = useCallback(() => {
     fetch(`https://fungeye-383609.ey.r.appspot.com/box1/measurements/latest`)
-    .then((response) => {
-      if (response.ok) return response.json();
-    })
-    .then((m) => {
-      setMeasurement(m);
-      setTimestamp(initTimestampString(m.id.dateTime));
-    })
-    .catch((err) => console.log(err));
-  }, []
-  )
+      .then((response) => {
+        if (response.ok) return response.json();
+      })
+      .then((m) => {
+        setMeasurement(m);
+        setTimestamp(initTimestampString(m.id.dateTime));
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     handleClick();
@@ -59,16 +58,13 @@ function Box() {
           <li>
             Temperature: {measurement == null ? -1 : measurement.temperature}
           </li>
-          <li>boxId: {measurement == null ? -1 : measurement.id.boxId} </li>
+          <li>CO2: {measurement == null ? -1 : 0}</li>
+          <li>Light: {measurement == null ? -1 : 0}</li>
           <li>
-            timestamp: {timestamp == null ? "Loading date..." : timestamp}
+            Box number: {measurement == null ? -1 : measurement.id.boxId}{" "}
           </li>
+          <li>{timestamp == null ? "Loading date..." : timestamp}</li>
         </ul>
-      </div>
-      <div className="button-container">
-        <button className="button-md" onClick={handleClick}>
-          Fetch latest conditions
-        </button>
       </div>
     </div>
   );
