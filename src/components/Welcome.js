@@ -6,7 +6,7 @@ function Welcome() {
   const navigate = useNavigate();
 
   function handleClick(event) {
-    navigate("/FrontEnd/box");
+    navigate("/box");
   }
 
   return (
