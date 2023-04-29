@@ -1,0 +1,88 @@
+:root {
+    --brown: #763D2D;
+    --beige: #F6DCAF; 
+  }
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.ultra {
+    font-family: 'Ultra', serif;
+    font-weight: 400;
+}
+
+.poppins {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.bg-dark {
+    background-color: var(--brown);
+}
+
+.bg-light {
+    background-color: var(--beige);
+}
+
+.text-dark {
+    color: var(--brown);
+}
+
+.text-light {
+    color: var(--beige);
+}
+
+.border-dark {
+    border: 1.7px solid var(--brown) !important;
+}
+
+.rounded-20 {
+    border-radius: 20px;
+}
+
+.align-self-center {
+    display: flex;
+    align-self: center;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.jc-space-around {
+    display: flex;
+    justify-content: space-around;
+}
+
+.jc-space-evenly {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.jc-space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.jc-center {
+    display: flex;
+    justify-content: center;
+}
+
+
+.faded {
+    background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.20), rgba(117, 19, 19, 0.3));
+}
+
+
+.slightly-faded {
+    background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.20), rgba(117, 19, 27, 0.15));
+
+}
