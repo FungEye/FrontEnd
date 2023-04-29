@@ -16,7 +16,7 @@ function MushroomDetailsModal(props){
     return(
         <div className="md-modal">
             <div className="md-modal-content">
-                <div className="md-modal-header align-items-center bg-dark row jc-space-between text-light poppins">
+                <div className="md-modal-header align-items-center bg-dark row jc-space-between text-light poppins very-slightly-faded">
                     <div>Mushroom Details</div><XButton onClick={() => setShow(false)}/>
                 </div>
                 <div className="md-modal-body bg-light column very-slightly-faded">
