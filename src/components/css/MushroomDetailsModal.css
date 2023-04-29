@@ -1,0 +1,52 @@
+.md-modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.md-modal-content {
+    width: 500px;
+}
+
+.md-modal-header {
+    padding: 10px 10px 10px 15px;
+    border-radius: 10px 10px 0 0;
+
+}
+
+.md-modal-body {
+    padding: 10px 30px 20px 30px;
+    border-radius: 0 0 10px 10px
+}
+
+.md-modal-body-title{
+    font-size: 48px;
+}
+
+.md-modal-body-top {}
+
+.align-text-start {
+    align-items: flex-start;
+}
+
+.md-modal-info-graphs {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.btns {
+    gap: 10px;
+}
+
+.md-modal-info-text {
+    width: 200px;
+    text-align: left;
+    gap: 5px;
+}

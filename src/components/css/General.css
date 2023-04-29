@@ -52,6 +52,11 @@
     align-self: center;
 }
 
+.align-items-center {
+    display: flex;
+    align-items: center;
+}
+
 .w-100 {
     width: 100%;
 }
@@ -84,5 +89,22 @@
 
 .slightly-faded {
     background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.20), rgba(117, 19, 27, 0.15));
+
+}
+
+.very-slightly-faded {
+    background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.20), rgba(117, 19, 27, 0.10));
+
+}
+
+.circled {
+    border-radius: 50%;
+}
+
+.raise:hover,
+.raise:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em rgba(111, 28, 28, 0.6);
+  transform: translateY(-0.25em);
+  transition: 0.25s
 
 }
