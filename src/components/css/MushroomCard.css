@@ -3,10 +3,9 @@
     height: 160px;
     display: flex;
     align-items: center;
-    margin: 50px;
 }
 
-.mushroom-card-image { 
+.img-100px { 
     width: 100px;
     height: 100%;
 }
