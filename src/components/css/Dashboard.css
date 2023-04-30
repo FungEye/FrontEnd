@@ -5,7 +5,8 @@
     flex-direction: column;
     height: 100%;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 70px;
+    width: 850px;
 
     
 }
@@ -50,7 +51,7 @@
 }
 
 .measurements div {
-    background-color: #ddd;
+    background-color: rgba(245, 246, 252, 0.20);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     padding: 20px;
@@ -65,10 +66,17 @@
 }
 
 .footer {
-background-color: #ddd;
+background-color: rgba(245, 246, 252, 0.20);
 color: black;
 font-size: 1.5em;
 padding: 20px;
 text-align: center;
-width: 43%;
+width: 60%;
+}
+
+.dashboard-card {
+    display: grid;
+    place-items: center;
+    width: 270px;
+    height: 160px;
 }
