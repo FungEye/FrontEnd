@@ -6,7 +6,7 @@ function Welcome() {
   const navigate = useNavigate();
 
   function handleClick(event) {
-    navigate("/box");
+    navigate("/dashboard");
   }
 
   return (
@@ -14,7 +14,7 @@ function Welcome() {
       <div>
         <h1 className="text">Welcome!</h1>
         <button className="button-54" onClick={handleClick}>
-          Set up a box!
+          Go to dashboard!
         </button>
       </div>
     </div>
