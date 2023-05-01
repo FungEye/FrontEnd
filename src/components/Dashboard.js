@@ -1,6 +1,6 @@
 import "./css/Dashboard.css";
 import { useState, useEffect, useCallback } from "react";
-
+import ButtonSecondary from "./ButtonSecondary";
 function Dashboard(){
 	const [measurement, setMeasurement] = useState(null);
 	const [timestamp, setTimestamp] = useState(null);
@@ -55,11 +55,14 @@ function Dashboard(){
 		<div class="header ultra text-dark ">
 			Dashboard
 		</div>
-        <div class="time ultra text-dark"> {timestamp == null ? "Loading date..." : timestamp} </div>
+		<p class="box time ultra text-dark">Box # {measurement == null ? -1 : measurement.id.boxId}</p>
+        <div class="time ultra text-dark row jc-space-evenly w-100 "> <ButtonSecondary text="<"/>{timestamp == null ? "Loading date..." : timestamp}<ButtonSecondary text=">"/> </div>
+		<div class=" time ultra text-dark">Status:</div>
+		<div class="status"></div>
 		<div class="measurements">
 			<div class = "border-dark">
 				<h2 class="ultra text-dark">Temperature</h2>
-				<p>{measurement == null ? -1 : measurement.temperature}&deg;C</p>
+				<p >{measurement == null ? -1 : measurement.temperature}&deg;C</p>
 			</div>
 			<div class = "border-dark">
 				 <h2 class="ultra text-dark">Humidity</h2>
@@ -76,8 +79,8 @@ function Dashboard(){
 		</div>
 		<div class="footer border-dark">
         <h3 class="ultra text-dark">Ideal Temperature:</h3>
-				<p>69&deg;C</p>
-                <h4>Suggestion: blablabalbabla</h4>
+				<p class="ultra text-dark">?&deg;C</p>
+                <p class="ultra text-dark">Suggestion:</p>
 		</div>
 	</div>
     </div>
