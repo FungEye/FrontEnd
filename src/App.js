@@ -4,7 +4,6 @@ import Welcome from "./components/Welcome";
 import Box from "./components/Box";
 import Dashboard from "./components/Dashboard";
 import MushroomCardPage from "./components/MushroomCardPage";
-import ConditionsCarousel from "./components/ConditionsCarousel";
 
 
 function App() {
@@ -42,100 +41,6 @@ function App() {
     "imgsrc": "https://static.vecteezy.com/system/resources/thumbnails/009/974/113/small_2x/isolated-enoki-mushroom-cutout-on-white-background-free-png.png"
   }
 
-  let shroomdata = {
-    "temperature": [
-        {
-            "phase": "spawn",
-            "temperature": [
-                24,
-                28
-            ]
-        },
-        {
-            "phase": "fruiting",
-            "temperature": [
-                26,
-                27
-            ]
-        },
-        {
-            "phase": "putinhing",
-            "temperature": [
-                22,
-                24
-            ]
-        }
-    ],
-    "humidity": [
-        {
-            "phase": "spawn",
-            "humidity": [
-                90,
-                100
-            ]
-        },
-        {
-            "phase": "fruiting",
-            "humidity": [
-                80,
-                86
-            ]
-        },
-        {
-            "phase": "putinhing",
-            "humidity": [
-                86,
-                94
-            ]
-        }
-    ],
-    "co2": [
-        {
-            "phase": "spawn",
-            "co2": [
-                300,
-                400
-            ]
-        },
-        {
-            "phase": "fruiting",
-            "co2": [
-                580,
-                670
-            ]
-        },
-        {
-            "phase": "putinhing",
-            "co2": [
-                300,
-                350
-            ]
-        }
-    ],
-    "light": [
-        {
-            "phase": "spawn",
-            "light": [
-                50,
-                100
-            ]
-        },
-        {
-            "phase": "fruiting",
-            "light": [
-                150,
-                170
-            ]
-        },
-        {
-            "phase": "putinhing",
-            "light": [
-                120,
-                150
-            ]
-        }
-    ]
-  }
 
   
 
@@ -148,7 +53,6 @@ function App() {
         <Route path="/box" element={<Box />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/shroomcard" element={<MushroomCardPage mushroomList={mushroomList} />} />
-        <Route path="/carousel" element={<ConditionsCarousel conditions={shroomdata}/>} />
       </Routes>
     </div>
   );

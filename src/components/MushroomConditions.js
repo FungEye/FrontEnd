@@ -1,4 +1,4 @@
-import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar } from "recharts"
+import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar } from "recharts"
 import "./css/MushroomConditions.css"
 
 
@@ -33,9 +33,6 @@ function MushroomConditions(props) {
         default:
             break;
     }
-
-    
-
     
     return (
         <div>
