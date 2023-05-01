@@ -4,6 +4,7 @@ import Welcome from "./components/Welcome";
 import Box from "./components/Box";
 import Dashboard from "./components/Dashboard";
 import MushroomCardPage from "./components/MushroomCardPage";
+import ConditionsCarousel from "./components/ConditionsCarousel";
 
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
     "shroomname": "Oyster",
     "imgsrc": "https://dtgxwmigmg3gc.cloudfront.net/imagery/assets/derivations/icon/256/256/true/eyJpZCI6ImIwNTMzOTI0Njk2ZGJlOTIzZTUyMDdlYWEyMjM5NGY3LmpwZyIsInN0b3JhZ2UiOiJwdWJsaWNfc3RvcmUifQ?signature=7bb476fd5c2f284f475942393f2edca779877dd2fb10e2574b78ae751080535c",
     "origin": "Cuba",
-    "description": "This mushroom is picked by putinhas very often in Connecticut."
+    "description": "This mushroom is picked by putinhas very often in Connecticut.",
+    "conditions" : null
   }
 
   let enoki = {
@@ -40,6 +42,103 @@ function App() {
     "imgsrc": "https://static.vecteezy.com/system/resources/thumbnails/009/974/113/small_2x/isolated-enoki-mushroom-cutout-on-white-background-free-png.png"
   }
 
+  let shroomdata = {
+    "temperature": [
+        {
+            "phase": "spawn",
+            "temperature": [
+                24,
+                28
+            ]
+        },
+        {
+            "phase": "fruiting",
+            "temperature": [
+                26,
+                27
+            ]
+        },
+        {
+            "phase": "putinhing",
+            "temperature": [
+                22,
+                24
+            ]
+        }
+    ],
+    "humidity": [
+        {
+            "phase": "spawn",
+            "humidity": [
+                90,
+                100
+            ]
+        },
+        {
+            "phase": "fruiting",
+            "humidity": [
+                80,
+                86
+            ]
+        },
+        {
+            "phase": "putinhing",
+            "humidity": [
+                86,
+                94
+            ]
+        }
+    ],
+    "co2": [
+        {
+            "phase": "spawn",
+            "co2": [
+                300,
+                400
+            ]
+        },
+        {
+            "phase": "fruiting",
+            "co2": [
+                580,
+                670
+            ]
+        },
+        {
+            "phase": "putinhing",
+            "co2": [
+                300,
+                350
+            ]
+        }
+    ],
+    "light": [
+        {
+            "phase": "spawn",
+            "light": [
+                50,
+                100
+            ]
+        },
+        {
+            "phase": "fruiting",
+            "light": [
+                150,
+                170
+            ]
+        },
+        {
+            "phase": "putinhing",
+            "light": [
+                120,
+                150
+            ]
+        }
+    ]
+  }
+
+  
+
   let mushroomList = [oyster, enoki, reishi, shiitake, wine_cap, pioppino]
 
   return (
@@ -49,6 +148,7 @@ function App() {
         <Route path="/box" element={<Box />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/shroomcard" element={<MushroomCardPage mushroomList={mushroomList} />} />
+        <Route path="/carousel" element={<ConditionsCarousel conditions={shroomdata}/>} />
       </Routes>
     </div>
   );
