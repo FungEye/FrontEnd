@@ -101,14 +101,17 @@
     border-radius: 50%;
 }
 
-.raise:hover,
-.raise:focus {
+.raise:hover {
     box-shadow: 0 0.5em 0.5em -0.4em rgba(111, 28, 28, 0.6);
     transform: translateY(-0.25em);
     transition: 0.25s
 }
 
 .raise:active {
-    transform: translateY(0.25em);
-    transition: 0.25s;
+    transform: translateX(-0.1em);
+    transition: 0.25s
+}
+
+.raise:focus {
+    box-shadow: none;
 }

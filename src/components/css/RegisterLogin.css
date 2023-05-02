@@ -83,3 +83,9 @@ img {
         flex-direction: column;
     }
 }
+
+.error {
+    font-size: 12px;
+    width: 100%;
+    color: rgb(165, 113, 113);
+}
