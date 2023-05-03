@@ -1,0 +1,18 @@
+.back-button{
+    position:absolute;
+    left: 0;
+    color: #26311D;
+    text-decoration: underline;
+}
+
+.choose-box-page{
+    background-color: #eed1ab;
+}
+
+.box-cards {
+    display:flex;
+    flex-wrap: wrap;
+    padding:50px;
+    justify-content:center; 
+    gap:15px 20px;
+}
