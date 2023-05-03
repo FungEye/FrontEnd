@@ -1,0 +1,12 @@
+.button {
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 13px;
+    font-size: 16px;
+    transition: 0.25s
+}
+
+.button:hover, .button:focus {
+  cursor: pointer;
+}

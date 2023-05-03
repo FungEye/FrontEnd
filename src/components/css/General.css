@@ -23,6 +23,11 @@
     font-weight: 400;
 }
 
+.varela {
+    font-family: 'Varela Round', sans-serif;
+    font-weight: 400;
+}
+
 .bg-dark {
     background-color: var(--brown);
 }
@@ -43,9 +48,18 @@
     border: 1.7px solid var(--brown) !important;
 }
 
+.rounded-10 {
+    border-radius: 10px;
+}
+
 .rounded-20 {
     border-radius: 20px;
 }
+
+.mt-15{
+    margin-top: 15px
+}
+
 
 .align-self-center {
     display: flex;
@@ -60,6 +74,12 @@
 .w-100 {
     width: 100%;
 }
+
+
+.pt-15 {
+    padding-top: 15px;
+}
+
 
 .jc-space-around {
     display: flex;

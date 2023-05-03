@@ -1,0 +1,13 @@
+
+.x-button {
+    width: 30px;
+    height: 30px;
+    transition: 0.25s;
+}
+
+.brighten:focus, .brighten:hover {
+    background-color: rgba(255, 233, 214);
+    box-shadow: 0 0 0.6em 0.05em rgba(255, 233, 214, 0.8);
+    cursor: pointer;
+}
+
