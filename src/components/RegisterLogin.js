@@ -1,6 +1,6 @@
 import { useSignIn } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import pic from "./images/mushroom.png";
 import "./css/RegisterLogin.css";
 import "./css/General.css";
@@ -20,7 +20,9 @@ export default function RegisterLogin() {
 
   const signIn = useSignIn();
   const navigate = useNavigate();
-
+  useEffect(() => {
+    clearInputs();
+  }, []);
   async function request(type, hashedPassword) {
     const rawResponse = await fetch(`https://72v0d.wiremockapi.cloud/${type}`, {
       method: "POST",
@@ -32,10 +34,8 @@ export default function RegisterLogin() {
     });
     if (rawResponse.ok) {
       const content = await rawResponse.json();
-      console.log(content);
+
       saveToken(content.token);
-    } else {
-      console.log(rawResponse);
     }
   }
 
@@ -52,12 +52,10 @@ export default function RegisterLogin() {
   async function registerClick() {
     if (isLogin) {
       setIsLogin(false);
+      clearInputs();
     } else {
       if (validate()) {
-        console.log("register");
-        console.log(username, password);
         const hashedPassword = bcrypt.hashSync(password, salt);
-        console.log(hashedPassword);
         await request("register", hashedPassword);
         clearInputs();
       }
@@ -65,17 +63,13 @@ export default function RegisterLogin() {
   }
 
   function backClick() {
-    console.log("back");
     clearInputs();
     setIsLogin(true);
   }
 
   async function loginClick() {
     if (validate()) {
-      console.log("login");
-      console.log(username, password);
       const hashedPassword = bcrypt.hashSync(password, salt);
-      console.log(hashedPassword);
       await request("login", hashedPassword);
       clearInputs();
     }
@@ -84,28 +78,19 @@ export default function RegisterLogin() {
   function clearInputs() {
     setUsername("");
     setPassword("");
-    setPassword("");
+    setConfirmedPassword("");
     setError("");
   }
 
   function validate() {
-    var upperCaseLetters = /[A-Z]/g;
-    var numbers = /[0-9]/g;
     if (
       username === "" ||
       password === "" ||
       (confirmedPassword === "" && !isLogin)
     ) {
       setError("Fields cannot be empty.");
-    } else if (password.includes(password)) {
+    } else if (password.includes(username)) {
       setError("Password cannot include your username.");
-    } else if (
-      !password.value.match(upperCaseLetters) ||
-      !password.value.match(numbers)
-    ) {
-      setError(
-        "Password must contain at least one number and one uppercase letter."
-      );
     } else if (!isLogin && confirmedPassword !== password) {
       setError("Passwords are not the same.");
     } else {
@@ -113,8 +98,6 @@ export default function RegisterLogin() {
     }
     return false;
   }
-
-  //<button onClick={generateJWT}>Login and get JWT</button>
   return (
     <div className="loginCard bg-light">
       <div className="titleInputMushroomContainer">
@@ -122,14 +105,17 @@ export default function RegisterLogin() {
           <div className="titleContainer ultra">
             {isLogin ? "Login" : "Register"}
           </div>
-          <div>
+          <div className="inputsContainer">
             <div className="inputContainer">
               <Input
                 title="Username"
                 placeholder="Your username..."
                 value={username}
                 type="text"
-                onChange={(event) => setUsername(event.target.value)}
+                onChange={(event) => {
+                  setUsername(event.target.value);
+                  setError("");
+                }}
               />
             </div>
             <div className="inputContainer">
@@ -138,7 +124,15 @@ export default function RegisterLogin() {
                 placeholder="Your password..."
                 value={password}
                 type="password"
-                onChange={(event) => setPassword(event.target.value)}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                  setError("");
+                }}
+                onKeyPress={(event) => {
+                  if (event.key === "Enter") {
+                    isLogin ? loginClick() : registerClick();
+                  }
+                }}
               />
             </div>
             {!isLogin ? (
@@ -148,13 +142,21 @@ export default function RegisterLogin() {
                   placeholder="Confirm password..."
                   value={confirmedPassword}
                   type="password"
-                  onChange={(event) => setConfirmedPassword(event.target.value)}
+                  onChange={(event) => {
+                    setConfirmedPassword(event.target.value);
+                    setError("");
+                  }}
+                  onKeyPress={(event) => {
+                    if (event.key === "Enter") {
+                      registerClick();
+                    }
+                  }}
                 />
               </div>
             ) : null}
-            {error !== "" ? (
+            <div className="inputContainer">
               <span className="poppins error">{error}</span>
-            ) : null}
+            </div>
           </div>
         </div>
         <div className="mushroomContainer">

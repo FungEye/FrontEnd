@@ -10,6 +10,7 @@ function Input(props) {
         value={props.value}
         onChange={props.onChange}
         type={props.type}
+        onKeyPress={props.onKeyPress}
       />
     </>
   );
