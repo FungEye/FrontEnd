@@ -108,7 +108,6 @@ function Dashboard() {
          <OneCondition title="Humidity" measurement={(measurement == null ? null : measurement.humidity)} unit="%"/>
          <OneCondition title="CO2" measurement={(measurement == null ? null : 0)} unit="ppm"/>
          <OneCondition title="Light" measurement={(measurement == null ? null : 0)} unit="lux"/>
-
         </div>
       </div>
     </div>
