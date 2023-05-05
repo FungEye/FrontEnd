@@ -1,4 +1,4 @@
-.welcomeContainer {
+.welcome-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,7 +10,7 @@
     
 }
 
-.howItWorksContainer{
+.how-it-works-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,8 +23,7 @@
     
 }
 
-
-.welcomeText {
+.welcome-text {
     font-size: 48px;
     color: #EED1AB;
     font-family:sans-serif
@@ -35,7 +34,7 @@
     color: #8f7c63;
 }
 
-.title{
+.welcome-page-title{
     font-size: 48px;
     color: #26311D;
     font-family:sans-serif
@@ -51,15 +50,13 @@
     height: 50px;
     background-color: #61734C;
     line-height:50px;
-    
+    align-items: center;
+    width:100%;
+    color: rgb(204, 204, 204);
 }
 
-.footerText{
-    color: rgb(170, 170, 170);
-}
 
-
-.paragraph{
+.welcome-paragraph{
     color: #61734c;
     font-family: sans-serif;
 }
