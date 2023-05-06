@@ -74,7 +74,6 @@ export default function RegisterLogin() {
       validate();
       if (error === "") {
         const hashedPassword = toHash(password);
-        console.log(hashedPassword);
         await request("register", hashedPassword);
         clearInputs();
       }
@@ -90,7 +89,6 @@ export default function RegisterLogin() {
     validate();
     if (error === "") {
       const hashedPassword = toHash(password);
-      console.log(hashedPassword);
       await request("login", hashedPassword);
       clearInputs();
     }
