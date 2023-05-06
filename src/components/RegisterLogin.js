@@ -1,14 +1,14 @@
 import { useSignIn } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import pic from "./images/mushroom.png";
+import pic from "../mushroom.png";
 import "./css/RegisterLogin.css";
 import "./css/General.css";
 import ButtonPrimary from "./ButtonPrimary";
 import ButtonSecondary from "./ButtonSecondary";
 import Input from "./Input";
 import useValidate from "../hooks/useValidate";
-
+import useHash from "../hooks/useHash";
 export default function RegisterLogin() {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
@@ -22,6 +22,7 @@ export default function RegisterLogin() {
     isLogin,
     setError,
   });
+  const hash = useHash(password);
   const signIn = useSignIn();
   const navigate = useNavigate();
 
@@ -54,28 +55,14 @@ export default function RegisterLogin() {
     navigate("/dashboard");
   }
 
-  //source: https://www.educba.com/javascript-hash/
-  function toHash(string) {
-    let hash = 0;
-    if (string.length === 0) return hash;
-    for (let i = 0; i < string.length; i++) {
-      let ch = string.charCodeAt(i);
-      hash = (hash << 5) - hash + ch;
-      hash = hash & hash;
-    }
-    return hash;
-  }
-
   async function registerClick() {
     if (isLogin) {
       setIsLogin(false);
       clearInputs();
     } else {
-      validate();
-      if (error === "") {
-        const hashedPassword = toHash(password);
-        console.log(hashedPassword);
-        await request("register", hashedPassword);
+      if (validate()) {
+        const hashedPassword = hash();
+        if (hashedPassword !== 0) await request("register", hashedPassword);
         clearInputs();
       }
     }
@@ -87,11 +74,9 @@ export default function RegisterLogin() {
   }
 
   async function loginClick() {
-    validate();
-    if (error === "") {
-      const hashedPassword = toHash(password);
-      console.log(hashedPassword);
-      await request("login", hashedPassword);
+    if (validate()) {
+      const hashedPassword = hash();
+      if (hashedPassword !== 0) await request("login", hashedPassword);
       clearInputs();
     }
   }
