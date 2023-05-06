@@ -15,6 +15,7 @@ function App() {
     origin: "Cuba",
     description:
       "This mushroom is picked by putinhas very often in Connecticut.",
+    conditions: null,
   };
 
   let enoki = {

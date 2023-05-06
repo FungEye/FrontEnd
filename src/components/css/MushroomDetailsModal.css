@@ -11,7 +11,7 @@
 }
 
 .md-modal-content {
-    width: 500px;
+    width: 700px;
 }
 
 .md-modal-header {
@@ -25,6 +25,10 @@
     border-radius: 0 0 10px 10px
 }
 
+.md-modal-body-top {
+    padding-right: 20px;
+}
+
 .md-modal-body-title{
     font-size: 48px;
 }
@@ -34,17 +38,21 @@
 }
 
 .md-modal-info-graphs {
-    width: 200px;
-    height: 200px;
+    width: 330px;
+    height: 370px;
     border-radius: 10px;
 }
 
 .btns {
-    gap: 10px;
+    gap: 25px;
 }
 
 .md-modal-info-text {
-    width: 200px;
+    width: 250px;
     text-align: left;
     gap: 5px;
+}
+
+#md-modal-body-left {
+    padding-top: 20px;
 }

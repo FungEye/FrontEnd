@@ -1,0 +1,17 @@
+:root {
+    --swiper-theme-color: #763D2D;
+
+}
+
+.conditions-carousel {
+    height: 330px;
+    width: 370px;
+    background-color: white;
+    display: flex;
+   align-items: center;
+   border-radius: 20px;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    scale: 60%;
+}
