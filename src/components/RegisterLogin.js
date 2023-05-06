@@ -10,7 +10,7 @@ import Input from "./Input";
 import useValidate from "../hooks/useValidate";
 
 export default function RegisterLogin() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
