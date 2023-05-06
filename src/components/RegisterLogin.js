@@ -7,22 +7,28 @@ import "./css/General.css";
 import ButtonPrimary from "./ButtonPrimary";
 import ButtonSecondary from "./ButtonSecondary";
 import Input from "./Input";
-import bcrypt from "bcryptjs";
-import { salt } from "./Helper";
+import useValidate from "../hooks/useValidate";
 
 export default function RegisterLogin() {
-  //TODO Validate and handle error
   const [isLogin, setIsLogin] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [error, setError] = useState("");
-
+  const validate = useValidate({
+    username,
+    password,
+    confirmedPassword,
+    isLogin,
+    setError,
+  });
   const signIn = useSignIn();
   const navigate = useNavigate();
+
   useEffect(() => {
     clearInputs();
   }, []);
+
   async function request(type, hashedPassword) {
     const rawResponse = await fetch(`https://72v0d.wiremockapi.cloud/${type}`, {
       method: "POST",
@@ -34,7 +40,6 @@ export default function RegisterLogin() {
     });
     if (rawResponse.ok) {
       const content = await rawResponse.json();
-
       saveToken(content.token);
     }
   }
@@ -49,13 +54,27 @@ export default function RegisterLogin() {
     navigate("/dashboard");
   }
 
+  //source: https://www.educba.com/javascript-hash/
+  function toHash(string) {
+    var hash = 0;
+    if (string.length === 0) return hash;
+    for (let i = 0; i < string.length; i++) {
+      let ch = string.charCodeAt(i);
+      hash = (hash << 5) - hash + ch;
+      hash = hash & hash;
+    }
+    return hash;
+  }
+
   async function registerClick() {
     if (isLogin) {
       setIsLogin(false);
       clearInputs();
     } else {
-      if (validate()) {
-        const hashedPassword = bcrypt.hashSync(password, salt);
+      validate();
+      if (error === "") {
+        const hashedPassword = toHash(password);
+        console.log(hashedPassword);
         await request("register", hashedPassword);
         clearInputs();
       }
@@ -68,8 +87,10 @@ export default function RegisterLogin() {
   }
 
   async function loginClick() {
-    if (validate()) {
-      const hashedPassword = bcrypt.hashSync(password, salt);
+    validate();
+    if (error === "") {
+      const hashedPassword = toHash(password);
+      console.log(hashedPassword);
       await request("login", hashedPassword);
       clearInputs();
     }
@@ -82,22 +103,6 @@ export default function RegisterLogin() {
     setError("");
   }
 
-  function validate() {
-    if (
-      username === "" ||
-      password === "" ||
-      (confirmedPassword === "" && !isLogin)
-    ) {
-      setError("Fields cannot be empty.");
-    } else if (password.includes(username)) {
-      setError("Password cannot include your username.");
-    } else if (!isLogin && confirmedPassword !== password) {
-      setError("Passwords are not the same.");
-    } else {
-      return true;
-    }
-    return false;
-  }
   return (
     <div className="loginCard bg-light">
       <div className="titleInputMushroomContainer">
