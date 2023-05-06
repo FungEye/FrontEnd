@@ -133,9 +133,9 @@ export default function RegisterLogin() {
                   setPassword(event.target.value);
                   setError("");
                 }}
-                onKeyPress={(event) => {
+                onKeyPress={async (event) => {
                   if (event.key === "Enter") {
-                    isLogin ? loginClick() : registerClick();
+                    isLogin ? await loginClick() : await registerClick();
                   }
                 }}
               />
@@ -151,9 +151,9 @@ export default function RegisterLogin() {
                     setConfirmedPassword(event.target.value);
                     setError("");
                   }}
-                  onKeyPress={(event) => {
+                  onKeyPress={async (event) => {
                     if (event.key === "Enter") {
-                      registerClick();
+                      await registerClick();
                     }
                   }}
                 />
