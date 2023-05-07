@@ -55,7 +55,7 @@ function Welcome() {
         </p>
       </div>
 
-      <footer className="footer">Fungeye 2023</footer>
+      <div className="footer">Fungeye 2023</div>
     </div>
   );
 }

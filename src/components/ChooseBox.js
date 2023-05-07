@@ -1,54 +1,70 @@
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./css/ChooseBox.css";
-import { useState } from "react";
+import "./css/General.css";
 import BoxCard from "./BoxCard";
-import ChooseBoxModal from "./ChooseBoxModal";
 
 function ChooseBox(props) {
   const navigate = useNavigate();
-  let boxList = props.boxList;
-  const [show, setShow] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const containerRef = useRef(null);
 
-  const [box, setBox] = useState(null);
+  let boxList = props.boxList;
+
   console.log(boxList);
-  const boxCards = boxList.map((x) => (
-    <BoxCard
-      box={x}
-      showDetails={() => {
-        setBox(x);
-        setShow(true);
-      }}
-      key={x.boxnumber}
-    />
+  const lastBoxNumber = boxList.findLast((box) => box).boxNumber;
+  console.log(lastBoxNumber);
+  const boxCards = boxList.map((item) => (
+    <BoxCard box={item} lastBoxNumber={lastBoxNumber} key={item.boxNumber} />
   ));
 
-  //Change the destination
+  // Change the destination
   function handleClick(event) {
     navigate("/FrontEnd/chooseBox");
   }
-  function chosenFunction() {}
+
+  function scrollLeft() {
+    const container = containerRef.current;
+    if (container) {
+      container.scrollBy({
+        left: -600,
+        behavior: "smooth",
+      });
+    }
+  }
+
+  // Scroll container to the right
+  function scrollRight() {
+    const container = containerRef.current;
+    if (container) {
+      container.scrollBy({
+        left: 600,
+        behavior: "smooth",
+      });
+    }
+  }
 
   return (
-    <div className="choose-box-page">
-      <p className="back-button" onClick={handleClick}>
+    <div className="choose-box-container">
+      <p
+        className="align-items-left text-light back-button"
+        onClick={handleClick}
+      >
         {"<"}
         Back
       </p>
-      <h2 className="title">Box Selection</h2>
-      <br></br>
-      <h4>Vacant boxes:</h4>
-
-      <div className="box-cards">
-        {boxCards}
-        <button onClick={() => setShow(true)}>Show Modal</button>
-        <ChooseBoxModal
-          title="Boxes blabla"
-          onClose={() => setShow(false)}
-          show={show}
-          onSubmit={chosenFunction()}
-        >
-          <p> This is box box box</p>
-        </ChooseBoxModal>
+      <h1 className="poppins text-light align-items-left">Box Selection</h1>
+      <h3 className="varela text-light align-items-left">Vacant boxes:</h3>
+      <div className="box-cards-container">
+        <div className="scroll-arrow left-arrow" onClick={scrollLeft}>
+          &lt;
+        </div>
+        <div className="box-cards" ref={containerRef}>
+          {boxCards}
+        </div>
+        <div className="scroll-arrow right-arrow" onClick={scrollRight}>
+          &gt;
+        </div>
       </div>
     </div>
   );

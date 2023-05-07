@@ -46,13 +46,14 @@
     
 }
 
-.footer{
+.footer.footer{
     height: 50px;
     background-color: #61734C;
     line-height:50px;
+    
     align-items: center;
-    width:100%;
-    color: rgb(204, 204, 204);
+    width: 99.4%;
+    color: rgb(207, 207, 207);
 }
 
 

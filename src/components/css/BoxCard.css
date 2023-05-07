@@ -1,4 +1,5 @@
 .box-card {
+    flex-shrink:0;
     width:270px;
     height: 160px;
     display:flex;
