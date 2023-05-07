@@ -105,7 +105,7 @@ export default function RegisterLogin() {
     <div className="loginCard bg-light">
       <div className="titleInputMushroomContainer">
         <div className="titleInputContainer">
-          <div className="titleContainer ultra">
+          <div className="titleContainer ultra row align-items-center text-dark">
             {isLogin ? "Login" : "Register"}
           </div>
           <div className="inputsContainer">
@@ -167,13 +167,13 @@ export default function RegisterLogin() {
         </div>
       </div>
       <div className="buttonContainer">
-        <ButtonPrimary
-          text={isLogin ? "Login" : "Register"}
-          onClick={isLogin ? loginClick : registerClick}
-        />
         <ButtonSecondary
           text={isLogin ? "Register" : "Back"}
           onClick={isLogin ? registerClick : backClick}
+        />
+        <ButtonPrimary
+          text={isLogin ? "Login" : "Register"}
+          onClick={isLogin ? loginClick : registerClick}
         />
       </div>
     </div>
