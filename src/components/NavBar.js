@@ -1,8 +1,7 @@
 import "./css/General.css";
 import "./css/NavBar.css";
 import pic from "../mushroom.png";
-import { useIsAuthenticated } from "react-auth-kit";
-import { useAuthUser, useSignOut } from "react-auth-kit";
+import { useAuthUser, useSignOut, useIsAuthenticated } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = (props) => {
