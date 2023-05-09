@@ -7,6 +7,18 @@
     background-color: #eed1ab;
 }
 
+.box-creation{
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+  margin-top:20px;
+
+}
+
+.box-creation .button-new {
+  margin-top: 10px;
+}
+
 .choose-box-container {
     position: relative;
   }

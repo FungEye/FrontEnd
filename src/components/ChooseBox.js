@@ -3,12 +3,15 @@ import { useNavigate } from "react-router-dom";
 import "./css/ChooseBox.css";
 import "./css/General.css";
 import BoxCard from "./BoxCard";
+import ButtonPrimary from "./ButtonPrimary";
+import CreateBoxModal from "./CreateBoxModal";
 
 function ChooseBox(props) {
   const navigate = useNavigate();
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const containerRef = useRef(null);
 
+  const containerRef = useRef(null);
+  const [show, setShow] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   let boxList = props.boxList;
 
   console.log(boxList);
@@ -44,6 +47,19 @@ function ChooseBox(props) {
     }
   }
 
+  function createNewBox() {
+    fetch("https://fungeye-383609.ey.r.appspot.com/boxx", {
+      method: "POST",
+    })
+      .then((response) => {
+        if (response.ok) return response.json();
+      })
+      .then((m) => {
+        console.log(m.id);
+      })
+      .catch((err) => setErrorMessage(err.message));
+  }
+
   return (
     <div className="choose-box-container">
       <p
@@ -65,6 +81,21 @@ function ChooseBox(props) {
         <div className="scroll-arrow right-arrow" onClick={scrollRight}>
           &gt;
         </div>
+      </div>
+      <div className="box-creation">
+        <h1 className="poppins text-light align-items-left">
+          Set up a new box:
+        </h1>
+        <br></br>
+        <ButtonPrimary text="NEW" onClick={() => setShow(true)} />
+        <CreateBoxModal
+          title="Boxes"
+          onClose={() => setShow(false)}
+          show={show}
+          onSubmit={createNewBox}
+          lastBoxNumber={props.lastBoxNumber}
+          err={errorMessage}
+        />
       </div>
     </div>
   );
