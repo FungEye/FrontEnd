@@ -5,7 +5,7 @@ import Dashboard from "./components/Dashboard";
 import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
-
+import NavBar from "./components/NavBar";
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -51,6 +51,7 @@ function App() {
 
   return (
     <div className="App">
+      <NavBar />
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route
