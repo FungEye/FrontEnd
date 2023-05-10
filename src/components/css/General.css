@@ -65,6 +65,7 @@
     margin-top: 15px
 }
 
+
 .align-self-center {
     display: flex;
     align-self: center;
@@ -89,13 +90,20 @@
     gap: 20px;
 }
 
+.align-items-left {
+    display:flex;
+    align-items:left;
+}
+
 .w-100 {
     width: 100%;
 }
 
+
 .pt-15 {
     padding-top: 15px;
 }
+
 
 .jc-space-around {
     display: flex;

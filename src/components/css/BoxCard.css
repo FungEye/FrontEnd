@@ -1,0 +1,24 @@
+.box-card {
+    flex-shrink:0;
+    width:270px;
+    height: 160px;
+    display:flex;
+    align-items: center;
+}
+
+.img-100px{
+    width: 100px;
+    height: 100%;
+}
+
+.bc-top-row {
+    box-sizing:border-box;
+    padding:0 15px;
+    font-size: 15 px;
+}
+
+.bc-box-name {
+    font-size: 24px;
+    word-wrap:break-word;
+    word-break:break-all;
+}
