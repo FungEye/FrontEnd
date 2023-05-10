@@ -3,7 +3,11 @@ import "./css/Button.css";
  
 
 function ButtonSecondary(props) {
-    return <button className="button bg-light text-dark border-dark poppins raise slightly-faded" onClick={props.onClick}>{props.text}</button>
+    let classes = "button bg-light text-dark border-dark poppins raise slightly-faded";
+    if (props.wide) {
+        classes += " wide";
+    }
+    return <button className={classes} onClick={props.onClick}>{props.text}</button>
 }
 
 export default ButtonSecondary
