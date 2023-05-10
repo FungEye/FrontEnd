@@ -22,17 +22,10 @@ function AddNewSpeciesForm(props){
   const handleLightChange = (event) => {
     setLux(event.target.value);
   };
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    setTemperature('');
-    setHumidity('');
-    setCo2('');
-    setLux('');
-  }
   return (
       <div className="bomb">
           <h2 className="ultra text-dark">{title}</h2>
-          <label>
+          <label className="poppins text-dark">
               Temperature:
               <input
                 type="number"
@@ -41,7 +34,7 @@ function AddNewSpeciesForm(props){
                 onChange={handleTemperatureChange}
               />
             </label>
-            <label>
+            <label className="poppins text-dark">
               Humidity:
               <input
                 type="number"
@@ -50,7 +43,7 @@ function AddNewSpeciesForm(props){
                 onChange={handleHumidityChange}
               />
             </label>
-            <label>
+            <label className="poppins text-dark">
               CO2:
               <input
                 type="number"
@@ -59,7 +52,7 @@ function AddNewSpeciesForm(props){
                 onChange={handleCo2Change}
               />
             </label>
-            <label>
+            <label className="poppins text-dark">
               Light:
               <input
                 type="number"
