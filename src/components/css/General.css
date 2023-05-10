@@ -1,5 +1,6 @@
 :root {
     --brown: #763D2D;
+    --light-brown: #ac8b71;
     --beige: #F6DCAF;
 }
 
@@ -30,6 +31,10 @@
 
 .bg-dark {
     background-color: var(--brown);
+}
+
+.bg-med {
+    background-color: var(--light-brown);
 }
 
 .bg-light {
@@ -66,9 +71,23 @@
     align-self: center;
 }
 
+.align-self-start {
+    display: flex;
+    align-self: flex-start;
+}
+
+.justify-self-start {
+    display: flex;
+    justify-self: flex-start;
+}
+
 .align-items-center {
     display: flex;
     align-items: center;
+}
+
+.gap-20 {
+    gap: 20px;
 }
 
 .align-items-left {
@@ -140,3 +159,7 @@
 .raise:focus {
     box-shadow: none;
 }
+
+.wide {
+    width: 175px !important;
+  }
