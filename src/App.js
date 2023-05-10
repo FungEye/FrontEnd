@@ -1,6 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Welcome from "./components/Welcome";
+import ChooseBox from "./components/ChooseBox";
 import Dashboard from "./components/Dashboard";
 import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
@@ -47,12 +48,74 @@ function App() {
       "https://static.vecteezy.com/system/resources/thumbnails/009/974/113/small_2x/isolated-enoki-mushroom-cutout-on-white-background-free-png.png",
   };
 
+  let box1 = {
+    boxNumber: 1,
+  };
+
+  let box2 = {
+    boxNumber: 2,
+  };
+
+  let box3 = {
+    boxNumber: 3,
+  };
+
+  let box4 = {
+    boxNumber: 4,
+  };
+
+  let box5 = {
+    boxNumber: 5,
+  };
+
+  let box6 = {
+    boxNumber: 6,
+  };
+
+  let box7 = {
+    boxNumber: 7,
+  };
+
+  let box8 = {
+    boxNumber: 8,
+  };
+
+  let box9 = {
+    boxNumber: 9,
+  };
+
+  let box10 = {
+    boxNumber: 10,
+  };
+
+  let box11 = {
+    boxNumber: 11,
+  };
+
+  let box12 = {
+    boxNumber: 12,
+  };
   let mushroomList = [oyster, enoki, reishi, shiitake, wine_cap, pioppino];
+  let boxList = [
+    box1,
+    box2,
+    box3,
+    box4,
+    box5,
+    box6,
+    box7,
+    box8,
+    box9,
+    box10,
+    box11,
+    box12,
+  ];
 
   return (
     <div className="App">
       <NavBar />
       <Routes>
+        <Route path="/chooseBox" element={<ChooseBox boxList={boxList} />} />
         <Route path="/" element={<Welcome />} />
         <Route
           path="/dashboard"
