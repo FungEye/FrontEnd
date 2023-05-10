@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard";
 import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
+import DarkMode from "./components/DarkMode/DarkMode";
 
 function App() {
   const isAuthenticated = useIsAuthenticated();
@@ -51,6 +52,7 @@ function App() {
 
   return (
     <div className="App">
+      <DarkMode/>
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route
