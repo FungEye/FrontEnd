@@ -1,3 +1,4 @@
+
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Welcome from "./components/Welcome";
@@ -54,7 +55,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Welcome />} />
-        <Route path="addnewspecies" element={<AddNewSpecies />} />
+        <Route path="/addnewspecies" element={<AddNewSpecies />} />
         <Route
           path="/dashboard"
           element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}
