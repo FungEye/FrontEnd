@@ -69,33 +69,35 @@ function ChooseBox(props) {
         {"<"}
         Back
       </p>
-      <h1 className="poppins text-light align-items-left">Box Selection</h1>
-      <h3 className="varela text-light align-items-left">Vacant boxes:</h3>
-      <div className="box-cards-container">
-        <div className="scroll-arrow left-arrow" onClick={scrollLeft}>
-          &lt;
+      <div className="cont-box column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
+        <h1 className="poppins text-dark align-items-left">Box Selection</h1>
+        <h3 className="varela text-dark align-items-left">Vacant boxes:</h3>
+        <div className="box-cards-container ">
+          <div className="scroll-arrow left-arrow" onClick={scrollLeft}>
+            &lt;
+          </div>
+          <div className="box-cards" ref={containerRef}>
+            {boxCards}
+          </div>
+          <div className="scroll-arrow right-arrow" onClick={scrollRight}>
+            &gt;
+          </div>
         </div>
-        <div className="box-cards" ref={containerRef}>
-          {boxCards}
+        <div className="box-creation">
+          <h1 className="poppins text-dark ">Set up a new box:</h1>
+          <br></br>
+
+          <ButtonPrimary text="NEW" onClick={() => setShow(true)} />
+
+          <CreateBoxModal
+            title="Boxes"
+            onClose={() => setShow(false)}
+            show={show}
+            onSubmit={createNewBox}
+            lastBoxNumber={props.lastBoxNumber}
+            err={errorMessage}
+          />
         </div>
-        <div className="scroll-arrow right-arrow" onClick={scrollRight}>
-          &gt;
-        </div>
-      </div>
-      <div className="box-creation">
-        <h1 className="poppins text-light align-items-left">
-          Set up a new box:
-        </h1>
-        <br></br>
-        <ButtonPrimary text="NEW" onClick={() => setShow(true)} />
-        <CreateBoxModal
-          title="Boxes"
-          onClose={() => setShow(false)}
-          show={show}
-          onSubmit={createNewBox}
-          lastBoxNumber={props.lastBoxNumber}
-          err={errorMessage}
-        />
       </div>
     </div>
   );
