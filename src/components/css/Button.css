@@ -7,9 +7,6 @@
     transition: 0.25s
 }
 
-.wide {
-  width: 175px;
-}
 
 .button:hover, .button:focus {
   cursor: pointer;

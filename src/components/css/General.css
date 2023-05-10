@@ -133,3 +133,7 @@
 .raise:focus {
     box-shadow: none;
 }
+
+.wide {
+    width: 175px !important;
+  }
