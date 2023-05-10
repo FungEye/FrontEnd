@@ -15,7 +15,7 @@ const NavBar = (props) => {
     signOut();
   }
   return (
-    <div className="navBar row varela bg-light text-dark jc-space-between  align-items-center slightly-faded">
+    <div className="navBar row varela bg-light text-dark jc-space-between align-items-center slightly-faded">
       <div
         onClick={() => navigate("/  ")}
         className="row jc-center align-items-center "
@@ -26,11 +26,8 @@ const NavBar = (props) => {
       <div className="navItems row jc-space-evenly poppins ">
         <p onClick={() => navigate("/dashboard")}>Dashboard</p>
         <p onClick={() => navigate("/shroomcard")}>Mushrooms</p>
-        <p>TRE</p>
-        <p>TRE</p>
-        <p>TRE</p>
-        <p>TRE</p>
-        <p>TRE</p>
+        <p onClick={() => navigate("/chooseBox")}>Boxes</p>
+        <p onClick={() => navigate("/addnewspecies")}>New</p>
         <p>TRE</p>
         <p>TRE</p>
       </div>

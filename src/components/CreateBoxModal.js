@@ -2,7 +2,6 @@ import "./css/ChooseBoxModal.css";
 import "./css/General.css";
 import ButtonPrimary from "./ButtonPrimary";
 import ButtonSecondary from "./ButtonSecondary";
-import React, { useEffect, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import ReactDOM from "react-dom";
 

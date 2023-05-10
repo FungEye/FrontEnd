@@ -23,7 +23,7 @@ function ChooseBox(props) {
 
   // Change the destination
   function handleClick(event) {
-    navigate("/FrontEnd/chooseBox");
+    navigate("/");
   }
 
   function scrollLeft() {
