@@ -19,16 +19,17 @@
     border-radius: 3px;
 }
 
-.button{
+.ans-button{
     margin-top: 15px;
     width: 120px;
     height: 55px;
 
 }
-.name input{
-    margin: 5px;
-    box-sizing: border-box;
-    opacity: 0.5;
-    margin-top: 20px;
-    border-radius: 3px;
+
+.ans-info {
+    margin-top: 15px;
+}
+
+#new-species-title {
+    margin-bottom: 10px;
 }
