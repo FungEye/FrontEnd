@@ -7,17 +7,11 @@
     margin: 0 auto;
     margin-top: 50px;
     width: 700px;
-    padding: 30px 0 20px 0;
-    
-}
-.phases input{
-    width: 70px;
-    margin: 5px;
+    padding: 10px 10px 20px 10px;
     box-sizing: border-box;
-    opacity: 0.5;
-    margin-top: 4%;
-    border-radius: 3px;
+
 }
+
 
 .ans-button{
     margin-top: 15px;
@@ -27,9 +21,14 @@
 }
 
 .ans-info {
-    margin-top: 15px;
+    margin: 15px 0 20px 0;
+    font-size: 20px;
 }
 
 #new-species-title {
     margin-bottom: 10px;
+}
+
+.phases {
+    margin-bottom: 30px;
 }

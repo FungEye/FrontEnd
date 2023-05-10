@@ -33,6 +33,10 @@
     background-color: var(--brown);
 }
 
+.bg-med {
+    background-color: var(--light-brown);
+}
+
 .bg-light {
     background-color: var(--beige);
 }
@@ -66,9 +70,23 @@
     align-self: center;
 }
 
+.align-self-start {
+    display: flex;
+    align-self: flex-start;
+}
+
+.justify-self-start {
+    display: flex;
+    justify-self: flex-start;
+}
+
 .align-items-center {
     display: flex;
     align-items: center;
+}
+
+.gap-20 {
+    gap: 20px;
 }
 
 .w-100 {

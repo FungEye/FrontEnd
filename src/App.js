@@ -7,6 +7,7 @@ import AddNewSpecies from "./components/AddNewSpecies";
 import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
+import AddNewSpeciesForm2 from "./components/AddNewSpeciesForm2";
 
 function App() {
   const isAuthenticated = useIsAuthenticated();
@@ -65,6 +66,7 @@ function App() {
           path="/shroomcard"
           element={<MushroomCardPage mushroomList={mushroomList} />}
         />
+        <Route path="/addcondition" element={<AddNewSpeciesForm2 title="Spawning"/>}/>
       </Routes>
     </div>
   );
