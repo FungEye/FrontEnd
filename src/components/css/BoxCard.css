@@ -1,6 +1,6 @@
 .box-card {
     flex-shrink:0;
-    width:270px;
+    width:200px;
     height: 160px;
     display:flex;
     align-items: center;
