@@ -3,9 +3,12 @@ import { Routes, Route } from "react-router-dom";
 import Welcome from "./components/Welcome";
 import ChooseBox from "./components/ChooseBox";
 import Dashboard from "./components/Dashboard";
+import RegisterLogin from "./components/RegisterLogin";
+import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
 
 function App() {
+  const isAuthenticated = useIsAuthenticated();
   let oyster = {
     shroomname: "Oyster",
     imgsrc:
@@ -113,7 +116,11 @@ function App() {
       <Routes>
         <Route path="/chooseBox" element={<ChooseBox boxList={boxList} />} />
         <Route path="/" element={<Welcome />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}
+        />
+        <Route path="/login" element={<RegisterLogin />} />
         <Route
           path="/shroomcard"
           element={<MushroomCardPage mushroomList={mushroomList} />}
