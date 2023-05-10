@@ -12,8 +12,6 @@ function Welcome() {
 
   return (
     <div className="welcomePage">
-      <div className="header"></div>
-
       <div className="welcome-container">
         <h1 className="welcome-text">
           <Typewriter
