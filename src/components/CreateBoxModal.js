@@ -2,18 +2,11 @@ import "./css/ChooseBoxModal.css";
 import "./css/General.css";
 import ButtonPrimary from "./ButtonPrimary";
 import ButtonSecondary from "./ButtonSecondary";
-import XButton from "./XButton";
 import React, { useEffect, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import ReactDOM from "react-dom";
 
 const ChooseBoxModal = (props) => {
-  const [domReady, setDomReady] = useState(false);
-
-  useEffect(() => {
-    setDomReady(true);
-  }, []);
-
   return ReactDOM.createPortal(
     <CSSTransition
       in={props.show}

@@ -51,7 +51,6 @@
   .box-cards {
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: auto;
     scroll-behavior: smooth;
     padding: 10px;
     gap: 10px;
