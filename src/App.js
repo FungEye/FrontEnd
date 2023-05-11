@@ -1,4 +1,3 @@
-
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Welcome from "./components/Welcome";
@@ -9,6 +8,7 @@ import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
 import NavBar from "./components/NavBar";
+import History from "./components/History";
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -129,6 +129,7 @@ function App() {
           path="/shroomcard"
           element={<MushroomCardPage mushroomList={mushroomList} />}
         />
+        <Route path="/history" element={<History />} />
       </Routes>
     </div>
   );

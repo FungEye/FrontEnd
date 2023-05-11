@@ -1,0 +1,64 @@
+:root {
+    --brown: #763D2D;
+    --light-brown: #ac8b71;
+    --beige: #F6DCAF;
+}
+
+.historyPageContainer {
+    width: 100%;
+    height: auto;
+    padding-top: 100px;
+}
+
+.historyContainer {
+    width: 50%;
+    height: 700px;
+}
+
+.backButtonContainer {
+    padding: 10px
+}
+
+.historyTitle {
+    font-size: 36px;
+}
+
+.pagesContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.toggleContainer {
+    margin-bottom: 15px;
+}
+
+
+.h-name {
+    font-size: 30px;
+}
+
+.h-sm {
+    font-size: 25px;
+}
+
+.h-xs {
+    font-size: 18px;
+}
+
+.hb-pointer {
+    cursor: pointer;
+}
+
+.hb-right {
+    border-right: 0.85px solid var(--brown);
+}
+
+.hb-left {
+    border-left: 0.85px solid var(--brown);
+}
+
+.focused {
+    background-color: #b189a0;
+
+}
