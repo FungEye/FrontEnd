@@ -9,6 +9,7 @@ import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
 import NavBar from "./components/NavBar";
+import OverviewPage from "./components/OverviewPage";
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -125,6 +126,7 @@ function App() {
           element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}
         />
         <Route path="/login" element={<RegisterLogin />} />
+        <Route path="/overview" element={<OverviewPage />} />
         <Route
           path="/shroomcard"
           element={<MushroomCardPage mushroomList={mushroomList} />}

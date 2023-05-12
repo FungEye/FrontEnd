@@ -90,9 +90,9 @@
     gap: 20px;
 }
 
-.align-items-left {
+.align-items-start {
     display:flex;
-    align-items:left;
+    align-items:flex-start;
 }
 
 .w-100 {
