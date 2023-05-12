@@ -6,27 +6,22 @@ export default function HistoryToggle(props) {
   const [tableClassName, setTableClassName] = useState("");
 
   const toggleGraph = useCallback(() => {
-    let classLeft = "w-50 hb-left hb-pointer";
-    let classRight = "w-50 hb-right hb-pointer";
-    if (props.isGraph) {
-      setTableClassName(classLeft);
-      classRight += " focused";
-      setGraphClassName(classRight);
-    } else {
-      setGraphClassName(classRight);
-      classLeft += " focused";
-      setTableClassName(classLeft);
-    }
+    let classGraph = "w-50 hb-graph hb-pointer roundedGraph rounded-10";
+    let classTable = "w-50 hb-table hb-pointer roundedTable rounded-10";
+    let f = " focused";
+    props.isGraph ? (classGraph += f) : (classTable += f);
+    setGraphClassName(classGraph);
+    setTableClassName(classTable);
   }, [props.isGraph]);
 
-  useEffect(() => toggleGraph, [toggleGraph]);
+  useEffect(() => toggleGraph(), [toggleGraph]);
 
   return (
-    <div className="toggleContainer row w-25 rounded-10 border-dark">
-      <div className={graphClassName}>
+    <div className="toggleContainer row w-50 rounded-10 border-dark">
+      <div className={graphClassName} onClick={() => props.toggle("graph")}>
         <p className="varela text-dark h-xs ">Graph</p>{" "}
       </div>
-      <div className={tableClassName}>
+      <div className={tableClassName} onClick={() => props.toggle("table")}>
         <p className="varela text-dark h-xs">Table</p>
       </div>
     </div>

@@ -7,7 +7,8 @@
 .historyPageContainer {
     width: 100%;
     height: auto;
-    padding-top: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 .historyContainer {
@@ -50,15 +51,50 @@
     cursor: pointer;
 }
 
-.hb-right {
+.hb-graph {
     border-right: 0.85px solid var(--brown);
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
 
-.hb-left {
+.hb-table {
     border-left: 0.85px solid var(--brown);
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 
 .focused {
+    transition: 0.5s;
     background-color: #b189a0;
+    animation: change 1s;
+}
 
+@keyframes change {
+    from {
+        background-color: var(--beige);
+    }
+
+    to {
+        background-color: #b189a0;
+    }
+}
+
+.roundedGraph {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.roundedTable {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.usefulLinks,
+.usefulTitle {
+    color: rgb(56, 26, 1);
+}
+
+.usefulLinks:hover {
+    text-shadow: 1px 1px 10px rgba(190, 79, 0, 0.5);
+    cursor: pointer;
 }

@@ -3,7 +3,19 @@ import "./css/History.css";
 import "./css/General.css";
 import HistoryToggle from "./HistoryToggle";
 import HistoryUseful from "./HistoryUseful";
+import { useState } from "react";
+
 export default function History(props) {
+  const [isGraph, setIsGraph] = useState(true);
+
+  function toggle(element) {
+    if (isGraph && element === "table") {
+      setIsGraph(false);
+    } else if (!isGraph && element === "graph") {
+      setIsGraph(true);
+    }
+  }
+
   return (
     <div className="historyPageContainer row jc-center align-items-center">
       <div className="historyContainer column bg-light rounded-20">
@@ -24,8 +36,8 @@ export default function History(props) {
             <p className="varela text-dark h-name">Shiitake</p>
             <p className="varela text-dark h-sm">Started: 27/04/2023</p>
             <p className="varela text-dark h-sm">Box #3</p>
-            <HistoryToggle />
-            <HistoryUseful isHistory={true} />
+            <HistoryToggle isGraph={isGraph} toggle={toggle} />
+            <HistoryUseful />
           </div>
           <div className="rightContainer w-50 h-100 ">
             {/* Here will be the carousel or table with historical data. Column */}
