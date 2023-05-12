@@ -3,10 +3,10 @@ import OPActiveGrow from "./OPActiveGrow";
 function OverviewPage() {
 
     let grow1 = {
+        status: "Good",
         mushroom: {
             shroomname: "Oyster",
             imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
-            status: "Good",
             lastMeasured: {
                 day: 11,
                 month: 5,
@@ -17,10 +17,10 @@ function OverviewPage() {
         }
     }
     let grow2 = {
+        status: "Alarming",
         mushroom: {
             shroomname: "Shiitake",
             imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
-            status: "Bad",
             lastMeasured: {
                 day: 11,
                 month: 5,

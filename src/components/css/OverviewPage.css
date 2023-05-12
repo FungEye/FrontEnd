@@ -14,10 +14,26 @@
 }
 
 .op-grow {
+    margin: 20px;
+    padding: 20px;
+    max-width: 400px;
     border: 1px solid black;
-    border-radius: 5px;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.op-shroom-name {
+    font-size: 24px;
 }
 
 .op-title {
     font-size: 36px;
+}
+
+.op-info-row {
+    gap: 5px;
+}
+
+.op-info {
+    font-weight: bold;
 }
