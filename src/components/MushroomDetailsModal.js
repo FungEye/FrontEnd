@@ -2,9 +2,105 @@ import "./css/MushroomDetailsModal.css";
 import ButtonPrimary from "./ButtonPrimary";
 import ButtonSecondary from "./ButtonSecondary";
 import XButton from "./XButton";
+import ConditionsCarousel from "./ConditionsCarousel";
 
 
 function MushroomDetailsModal(props){
+
+    let shroomdata = {
+        "temperature": [
+            {
+                "phase": "spawn",
+                "temperature": [
+                    24,
+                    28
+                ]
+            },
+            {
+                "phase": "fruiting",
+                "temperature": [
+                    26,
+                    27
+                ]
+            },
+            {
+                "phase": "putinhing",
+                "temperature": [
+                    22,
+                    24
+                ]
+            }
+        ],
+        "humidity": [
+            {
+                "phase": "spawn",
+                "humidity": [
+                    90,
+                    100
+                ]
+            },
+            {
+                "phase": "fruiting",
+                "humidity": [
+                    80,
+                    86
+                ]
+            },
+            {
+                "phase": "putinhing",
+                "humidity": [
+                    86,
+                    94
+                ]
+            }
+        ],
+        "co2": [
+            {
+                "phase": "spawn",
+                "co2": [
+                    300,
+                    400
+                ]
+            },
+            {
+                "phase": "fruiting",
+                "co2": [
+                    580,
+                    670
+                ]
+            },
+            {
+                "phase": "putinhing",
+                "co2": [
+                    300,
+                    350
+                ]
+            }
+        ],
+        "light": [
+            {
+                "phase": "spawn",
+                "light": [
+                    50,
+                    100
+                ]
+            },
+            {
+                "phase": "fruiting",
+                "light": [
+                    150,
+                    170
+                ]
+            },
+            {
+                "phase": "putinhing",
+                "light": [
+                    120,
+                    150
+                ]
+            }
+        ]
+      }
 
     if (!props.show) {
         return null;
@@ -27,22 +123,18 @@ function MushroomDetailsModal(props){
                         <img className="img-100px" src={mushroom.imgsrc} alt="mushroomicon"></img>
                     </div>
                     <div className="md-modal-body-info row jc-space-between">
-                        <div className="column jc-space-between">
+                        <div id="md-modal-body-left"className="column jc-space-between">
                             <div className="md-modal-info-text column text-dark">
                                 <div><b>Origin: </b>{mushroom.origin}</div>
                                 <div><b>Description: </b>{mushroom.description}</div>
                              </div>
-                             <div className="row btns">
+                             <div className="row btns jc-center">
                                 <ButtonSecondary text="Back" onClick={() => setShow(false)}/>
                                 <ButtonPrimary text="Pick"/>
                              </div>
                         </div>
-                        
-                        <div className="md-modal-info-graphs border-dark">
-
-                        </div>
+                            <ConditionsCarousel conditions={shroomdata}/>
                     </div>
-                    
                 </div>
             </div>
         </div>
