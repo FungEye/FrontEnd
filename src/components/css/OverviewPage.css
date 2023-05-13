@@ -38,3 +38,7 @@
 .op-info {
     font-weight: bold;
 }
+
+.inside-collapsible {
+    padding: 20px;
+}

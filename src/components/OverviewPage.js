@@ -1,5 +1,6 @@
 import Collapsible from "./Collapsible";
 import OPActiveGrow from "./OPActiveGrow";
+import { useNavigate } from "react-router-dom";
 
 function OverviewPage() {
 
@@ -32,6 +33,12 @@ function OverviewPage() {
         }
     }
 
+    const navigate = useNavigate();
+
+    const goToYields = () => {
+        navigate("/yields");
+    }
+
     let growList = [grow1, grow2];
 
     let grows = growList.map(x => <OPActiveGrow grow={x} />)
@@ -42,12 +49,17 @@ function OverviewPage() {
     return (<div className="op-container bg-light rounded-20 column align-items-center">
         <div className="op-title ultra text-dark">Overview</div>
         <Collapsible width={collapsibleWidth} text="Active Grows" content={
-            <div id="op-active-grows" className="collapsible column">
+            <div id="op-active-grows" className="column">
                 {grows}
             </div>} />
-        <Collapsible width={collapsibleWidth} text="Free Boxes" noScript ={true} content={
-            <div>
-                lol
+        <Collapsible width={collapsibleWidth} text="Free Boxes" content={
+            <div className="inside-collapsible">
+                coming soon
+            </div>
+        } />
+        <Collapsible width={collapsibleWidth} text="Past Yields" content={
+            <div className="inside-collapsible">
+                To see your yields, go to your <a style={{cursor: "pointer", "text-decoration": "underline"}}onClick={goToYields}>Yields</a> page.
             </div>
         } />
 
