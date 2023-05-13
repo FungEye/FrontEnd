@@ -2,6 +2,7 @@ import Collapsible from "./Collapsible";
 import OPActiveGrow from "./OPActiveGrow";
 import { useNavigate } from "react-router-dom";
 import useScript from "../hooks/useScript";
+import OverviewBox from "./OverviewBox";
 
 function OverviewPage() {
 
@@ -54,6 +55,19 @@ function OverviewPage() {
         }
     }
 
+    let box1 = {
+        id: 1,
+        shroomgrowing: "Portobello"
+    }
+
+    let box2 = {
+        id: 2
+    }
+
+    let boxes = [box1, box2];
+
+    let boxList = boxes.map(x => <OverviewBox boxId={x.id} shroomgrowing={x.shroomgrowing}/>)
+
     const navigate = useNavigate();
 
     const goToYields = () => {
@@ -67,15 +81,15 @@ function OverviewPage() {
     let collapsibleWidth = 450;
 
 
-    return (<div className="op-container bg-light rounded-20 column align-items-center">
+    return (<div className="op-container bg-light rounded-20 column align-items-center very-slightly-faded">
         <div className="op-title ultra text-dark">Overview</div>
         <Collapsible id="active-grows" width={collapsibleWidth} text="Active Grows" content={
             <div id="op-active-grows" className="column">
                 {grows}
             </div>} />
-        <Collapsible width={collapsibleWidth} text="Free Boxes" content={
-            <div className="inside-collapsible">
-                coming soon
+        <Collapsible width={collapsibleWidth} text="Your Boxes" content={
+            <div className="op-free-boxes column inside-collapsible">
+                {boxList}
             </div>
         } />
         <Collapsible width={collapsibleWidth} text="Past Yields" content={

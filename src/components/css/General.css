@@ -176,3 +176,7 @@
 .wide {
     width: 175px !important;
   }
+
+.pointer {
+    cursor: pointer;
+}

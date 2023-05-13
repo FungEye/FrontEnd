@@ -13,6 +13,7 @@ import OverviewPage from "./components/OverviewPage";
 import OPActiveGrow from "./components/OPActiveGrow";
 import Collapsible from "./components/Collapsible";
 import useScript from "./hooks/useScript";
+import OverviewBox from "./components/OverviewBox";
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -148,6 +149,7 @@ function App() {
         <Route path="/login" element={<RegisterLogin />} />
         <Route path="/overview" element={<OverviewPage />} />
         <Route path="/collapse" element={<Collapsible text="Lol" content={element} />} />
+        <Route path="/box" element={<OverviewBox />} />
         <Route
           path="/shroomcard"
           element={<MushroomCardPage mushroomList={mushroomList} />}

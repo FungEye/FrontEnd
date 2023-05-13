@@ -22,7 +22,7 @@ function OPActiveGrow(props) {
 
 
     return (
-        <div onClick={() => goToDashboard()} className="op-grow row bg-light align-items-center rounded-20 very-slightly-faded border-dark">
+        <div onClick={() => goToDashboard()} className="op-grow row bg-light align-items-center rounded-20 very-slightly-faded border-dark varela pointer">
             <img className="op-icon" src={imgurl}></img>
             <div className="column w-100 align-items-start">
                 <div className="op-shroom-name ultra text-dark">{shroomname}</div>
