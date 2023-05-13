@@ -7,10 +7,9 @@ function OverviewPage() {
 
     useScript(`
       var coll = document.getElementsByClassName("collapse-container");
+    var i;
 
-var i;
-
-for (i = 0; i < coll.length; i++) {
+    for (i = 0; i < coll.length; i++) {
   coll[i].addEventListener("click", function() {
     this.classList.toggle("active");
     var content = this.nextElementSibling;
@@ -21,6 +20,9 @@ for (i = 0; i < coll.length; i++) {
       content.style.maxHeight = scrollheight + "px";
     } 
   });
+  
+  document.getElementById("active-grows").click();
+
 }`)
 
     let grow1 = {
@@ -67,7 +69,7 @@ for (i = 0; i < coll.length; i++) {
 
     return (<div className="op-container bg-light rounded-20 column align-items-center">
         <div className="op-title ultra text-dark">Overview</div>
-        <Collapsible width={collapsibleWidth} text="Active Grows" content={
+        <Collapsible id="active-grows" width={collapsibleWidth} text="Active Grows" content={
             <div id="op-active-grows" className="column">
                 {grows}
             </div>} />
