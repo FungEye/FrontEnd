@@ -1,11 +1,13 @@
 .op-container {
-    width: 700px;
+    width: 600px;
     padding: 20px;
     margin: 20px auto;
+    gap: 10px;
 }
 
 #op-active-grows {
-    gap: 5px;
+    padding: 20px;
+    gap: 20px;
 }
 
 .op-icon {
@@ -14,7 +16,6 @@
 }
 
 .op-grow {
-    margin: 20px;
     padding: 20px;
     max-width: 400px;
     border: 1px solid black;

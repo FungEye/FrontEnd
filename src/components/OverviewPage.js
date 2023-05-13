@@ -1,3 +1,4 @@
+import Collapsible from "./Collapsible";
 import OPActiveGrow from "./OPActiveGrow";
 
 function OverviewPage() {
@@ -31,14 +32,25 @@ function OverviewPage() {
         }
     }
 
+    let growList = [grow1, grow2];
 
-    return (<div className="op-container bg-light rounded-20 column">
+    let grows = growList.map(x => <OPActiveGrow grow={x} />)
+
+    let collapsibleWidth = 450;
+
+
+    return (<div className="op-container bg-light rounded-20 column align-items-center">
         <div className="op-title ultra text-dark">Overview</div>
-        <div id="op-active-grows" className="collapsible column ">
-            <div className="op-ag-title text-dark varela">Active Grows</div>
-            <OPActiveGrow grow={grow1}/>
-            <OPActiveGrow grow={grow2}/>
-        </div>
+        <Collapsible width={collapsibleWidth} text="Active Grows" content={
+            <div id="op-active-grows" className="collapsible column">
+                {grows}
+            </div>} />
+        <Collapsible width={collapsibleWidth} text="Free Boxes" noScript ={true} content={
+            <div>
+                lol
+            </div>
+        } />
+
     </div>)
 }
 

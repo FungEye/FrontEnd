@@ -1,5 +1,6 @@
 :root {
     --brown: #763D2D;
+    --hover-brown: #612c22;
     --light-brown: #ac8b71;
     --beige: #F6DCAF;
 }
@@ -59,6 +60,18 @@
 
 .rounded-20 {
     border-radius: 20px;
+}
+
+.rounded-top-20 {
+    border-radius: 20px 20px 0 0;
+}
+
+.rounded-bottom-20 {
+    border-radius: 0 0 20px 20px;
+}
+
+.overflow-hidden {
+    overflow: hidden;
 }
 
 .mt-15 {

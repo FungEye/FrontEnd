@@ -11,6 +11,8 @@ import MushroomCardPage from "./components/MushroomCardPage";
 import NavBar from "./components/NavBar";
 import OverviewPage from "./components/OverviewPage";
 import OPActiveGrow from "./components/OPActiveGrow";
+import Collapsible from "./components/Collapsible";
+import useScript from "./hooks/useScript";
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -118,17 +120,37 @@ function App() {
   let grow1 = {
     status: "Good",
     mushroom: {
-        shroomname: "Oyster",
-        imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
-        lastMeasured: {
-            day: 11,
-            month: 5,
-            year: 2023,
-            hour: 9,
-            minute: 30
-        }
+      shroomname: "Oyster",
+      imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
+      lastMeasured: {
+        day: 11,
+        month: 5,
+        year: 2023,
+        hour: 9,
+        minute: 30
+      }
     }
-}
+  }
+
+  let element = <h1>Big lol</h1>
+
+  useScript(`
+      var coll = document.getElementsByClassName("collapse-container");
+
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+        let scrollheight = content.scrollHeight + 40;
+      content.style.maxHeight = scrollheight + "px";
+    } 
+  });
+}`)
 
   return (
     <div className="App">
@@ -142,7 +164,8 @@ function App() {
           element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}
         />
         <Route path="/login" element={<RegisterLogin />} />
-        <Route path="/overview" element={<OverviewPage/>} />
+        <Route path="/overview" element={<OverviewPage />} />
+        <Route path="/collapse" element={<Collapsible text="Lol" content={element} />} />
         <Route
           path="/shroomcard"
           element={<MushroomCardPage mushroomList={mushroomList} />}
