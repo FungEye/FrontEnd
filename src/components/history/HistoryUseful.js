@@ -1,5 +1,5 @@
-import "./css/History.css";
-
+import "../css/History.css";
+import "../css/General.css";
 export default function HistoryUseful() {
   return (
     <div className="usefulContainer p-10 column bg-med rounded-10 border-dark">

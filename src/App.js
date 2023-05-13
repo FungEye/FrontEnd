@@ -8,7 +8,7 @@ import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
 import NavBar from "./components/NavBar";
-import History from "./components/History";
+import History from "./components/history/History";
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {

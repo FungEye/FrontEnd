@@ -1,10 +1,11 @@
-import ButtonSecondary from "./ButtonSecondary";
-import "./css/History.css";
-import "./css/General.css";
+import ButtonSecondary from "../ButtonSecondary";
+import "../css/History.css";
+import "../css/General.css";
 import HistoryToggle from "./HistoryToggle";
 import HistoryUseful from "./HistoryUseful";
 import { useState } from "react";
-
+import Chart from "./HistoryConditionChart";
+import Carousel from "./HistoryChartsCarousel";
 export default function History(props) {
   const [isGraph, setIsGraph] = useState(true);
 
@@ -39,9 +40,9 @@ export default function History(props) {
             <HistoryToggle isGraph={isGraph} toggle={toggle} />
             <HistoryUseful />
           </div>
-          <div className="rightContainer w-50 h-100 ">
+          <div className="rightContainer row jc-start align-items-start  w-50 h-75 p-10 ">
             {/* Here will be the carousel or table with historical data. Column */}
-            <div>Carousel will be here </div>
+            <Carousel />
           </div>
         </div>
       </div>

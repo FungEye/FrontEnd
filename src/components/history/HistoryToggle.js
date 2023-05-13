@@ -1,5 +1,5 @@
-import "./css/History.css";
-import "./css/General.css";
+import "../css/History.css";
+import "../css/General.css";
 import { useState, useEffect, useCallback } from "react";
 export default function HistoryToggle(props) {
   const [graphClassName, setGraphClassName] = useState("");
