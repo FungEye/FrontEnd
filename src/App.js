@@ -134,24 +134,6 @@ function App() {
 
   let element = <h1>Big lol</h1>
 
-  useScript(`
-      var coll = document.getElementsByClassName("collapse-container");
-
-var i;
-
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-    } else {
-        let scrollheight = content.scrollHeight + 40;
-      content.style.maxHeight = scrollheight + "px";
-    } 
-  });
-}`)
-
   return (
     <div className="App">
       <NavBar />

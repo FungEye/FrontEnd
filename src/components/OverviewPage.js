@@ -1,8 +1,27 @@
 import Collapsible from "./Collapsible";
 import OPActiveGrow from "./OPActiveGrow";
 import { useNavigate } from "react-router-dom";
+import useScript from "../hooks/useScript";
 
 function OverviewPage() {
+
+    useScript(`
+      var coll = document.getElementsByClassName("collapse-container");
+
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+        let scrollheight = content.scrollHeight + 40;
+      content.style.maxHeight = scrollheight + "px";
+    } 
+  });
+}`)
 
     let grow1 = {
         status: "Good",
