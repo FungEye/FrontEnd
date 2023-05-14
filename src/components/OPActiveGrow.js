@@ -21,7 +21,8 @@ function OPActiveGrow(props) {
 
     // TODO change the onClick from going to the general dashboard to
     // going to a dashboard that fetches depending on the grow id
-    // and all that grow id.
+    // When the dashboard actually fetches from a specific grow.
+    // So it will be like "/grows/{growid}"
 
     return (
         <div onClick={() => goToDashboard()} className="op-grow row bg-light align-items-center rounded-20 very-slightly-faded border-dark varela pointer">
