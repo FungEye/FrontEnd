@@ -1,5 +1,8 @@
 import ButtonPrimary from "./ButtonPrimary";
 import trashIcon from "../img/trash-2.svg";
+import "./css/OverviewPage.css";
+import "./css/General.css";
+import { useNavigate } from "react-router-dom";
 
 function OverviewBox(props) {
 
@@ -9,11 +12,21 @@ function OverviewBox(props) {
     let description;
     let buttonAndTrash;
 
+    const navigate = useNavigate();
+
+    function goToMushrooms() {
+        navigate("/mushrooms");
+    }
+
+    function goToDashboard() {
+        navigate("/dashboard");
+    }
+
     if (shroomgrowing) {
         description =
             <div className="row op-info-row text-dark">
                 <div className="op-info-value">Growing</div>
-                <div className="op-info">{shroomgrowing}</div>
+                <div className="op-info pointer" onClick={() => goToDashboard()}>{shroomgrowing}</div>
             </div>
     }
 
@@ -23,8 +36,8 @@ function OverviewBox(props) {
 
         buttonAndTrash = 
         <div className="align-items-center op-box-btn-and-icon">
-            <ButtonPrimary text="Start Grow" />
-            <img className="pointer" src={trashIcon}></img>
+            <ButtonPrimary text="Start Grow" onClick={goToMushrooms} />
+            <img data-test="trash" className="pointer" src={trashIcon}></img>
         </div>
     }
 

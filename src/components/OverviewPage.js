@@ -87,14 +87,14 @@ function OverviewPage() {
             <div id="op-active-grows" className="column">
                 {grows}
             </div>} />
-        <Collapsible width={collapsibleWidth} text="Your Boxes" content={
+        <Collapsible id="your-boxes" width={collapsibleWidth} text="Your Boxes" content={
             <div className="op-free-boxes column inside-collapsible">
                 {boxList}
             </div>
         } />
-        <Collapsible width={collapsibleWidth} text="Past Yields" content={
+        <Collapsible id="past-yields" width={collapsibleWidth} text="Past Yields" content={
             <div className="inside-collapsible">
-                To see your yields, go to your <a style={{cursor: "pointer", "text-decoration": "underline"}}onClick={goToYields}>Yields</a> page.
+                To see your yields, go to your <a style={{cursor: "pointer", "textDecoration": "underline"}}onClick={goToYields}>Yields</a> page.
             </div>
         } />
 

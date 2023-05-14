@@ -16,6 +16,7 @@ function Input(props) {
         value={props.value}
         onChange={props.onChange}
         type={props.type}
+        data-test={props.title}
         onKeyPress={props.onKeyPress}
       />
     </div>

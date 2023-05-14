@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Status from "./Status";
 import "./css/OverviewPage.css";
+import "./css/General.css";
+import { getFullDateTimeString } from "../util/DateTimeFormatter";
 
 function OPActiveGrow(props) {
 
@@ -11,7 +13,7 @@ function OPActiveGrow(props) {
     let status = grow.status;
     let lastMeasured = grow.lastMeasured;
     // import that function that gets the string from a date object or whatever
-    let lastMeasuredString = "11.05.2023 - 09:46"; //TODO here
+    let lastMeasuredString = getFullDateTimeString(lastMeasured);
 
     const navigate = useNavigate();
 

@@ -151,7 +151,7 @@ function App() {
         <Route path="/collapse" element={<Collapsible text="Lol" content={element} />} />
         <Route path="/box" element={<OverviewBox />} />
         <Route
-          path="/shroomcard"
+          path="/mushrooms"
           element={<MushroomCardPage mushroomList={mushroomList} />}
         />
       </Routes>

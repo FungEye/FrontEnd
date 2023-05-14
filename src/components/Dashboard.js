@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import ButtonSecondary from "./ButtonSecondary";
 import OneCondition from "./OneCondition";
 import Status from "./Status";
+import { getTimeString, getDateString } from "../util/DateTimeFormatter";
 function Dashboard() {
   const [measurement, setMeasurement] = useState(null);
   // const [timestamp, setTimestamp] = useState(null);
@@ -29,51 +30,7 @@ function Dashboard() {
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
-
-  /*
-  function initTimestampString(x) {
-    let result = ``;
-    result += getDateString(x);
-    result += `/`;
-    result += `${x.year} `;
-    if (x.hour < 10) {
-      result += "0";
-    }
-    result += getTimeString(x);
-    result += ":"
-
-    if (x.second < 10) {
-      result += "0";
-    }
-    result += `${x.second}`;
-
-    return result;
-  }
-  */
-
-  function getTimeString(x) {
-    let result = ``;
-    result += `${x.hour}:`;
-    if (x.minute < 10) {
-      result += "0";
-    }
-    result += `${x.minute}`;
-    return result;
-  }
-
-  function getDateString(x) {
-    let result = "";
-    if (x.day < 10) {
-      result += "0";
-    }
-    result += `${x.day}/`;
-    if (x.month < 10) {
-      result += "0";
-    }
-    result += `${x.month}`;
-    return result;
-  }
+  }, [fetchData]); 
 
   return (
     <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
