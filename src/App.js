@@ -14,6 +14,8 @@ import OPActiveGrow from "./components/OPActiveGrow";
 import Collapsible from "./components/Collapsible";
 import useScript from "./hooks/useScript";
 import OverviewBox from "./components/OverviewBox";
+import RecipeCard from "./components/RecipeCard";
+import RecipePage from "./components/RecipePage";
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -135,6 +137,12 @@ function App() {
 
   let element = <h1>Big lol</h1>
 
+  let recipeBrowse = {
+    name: "Garlic Mushroom",
+    imgurl: "https://bigoven-res.cloudinary.com/image/upload/h_320,w_320,c_fill/garlic-pork-chops-in-creamy-mu-08b95d.jpg",
+    difficulty: "Easy"
+  }
+
   return (
     <div className="App">
       <NavBar />
@@ -150,6 +158,7 @@ function App() {
         <Route path="/overview" element={<OverviewPage />} />
         <Route path="/collapse" element={<Collapsible text="Lol" content={element} />} />
         <Route path="/box" element={<OverviewBox />} />
+        <Route path="/recipe" element={<RecipePage recipes={[recipeBrowse, recipeBrowse]}/>} />
         <Route
           path="/mushrooms"
           element={<MushroomCardPage mushroomList={mushroomList} />}
