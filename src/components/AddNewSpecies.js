@@ -5,9 +5,12 @@ import ButtonSecondary from "./ButtonSecondary";
 import ButtonPrimary from "./ButtonPrimary";
 import Input from "./Input";
 import XButton from "./XButton";
+import AddNewSpeciesOrigin from "./AddNewSpeciesOrigin";
 
 function AddNewSpecies() {
   const [name, setName] = useState('');
+  const [origin, setOrigin] = useState('');
+  const [imageurl, setImageurl] = useState('');
   const [spawningConditions, setSpawningConditions] = useState(getNewConditions());
   const [piningConditions, setPiningConditions] = useState(getNewConditions());
   const [fruitingConditions, setFruitingConditions] = useState(getNewConditions());
@@ -49,17 +52,10 @@ function AddNewSpecies() {
       </div>
       <div className="dashboard column align-items-center">
         <div id="new-species-title" className="mushroom-title text-dark ultra">Add new species</div>
-        <Input
-          title="Mushroom name"
-          placeholder="Mushroom name..."
-          value={name}
-          type="mushroom-name"
-          onChange={(event) => {
-            setName(event.target.value);
-            // setError("");
-          }}
-          wide={true}
-        />
+        <div className="Origin-row row">
+          <AddNewSpeciesOrigin/>
+          <div className="origindescription" placeholder="Description"></div>
+        </div>
         <div className="ans-info text-dark">Provide ideal growing conditions for each phase...</div>
         <div className="phases column align-items-center gap-20">
           <div className="row gap-20">
