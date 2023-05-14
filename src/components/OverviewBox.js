@@ -26,7 +26,7 @@ function OverviewBox(props) {
         description =
             <div className="row op-info-row text-dark">
                 <div className="op-info-value">Growing</div>
-                <div className="op-info pointer" onClick={() => goToDashboard()}>{shroomgrowing}</div>
+                <div className="op-info" onClick={() => goToDashboard()}>{shroomgrowing}</div>
             </div>
     }
 

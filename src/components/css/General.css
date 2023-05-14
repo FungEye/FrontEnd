@@ -143,6 +143,10 @@
     background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.20), rgba(117, 19, 19, 0.3));
 }
 
+.gap-10 {
+    gap: 10px;
+}
+
 
 .slightly-faded {
     background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.20), rgba(117, 19, 27, 0.15));
