@@ -15,7 +15,7 @@ export default function Chart(props) {
     <div className="column">
       <p className="varela text-dark h-name">{props.text}</p>
       <LineChart
-        width={400}
+        width={350}
         height={250}
         data={props.data}
         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}

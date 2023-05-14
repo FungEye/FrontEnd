@@ -19,10 +19,10 @@ export default function HistoryToggle(props) {
   return (
     <div className="toggleContainer row w-50 rounded-10 border-dark">
       <div className={graphClassName} onClick={() => props.toggle("graph")}>
-        <p className="varela text-dark h-xs ">Graph</p>{" "}
+        <p className="varela text-dark textHover h-xs ">Graph</p>{" "}
       </div>
       <div className={tableClassName} onClick={() => props.toggle("table")}>
-        <p className="varela text-dark h-xs">Table</p>
+        <p className="varela text-dark textHover h-xs">Table</p>
       </div>
     </div>
   );

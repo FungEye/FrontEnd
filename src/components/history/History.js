@@ -4,8 +4,9 @@ import "../css/General.css";
 import HistoryToggle from "./HistoryToggle";
 import HistoryUseful from "./HistoryUseful";
 import { useState } from "react";
-import Chart from "./HistoryConditionChart";
-import Carousel from "./HistoryChartsCarousel";
+import CarouselGraph from "./HistoryChartsCarousel";
+import CarouselTable from "./HistoryTableCarousel";
+import Table from "./HistoryTable";
 export default function History(props) {
   const [isGraph, setIsGraph] = useState(true);
 
@@ -40,9 +41,9 @@ export default function History(props) {
             <HistoryToggle isGraph={isGraph} toggle={toggle} />
             <HistoryUseful />
           </div>
-          <div className="rightContainer row jc-start align-items-start  w-50 h-75 p-10 ">
+          <div className="rightContainer row jc-start align-items-center  w-50 h-75 p-10 ">
             {/* Here will be the carousel or table with historical data. Column */}
-            <Carousel />
+            {isGraph ? <CarouselGraph /> : <CarouselTable />}
           </div>
         </div>
       </div>
