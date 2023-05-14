@@ -1,0 +1,57 @@
+.op-container {
+    width: 600px;
+    padding: 20px;
+    margin: 20px auto;
+    gap: 10px;
+}
+
+#op-active-grows {
+    padding: 20px;
+    gap: 20px;
+}
+
+.op-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.op-grow {
+    padding: 20px;
+    max-width: 400px;
+    gap: 20px;
+}
+
+.op-shroom-name {
+    font-size: 24px;
+}
+
+.op-title {
+    font-size: 36px;
+}
+
+.op-info-row {
+    gap: 5px;
+}
+
+.op-free-boxes {
+    padding: 20px;
+    max-width: 400px;
+    gap: 20px;
+}
+
+.op-info {
+    font-weight: bold;
+}
+
+.inside-collapsible {
+    padding: 20px;
+}
+
+.op-box {
+    width: 300px;
+    height: 150px;
+}
+
+.op-box-btn-and-icon {
+    gap: 10px;
+}

@@ -11,15 +11,19 @@ function MushroomCardPage(props) {
 
     const [mushroom, setMushroom] = useState(null);
     console.log(mushroomList);
-    const shroomcards = mushroomList.map(x => <MushroomCard mushroom={x} showDetails={() => {setMushroom(x); setShow(true)}} key={x.shroomname} />)
+    const shroomcards = mushroomList.map(x => <MushroomCard mushroom={x} showDetails={() => { setMushroom(x); setShow(true) }} key={x.shroomname} />)
 
-    return(
-        <div className="mushroom-cards">
-            {shroomcards}
-            <MushroomDetailsModal show={show} setShow={setShow} mushroom={mushroom}/>
+    return (
+        <div className="column mushroom-page gap-20">
+            <div className="start-grow-info text-light poppins">Pick a mushroom species to start a grow.</div>
+            <div className="mushroom-cards">
+                {shroomcards}
+            </div>
+            <MushroomDetailsModal show={show} setShow={setShow} mushroom={mushroom} />
         </div>
+
     )
-    
+
 }
 
 export default MushroomCardPage

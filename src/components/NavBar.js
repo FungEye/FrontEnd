@@ -25,7 +25,8 @@ const NavBar = (props) => {
       </div>
       <div className="navItems row jc-space-evenly poppins ">
         <p onClick={() => navigate("/dashboard")}>Dashboard</p>
-        <p onClick={() => navigate("/shroomcard")}>Mushrooms</p>
+        <p onClick={() => navigate("/overview")}>Overview</p>
+        <p onClick={() => navigate("/mushrooms")}>Mushrooms</p>
         <p onClick={() => navigate("/chooseBox")}>Boxes</p>
         <p onClick={() => navigate("/addnewspecies")}>New</p>
         

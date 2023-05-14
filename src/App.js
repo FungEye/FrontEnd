@@ -9,6 +9,11 @@ import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
 import NavBar from "./components/NavBar";
+import OverviewPage from "./components/OverviewPage";
+import OPActiveGrow from "./components/OPActiveGrow";
+import Collapsible from "./components/Collapsible";
+import useScript from "./hooks/useScript";
+import OverviewBox from "./components/OverviewBox";
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -113,6 +118,23 @@ function App() {
     box12,
   ];
 
+  let grow1 = {
+    status: "Good",
+    mushroom: {
+      shroomname: "Oyster",
+      imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
+      lastMeasured: {
+        day: 11,
+        month: 5,
+        year: 2023,
+        hour: 9,
+        minute: 30
+      }
+    }
+  }
+
+  let element = <h1>Big lol</h1>
+
   return (
     <div className="App">
       <NavBar />
@@ -125,8 +147,11 @@ function App() {
           element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}
         />
         <Route path="/login" element={<RegisterLogin />} />
+        <Route path="/overview" element={<OverviewPage />} />
+        <Route path="/collapse" element={<Collapsible text="Lol" content={element} />} />
+        <Route path="/box" element={<OverviewBox />} />
         <Route
-          path="/shroomcard"
+          path="/mushrooms"
           element={<MushroomCardPage mushroomList={mushroomList} />}
         />
       </Routes>
