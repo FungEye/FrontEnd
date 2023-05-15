@@ -2,7 +2,6 @@ import "./css/Input.css";
 import "./css/General.css";
 
 function Input(props) {
-
   let classes = "input rounded-20 poppins text-dark";
   if (props.wide) {
     classes += " wide";
@@ -10,13 +9,16 @@ function Input(props) {
 
   return (
     <div className="column">
-      <label className="poppins text-dark"><b>{props.title}</b></label>
+      <label className="poppins text-dark">
+        <b>{props.title}</b>
+      </label>
       <input
-        className= {classes}
+        className={classes}
         value={props.value}
         onChange={props.onChange}
         type={props.type}
         data-test={props.title}
+        data-cy={props.title}
         onKeyPress={props.onKeyPress}
       />
     </div>
