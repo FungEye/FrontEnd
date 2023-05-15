@@ -1,4 +1,3 @@
-
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Welcome from "./components/Welcome";
@@ -9,11 +8,15 @@ import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
 import NavBar from "./components/NavBar";
+import Guide from "./components/Guide";
+
+
 import OverviewPage from "./components/OverviewPage";
 import OPActiveGrow from "./components/OPActiveGrow";
 import Collapsible from "./components/Collapsible";
 import useScript from "./hooks/useScript";
 import OverviewBox from "./components/OverviewBox";
+
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -154,6 +157,7 @@ function App() {
           path="/mushrooms"
           element={<MushroomCardPage mushroomList={mushroomList} />}
         />
+        <Route path="/guide" element={<Guide />} />
       </Routes>
     </div>
   );
