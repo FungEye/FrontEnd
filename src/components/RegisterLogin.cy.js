@@ -4,6 +4,7 @@ import { HashRouter } from "react-router-dom";
 import { AuthProvider } from "react-auth-kit";
 import "./css/General.css";
 import "./css/RegisterLogin.css";
+
 describe("<RegisterLogin />", () => {
   beforeEach(() => {
     cy.mount(
