@@ -7,7 +7,7 @@ function ButtonSecondary(props) {
     if (props.wide) {
         classes += " wide";
     }
-    return <button className={classes} onClick={props.onClick}>{props.text}</button>
+    return <button data-test={props.text} className={classes} onClick={props.onClick}>{props.text}</button>
 }
 
 export default ButtonSecondary
