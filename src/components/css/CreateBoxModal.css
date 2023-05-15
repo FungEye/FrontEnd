@@ -13,10 +13,9 @@
 }
 
 .modal.show{
-    opacity:1;
+    opacity:10;
     pointer-events:visible;
-    display:flex;
-    align-items: center;
+    
     
 }
 
@@ -32,17 +31,24 @@
 .modal-content {
     width:500px;
     background-color: #fff;
-    transform:translateY(-200px);
-    transition: all 0.3s ease-in-out;
+    transform:translateY(-175%);
+    transition: transform 0.3s ease-in-out;
     margin: auto;
 }
 
+.modal.exit-active .modal-content{
+    transform: translateY(-200px);
+}
 .modal.enter-done .modal-content{
-    transform: translateY(5);
+    transform: translateY(-200px);
+}
+
+.modal.show .modal-content{
+    transform: translateY(-200px);
 }
 
 .modal.exit .modal-content{
-    transform: translateY(5);
+    transform: translateY(-200px);
 }
 
 .modal-header, modal-footer {
