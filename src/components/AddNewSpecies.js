@@ -23,6 +23,11 @@ function AddNewSpecies() {
       "light": 0
     }
   }
+  function clearName(textarea) {
+    if (textarea.value === textarea.defaultValue) {
+      textarea.value = '';
+    }
+  }
 
   function updateCondition(oldCondition, stat, value) {
     let newCondition = {...oldCondition};
@@ -41,6 +46,7 @@ function AddNewSpecies() {
         break;
       default:
         return;
+        
     }
     return newCondition;
   }
@@ -52,9 +58,13 @@ function AddNewSpecies() {
       </div>
       <div className="dashboard column align-items-center">
         <div id="new-species-title" className="mushroom-title text-dark ultra">Add new species</div>
-        <div className="Origin-row row">
+        <div className="origin-row row">
           <AddNewSpeciesOrigin/>
-          <div className="origindescription" placeholder="Description"></div>
+          <div className="origindescription" placeholder="Description">
+            <textarea rows="10" cols="30" placeholder="Description">
+  
+            </textarea>
+          </div>
         </div>
         <div className="ans-info text-dark">Provide ideal growing conditions for each phase...</div>
         <div className="phases column align-items-center gap-20">
