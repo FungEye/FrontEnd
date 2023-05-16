@@ -9,7 +9,7 @@ import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
 import NavBar from "./components/NavBar";
 import Guide from "./components/Guide";
-
+import YieldPage from "./components/YieldPage";
 
 import OverviewPage from "./components/OverviewPage";
 import OPActiveGrow from "./components/OPActiveGrow";
@@ -131,12 +131,12 @@ function App() {
         month: 5,
         year: 2023,
         hour: 9,
-        minute: 30
-      }
-    }
-  }
+        minute: 30,
+      },
+    },
+  };
 
-  let element = <h1>Big lol</h1>
+  let element = <h1>Big lol</h1>;
 
   return (
     <div className="App">
@@ -151,12 +151,16 @@ function App() {
         />
         <Route path="/login" element={<RegisterLogin />} />
         <Route path="/overview" element={<OverviewPage />} />
-        <Route path="/collapse" element={<Collapsible text="Lol" content={element} />} />
+        <Route
+          path="/collapse"
+          element={<Collapsible text="Lol" content={element} />}
+        />
         <Route path="/box" element={<OverviewBox />} />
         <Route
           path="/mushrooms"
           element={<MushroomCardPage mushroomList={mushroomList} />}
         />
+        <Route path="/yields" element={<YieldPage />} />
         <Route path="/guide" element={<Guide />} />
       </Routes>
     </div>
