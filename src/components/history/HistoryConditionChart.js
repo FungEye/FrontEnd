@@ -5,7 +5,6 @@ import {
   YAxis,
   Line,
   Tooltip,
-  Legend,
 } from "recharts";
 import "../css/General.css";
 import "../css/History.css";

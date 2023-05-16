@@ -6,7 +6,6 @@ import HistoryUseful from "./HistoryUseful";
 import { useState } from "react";
 import CarouselGraph from "./HistoryChartsCarousel";
 import CarouselTable from "./HistoryTableCarousel";
-import Table from "./HistoryTable";
 export default function History(props) {
   const [isGraph, setIsGraph] = useState(true);
 
@@ -37,7 +36,7 @@ export default function History(props) {
             {/* Here will be name, date, boxID, viewToggle and useful. Column */}
             <p className="varela text-dark h-name">Shiitake</p>
             <p className="varela text-dark h-sm">Started: 27/04/2023</p>
-            <p className="varela text-dark h-sm">Box #3</p>
+            <p className="varela text-dark h-sm">Grow #3</p>
             <HistoryToggle isGraph={isGraph} toggle={toggle} />
             <HistoryUseful />
           </div>

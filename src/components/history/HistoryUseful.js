@@ -9,8 +9,10 @@ export default function HistoryUseful() {
         <p>🍄</p>
       </div>
       <div className="pagesContainer">
-        <div className=" usefulLinks varela">>See mushroom details</div>
-        <div className=" usefulLinks varela">>See recipes</div>
+        <div className=" usefulLinks textHover varela">
+          >See mushroom details
+        </div>
+        <div className=" usefulLinks textHover varela">>See recipes</div>
       </div>
     </div>
   );
