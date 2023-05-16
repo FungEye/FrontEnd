@@ -13,7 +13,7 @@ import Table from "./HistoryTable";
 
 function ConditionsCarousel() {
   return (
-    <div className="conditions-carousel-table very-slightly-faded">
+    <div className="conditions-carousel-history very-slightly-faded">
       <Swiper
         // install Swiper modules
         modules={[Navigation, Pagination]}

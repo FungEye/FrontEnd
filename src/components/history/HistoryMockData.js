@@ -46,11 +46,11 @@ export const data = [
 export const mockData = {
   temp: {
     values: [
-      { value: 10, date: "2018-01-01" },
-      { value: 11, date: "2018-01-02" },
-      { value: 12, date: "2018-01-03" },
-      { value: 14, date: "2018-01-04" },
-      { value: 17, date: "2018-01-05" },
+      { value: 10, date: "13:21 2018-01-01" },
+      { value: 11, date: "13:21 2018-01-01" },
+      { value: 12, date: "13:21 2018-01-01" },
+      { value: 14, date: "13:21 2018-01-01" },
+      { value: 17, date: "13:21 2018-01-01" },
       { value: 16, date: "2018-01-06" },
       { value: 13, date: "2018-01-07" },
       { value: 8, date: "2018-01-08" },

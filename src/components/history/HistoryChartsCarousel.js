@@ -8,9 +8,11 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { mockData } from "./HistoryMockData";
 import Chart from "./HistoryConditionChart";
+import "../css/History.css";
+import "../css/General.css";
 export default function Carousel() {
   return (
-    <div className="conditions-carousel very-slightly-faded">
+    <div className="conditions-carousel-history very-slightly-faded">
       <Swiper
         // install Swiper modules
         modules={[Navigation, Pagination]}

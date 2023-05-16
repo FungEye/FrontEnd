@@ -61,13 +61,13 @@ export default function StickyHeadTable() {
       }}
     >
       <div className="row bg-light jc-space-around ">
-        <p className="varela text-dark"> ⬅️ 19/05</p>
-        <p className="varela text-dark">20/05</p>
-        <p className="varela text-dark">21/05 ➡️ </p>
+        <p className="varela text-dark h-xs"> ⬅️ 19/05</p>
+        <p className="varela text-dark h-sm">20/05</p>
+        <p className="varela text-dark h-xs">21/05 ➡️ </p>
       </div>
       <TableContainer
         sx={{
-          maxHeight: 300,
+          maxHeight: 320,
           width: "100%",
           backgroundColor: "#F6DCAF",
           fontFamily: "Varela Round",
