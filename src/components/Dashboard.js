@@ -3,10 +3,11 @@ import * as React from 'react';
 import { useState, useEffect, useCallback } from "react";
 import { Routes, Route, useParams } from 'react-router-dom';
 import ButtonSecondary from "./ButtonSecondary";
+import ButtonPrimary from "./ButtonPrimary";
 import OneCondition from "./OneCondition";
 import Status from "./Status";
 function Dashboard() {
-  let {userId} = useParams();
+  let {growId} = useParams();
   const [measurement, setMeasurement] = useState(null);
   // const [timestamp, setTimestamp] = useState(null);
   const [time, setTime] = useState(null);
@@ -15,8 +16,6 @@ function Dashboard() {
   const [status] = useState("Good");
   const [shroomname] = useState("Oyster");
   // const [shroomname, setShroomName] = useState("Oyster");
-  
-
   const fetchData = useCallback(() => {
     fetch(`https://fungeye-383609.ey.r.appspot.com/box1/measurements/latest`)
       .then((response) => {
@@ -59,11 +58,12 @@ function Dashboard() {
   }
 
   return (
+    
     <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
       <div className="dashboard column align-items-center">
         <div className="mushroom-title text-dark ultra">{shroomname} Mushroom</div>
         <div className="box text-dark w-100">
-         {userId} Box # {measurement == null ? -1 : measurement.id.boxId}
+         {growId} Box # {measurement == null ? -1 : measurement.id.boxId}
         </div>
         <div className="date text-dark">
          <b>{date}</b>
@@ -75,6 +75,8 @@ function Dashboard() {
           </div>
           <div className="big-time">
             <b>
+
+              {/* // ternary operator , with props.isNew() */}
             {time == null ? "Loading date..." : time}
 
             </b>
@@ -86,6 +88,7 @@ function Dashboard() {
         </div>
         <div className="status-text text-dark"><b>Status:</b></div>
         <Status status={status}/>
+        <div className="togglelight"> <ButtonPrimary text="Light" /> </div>
         <div className="measurements jc-center">
          <OneCondition title="Temperature" measurement={(measurement == null ? null : measurement.temperature)} unit="ºC"/>
          <OneCondition title="Humidity" measurement={(measurement == null ? null : measurement.humidity)} unit="%"/>
