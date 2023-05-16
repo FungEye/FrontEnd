@@ -33,7 +33,7 @@ function YieldCard(props) {
         </div>
       </div>
       <div className="yield-card-yields-column">
-        <h2 className="text-dark varela">Harvests:</h2>
+        <h2 className="text-dark varela">Harvests from this grow:</h2>
 
         <h3 className="text-dark varela"> Harvested 34.71 g on 16.05.2023</h3>
 

@@ -12,10 +12,12 @@
 
 .filter-cont{
     position:relative;
+    
 }
 
 .autocomplete-dropdown{
     position:absolute;
+    display: inline-block;
     top:100%;
     left:0;
     width: 100%;
@@ -26,6 +28,8 @@
     list-style-type: none;
     padding:0;
     margin:0;
+    top: calc(100%+5px);
+    width:100%;
 }
 
 .autocomplete-dropdown li{

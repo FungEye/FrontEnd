@@ -1,5 +1,5 @@
 .yield-card{
-    width: 700px;
+    width: 1000px;
    
     background-color: #eed1ab ;
     min-height: 200px;;
@@ -13,12 +13,14 @@
 .yield-card-1st-column{
     display: flex;
     flex-direction: column;
+    width:25%;
 
 }
 
 .yield-card-2nd-column{
     display: flex;
     flex-direction: column;
+    
 
 }
 

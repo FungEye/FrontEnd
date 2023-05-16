@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./css/AutoCompleteInput.css";
 
 const AutocompleteInput = () => {
   const [searchText, setSearchText] = useState("");
@@ -20,7 +21,7 @@ const AutocompleteInput = () => {
   };
 
   return (
-    <div className="autocomplete">
+    <div className="autocomplete-container">
       <input
         type="text"
         placeholder="Filter by mushroom name..."
