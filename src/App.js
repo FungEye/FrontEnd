@@ -10,12 +10,10 @@ import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
 import NavBar from "./components/NavBar";
 import OverviewPage from "./components/OverviewPage";
-import OPActiveGrow from "./components/OPActiveGrow";
-import Collapsible from "./components/Collapsible";
-import useScript from "./hooks/useScript";
 import OverviewBox from "./components/OverviewBox";
-import RecipeCard from "./components/RecipeCard";
 import RecipePage from "./components/RecipePage";
+import DropdownMenu from "./components/DropdownMenu";
+import RecipeDetailPage from "./components/RecipeDetailPage";
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -120,29 +118,6 @@ function App() {
     box12,
   ];
 
-  let grow1 = {
-    status: "Good",
-    mushroom: {
-      shroomname: "Oyster",
-      imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
-      lastMeasured: {
-        day: 11,
-        month: 5,
-        year: 2023,
-        hour: 9,
-        minute: 30
-      }
-    }
-  }
-
-  let element = <h1>Big lol</h1>
-
-  let recipeBrowse = {
-    name: "Garlic Mushroom",
-    imgurl: "https://bigoven-res.cloudinary.com/image/upload/h_320,w_320,c_fill/garlic-pork-chops-in-creamy-mu-08b95d.jpg",
-    difficulty: "Easy"
-  }
-
   return (
     <div className="App">
       <NavBar />
@@ -156,9 +131,10 @@ function App() {
         />
         <Route path="/login" element={<RegisterLogin />} />
         <Route path="/overview" element={<OverviewPage />} />
-        <Route path="/collapse" element={<Collapsible text="Lol" content={element} />} />
         <Route path="/box" element={<OverviewBox />} />
-        <Route path="/recipe" element={<RecipePage recipes={[recipeBrowse, recipeBrowse]}/>} />
+        <Route path="/recipes" element={<RecipePage/>} />
+        <Route path="/dropdown" element={<DropdownMenu/>} />
+        <Route path="/recipes/:recipeId" element={<RecipeDetailPage/>} />
         <Route
           path="/mushrooms"
           element={<MushroomCardPage mushroomList={mushroomList} />}
