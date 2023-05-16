@@ -6,6 +6,7 @@ import ButtonPrimary from "./ButtonPrimary";
 import Input from "./Input";
 import XButton from "./XButton";
 import AddNewSpeciesOrigin from "./AddNewSpeciesOrigin";
+import ArchiveModal from "./ArchiveModal";
 
 function EditAddNewSpecies() {
   const [name, setName] = useState('');
@@ -14,7 +15,7 @@ function EditAddNewSpecies() {
   const [spawningConditions, setSpawningConditions] = useState(getNewConditions());
   const [piningConditions, setPiningConditions] = useState(getNewConditions());
   const [fruitingConditions, setFruitingConditions] = useState(getNewConditions());
-
+  const [show, setShow] = useState(false)
   function getNewConditions() {
     return {
       "temperature": 0,
@@ -75,7 +76,8 @@ function EditAddNewSpecies() {
           <AddNewSpeciesForm2 title="Fruiting" />
         </div>
         <div className="text-dark row gap-10">
-            <ButtonPrimary wide={true} text="Archive" />
+            <ButtonPrimary wide={true}  onClick={() => setShow(true) } text="Archive" />
+            <ArchiveModal onClose={() => setShow(false)} show={show}/>
           <ButtonPrimary wide={true} text="Save" />
         </div>
       </div>
