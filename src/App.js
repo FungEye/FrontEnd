@@ -131,9 +131,7 @@ function App() {
         />
         <Route path="/login" element={<RegisterLogin />} />
         <Route path="/overview" element={<OverviewPage />} />
-        <Route path="/box" element={<OverviewBox />} />
         <Route path="/recipes" element={<RecipePage/>} />
-        <Route path="/dropdown" element={<DropdownMenu/>} />
         <Route path="/recipes/:recipeId" element={<RecipeDetailPage/>} />
         <Route
           path="/mushrooms"
