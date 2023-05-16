@@ -38,19 +38,19 @@ function RecipeDetailPage() {
                     <div className="recipe-detail-title">
                         {recipe.recipeName}
                     </div>
-                    <div className="row recipe-detail-info">
+                    <div data-test="prep-time" className="row recipe-detail-info">
                         <div className="recipe-detail-field">Prep time: </div>
                         <div className="recipe-detail-value">{recipe.prepTimeMin} min.</div>
                     </div>
-                    <div className="row recipe-detail-info">
+                    <div data-test="cook-time" className="row recipe-detail-info">
                         <div className="recipe-detail-field">Cooking time: </div>
                         <div className="recipe-detail-value">{recipe.cookTimeMin} min.</div>
                     </div>
-                    <div className="row recipe-detail-info">
+                    <div data-test="difficulty" className="row recipe-detail-info">
                         <div className="recipe-detail-field">Difficulty: </div>
                         <div className="recipe-detail-value">{recipe.difficulty}</div>
                     </div>
-                    <div className="row recipe-detail-info">
+                    <div data-test="num-servings" className="row recipe-detail-info">
                         <div className="recipe-detail-field">Num. of Servings: </div>
                         <div className="recipe-detail-value">{recipe.servings}</div>
                     </div>
@@ -59,13 +59,13 @@ function RecipeDetailPage() {
             <div className="recipe-details bg-dark w-100 row rounded-20 slightly-faded">
                 <div className="recipe-specifics rounded-20 bg-light column very-slightly-faded">
                     <div className="recipe-detail-big align-self-center">Ingredients</div>
-                    <ul>
+                    <ul id="ingredients">
                         {ingredientsOL}
                     </ul>
                 </div>
                 <div className="recipe-specifics rounded-20 bg-light column very-slightly-faded">
                     <div className="recipe-detail-big align-self-center">Steps</div>
-                    <ol>
+                    <ol id="steps">
                         {stepsOL}
                     </ol>
                 </div>
