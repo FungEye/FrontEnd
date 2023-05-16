@@ -1,9 +1,12 @@
 import "./css/Dashboard.css";
+import * as React from 'react';
 import { useState, useEffect, useCallback } from "react";
+import { Routes, Route, useParams } from 'react-router-dom';
 import ButtonSecondary from "./ButtonSecondary";
 import OneCondition from "./OneCondition";
 import Status from "./Status";
 function Dashboard() {
+  let {userId} = useParams();
   const [measurement, setMeasurement] = useState(null);
   // const [timestamp, setTimestamp] = useState(null);
   const [time, setTime] = useState(null);
@@ -12,6 +15,7 @@ function Dashboard() {
   const [status] = useState("Good");
   const [shroomname] = useState("Oyster");
   // const [shroomname, setShroomName] = useState("Oyster");
+  
 
   const fetchData = useCallback(() => {
     fetch(`https://fungeye-383609.ey.r.appspot.com/box1/measurements/latest`)
@@ -30,27 +34,6 @@ function Dashboard() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
-
-  /*
-  function initTimestampString(x) {
-    let result = ``;
-    result += getDateString(x);
-    result += `/`;
-    result += `${x.year} `;
-    if (x.hour < 10) {
-      result += "0";
-    }
-    result += getTimeString(x);
-    result += ":"
-
-    if (x.second < 10) {
-      result += "0";
-    }
-    result += `${x.second}`;
-
-    return result;
-  }
-  */
 
   function getTimeString(x) {
     let result = ``;
@@ -80,7 +63,7 @@ function Dashboard() {
       <div className="dashboard column align-items-center">
         <div className="mushroom-title text-dark ultra">{shroomname} Mushroom</div>
         <div className="box text-dark w-100">
-          Box # {measurement == null ? -1 : measurement.id.boxId}
+         {userId} Box # {measurement == null ? -1 : measurement.id.boxId}
         </div>
         <div className="date text-dark">
          <b>{date}</b>
