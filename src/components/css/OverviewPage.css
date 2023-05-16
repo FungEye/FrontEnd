@@ -55,3 +55,8 @@
 .op-box-btn-and-icon {
     gap: 10px;
 }
+
+.yieldsLink {
+    cursor: "pointer";
+    text-decoration: "underline"
+}
