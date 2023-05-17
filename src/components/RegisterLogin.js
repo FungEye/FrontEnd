@@ -44,7 +44,7 @@ export default function RegisterLogin() {
     );
     if (rawResponse.ok) {
       const content = await rawResponse.json();
-      saveToken(content.token);
+      saveToken(content.accessToken);
     }
   }
 
