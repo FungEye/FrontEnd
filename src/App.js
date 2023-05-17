@@ -14,7 +14,7 @@ import Guide from "./components/Guide";
 import YieldPage from "./components/YieldPage";
 import RecipePage from "./components/RecipePage";
 import RecipeDetailPage from "./components/RecipeDetailPage";
-
+import OverviewPage from "./components/OverviewPage";
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -160,6 +160,7 @@ function App() {
         <Route path="/yields" element={<YieldPage />} />
         <Route path="/history" element={<History />} />
         <Route path="/guide" element={<Guide />} />
+        <Route path="/overview" element={<OverviewPage />} />
       </Routes>
     </div>
   );
