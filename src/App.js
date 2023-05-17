@@ -1,3 +1,4 @@
+
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Welcome from "./components/Welcome";
@@ -147,7 +148,7 @@ function App() {
         <Route path="/dashboard/:userId" element={<Dashboard />} />
         <Route path="/editaddnewspecies" element={<EditAddNewSpecies />} />
         <Route
-          path="/:userId"
+          path="/dashboard"
           element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}
         />
         <Route path="/login" element={<RegisterLogin />} />
