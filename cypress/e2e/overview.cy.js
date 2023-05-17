@@ -1,10 +1,6 @@
 describe("Overview PAGE test suite", () => {
   beforeEach(() => {
-    // Cypress starts out with a blank slate for each test
-    // so we must tell it to visit our website with the `cy.visit()` command.
-    // Since we want to visit the same URL at the start of all our tests,
-    // we include it in our beforeEach function so that it runs before each test
-    cy.visit("http://localhost:3000/#/login");
+    cy.visit('http://localhost:3000/#/login')
     cy.get("[data-test='Username']").type("lol");
     cy.get("[data-test='Password']").type("lalalala");
     cy.get("[data-test='Login']").click();
@@ -30,8 +26,14 @@ describe("Overview PAGE test suite", () => {
     cy.url().should("include", "/mushrooms");
   });
 
-  it("Starting a new grow from Empty Active Grows button", () => {
-    cy.get("#your-boxes").click();
+  // TODO failing because, in End to End testing, I cannot decide
+  // to make the Active Grows empty because that would imply heavily changing the code.
+  // When our system is more solid, we can just make a test user
+  // that has no active grows, and then log into his account
+  // for this test case.
+  // Otherwise, log into the account of another Test User
+  // which has grows in his account.
+  it('Starting a new grow from Empty Active Grows button', () => {
     cy.get("[data-test='Start Grow']").click();
     cy.url().should("include", "/mushrooms");
   });

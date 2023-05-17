@@ -184,3 +184,7 @@
 .pointer {
     cursor: pointer;
 }
+
+.m-auto {
+    margin: auto;
+}
