@@ -1,0 +1,37 @@
+.yield-card{
+    width: 1000px;
+   
+    background-color: #eed1ab ;
+    min-height: 200px;;
+}
+
+.yield-card-flex{
+    display:flex;
+    flex-direction: row;
+}
+
+.yield-card-1st-column{
+    display: flex;
+    flex-direction: column;
+    width:25%;
+
+}
+
+.yield-card-2nd-column{
+    display: flex;
+    flex-direction: column;
+    
+
+}
+
+.yield-card-3rd-column{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.yield-card-yields-column{
+    display: flex;
+    flex-direction: column;
+
+}

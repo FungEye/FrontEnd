@@ -4,10 +4,17 @@ import Welcome from "./components/Welcome";
 import ChooseBox from "./components/ChooseBox";
 import Dashboard from "./components/Dashboard";
 import AddNewSpecies from "./components/AddNewSpecies";
+import EditAddNewSpecies from "./components/EditAddNewSpecies";
 import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
 import NavBar from "./components/NavBar";
+import History from "./components/history/History";
+import Guide from "./components/Guide";
+import YieldPage from "./components/YieldPage";
+import RecipePage from "./components/RecipePage";
+import RecipeDetailPage from "./components/RecipeDetailPage";
+
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -112,6 +119,23 @@ function App() {
     box12,
   ];
 
+  let grow1 = {
+    status: "Good",
+    mushroom: {
+      shroomname: "Oyster",
+      imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
+      lastMeasured: {
+        day: 11,
+        month: 5,
+        year: 2023,
+        hour: 9,
+        minute: 30,
+      },
+    },
+  };
+
+  let element = <h1>Big lol</h1>;
+
   return (
     <div className="App">
       <NavBar />
@@ -120,16 +144,22 @@ function App() {
         <Route path="/" element={<Welcome />} />
         <Route path="/addnewspecies" element={<AddNewSpecies />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        {/* <Route path="/dashboard/:userId" element={<Dashboard />} /> */}
+        <Route path="/dashboard/:userId" element={<Dashboard />} />
+        <Route path="/editaddnewspecies" element={<EditAddNewSpecies />} />
         <Route
           path="/:userId"
           element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}
         />
         <Route path="/login" element={<RegisterLogin />} />
+        <Route path="/recipes" element={<RecipePage />} />
+        <Route path="/recipes/:recipeId" element={<RecipeDetailPage />} />
         <Route
-          path="/shroomcard"
+          path="/mushrooms"
           element={<MushroomCardPage mushroomList={mushroomList} />}
         />
+        <Route path="/yields" element={<YieldPage />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/guide" element={<Guide />} />
       </Routes>
     </div>
   );
