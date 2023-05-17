@@ -1,0 +1,151 @@
+:root {
+    --brown: #763D2D;
+    --light-brown: #ac8b71;
+    --beige: #F6DCAF;
+}
+
+.historyPageContainer {
+    width: 100%;
+    height: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.historyContainer {
+    width: 50%;
+    height: 700px;
+}
+
+.backButtonContainer {
+    padding: 10px
+}
+
+.historyTitle {
+    font-size: 36px;
+}
+
+.pagesContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.toggleContainer {
+    margin-bottom: 15px;
+}
+
+
+
+.h-name {
+    font-size: 30px;
+}
+
+.h-sm {
+    font-size: 25px;
+}
+
+.h-xs {
+    font-size: 18px;
+}
+
+.hb-pointer {
+    cursor: pointer;
+}
+
+.hb-graph {
+    border-right: 0.85px solid var(--brown);
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.hb-table {
+    border-left: 0.85px solid var(--brown);
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.focused {
+    transition: 0.5s;
+    background-color: #b189a0;
+    animation: change 1s;
+}
+
+@keyframes change {
+    from {
+        background-color: var(--beige);
+    }
+
+    to {
+        background-color: #b189a0;
+    }
+}
+
+.roundedGraph {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.roundedTable {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.usefulLinks,
+.usefulTitle {
+    color: rgb(56, 26, 1);
+}
+
+.textHover:hover {
+    text-shadow: 1px 1px 10px rgba(190, 79, 0, 0.5);
+    cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #925442;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #8f4935;
+}
+
+.rightContainer {
+    padding-top: 50px;
+}
+
+:root {
+    --swiper-theme-color: #763D2D;
+
+}
+
+.conditions-carousel-history {
+    height: 400px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    scale: 60%;
+}
+
+.custom-tooltip {
+    background: #bbbbbb;
+    padding: 5px;
+    opacity: 0.5;
+
+}

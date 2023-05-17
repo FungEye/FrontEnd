@@ -31,14 +31,17 @@ export default function RegisterLogin() {
   }, []);
 
   async function request(type, hashedPassword) {
-    const rawResponse = await fetch(`https://72v0d.wiremockapi.cloud/${type}`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: username, password: hashedPassword }),
-    });
+    const rawResponse = await fetch(
+      `https://fungeye-383609.ey.r.appspot.com/api/auth/${type}`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: username, password: hashedPassword }),
+      }
+    );
     if (rawResponse.ok) {
       const content = await rawResponse.json();
       saveToken(content.token);

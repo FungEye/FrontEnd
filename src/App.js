@@ -9,6 +9,7 @@ import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
 import NavBar from "./components/NavBar";
+import History from "./components/history/History";
 import Guide from "./components/Guide";
 import YieldPage from "./components/YieldPage";
 import RecipePage from "./components/RecipePage";
@@ -155,6 +156,7 @@ function App() {
           element={<MushroomCardPage mushroomList={mushroomList} />}
         />
         <Route path="/yields" element={<YieldPage />} />
+        <Route path="/history" element={<History />} />
         <Route path="/guide" element={<Guide />} />
       </Routes>
     </div>
