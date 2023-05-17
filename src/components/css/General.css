@@ -107,7 +107,7 @@
 .align-items-left {
     display: flex;
     align-items: left;
-
+}
 .align-items-start {
     display:flex;
     align-items:flex-start;
