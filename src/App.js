@@ -9,11 +9,12 @@ import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
 import NavBar from "./components/NavBar";
+import History from "./components/history/History";
 import Guide from "./components/Guide";
-
 import OverviewPage from "./components/OverviewPage";
 import RecipePage from "./components/RecipePage";
 import RecipeDetailPage from "./components/RecipeDetailPage";
+
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -138,6 +139,7 @@ function App() {
           path="/mushrooms"
           element={<MushroomCardPage mushroomList={mushroomList} />}
         />
+        <Route path="/history" element={<History />} />
         <Route path="/guide" element={<Guide />} />
       </Routes>
     </div>

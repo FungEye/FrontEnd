@@ -29,12 +29,12 @@
 
 
 
-p:hover {
+.navItemsText:hover {
     text-shadow: 1px 1px 10px rgba(190, 79, 0, 0.5);
     cursor: pointer;
 }
 
-p {
+.navItemsText {
     font-size: 20px;
     transition: 0.2s;
 }

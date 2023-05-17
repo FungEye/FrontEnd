@@ -24,17 +24,33 @@ const NavBar = (props) => {
         <img src={pic} alt="Girl in a jacket" className="logo" />
       </div>
       <div className="navItems row jc-space-evenly poppins ">
-        <p onClick={() => navigate("/dashboard")}>Dashboard</p>
-        <p onClick={() => navigate("/overview")}>Overview</p>
-        <p onClick={() => navigate("/mushrooms")}>Mushrooms</p>
-        <p onClick={() => navigate("/chooseBox")}>Boxes</p>
-        <p onClick={() => navigate("/addnewspecies")}>New</p>
-        <p onClick={() => navigate("/guide")}>Guide</p>
-        
+
+        <p className="navItemsText" onClick={() => navigate("/dashboard")}>
+          Dashboard
+        </p>
+        <p className="navItemsText" onClick={() => navigate("/overview")}>
+          Overview
+        </p>
+         <p className="navItemsText" onClick={() => navigate("/mushrooms")}>Mushrooms</p>
+        <p className="navItemsText" onClick={() => navigate("/chooseBox")}>
+          Boxes
+        </p>
+        <p className="navItemsText" onClick={() => navigate("/addnewspecies")}>
+          New
+        </p>
+        <p className="navItemsText" onClick={() => navigate("/history")}>
+          History
+        </p>
+         
+<p className="navItemsText" onClick={() => navigate("/guide")}>Guide</p>
+
       </div>
       <div className="poppins row jc-space-between align-items-center login">
-        <p>{isAuthenticated() ? auth().name : null}</p>
-        <p onClick={() => (isAuthenticated() ? logOut() : navigate("login"))}>
+        <p className="navItemsText">{isAuthenticated() ? auth().name : null}</p>
+        <p
+          className="navItemsText"
+          onClick={() => (isAuthenticated() ? logOut() : navigate("login"))}
+        >
           {isAuthenticated() ? "Log out 🔓" : "Log in 🔒"}
         </p>
       </div>
