@@ -1,3 +1,4 @@
+
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Welcome from "./components/Welcome";
@@ -119,10 +120,8 @@ function App() {
         <Route path="/chooseBox" element={<ChooseBox boxList={boxList} />} />
         <Route path="/" element={<Welcome />} />
         <Route path="/addnewspecies" element={<AddNewSpecies />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        {/* <Route path="/dashboard/:userId" element={<Dashboard />} /> */}
         <Route
-          path="/:userId"
+          path="/dashboard"
           element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}
         />
         <Route path="/login" element={<RegisterLogin />} />
