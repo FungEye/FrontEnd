@@ -12,7 +12,6 @@
 
 }
 
-
 .ans-button{
     margin-top: 15px;
     width: 120px;
@@ -31,4 +30,14 @@
 
 .phases {
     margin-bottom: 30px;
+}
+.origin-row{
+    align-items: center;
+}
+
+.origindescription textarea {
+    margin-top: 25px;
+    background-color: #fff6e6;
+    padding: 2px 10px 2px 10px;
+    border: none;
 }

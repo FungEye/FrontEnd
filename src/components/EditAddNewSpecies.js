@@ -1,33 +1,40 @@
 import AddNewSpeciesForm2 from "./AddNewSpeciesForm2";
 import "./css/AddNewSpecies.css";
+import { useState } from "react";
 import ButtonPrimary from "./ButtonPrimary";
 import XButton from "./XButton";
 import AddNewSpeciesOrigin from "./AddNewSpeciesOrigin";
+import ArchiveModal from "./ArchiveModal";
 
-function AddNewSpecies() {
-  // const [name, setName] = useState('');
-  // const [origin, setOrigin] = useState('');
-  // const [imageurl, setImageurl] = useState('');
-  // const [spawningConditions, setSpawningConditions] = useState(getNewConditions());
+function EditAddNewSpecies() {
+  // const [name, setName] = useState("");
+  // const [origin, setOrigin] = useState("");
+  // const [imageurl, setImageurl] = useState("");
+  // const [spawningConditions, setSpawningConditions] = useState(
+  //   getNewConditions()
+  // );
   // const [piningConditions, setPiningConditions] = useState(getNewConditions());
-  // const [fruitingConditions, setFruitingConditions] = useState(getNewConditions());
+  // const [fruitingConditions, setFruitingConditions] = useState(
+  //   getNewConditions()
+  // );
+  const [show, setShow] = useState(false);
 
   // function getNewConditions() {
   //   return {
-  //     "temperature": 0,
-  //     "humidity": 0,
-  //     "co2": 0,
-  //     "light": 0
-  //   }
+  //     temperature: 0,
+  //     humidity: 0,
+  //     co2: 0,
+  //     light: 0,
+  //   };
   // }
   // function clearName(textarea) {
   //   if (textarea.value === textarea.defaultValue) {
-  //     textarea.value = '';
+  //     textarea.value = "";
   //   }
   // }
 
   // function updateCondition(oldCondition, stat, value) {
-  //   let newCondition = {...oldCondition};
+  //   let newCondition = { ...oldCondition };
   //   switch (stat) {
   //     case "temp":
   //       newCondition.temperature = value;
@@ -43,7 +50,6 @@ function AddNewSpecies() {
   //       break;
   //     default:
   //       return;
-
   //   }
   //   return newCondition;
   // }
@@ -55,7 +61,7 @@ function AddNewSpecies() {
       </div>
       <div className="dashboard column align-items-center">
         <div id="new-species-title" className="mushroom-title text-dark ultra">
-          Add new species
+          Edit species
         </div>
         <div className="origin-row row">
           <AddNewSpeciesOrigin />
@@ -73,12 +79,18 @@ function AddNewSpecies() {
           </div>
           <AddNewSpeciesForm2 title="Fruiting" />
         </div>
-        <div className="text-dark">
-          <ButtonPrimary wide={true} text="Add Mushroom" />
+        <div className="text-dark row gap-10">
+          <ButtonPrimary
+            wide={true}
+            onClick={() => setShow(true)}
+            text="Archive"
+          />
+          <ArchiveModal onClose={() => setShow(false)} show={show} />
+          <ButtonPrimary wide={true} text="Save" />
         </div>
       </div>
     </div>
   );
 }
 
-export default AddNewSpecies;
+export default EditAddNewSpecies;

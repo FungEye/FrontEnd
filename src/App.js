@@ -4,6 +4,7 @@ import Welcome from "./components/Welcome";
 import ChooseBox from "./components/ChooseBox";
 import Dashboard from "./components/Dashboard";
 import AddNewSpecies from "./components/AddNewSpecies";
+import EditAddNewSpecies from "./components/EditAddNewSpecies";
 import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
@@ -124,6 +125,7 @@ function App() {
         <Route path="/chooseBox" element={<ChooseBox boxList={boxList} />} />
         <Route path="/" element={<Welcome />} />
         <Route path="/addnewspecies" element={<AddNewSpecies />} />
+        <Route path="/editaddnewspecies" element={<EditAddNewSpecies />} />
         <Route
           path="/dashboard"
           element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}
