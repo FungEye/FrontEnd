@@ -11,12 +11,9 @@ import MushroomCardPage from "./components/MushroomCardPage";
 import NavBar from "./components/NavBar";
 import Guide from "./components/Guide";
 import YieldPage from "./components/YieldPage";
-
-
-
-import OverviewPage from "./components/OverviewPage";
 import RecipePage from "./components/RecipePage";
 import RecipeDetailPage from "./components/RecipeDetailPage";
+
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -121,7 +118,6 @@ function App() {
     box12,
   ];
 
-
   let grow1 = {
     status: "Good",
     mushroom: {
@@ -139,7 +135,6 @@ function App() {
 
   let element = <h1>Big lol</h1>;
 
-
   return (
     <div className="App">
       <NavBar />
@@ -153,15 +148,8 @@ function App() {
           element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}
         />
         <Route path="/login" element={<RegisterLogin />} />
-        <Route path="/overview" element={<OverviewPage />} />
-
-        <Route
-          path="/collapse"
-          element={<Collapsible text="Lol" content={element} />}
-        />
-        <Route path="/box" element={<OverviewBox />} />
-        <Route path="/recipes" element={<RecipePage/>} />
-        <Route path="/recipes/:recipeId" element={<RecipeDetailPage/>} />
+        <Route path="/recipes" element={<RecipePage />} />
+        <Route path="/recipes/:recipeId" element={<RecipeDetailPage />} />
         <Route
           path="/mushrooms"
           element={<MushroomCardPage mushroomList={mushroomList} />}
