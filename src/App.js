@@ -143,9 +143,11 @@ function App() {
         <Route path="/chooseBox" element={<ChooseBox boxList={boxList} />} />
         <Route path="/" element={<Welcome />} />
         <Route path="/addnewspecies" element={<AddNewSpecies />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/:userId" element={<Dashboard />} />
         <Route path="/editaddnewspecies" element={<EditAddNewSpecies />} />
         <Route
-          path="/dashboard"
+          path="/:userId"
           element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}
         />
         <Route path="/login" element={<RegisterLogin />} />
