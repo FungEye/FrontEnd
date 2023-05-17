@@ -1,4 +1,4 @@
-import "./css/ChooseBoxModal.css";
+import "./css/CreateBoxModal.css";
 import "./css/General.css";
 import ButtonPrimary from "./ButtonPrimary";
 import ButtonSecondary from "./ButtonSecondary";

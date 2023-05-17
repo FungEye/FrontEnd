@@ -24,26 +24,31 @@ const NavBar = (props) => {
         <img src={pic} alt="Girl in a jacket" className="logo" />
       </div>
       <div className="navItems row jc-space-evenly poppins ">
-
         <p className="navItemsText" onClick={() => navigate("/dashboard")}>
           Dashboard
         </p>
         <p className="navItemsText" onClick={() => navigate("/overview")}>
           Overview
         </p>
-         <p className="navItemsText" onClick={() => navigate("/mushrooms")}>Mushrooms</p>
+        <p className="navItemsText" onClick={() => navigate("/mushrooms")}>
+          Mushrooms
+        </p>
         <p className="navItemsText" onClick={() => navigate("/chooseBox")}>
           Boxes
         </p>
         <p className="navItemsText" onClick={() => navigate("/addnewspecies")}>
           New
         </p>
+        <p className="navItemsText" onClick={() => navigate("/yields")}>
+          Yields
+        </p>
         <p className="navItemsText" onClick={() => navigate("/history")}>
           History
         </p>
-         
-<p className="navItemsText" onClick={() => navigate("/guide")}>Guide</p>
 
+        <p className="navItemsText" onClick={() => navigate("/guide")}>
+          Guide
+        </p>
       </div>
       <div className="poppins row jc-space-between align-items-center login">
         <p className="navItemsText">{isAuthenticated() ? auth().name : null}</p>

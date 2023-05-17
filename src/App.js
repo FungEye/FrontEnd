@@ -11,7 +11,7 @@ import MushroomCardPage from "./components/MushroomCardPage";
 import NavBar from "./components/NavBar";
 import History from "./components/history/History";
 import Guide from "./components/Guide";
-import OverviewPage from "./components/OverviewPage";
+import YieldPage from "./components/YieldPage";
 import RecipePage from "./components/RecipePage";
 import RecipeDetailPage from "./components/RecipeDetailPage";
 
@@ -119,6 +119,23 @@ function App() {
     box12,
   ];
 
+  let grow1 = {
+    status: "Good",
+    mushroom: {
+      shroomname: "Oyster",
+      imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
+      lastMeasured: {
+        day: 11,
+        month: 5,
+        year: 2023,
+        hour: 9,
+        minute: 30,
+      },
+    },
+  };
+
+  let element = <h1>Big lol</h1>;
+
   return (
     <div className="App">
       <NavBar />
@@ -132,13 +149,13 @@ function App() {
           element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}
         />
         <Route path="/login" element={<RegisterLogin />} />
-        <Route path="/overview" element={<OverviewPage />} />
-        <Route path="/recipes" element={<RecipePage/>} />
-        <Route path="/recipes/:recipeId" element={<RecipeDetailPage/>} />
+        <Route path="/recipes" element={<RecipePage />} />
+        <Route path="/recipes/:recipeId" element={<RecipeDetailPage />} />
         <Route
           path="/mushrooms"
           element={<MushroomCardPage mushroomList={mushroomList} />}
         />
+        <Route path="/yields" element={<YieldPage />} />
         <Route path="/history" element={<History />} />
         <Route path="/guide" element={<Guide />} />
       </Routes>
