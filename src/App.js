@@ -4,6 +4,7 @@ import Welcome from "./components/Welcome";
 import ChooseBox from "./components/ChooseBox";
 import Dashboard from "./components/Dashboard";
 import AddNewSpecies from "./components/AddNewSpecies";
+import EditAddNewSpecies from "./components/EditAddNewSpecies";
 import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
@@ -11,12 +12,11 @@ import NavBar from "./components/NavBar";
 import Guide from "./components/Guide";
 import YieldPage from "./components/YieldPage";
 
-import OverviewPage from "./components/OverviewPage";
-import OPActiveGrow from "./components/OPActiveGrow";
-import Collapsible from "./components/Collapsible";
-import useScript from "./hooks/useScript";
-import OverviewBox from "./components/OverviewBox";
 
+
+import OverviewPage from "./components/OverviewPage";
+import RecipePage from "./components/RecipePage";
+import RecipeDetailPage from "./components/RecipeDetailPage";
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -121,6 +121,7 @@ function App() {
     box12,
   ];
 
+
   let grow1 = {
     status: "Good",
     mushroom: {
@@ -138,6 +139,7 @@ function App() {
 
   let element = <h1>Big lol</h1>;
 
+
   return (
     <div className="App">
       <NavBar />
@@ -145,17 +147,21 @@ function App() {
         <Route path="/chooseBox" element={<ChooseBox boxList={boxList} />} />
         <Route path="/" element={<Welcome />} />
         <Route path="/addnewspecies" element={<AddNewSpecies />} />
+        <Route path="/editaddnewspecies" element={<EditAddNewSpecies />} />
         <Route
           path="/dashboard"
           element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}
         />
         <Route path="/login" element={<RegisterLogin />} />
         <Route path="/overview" element={<OverviewPage />} />
+
         <Route
           path="/collapse"
           element={<Collapsible text="Lol" content={element} />}
         />
         <Route path="/box" element={<OverviewBox />} />
+        <Route path="/recipes" element={<RecipePage/>} />
+        <Route path="/recipes/:recipeId" element={<RecipeDetailPage/>} />
         <Route
           path="/mushrooms"
           element={<MushroomCardPage mushroomList={mushroomList} />}
