@@ -1,5 +1,5 @@
 import React from 'react'
-import OverviewPage from './OverviewPage'
+import OverviewPage from '../components/OverviewPage'
 import { HashRouter } from 'react-router-dom'
 
 describe('<OverviewPage />', () => {
