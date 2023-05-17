@@ -4,7 +4,7 @@ import YieldCard from "./YieldCard";
 import AutocompleteInput from "./AutocompleteInput";
 
 function YieldPage(props) {
-  let yieldsList = props.yieldsList;
+  // let yieldsList = props.yieldsList;
 
   return (
     <div>

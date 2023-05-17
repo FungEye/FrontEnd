@@ -119,22 +119,22 @@ function App() {
     box12,
   ];
 
-  let grow1 = {
-    status: "Good",
-    mushroom: {
-      shroomname: "Oyster",
-      imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
-      lastMeasured: {
-        day: 11,
-        month: 5,
-        year: 2023,
-        hour: 9,
-        minute: 30,
-      },
-    },
-  };
+  // let grow1 = {
+  //   status: "Good",
+  //   mushroom: {
+  //     shroomname: "Oyster",
+  //     imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
+  //     lastMeasured: {
+  //       day: 11,
+  //       month: 5,
+  //       year: 2023,
+  //       hour: 9,
+  //       minute: 30,
+  //     },
+  //   },
+  // };
 
-  let element = <h1>Big lol</h1>;
+  // let element = <h1>Big lol</h1>;
 
   return (
     <div className="App">

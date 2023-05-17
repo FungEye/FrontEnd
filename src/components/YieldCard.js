@@ -4,7 +4,7 @@ import ButtonPrimary from "./ButtonPrimary";
 import shroomPic from "../img/oyster.png";
 
 function YieldCard(props) {
-  let grow = props.grow;
+  // let grow = props.grow;
 
   return (
     <div className="yield-card rounded-20 mt-15 ">

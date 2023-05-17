@@ -35,30 +35,6 @@ function Dashboard() {
     fetchData();
   }, [fetchData]);
 
-  function getTimeString(x) {
-    let result = ``;
-    result += `${x.hour}:`;
-    if (x.minute < 10) {
-      result += "0";
-    }
-    result += `${x.minute}`;
-    return result;
-  }
-
-  function getDateString(x) {
-    let result = "";
-    if (x.day < 10) {
-      result += "0";
-    }
-    result += `${x.day}/`;
-    if (x.month < 10) {
-      result += "0";
-    }
-    result += `${x.month}`;
-    return result;
-  }
-
-
   return (
     <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
       <div className="dashboard column align-items-center">
