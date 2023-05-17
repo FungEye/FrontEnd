@@ -4,11 +4,17 @@ import Welcome from "./components/Welcome";
 import ChooseBox from "./components/ChooseBox";
 import Dashboard from "./components/Dashboard";
 import AddNewSpecies from "./components/AddNewSpecies";
+import EditAddNewSpecies from "./components/EditAddNewSpecies";
 import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/MushroomCardPage";
 import NavBar from "./components/NavBar";
 import History from "./components/history/History";
+import Guide from "./components/Guide";
+import OverviewPage from "./components/OverviewPage";
+import RecipePage from "./components/RecipePage";
+import RecipeDetailPage from "./components/RecipeDetailPage";
+
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -120,16 +126,21 @@ function App() {
         <Route path="/chooseBox" element={<ChooseBox boxList={boxList} />} />
         <Route path="/" element={<Welcome />} />
         <Route path="/addnewspecies" element={<AddNewSpecies />} />
+        <Route path="/editaddnewspecies" element={<EditAddNewSpecies />} />
         <Route
           path="/dashboard"
           element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}
         />
         <Route path="/login" element={<RegisterLogin />} />
+        <Route path="/overview" element={<OverviewPage />} />
+        <Route path="/recipes" element={<RecipePage/>} />
+        <Route path="/recipes/:recipeId" element={<RecipeDetailPage/>} />
         <Route
-          path="/shroomcard"
+          path="/mushrooms"
           element={<MushroomCardPage mushroomList={mushroomList} />}
         />
         <Route path="/history" element={<History />} />
+        <Route path="/guide" element={<Guide />} />
       </Routes>
     </div>
   );

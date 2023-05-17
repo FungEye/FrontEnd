@@ -153,7 +153,7 @@ export default function RegisterLogin() {
           </div>
         </div>
         <div className="mushroomContainer">
-          <img src={pic} alt="Girl in a jacket" />
+          <img className="rl-img" src={pic} alt="Girl in a jacket" />
         </div>
       </div>
       <div className="buttonContainer">
