@@ -2,10 +2,22 @@ import "./css/General.css";
 import "./css/YieldPage.css";
 import YieldCard from "./YieldCard";
 import AutocompleteInput from "./AutocompleteInput";
-
+import { useEffect, useCallback } from "react";
 function YieldPage(props) {
   // let yieldsList = props.yieldsList;
+  const getYields = useCallback(() => {
+    fetch(`https://fungeye-383609.ey.r.appspot.com/harvest/1`)
+      .then((res) => {
+        console.log(res);
+        if (res.ok) return res.json();
+      })
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  }, []);
 
+  useEffect(() => {
+    getYields();
+  }, [getYields]);
   return (
     <div>
       <div className="yields-title-container">
