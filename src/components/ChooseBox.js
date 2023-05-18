@@ -5,10 +5,11 @@ import "./css/General.css";
 import BoxCard from "./BoxCard";
 import ButtonPrimary from "./ButtonPrimary";
 import CreateBoxModal from "./CreateBoxModal";
-
+import { useParams } from "react-router-dom";
 function ChooseBox(props) {
   const navigate = useNavigate();
-
+  const { mushroomId } = useParams();
+  console.log(mushroomId);
   const containerRef = useRef(null);
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
