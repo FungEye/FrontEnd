@@ -1,5 +1,5 @@
 import React from "react";
-import OPActiveGrow from "../components/OPActiveGrow";
+import OPActiveGrow from "../../components/OPActiveGrow";
 import { HashRouter } from "react-router-dom";
 
 describe("<OPActiveGrow />", () => {

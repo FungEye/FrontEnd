@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --brown: #763D2D;
     --beige: #F6DCAF;
 }
@@ -35,8 +35,9 @@
 }
 
 .navItemsText {
-    font-size: 20px;
+    font-size: 10px;
     transition: 0.2s;
+    color: rgb(7, 7, 7)
 }
 
 .separator {
@@ -45,4 +46,162 @@
 
 .login {
     width: 10%;
+}
+
+.nav-btn {
+    padding: 5px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--textColor);
+    visibility: hidden;
+    opacity: 0;
+    font-size: 1.8rem;
+}
+
+@media only screen and (max-width: 1000px) {
+    .navBar .nav-btn {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .navItems,
+    .navBar {
+        position: fixed;
+        top: -100vh;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        background-color: var(--mainColor);
+        transition: 1s;
+    }
+
+    .navBar .responsive_nav {
+        transform: translateY(100vh);
+    }
+
+    .navItems .nav-close-btn {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+    }
+
+    .navItems {
+        font-size: 1.5rem;
+    }
+} */
+
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Titillium Web", sans-serif;
+}
+
+:root {
+    --mainColor: #29335c;
+    --mainColorLight: #5767aa;
+    --secondaryColor: #db2b39;
+    --textColor: #eee;
+    --brown: #763D2D;
+    --hover-brown: #612c22;
+    --light-brown: #ac8b71;
+    --beige: #F6DCAF;
+}
+
+.header,
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80px;
+    width: 100%;
+    padding: 0 2rem;
+    background-color: var(--beige);
+    color: var(--brown);
+    overflow: hidden;
+}
+
+nav a {
+    margin: 0 1rem;
+    color: var(--brown);
+    text-decoration: none;
+}
+
+.navItemsText {
+    font-size: 18px;
+}
+
+nav .navItemsText:hover {
+    text-shadow: 1px 1px 10px rgba(190, 79, 0, 0.5);
+    cursor: pointer;
+}
+
+.header .nav-btn {
+    padding: 5px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--brown);
+    visibility: hidden;
+    opacity: 0;
+    font-size: 1rem;
+}
+
+.header div,
+nav {
+    display: flex;
+    align-items: space-around;
+}
+
+
+
+@media only screen and (max-width: 1024px) {
+    .header .nav-btn {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .header nav {
+        position: fixed;
+        top: -100vh;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        background-color: var(--beige);
+        transition: 1s;
+        z-index: 6;
+    }
+
+    .header .responsive_nav {
+        transform: translateY(100vh);
+    }
+
+    .navItemsText {
+        font-size: 32px;
+    }
+
+    nav .nav-close-btn {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+    }
+
+    nav a {
+        font-size: 1.5rem;
+    }
 }

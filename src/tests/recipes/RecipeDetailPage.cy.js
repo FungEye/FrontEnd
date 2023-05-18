@@ -1,5 +1,5 @@
 import React from 'react'
-import RecipeDetailPage from './RecipeDetailPage'
+import RecipeDetailPage from '../../components/RecipeDetailPage'
 import { HashRouter } from 'react-router-dom'
 
 describe('<RecipeDetailPage />', () => {
