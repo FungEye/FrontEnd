@@ -1,20 +1,22 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Welcome from "./components/Welcome";
-import ChooseBox from "./components/ChooseBox";
-import Dashboard from "./components/Dashboard";
-import AddNewSpecies from "./components/AddNewSpecies";
-import EditAddNewSpecies from "./components/EditAddNewSpecies";
-import RegisterLogin from "./components/RegisterLogin";
 import { useIsAuthenticated } from "react-auth-kit";
-import MushroomCardPage from "./components/MushroomCardPage";
-import NavBar from "./components/NavBar";
-import History from "./components/history/History";
-import Guide from "./components/Guide";
-import YieldPage from "./components/YieldPage";
-import RecipePage from "./components/RecipePage";
-import RecipeDetailPage from "./components/RecipeDetailPage";
-import OverviewPage from "./components/OverviewPage";
+import NavBar from "./components/ui/NavBar";
+import Dashboard from "./components/pages/Dashboard";
+import Guide from "./components/pages/Guide";
+import RegisterLogin from "./components/pages/RegisterLogin";
+import MushroomCardPage from "./components/pages/mushroom/MushroomCardPage";
+import OverviewPage from "./components/pages/overview/OverviewPage";
+import Welcome from "./components/pages/overview/Welcome";
+import RecipeDetailPage from "./components/pages/recipe/RecipeDetailPage";
+import RecipePage from "./components/pages/recipe/RecipePage";
+import AddNewSpecies from "./components/pages/species/AddNewSpecies";
+import EditAddNewSpecies from "./components/pages/species/EditAddNewSpecies";
+import YieldPage from "./components/pages/yield/YieldPage";
+import ChooseBox from "./components/ui/ChooseBox";
+import History from "./components/pages/history/History";
+
+
 function App() {
   const isAuthenticated = useIsAuthenticated();
   let oyster = {
@@ -124,24 +126,7 @@ function App() {
     box11,
     box12,
   ];
-
-  // let grow1 = {
-  //   status: "Good",
-  //   mushroom: {
-  //     shroomname: "Oyster",
-  //     imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
-  //     lastMeasured: {
-  //       day: 11,
-  //       month: 5,
-  //       year: 2023,
-  //       hour: 9,
-  //       minute: 30,
-  //     },
-  //   },
-  // };
-
-  // let element = <h1>Big lol</h1>;
-
+  
   return (
     <div className="App">
       <NavBar />
