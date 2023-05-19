@@ -5,7 +5,9 @@ import ButtonSecondary from "./ButtonSecondary";
 import OneCondition from "./OneCondition";
 import Status from "./Status";
 import { getTimeString, getDateString } from "../util/DateTimeFormatter";
-function Dashboard() {
+import { useParams } from "react-router-dom";
+function Dashboard({ isNew }) {
+  const { boxId } = useParams();
   const [measurement, setMeasurement] = useState(null);
   const [time, setTime] = useState(null);
   const [date, setDate] = useState(null);
@@ -16,92 +18,96 @@ function Dashboard() {
   const [error, setError] = useState("");
   const authHeader = useAuthHeader();
 
-  const fetchData = useCallback(
-    (id) => {
-      console.log(authHeader());
-      console.log("ID: ", id);
-      fetch(
-        `https://fungeye-383609.ey.r.appspot.com/box${id}/measurements/latest`,
+  const fetchData = useCallback(() => {
+    fetch(
+      `https://fungeye-383609.ey.r.appspot.com/box${boxId}/measurements/latest`,
         {
           method: "GET",
           headers: {
             Authorization: authHeader(),
           },
         }
-      )
-        .then((response) => {
-          if (response.ok) return response.json();
-        })
-        .then((m) => {
-          console.log(m);
-          setMeasurement(m);
-          setTime(getTimeString(m.id.dateTime));
-          setDate(getDateString(m.id.dateTime));
-        })
-        .catch((err) => {
-          console.log(err);
-          setError(err.message);
-        });
-    },
-    [authHeader]
-  );
+    )
+      .then((response) => {
+        if (response.ok) return response.json();
+      })
+      .then((m) => {
+        setMeasurement(m);
+        // setTimestamp(initTimestampString(m.id.dateTime));
+        setTime(getTimeString(m.id.dateTime));
+        setDate(getDateString(m.id.dateTime));
+      })
+      .catch((err) => console.log(err));
+  }, [boxId]);
 
   useEffect(() => {
-    fetchData(1);
-  }, [fetchData]);
+    if (!isNew) fetchData();
+  }, [isNew, fetchData]);
+
 
   return (
     <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
       <div className="dashboard column align-items-center">
-        <div className="mushroom-title text-dark ultra">
-          {shroomname} Mushroom
-        </div>
-        <div className="box text-dark w-100">
-          Box # {measurement == null ? -1 : measurement.id.boxId}
-        </div>
+        <div className="mushroom-title text-dark ultra">{shroomname}</div>
+        <div className="box text-dark w-100">Box #{boxId}</div>
         <div className="date text-dark">
           <b>{date}</b>
         </div>
         <div className="text-dark row jc-space-evenly align-items-center w-100 ">
-          <div className="column pt-15">
-            <ButtonSecondary text="<" />
-            <div className="small-time">11:11</div>
+          {!isNew ? (
+            <div className="column pt-15">
+              <ButtonSecondary text="<" />
+              <div className="small-time">11:11</div>
+            </div>
+          ) : null}
+          <div className="big-time p-10">
+            <b>
+              {isNew
+                ? "No measurements yet, come back later"
+                : time == null
+                ? "Loading date..."
+                : time}
+            </b>
           </div>
-          <div className="big-time">
-            <b>{time == null ? "Loading date..." : time}</b>
-          </div>
-          <div className="column pt-15">
-            <ButtonSecondary text=">" />
-            <div className="small-time">11:33</div>
-          </div>
+          {!isNew ? (
+            <div className="column pt-15">
+              <ButtonSecondary text=">" />
+              <div className="small-time">11:33</div>
+            </div>
+          ) : null}
         </div>
-        <div className="status-text text-dark">
-          <b>Status:</b>
-        </div>
-        <Status status={status} />
-        <div className="measurements jc-center">
-          <OneCondition
-            title="Temperature"
-            measurement={measurement == null ? null : measurement.temperature}
-            unit="ºC"
-          />
-          <OneCondition
-            title="Humidity"
-            measurement={measurement == null ? null : measurement.humidity}
-            unit="%"
-          />
-          <OneCondition
-            title="CO2"
-            measurement={measurement == null ? null : measurement.co2}
-            unit="ppm"
-          />
-          <OneCondition
-            title="Light"
-            measurement={measurement == null ? null : measurement.light}
-            unit="lux"
-          />
-        </div>
-        <p>{error}</p>
+        {!isNew ? (
+          <>
+            <div className="status-text text-dark">
+              <b>Status:</b>
+            </div>
+            <Status status={status} />
+            <div className="measurements jc-center">
+              <OneCondition
+                title="Temperature"
+                measurement={
+                  measurement == null ? null : measurement.temperature
+                }
+                unit="ºC"
+              />
+              <OneCondition
+                title="Humidity"
+                measurement={measurement == null ? null : measurement.humidity}
+                unit="%"
+              />
+              <OneCondition
+                title="CO2"
+                measurement={measurement == null ? null : 0}
+                unit="ppm"
+              />
+              <OneCondition
+                title="Light"
+                measurement={measurement == null ? null : 0}
+                unit="lux"
+              />
+            </div>
+          </>
+        ) : null}
       </div>
     </div>
   );

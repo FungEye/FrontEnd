@@ -55,7 +55,8 @@ function AddNewSpecies() {
       </div>
       <div className="dashboard column align-items-center">
         <div id="new-species-title" className="mushroom-title text-dark ultra">
-          Add new species
+          {/* {isEdit? "Edit Species" : "Add New Species"} */}
+          dAd new species
         </div>
         <div className="origin-row row">
           <AddNewSpeciesOrigin />
