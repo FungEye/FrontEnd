@@ -16,34 +16,38 @@ function Dashboard() {
   const [error, setError] = useState("");
   const authHeader = useAuthHeader();
 
-  const fetchData = useCallback(() => {
-    console.log(authHeader());
-    const authFullText = authHeader();
-    const authDesiredText = authFullText.split(" ")[1];
-    console.log(authDesiredText);
-    fetch(`https://fungeye-383609.ey.r.appspot.com/box1/measurements/latest`, {
-      method: "GET",
-      headers: {
-        Authorization: authHeader(),
-      },
-    })
-      .then((response) => {
-        if (response.ok) return response.json();
-      })
-      .then((m) => {
-        setMeasurement(m);
-        // setTimestamp(initTimestampString(m.id.dateTime));
-        setTime(getTimeString(m.id.dateTime));
-        setDate(getDateString(m.id.dateTime));
-      })
-      .catch((err) => {
-        console.log(err);
-        setError(err.message);
-      });
-  }, [authHeader]);
+  const fetchData = useCallback(
+    (id) => {
+      console.log(authHeader());
+      console.log("ID: ", id);
+      fetch(
+        `https://fungeye-383609.ey.r.appspot.com/box${id}/measurements/latest`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: authHeader(),
+          },
+        }
+      )
+        .then((response) => {
+          if (response.ok) return response.json();
+        })
+        .then((m) => {
+          console.log(m);
+          setMeasurement(m);
+          setTime(getTimeString(m.id.dateTime));
+          setDate(getDateString(m.id.dateTime));
+        })
+        .catch((err) => {
+          console.log(err);
+          setError(err.message);
+        });
+    },
+    [authHeader]
+  );
 
   useEffect(() => {
-    fetchData();
+    fetchData(1);
   }, [fetchData]);
 
   return (
@@ -88,12 +92,12 @@ function Dashboard() {
           />
           <OneCondition
             title="CO2"
-            measurement={measurement == null ? null : 0}
+            measurement={measurement == null ? null : measurement.co2}
             unit="ppm"
           />
           <OneCondition
             title="Light"
-            measurement={measurement == null ? null : 0}
+            measurement={measurement == null ? null : measurement.light}
             unit="lux"
           />
         </div>
