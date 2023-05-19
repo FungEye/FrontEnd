@@ -1,10 +1,11 @@
 import React from "react";
-import RegisterLogin from "../components/RegisterLogin";
+import RegisterLogin from "../../components/RegisterLogin";
 import { HashRouter } from "react-router-dom";
 import { AuthProvider } from "react-auth-kit";
 
 describe("<RegisterLogin />", () => {
   beforeEach(() => {
+    cy.viewport(1280, 720);
     cy.mount(
       <AuthProvider
         authType={"cookie"}

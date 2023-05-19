@@ -1,5 +1,5 @@
 import React from "react";
-import OverviewBox from "../components/OverviewBox";
+import OverviewBox from "../../components/OverviewBox";
 import { HashRouter } from "react-router-dom";
 
 describe("<OverviewBox />", () => {

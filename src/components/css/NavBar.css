@@ -1,48 +1,122 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
 :root {
+    --mainColor: #29335c;
+    --mainColorLight: #5767aa;
+    --secondaryColor: #db2b39;
+    --textColor: #eee;
     --brown: #763D2D;
+    --hover-brown: #612c22;
+    --light-brown: #ac8b71;
     --beige: #F6DCAF;
 }
 
-.navBar {
-    position: relative;
-    width: 95%;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    margin: auto;
-    padding: 5px 30px 5px 30px;
-    box-sizing: border-box;
-    height: 80px;
+.header {
+    padding-left: 2rem;
 }
 
-.navItems {
-    width: 50%;
+.header,
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80px;
+    width: 100%;
+    background-color: var(--beige);
+    color: var(--brown);
+    overflow: hidden;
 }
 
-.logo {
-    height: 60px;
-    width: auto;
+nav {
+    justify-content: space-around;
 }
 
-.title {
-    font-size: 36px;
+nav a {
+    margin: 0 1rem;
+    color: var(--brown);
+    text-decoration: none;
 }
 
+.navItemsText {
+    font-size: 18px;
+}
 
-
-.navItemsText:hover {
+nav .navItemsText:hover {
     text-shadow: 1px 1px 10px rgba(190, 79, 0, 0.5);
     cursor: pointer;
 }
 
-.navItemsText {
-    font-size: 20px;
-    transition: 0.2s;
+.title:hover {
+    text-shadow: 1px 1px 10px rgba(190, 79, 0, 0.5);
+    cursor: pointer;
 }
 
-.separator {
-    font-size: 32px;
+.header .nav-btn {
+    padding: 5px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--brown);
+    visibility: hidden;
+    opacity: 0;
+    font-size: 1rem;
 }
 
-.login {
-    width: 10%;
+.header div,
+nav {
+    display: flex;
+    align-items: space-around;
+}
+
+
+
+@media only screen and (max-width: 1024px) {
+    .header .nav-btn {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .header nav {
+        position: fixed;
+        top: -100vh;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        background-color: var(--beige);
+        transition: 1s;
+        z-index: 6;
+    }
+
+    .login {
+        width: 50%;
+    }
+
+    .header .responsive_nav {
+        transform: translateY(100vh);
+    }
+
+    .navItemsText {
+        font-size: 32px;
+    }
+
+    nav .nav-close-btn {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+    }
+
+    nav a {
+        font-size: 1.5rem;
+    }
 }

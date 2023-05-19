@@ -1,5 +1,6 @@
 import "./css/Dashboard.css";
 import { useState, useEffect, useCallback } from "react";
+import { useAuthHeader } from "react-auth-kit";
 import ButtonSecondary from "./ButtonSecondary";
 import OneCondition from "./OneCondition";
 import Status from "./Status";
@@ -8,17 +9,24 @@ import { useParams } from "react-router-dom";
 function Dashboard({ isNew }) {
   const { boxId } = useParams();
   const [measurement, setMeasurement] = useState(null);
-  // const [timestamp, setTimestamp] = useState(null);
   const [time, setTime] = useState(null);
   const [date, setDate] = useState(null);
   // const [status, setStatus] = useState("Good");
   const [status] = useState("Good");
   const [shroomname] = useState("Oyster");
   // const [shroomname, setShroomName] = useState("Oyster");
+  const [error, setError] = useState("");
+  const authHeader = useAuthHeader();
 
   const fetchData = useCallback(() => {
     fetch(
-      `https://fungeye-383609.ey.r.appspot.com/box${boxId}/measurements/latest`
+      `https://fungeye-383609.ey.r.appspot.com/box${boxId}/measurements/latest`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: authHeader(),
+          },
+        }
     )
       .then((response) => {
         if (response.ok) return response.json();
@@ -35,6 +43,7 @@ function Dashboard({ isNew }) {
   useEffect(() => {
     if (!isNew) fetchData();
   }, [isNew, fetchData]);
+
 
   return (
     <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
