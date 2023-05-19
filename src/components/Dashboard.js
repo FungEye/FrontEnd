@@ -1,5 +1,5 @@
 import "./css/Dashboard.css";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useAuthHeader } from "react-auth-kit";
 import ButtonSecondary from "./ButtonSecondary";
 import OneCondition from "./OneCondition";
@@ -18,32 +18,35 @@ function Dashboard({ isNew }) {
   const [error, setError] = useState("");
   const authHeader = useAuthHeader();
 
-  const fetchData = useCallback(() => {
-    fetch(
-      `https://fungeye-383609.ey.r.appspot.com/box${boxId}/measurements/latest`,
+  useEffect(() => {
+    const fetchData = () => {
+      setError("");
+      fetch(
+        `https://fungeye-383609.ey.r.appspot.com/box${boxId}/measurements/latest`,
         {
           method: "GET",
           headers: {
             Authorization: authHeader(),
           },
         }
-    )
-      .then((response) => {
-        if (response.ok) return response.json();
-      })
-      .then((m) => {
-        setMeasurement(m);
-        // setTimestamp(initTimestampString(m.id.dateTime));
-        setTime(getTimeString(m.id.dateTime));
-        setDate(getDateString(m.id.dateTime));
-      })
-      .catch((err) => console.log(err));
-  }, [boxId]);
+      )
+        .then((response) => {
+          if (response.ok) return response.json();
+          else if (response.status === 401)
+            setError("You have to login first.");
+        })
+        .then((m) => {
+          console.log(m);
+          setMeasurement(m);
+          setTime(getTimeString(m.id.dateTime));
+          setDate(getDateString(m.id.dateTime));
+        })
+        .catch((err) => setError("Failed to fetch data."));
+    };
 
-  useEffect(() => {
     if (!isNew) fetchData();
-  }, [isNew, fetchData]);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
@@ -82,7 +85,7 @@ function Dashboard({ isNew }) {
               <b>Status:</b>
             </div>
             <Status status={status} />
-            <div className="measurements jc-center">
+            <div className="measurements jc-center flex-wrap">
               <OneCondition
                 title="Temperature"
                 measurement={
@@ -109,6 +112,7 @@ function Dashboard({ isNew }) {
           </>
         ) : null}
       </div>
+      <p>{error}</p>
     </div>
   );
 }
