@@ -3,11 +3,72 @@ import "../css/History.css";
 import "../css/General.css";
 import HistoryToggle from "./HistoryToggle";
 import HistoryUseful from "./HistoryUseful";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CarouselGraph from "./HistoryChartsCarousel";
 import CarouselTable from "./HistoryTableCarousel";
-export default function History(props) {
-  const [isGraph, setIsGraph] = useState(true);
+import { useAuthHeader } from "react-auth-kit";
+import { useParams } from "react-router-dom";
+
+export default function History() {
+  const [isGraph, setIsGraph] = useState(false);
+  const [error, setError] = useState("");
+  const authHeader = useAuthHeader();
+  const { boxId } = useParams();
+  const [graphData, setGraphData] = useState([]);
+  const [tableData, setTableData] = useState([]);
+
+  useEffect(() => {
+    const fetchGraphData = () => {
+      setError("");
+      fetch(
+        `https://fungeye-383609.ey.r.appspot.com/box${boxId}/measurements/historical`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: authHeader(),
+          },
+        }
+      )
+        .then((response) => {
+          if (response.ok) return response.json();
+          else if (response.status === 401)
+            setError("You have to login first.");
+        })
+        .then((m) => {
+          console.log(m);
+          setGraphData(m);
+        })
+        .catch((err) => setError("Failed to fetch data."));
+    };
+
+    const fetchTableData = () => {
+      setError("");
+      console.log(authHeader());
+      fetch(
+        `https://fungeye-383609.ey.r.appspot.com/box${boxId}/measurements`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: authHeader(),
+          },
+        }
+      )
+        .then((response) => {
+          if (response.ok) return response.json();
+          else if (response.status === 401)
+            setError("You have to login first.");
+        })
+        .then((m) => {
+          console.log(m);
+          setTableData(m);
+        })
+        .catch((err) => setError("Failed to fetch data."));
+    };
+
+    fetchGraphData();
+    fetchTableData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function toggle(element) {
     if (isGraph && element === "table") {
@@ -42,9 +103,14 @@ export default function History(props) {
           </div>
           <div className="rightContainer row jc-start align-items-center  w-50 h-75 p-10 ">
             {/* Here will be the carousel or table with historical data. Column */}
-            {isGraph ? <CarouselGraph /> : <CarouselTable />}
+            {isGraph ? (
+              <CarouselGraph data={graphData} />
+            ) : (
+              <CarouselTable data={tableData} />
+            )}
           </div>
         </div>
+        <p>{error}</p>
       </div>
     </div>
   );

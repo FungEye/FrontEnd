@@ -10,7 +10,7 @@ import { mockData } from "./HistoryMockData";
 import Chart from "./HistoryConditionChart";
 import "../css/History.css";
 import "../css/General.css";
-export default function Carousel() {
+export default function Carousel({ data }) {
   return (
     <div className="conditions-carousel-history very-slightly-faded">
       <Swiper

@@ -51,7 +51,8 @@ const rows = [
   createData("13:03", 17.6, 33, 443, 59),
 ];
 
-export default function StickyHeadTable() {
+export default function StickyHeadTable({ data }) {
+  console.log(data);
   return (
     <Paper
       sx={{
@@ -61,7 +62,7 @@ export default function StickyHeadTable() {
     >
       <div className="row bg-light jc-space-around ">
         <p className="varela text-dark h-xs"> ⬅️ 19/05</p>
-        <p className="varela text-dark h-sm">20/05</p>
+        <p className="varela text-dark h-sm">{`${data.day}/0${data.month}`}</p>
         <p className="varela text-dark h-xs">21/05 ➡️ </p>
       </div>
       <TableContainer
