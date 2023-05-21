@@ -81,6 +81,42 @@ function ConditionsCarousel({ data }) {
   //   populateData();
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [data]);
+  function sort(days) {
+    let sortedDays = days;
+    function sortMonths(a, b) {
+      return a.month - b.month;
+    }
+
+    function sortDays(a, b) {
+      if (a.month === b.month) {
+        return a.day - b.day;
+      }
+    }
+    sortedDays.sort((a, b) => sortMonths(a, b));
+    sortedDays.sort((a, b) => sortDays(a, b));
+    return sortedDays;
+  }
+
+  function assignPreviousAndNext(days) {
+    let assignedDays = days;
+    assignedDays.forEach((element, index) => {
+      console.log(index);
+      console.log(element);
+      if (index !== 0 && index !== assignedDays.length - 1) {
+        assignedDays[index].previousDay = assignedDays[index - 1].day;
+        assignedDays[index].previousMonth = assignedDays[index - 1].month;
+        assignedDays[index].nextDay = assignedDays[index + 1].day;
+        assignedDays[index].nextMonth = assignedDays[index + 1].month;
+      } else if (index === 0) {
+        assignedDays[index].nextDay = assignedDays[index + 1].day;
+        assignedDays[index].nextMonth = assignedDays[index + 1].month;
+      } else if (index === assignedDays.length - 1) {
+        assignedDays[index].previousDay = assignedDays[index - 1].day;
+        assignedDays[index].previousMonth = assignedDays[index - 1].month;
+      }
+    });
+    return assignedDays;
+  }
 
   const createAllDaysPromise = (data) => {
     let days = [];
@@ -98,36 +134,10 @@ function ConditionsCarousel({ data }) {
       }
     });
 
-    function sortMonths(a, b) {
-      return a.month - b.month;
-    }
-
-    function sortDays(a, b) {
-      if (a.month === b.month) {
-        return a.day - b.day;
-      }
-    }
-    days.sort((a, b) => sortMonths(a, b));
-    days.sort((a, b) => sortDays(a, b));
-    days.forEach((element, index) => {
-      console.log(index);
-      console.log(element);
-      if (index !== 0 && index !== days.length - 1) {
-        days[index].previousDay = days[index - 1].day;
-        days[index].previousMonth = days[index - 1].month;
-        days[index].nextDay = days[index + 1].day;
-        days[index].nextMonth = days[index + 1].month;
-      } else if (index === 0) {
-        days[index].nextDay = days[index + 1].day;
-        days[index].nextMonth = days[index + 1].month;
-      } else if (index === days.length - 1) {
-        days[index].previousDay = days[index - 1].day;
-        days[index].previousMonth = days[index - 1].month;
-      }
-    });
+    days = sort(days);
+    days = assignPreviousAndNext(days);
 
     console.log("Created days: ", days);
-
     return new Promise((resolve, reject) => {
       if (days.length > 0) {
         resolve(days);
