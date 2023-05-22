@@ -14,17 +14,6 @@ import { useState, useEffect } from "react";
 
 function ConditionsCarousel({ data }) {
   const [slides, setSlides] = useState([]);
-  function createOneDayData(day, month) {
-    return {
-      day,
-      month,
-      previousDay: 0,
-      previousMonth: 0,
-      nextDay: 0,
-      nextMonth: 0,
-      values: [],
-    };
-  }
 
   //To sanitize the data, we need to take three steps:
   // 1. Create object with days and month, without repeating values based on received data.
@@ -36,51 +25,17 @@ function ConditionsCarousel({ data }) {
   // That's why there are three callbacks.
   // 1. createAllDays, 2. populateData, 3. createSlides
 
-  // const createSlides = useCallback(() => {
-  //   let element = daysData.map((d) => (
-  //     <SwiperSlide key={Math.random()}>
-  //       <Table data={d} />
-  //     </SwiperSlide>
-  //   ));
-  //   setSlides(element);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [daysData]);
-
-  // const populateData = useCallback(() => {
-  //   data.forEach((e) => {
-  //     let day = e.id.dateTime.day;
-  //     let month = e.id.dateTime.month;
-  //     let existingDayData = daysData.find(
-  //       (d) => d.day === day && d.month === month
-  //     );
-  //     if (existingDayData !== undefined) {
-  //       existingDayData.values.push(e);
-  //     }
-  //   });
-  //   console.log("PopulateDays", daysData);
-  //   createSlides();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [daysData]);
-
-  // const createDays = useCallback(() => {
-  //   let days = [];
-  //   data.forEach((e) => {
-  //     let day = e.id.dateTime.day;
-  //     let month = e.id.dateTime.month;
-  //     let existingDayData = days.find(
-  //       (d) => d.day === day && d.month === month
-  //     );
-  //     if (existingDayData === undefined) {
-  //       let newDayData = createOneDayData(day, month);
-  //       days.push(newDayData);
-  //     } else {
-  //     }
-  //   });
-  //   console.log("CreateDays", days);
-  //   setDaysData(days);
-  //   populateData();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [data]);
+  function createOneDayData(day, month) {
+    return {
+      day,
+      month,
+      previousDay: 0,
+      previousMonth: 0,
+      nextDay: 0,
+      nextMonth: 0,
+      values: [],
+    };
+  }
   function sort(days) {
     let sortedDays = days;
     function sortMonths(a, b) {
@@ -95,6 +50,22 @@ function ConditionsCarousel({ data }) {
     sortedDays.sort((a, b) => sortMonths(a, b));
     sortedDays.sort((a, b) => sortDays(a, b));
     return sortedDays;
+  }
+
+  function sortTimeForValues(populatedDays) {
+    let populatedDaysSorted = populatedDays;
+    populatedDaysSorted.forEach((element) => {
+      element.values = element.values.sort(
+        (a, b) => a.id.dateTime.hour - b.id.dateTime.hour
+      );
+      function sortMinutes(a, b) {
+        if (a.id.dateTime.hour === b.id.dateTime.hour) {
+          return a.id.dateTime.minute - b.id.dateTime.minute;
+        }
+      }
+      element.values = element.values.sort((a, b) => sortMinutes(a, b));
+    });
+    return populatedDaysSorted;
   }
 
   function assignPreviousAndNext(days) {
@@ -123,13 +94,11 @@ function ConditionsCarousel({ data }) {
     data.forEach((e, index) => {
       let day = e.id.dateTime.day;
       let month = e.id.dateTime.month;
-      let hour = e.id.dateTime.hour;
-      let minute = e.id.dateTime.minute;
       let existingDayData = days.find(
         (d) => d.day === day && d.month === month
       );
       if (existingDayData === undefined) {
-        let newDayData = createOneDayData(day, month, hour, minute);
+        let newDayData = createOneDayData(day, month);
         days.push(newDayData);
       }
     });
@@ -152,13 +121,29 @@ function ConditionsCarousel({ data }) {
     data.forEach((e) => {
       let day = e.id.dateTime.day;
       let month = e.id.dateTime.month;
+      let hour =
+        e.id.dateTime.hour <= 9 ? "0" + e.id.dateTime.hour : e.id.dateTime.hour;
+      let minute =
+        e.id.dateTime.minute <= 9
+          ? "0" + e.id.dateTime.minute
+          : e.id.dateTime.minute;
+      let time = { time: hour + ":" + minute };
+
       let existingDayData = populatedDays.find(
         (d) => d.day === day && d.month === month
       );
       if (existingDayData !== undefined) {
-        existingDayData.values.push(e);
+        let valueWithTime = {
+          ...e,
+          ...time,
+        };
+
+        existingDayData.values.push(valueWithTime);
       }
     });
+
+    populatedDays = sortTimeForValues(populatedDays);
+
     console.log("PopulateDays", populatedDays);
 
     return new Promise((resolve, reject) => {
