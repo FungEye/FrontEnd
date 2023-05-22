@@ -3,11 +3,13 @@
     height: 160px;
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
-.img-100px { 
+.mc-img { 
+    height: 75px;
     width: 100px;
-    height: 100%;
+    object-fit: cover;
 }
 
 .mc-top-row {
@@ -17,7 +19,7 @@
 }
 
 .mc-mushroom-name {
-    font-size: 24px;
+    font-size: 20px;
+    max-width: 125px;
     word-wrap: break-word;
-    word-break:break-all;
 }

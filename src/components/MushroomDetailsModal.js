@@ -4,68 +4,11 @@ import ButtonSecondary from "./ButtonSecondary";
 import XButton from "./XButton";
 import ConditionsCarousel from "./ConditionsCarousel";
 import { useNavigate } from "react-router-dom";
+import { fromPhasesToStats } from "../util/ConditionsConverter";
 function MushroomDetailsModal(props) {
   const navigate = useNavigate();
 
-  let shroomdata = {
-    temperature: [
-      {
-        phase: "spawn",
-        temperature: [24, 28],
-      },
-      {
-        phase: "fruiting",
-        temperature: [26, 27],
-      },
-      {
-        phase: "putinhing",
-        temperature: [22, 24],
-      },
-    ],
-    humidity: [
-      {
-        phase: "spawn",
-        humidity: [90, 100],
-      },
-      {
-        phase: "fruiting",
-        humidity: [80, 86],
-      },
-      {
-        phase: "putinhing",
-        humidity: [86, 94],
-      },
-    ],
-    co2: [
-      {
-        phase: "spawn",
-        co2: [300, 400],
-      },
-      {
-        phase: "fruiting",
-        co2: [580, 670],
-      },
-      {
-        phase: "putinhing",
-        co2: [300, 350],
-      },
-    ],
-    light: [
-      {
-        phase: "spawn",
-        light: [50, 100],
-      },
-      {
-        phase: "fruiting",
-        light: [150, 170],
-      },
-      {
-        phase: "putinhing",
-        light: [120, 150],
-      },
-    ],
-  };
-
+  
   if (!props.show) {
     return null;
   }
@@ -73,6 +16,7 @@ function MushroomDetailsModal(props) {
   let mushroom = props.mushroom;
   let setShow = props.setShow;
   let mushroomId = 69;
+  let shroomdata = mushroom.idealConditionDtos;
 
   return (
     <div className="md-modal">
@@ -84,22 +28,22 @@ function MushroomDetailsModal(props) {
         <div className="md-modal-body bg-light column very-slightly-faded">
           <div className="md-modal-body-top row align-items-center jc-space-between">
             <div className="ultra md-modal-body-title text-dark">
-              {mushroom.shroomname}
+              {mushroom.name}
             </div>
             <img
-              className="img-100px"
-              src={mushroom.imgsrc}
+              className="md-picture rounded-20"
+              src={mushroom.imageUrl}
               alt="mushroomicon"
             ></img>
           </div>
-          <div className="md-modal-body-info row jc-space-between">
+          <div className="md-modal-body-info row">
             <div id="md-modal-body-left" className="column jc-space-between">
               <div className="md-modal-info-text column text-dark">
                 <div>
                   <b>Origin: </b>
                   {mushroom.origin}
                 </div>
-                <div>
+                <div className="md-description">
                   <b>Description: </b>
                   {mushroom.description}
                 </div>
