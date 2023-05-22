@@ -52,7 +52,6 @@ const columns = [
 // ];
 
 export default function StickyHeadTable({ data }) {
-  console.log(data);
   return (
     <Paper
       sx={{

@@ -6,7 +6,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { mockData } from "./HistoryMockData";
 import Chart from "./HistoryConditionChart";
 import "../css/History.css";
 import "../css/General.css";
@@ -14,27 +13,24 @@ export default function Carousel({ data }) {
   return (
     <div className="conditions-carousel-history very-slightly-faded">
       <Swiper
-        // install Swiper modules
         modules={[Navigation, Pagination]}
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
         speed={800}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
         centeredSlides={true}
       >
         <SwiperSlide>
-          <Chart data={mockData.temp.values} text="Temperature" />
+          <Chart data={data.temperature} text="Temperature" />
         </SwiperSlide>
         <SwiperSlide>
-          <Chart data={mockData.temp.values} text="Humidity" />
+          <Chart data={data.humidity} text="Humidity" />
         </SwiperSlide>
         <SwiperSlide>
-          <Chart data={mockData.temp.values} text="CO2" />
+          <Chart data={data.co2} text="CO2" />
         </SwiperSlide>
         <SwiperSlide>
-          <Chart data={mockData.temp.values} text="Light" />
+          <Chart data={data.light} text="Light" />
         </SwiperSlide>
       </Swiper>
     </div>

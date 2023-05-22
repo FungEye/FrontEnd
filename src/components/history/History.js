@@ -10,7 +10,7 @@ import { useAuthHeader } from "react-auth-kit";
 import { useParams } from "react-router-dom";
 
 export default function History() {
-  const [isGraph, setIsGraph] = useState(false);
+  const [isGraph, setIsGraph] = useState(true);
   const [error, setError] = useState("");
   const authHeader = useAuthHeader();
   const { boxId } = useParams();
@@ -43,7 +43,6 @@ export default function History() {
 
     const fetchTableData = () => {
       setError("");
-      console.log(authHeader());
       fetch(
         `https://fungeye-383609.ey.r.appspot.com/box${boxId}/measurements`,
         {
@@ -59,7 +58,6 @@ export default function History() {
             setError("You have to login first.");
         })
         .then((m) => {
-          console.log(m);
           setTableData(m);
         })
         .catch((err) => setError("Failed to fetch data."));

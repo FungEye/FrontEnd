@@ -71,8 +71,6 @@ function ConditionsCarousel({ data }) {
   function assignPreviousAndNext(days) {
     let assignedDays = days;
     assignedDays.forEach((element, index) => {
-      console.log(index);
-      console.log(element);
       if (index !== 0 && index !== assignedDays.length - 1) {
         assignedDays[index].previousDay = assignedDays[index - 1].day;
         assignedDays[index].previousMonth = assignedDays[index - 1].month;
@@ -106,7 +104,6 @@ function ConditionsCarousel({ data }) {
     days = sort(days);
     days = assignPreviousAndNext(days);
 
-    console.log("Created days: ", days);
     return new Promise((resolve, reject) => {
       if (days.length > 0) {
         resolve(days);
@@ -144,7 +141,7 @@ function ConditionsCarousel({ data }) {
 
     populatedDays = sortTimeForValues(populatedDays);
 
-    console.log("PopulateDays", populatedDays);
+    // console.log("PopulateDays", populatedDays);
 
     return new Promise((resolve, reject) => {
       if (days.length > 0) {
