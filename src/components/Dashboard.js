@@ -100,12 +100,12 @@ function Dashboard({ isNew }) {
               />
               <OneCondition
                 title="CO2"
-                measurement={measurement == null ? null : 0}
+                measurement={measurement == null ? null : measurement.co2}
                 unit="ppm"
               />
               <OneCondition
                 title="Light"
-                measurement={measurement == null ? null : 0}
+                measurement={measurement == null ? null : measurement.light}
                 unit="lux"
               />
             </div>
