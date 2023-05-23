@@ -10,16 +10,16 @@ import "../css/General.css";
 import "../css/History.css";
 const columns = [
   { id: "time", label: "Time", minWidth: 170 },
-  { id: "lux", label: "Light (lux)", minWidth: 100, align: "center" },
+  { id: "light", label: "Light (lux)", minWidth: 100, align: "center" },
   {
-    id: "temp",
+    id: "temperature",
     label: "Temp (°C)",
     minWidth: 170,
     align: "center",
     format: (value) => value.toFixed(1),
   },
   {
-    id: "hmd",
+    id: "humidity",
     label: "Humidity (%)",
     minWidth: 170,
     align: "center",
@@ -34,24 +34,7 @@ const columns = [
   },
 ];
 
-function createData(time, temp, hmd, lux, co2) {
-  return { time, temp, hmd, lux, co2 };
-}
-
-const rows = [
-  createData("13:03", 17.6, 33, 443, 59),
-  createData("13:03", 17.6, 33, 443, 59),
-  createData("13:03", 17.6, 33, 443, 59),
-  createData("13:03", 17.6, 33, 443, 59),
-  createData("13:03", 17.6, 33, 443, 59),
-  createData("13:03", 17.6, 33, 443, 59),
-  createData("13:03", 17.6, 33, 443, 59),
-  createData("13:03", 17.6, 33, 443, 59),
-  createData("13:03", 17.6, 33, 443, 59),
-  createData("13:03", 17.6, 33, 443, 59),
-];
-
-export default function StickyHeadTable() {
+export default function StickyHeadTable({ data }) {
   return (
     <Paper
       sx={{
@@ -60,9 +43,15 @@ export default function StickyHeadTable() {
       }}
     >
       <div className="row bg-light jc-space-around ">
-        <p className="varela text-dark h-xs"> ⬅️ 19/05</p>
-        <p className="varela text-dark h-sm">20/05</p>
-        <p className="varela text-dark h-xs">21/05 ➡️ </p>
+        <p className="varela text-dark h-xs">
+          {data.previousDay !== 0
+            ? `⬅️ ${data.previousDay}/0${data.previousMonth}`
+            : ""}
+        </p>
+        <p className="varela text-dark h-sm">{`${data.day}/0${data.month}`}</p>
+        <p className="varela text-dark h-xs">
+          {data.nextDay !== 0 ? `${data.nextDay}/0${data.nextMonth} ➡️` : ""}
+        </p>
       </div>
       <TableContainer
         sx={{
@@ -77,7 +66,7 @@ export default function StickyHeadTable() {
             <TableRow>
               {columns.map((column) => (
                 <TableCell
-                  key={column.id}
+                  key={column.label}
                   align={column.align}
                   style={{
                     maxWidth: "40%",
@@ -95,9 +84,14 @@ export default function StickyHeadTable() {
             </TableRow>
           </TableHead>
           <TableBody sx={{ maxHeight: 30, width: "100%" }}>
-            {rows.map((row) => {
+            {data.values.map((row) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                <TableRow
+                  hover
+                  role="checkbox"
+                  tabIndex={-1}
+                  key={row.time + row.humidity}
+                >
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
@@ -123,15 +117,6 @@ export default function StickyHeadTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      /> */}
     </Paper>
   );
 }

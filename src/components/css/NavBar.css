@@ -1,4 +1,3 @@
-
 :root {
     --mainColor: #29335c;
     --mainColorLight: #5767aa;
@@ -16,6 +15,9 @@
 
 .header,
 nav {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -30,16 +32,26 @@ nav {
 
 nav {
     justify-content: space-around;
+
 }
 
 nav a {
     margin: 0 1rem;
     color: var(--brown);
     text-decoration: none;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .navItemsText {
     font-size: 18px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.title {
+    padding: 10
 }
 
 nav .navItemsText:hover {
@@ -62,12 +74,17 @@ nav .navItemsText:hover {
     visibility: hidden;
     opacity: 0;
     font-size: 1rem;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .header div,
 nav {
     display: flex;
     align-items: space-around;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 
@@ -92,6 +109,10 @@ nav {
         background-color: var(--beige);
         transition: 1s;
         z-index: 6;
+    }
+
+    .title {
+        font-size: 15px;
     }
 
     .login {

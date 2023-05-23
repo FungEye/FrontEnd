@@ -108,9 +108,10 @@
     display: flex;
     align-items: left;
 }
+
 .align-items-start {
-    display:flex;
-    align-items:flex-start;
+    display: flex;
+    align-items: flex-start;
 
 }
 
@@ -205,7 +206,7 @@
 
 .wide {
     width: 175px !important;
-  }
+}
 
 .pointer {
     cursor: pointer;
@@ -213,6 +214,14 @@
 
 .m-auto {
     margin: auto;
+}
+
+.text-m {
+    font-size: 20px;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
 }
 
 
@@ -230,4 +239,5 @@
     width: 100px;
     object-fit: cover;
 }
+
 

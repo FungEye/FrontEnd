@@ -163,7 +163,7 @@ function App() {
           element={<MushroomCardPage mushroomList={mushroomList} />}
         />
         <Route path="/yields" element={<YieldPage />} />
-        <Route path="/history" element={<History />} />
+        <Route path="/history/:boxId" element={<History />} />
         <Route path="/guide" element={<Guide />} />
         <Route path="/overview" element={<OverviewPage />} />
       </Routes>
