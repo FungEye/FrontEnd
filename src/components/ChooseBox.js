@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "./css/ChooseBox.css";
 import "./css/General.css";
@@ -6,14 +6,19 @@ import BoxCard from "./BoxCard";
 import ButtonPrimary from "./ButtonPrimary";
 import CreateBoxModal from "./CreateBoxModal";
 import { useParams } from "react-router-dom";
+import { useAuthHeader, useIsAuthenticated, useAuthUser } from "react-auth-kit";
+
 function ChooseBox(props) {
   const navigate = useNavigate();
-  const { mushroomId } = useParams();
-  console.log(mushroomId);
+
   const containerRef = useRef(null);
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   let boxList = props.boxList;
+  const [fetchedBoxList, setBoxList] = useState(null);
+  const authHeader = useAuthHeader();
+  const auth = useAuthUser();
+  const authenticated = useIsAuthenticated();
 
   console.log(boxList);
   const lastBoxNumber = boxList.findLast((box) => box).boxNumber;
@@ -37,7 +42,6 @@ function ChooseBox(props) {
     }
   }
 
-  // Scroll container to the right
   function scrollRight() {
     const container = containerRef.current;
     if (container) {
@@ -47,9 +51,35 @@ function ChooseBox(props) {
       });
     }
   }
+  //navbar.js line 61 for getting the username
+  // use the crazy quotation marks ` , for variables dollars
+  const fetchEmptyBoxes = useCallback(() => {
+    fetch(
+      `https://fungeye-383609.ey.r.appspot.com/Kamil/boxes/empty`, //${auth().name}
+      {
+        method: "GET",
+        headers: {
+          Authorization: authHeader(),
+        },
+      }
+    )
+      .then((response) => {
+        console.log("RESPONSE", response);
+        if (response.ok) return response.json();
+      })
+      .then((b) => {
+        console.log(b);
+        setBoxList(b);
+      })
+      .catch((err) => console.log(err));
+  }, [authHeader, auth]);
+
+  useEffect(() => {
+    if (authenticated) fetchEmptyBoxes();
+  }, [authHeader, fetchEmptyBoxes, authenticated]);
 
   function createNewBox() {
-    fetch("https://fungeye-383609.ey.r.appspot.com/boxx", {
+    fetch(`https://fungeye-383609.ey.r.appspot.com/box`, {
       method: "POST",
     })
       .then((response) => {
@@ -73,6 +103,7 @@ function ChooseBox(props) {
       <div className="cont-box column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
         <h1 className="poppins text-dark align-items-left">Box Selection</h1>
         <h3 className="varela text-dark align-items-left">Vacant boxes:</h3>
+        <button onClick={fetchEmptyBoxes}> FEEEEEETCH pls </button>
         <div className="box-cards-container ">
           <div className="scroll-arrow left-arrow" onClick={scrollLeft}>
             &lt;
