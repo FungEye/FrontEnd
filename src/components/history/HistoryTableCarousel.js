@@ -154,7 +154,7 @@ function ConditionsCarousel({ data }) {
 
   const createSlidesInPromise = (populatedDays) => {
     let element = populatedDays.map((d) => (
-      <SwiperSlide key={Math.random()}>
+      <SwiperSlide key={`${d.day}/${d.month}`}>
         <Table data={d} />
       </SwiperSlide>
     ));

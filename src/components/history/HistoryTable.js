@@ -81,9 +81,9 @@ export default function StickyHeadTable({ data }) {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map((column, index) => (
                 <TableCell
-                  key={column.id}
+                  key={index}
                   align={column.align}
                   style={{
                     maxWidth: "40%",
@@ -104,11 +104,11 @@ export default function StickyHeadTable({ data }) {
             {data.values.map((row) => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column) => {
+                  {columns.map((column, index) => {
                     const value = row[column.id];
                     return (
                       <TableCell
-                        key={column.id}
+                        key={index}
                         align={column.align}
                         style={{
                           maxWidth: "40%",
