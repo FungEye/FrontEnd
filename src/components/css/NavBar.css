@@ -26,6 +26,8 @@ nav {
     background-color: var(--beige);
     color: var(--brown);
     overflow: hidden;
+    padding: 0px;
+    margin: 0;
 }
 
 nav {

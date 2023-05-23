@@ -37,7 +37,7 @@ function MushroomConditions(props) {
     return (
         <div>
             <div className="conditions-title text-dark"><b>{title}</b></div>
-            <BarChart barSize={40} width={300} height={250} data={data} margin={{ top: 20, right: 20, bottom: 10, left: -15 }} className="barchart">
+            <BarChart barSize={40} width={400} height={250} data={data} margin={{ top: 20, right: 20, bottom: 10, left: 0 }} className="barchart">
                 <CartesianGrid strokeDasharray="8" stroke="#d1905e"/>
                 <XAxis dataKey="phase" />
                 <YAxis tickCount={10} type="number" domain={[min, max]} />

@@ -223,3 +223,21 @@
 .flex-wrap {
     flex-wrap: wrap;
 }
+
+
+.align-self-end {
+    display: flex;
+    align-self: flex-end;
+}
+
+.end {
+    margin-left: auto;
+}
+
+.img-100px {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+
+

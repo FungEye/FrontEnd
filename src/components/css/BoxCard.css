@@ -6,11 +6,6 @@
     align-items: center;
 }
 
-.img-100px{
-    width: 100px;
-    height: 100%;
-}
-
 .bc-top-row {
     box-sizing:border-box;
     padding:0 15px;

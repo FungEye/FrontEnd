@@ -24,7 +24,7 @@ function ChooseBox(props) {
 
   // Change the destination
   function handleClick(event) {
-    navigate("/");
+    navigate("/mushrooms");
   }
 
   function scrollLeft() {
