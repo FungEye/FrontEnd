@@ -34,23 +34,6 @@ const columns = [
   },
 ];
 
-// function createData(time, temp, hmd, lux, co2) {
-//   return { time, temp, hmd, lux, co2 };
-// }
-
-// const rows = [
-//   createData("13:03", 17.6, 33, 443, 59),
-//   createData("13:03", 17.6, 33, 443, 59),
-//   createData("13:03", 17.6, 33, 443, 59),
-//   createData("13:03", 17.6, 33, 443, 59),
-//   createData("13:03", 17.6, 33, 443, 59),
-//   createData("13:03", 17.6, 33, 443, 59),
-//   createData("13:03", 17.6, 33, 443, 59),
-//   createData("13:03", 17.6, 33, 443, 59),
-//   createData("13:03", 17.6, 33, 443, 59),
-//   createData("13:03", 17.6, 33, 443, 59),
-// ];
-
 export default function StickyHeadTable({ data }) {
   return (
     <Paper
@@ -81,9 +64,9 @@ export default function StickyHeadTable({ data }) {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column, index) => (
+              {columns.map((column) => (
                 <TableCell
-                  key={index}
+                  key={column.label}
                   align={column.align}
                   style={{
                     maxWidth: "40%",
@@ -103,12 +86,17 @@ export default function StickyHeadTable({ data }) {
           <TableBody sx={{ maxHeight: 30, width: "100%" }}>
             {data.values.map((row) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column, index) => {
+                <TableRow
+                  hover
+                  role="checkbox"
+                  tabIndex={-1}
+                  key={row.time + row.humidity}
+                >
+                  {columns.map((column) => {
                     const value = row[column.id];
                     return (
                       <TableCell
-                        key={index}
+                        key={column.id}
                         align={column.align}
                         style={{
                           maxWidth: "40%",

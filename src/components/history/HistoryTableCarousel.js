@@ -141,8 +141,6 @@ function ConditionsCarousel({ data }) {
 
     populatedDays = sortTimeForValues(populatedDays);
 
-    // console.log("PopulateDays", populatedDays);
-
     return new Promise((resolve, reject) => {
       if (days.length > 0) {
         resolve(populatedDays);

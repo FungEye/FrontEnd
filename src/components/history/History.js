@@ -35,7 +35,7 @@ export default function History() {
             setError("You have to login first.");
         })
         .then((m) => {
-          console.log(m);
+  
           setGraphData(m);
         })
         .catch((err) => setError("Failed to fetch data."));
