@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import MushroomCard from "./MushroomCard";
 import MushroomDetailsModal from "./MushroomDetailsModal";
-import { useCallback } from "react";
 import "./css/MushroomCardPage.css";
 import { useAuthHeader } from "react-auth-kit";
 

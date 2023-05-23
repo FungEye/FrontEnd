@@ -4,7 +4,6 @@ import ButtonSecondary from "./ButtonSecondary";
 import XButton from "./XButton";
 import ConditionsCarousel from "./ConditionsCarousel";
 import { useNavigate } from "react-router-dom";
-import { fromPhasesToStats } from "../util/ConditionsConverter";
 function MushroomDetailsModal(props) {
   const navigate = useNavigate();
 
