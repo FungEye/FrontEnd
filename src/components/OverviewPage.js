@@ -146,6 +146,8 @@ function OverviewPage(props) {
     }
   
     else {
+      document.getElementById("your-boxes").click();
+      document.getElementById("your-boxes").click();
       boxList = boxes.map((x) => (
         <OverviewBox box={x}/>
       ));
