@@ -2,7 +2,6 @@ import AddNewSpeciesForm2 from "./AddNewSpeciesForm2";
 import "./css/AddNewSpecies.css";
 import ButtonPrimary from "./ButtonPrimary";
 import XButton from "./XButton";
-import AddNewSpeciesOrigin from "./AddNewSpeciesOrigin";
 import { useState } from "react";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
 import Input from "./Input";
