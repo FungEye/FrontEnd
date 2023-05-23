@@ -63,6 +63,36 @@ function ChooseBox(props) {
       .catch((err) => console.log(err.message));
   }
 
+  function createGrowTEST() {
+    fetch("https://fungeye-383609.ey.r.appspot.com/grow", {
+      method: "POST",
+      headers: {
+        Authorization: authHeader(),
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        boxId: 38,
+        mushroomId: 1,
+        username: "Kamil",
+        date: {
+          year: currentDate.getFullYear(),
+          month: currentMonth,
+          day: currentDate.getDate(),
+        },
+        developStage: "spawn run",
+      }),
+    })
+      .then((response) => {
+        console.log(response);
+        if (response.ok) return response.json();
+      })
+      .then((m) => {
+        console.log(m.id);
+        console.log("success");
+      })
+      .catch((err) => console.log(err.message));
+  }
+
   function scrollLeft() {
     const container = containerRef.current;
     if (container) {
@@ -93,6 +123,9 @@ function ChooseBox(props) {
         {"<"}
         Back
       </p>
+      <button onClick={createGrowTEST()}>
+        TEST THE {"CREATEGROW()"} FUNCTION
+      </button>
       <div className="cont-box column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
         <h1 className="poppins text-dark align-items-left">Box Selection</h1>
         <h3 className="varela text-dark align-items-left">Vacant boxes:</h3>
