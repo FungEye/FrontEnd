@@ -104,7 +104,10 @@ function AddNewSpecies() {
           },
           body: JSON.stringify(mushroom)
         },
-      );
+      )
+      .catch(err => {
+        console.log(err);
+      });
     }
     submit(mushroom);
   }
