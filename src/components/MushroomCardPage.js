@@ -21,7 +21,7 @@ function MushroomCardPage() {
             setMushrooms([...shrooms]);
             console.log(shrooms);
         }
-        getData();
+        await getData();
     }, []);
 
 
