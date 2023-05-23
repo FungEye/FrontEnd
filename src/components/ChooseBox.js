@@ -48,19 +48,6 @@ function ChooseBox(props) {
     }
   }
 
-  function createNewBox() {
-    fetch("https://fungeye-383609.ey.r.appspot.com/boxx", {
-      method: "POST",
-    })
-      .then((response) => {
-        if (response.ok) return response.json();
-      })
-      .then((m) => {
-        console.log(m.id);
-      })
-      .catch((err) => setErrorMessage(err.message));
-  }
-
   return (
     <div className="choose-box-container">
       <p
@@ -94,7 +81,6 @@ function ChooseBox(props) {
             title="Boxes"
             onClose={() => setShow(false)}
             show={show}
-            onSubmit={createNewBox}
             lastBoxNumber={props.lastBoxNumber}
             err={errorMessage}
           />
