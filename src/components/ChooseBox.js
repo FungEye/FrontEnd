@@ -47,6 +47,13 @@ function ChooseBox(props) {
     }
   }
 
+  function createGrow() {
+    fetch("https://fungeye-383609.ey.r.appspot.com/grow", {
+      method: "POST",
+      headers: {},
+    });
+  }
+
   return (
     <div className="choose-box-container">
       <p
