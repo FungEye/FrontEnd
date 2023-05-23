@@ -1,8 +1,8 @@
 
 function fromPhasesToStats(conditionsInPhases) {
-    const spawnRun = conditionsInPhases[2];
-    const pinning = conditionsInPhases[0];
-    const fruiting = conditionsInPhases[1];
+    const spawnRun = conditionsInPhases.find(c => c.developmentStage === "spawn run");
+    const pinning = conditionsInPhases.find(c => c.developmentStage === "pinning");
+    const fruiting = conditionsInPhases.find(c => c.developmentStage === "fruiting");
     return {
         temperature: [
             {

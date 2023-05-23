@@ -35,7 +35,7 @@ function AddNewSpecies() {
   const auth = useAuthUser();
   const authHeader = useAuthHeader();
 
-  function submitMushroom() {
+  async function submitNewMushroom() {
     const username = auth().name;
     const mushroom = {
       name: mushroomName,
@@ -104,9 +104,12 @@ function AddNewSpecies() {
           },
           body: JSON.stringify(mushroom)
         },
-      );
+      )
+      .catch(err => {
+        console.log(err);
+      });
     }
-    // submit(mushroom);
+    await submit(mushroom);
   }
 
   return (
@@ -171,7 +174,7 @@ function AddNewSpecies() {
           <AddNewSpeciesForm2 conditions={fruitingConditions} setConditions={setFruitingConditions} title="Fruiting" />
         </div>
         <div className="text-dark">
-          <ButtonPrimary onClick={() => { submitMushroom() }} wide={true} text="Add Mushroom" />
+          <ButtonPrimary onClick={async () => { await submitNewMushroom() }} wide={true} text="Add Mushroom" />
         </div>
       </div>
     </div>
