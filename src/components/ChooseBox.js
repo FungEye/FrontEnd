@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./css/ChooseBox.css";
 import "./css/General.css";
@@ -14,14 +14,26 @@ function ChooseBox(props) {
   const containerRef = useRef(null);
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [boxData, setBoxData] = useState([]);
   const auth = useAuthUser();
   const authHeader = useAuthHeader();
-  let boxList = props.boxList;
+  let boxList = boxData;
   let currentDate = new Date();
   let currentMonth = currentDate.getMonth() + 1;
+  let username = auth().name;
   const [selectedBoxId, setSelectedBoxId] = useState(null);
   //const lastBoxNumber = boxList.findLast((box) => box).boxNumber;
 
+  //getting the empty boxes of a user
+  useEffect(() => {
+    fetch(`https://fungeye-383609.ey.r.appspot.com/${username}/boxes/empty`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("DATA: " + data);
+        setBoxData(data);
+      })
+      .catch((error) => console.error(error));
+  }, [username]);
   const handleBoxSelect = (boxId) => {
     setSelectedBoxId(boxId);
   };
@@ -64,7 +76,7 @@ function ChooseBox(props) {
   }
 
   function createGrowTEST() {
-    fetch("https://fungeye-383609.ey.r.appspot.com/grow", {
+    fetch(`https://fungeye-383609.ey.r.appspot.com/grow`, {
       method: "POST",
       headers: {
         Authorization: authHeader(),
@@ -88,7 +100,6 @@ function ChooseBox(props) {
       })
       .then((m) => {
         console.log(m.id);
-        console.log("success");
       })
       .catch((err) => console.log(err.message));
   }
@@ -103,7 +114,6 @@ function ChooseBox(props) {
     }
   }
 
-  // Scroll container to the right
   function scrollRight() {
     const container = containerRef.current;
     if (container) {
@@ -124,7 +134,7 @@ function ChooseBox(props) {
         Back
       </p>
       <button onClick={createGrowTEST()}>
-        TEST THE {"CREATEGROW()"} FUNCTION
+        TRY THE {"CREATEGROWTEST()"} FUNCTION
       </button>
       <div className="cont-box column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
         <h1 className="poppins text-dark align-items-left">Box Selection</h1>
