@@ -6,10 +6,9 @@
     height: 100%;
     margin: 0 auto;
     margin-top: 50px;
-    width: 700px;
+    width: 800px;
     padding: 10px 10px 20px 10px;
     box-sizing: border-box;
-
 }
 
 .ans-button{
@@ -17,6 +16,10 @@
     width: 120px;
     height: 55px;
 
+}
+
+.ans-inputs-row {
+    gap: 50px;
 }
 
 .ans-info {
