@@ -10,8 +10,13 @@
     justify-content: center;
 }
 
-.md-modal-content {
-    width: 700px;
+.md-picture {
+    height: 100px;
+    width: auto;
+}
+
+.md-modal-body-info {
+    gap: 30px;
 }
 
 .md-modal-header {
@@ -22,7 +27,8 @@
 
 .md-modal-body {
     padding: 10px 30px 20px 30px;
-    border-radius: 0 0 10px 10px
+    border-radius: 0 0 10px 10px;
+    gap: 10px;
 }
 
 .md-modal-body-top {
@@ -55,4 +61,9 @@
 
 #md-modal-body-left {
     padding-top: 20px;
+}
+
+.md-description {
+    max-height: 200px;
+    overflow-y: auto;
 }

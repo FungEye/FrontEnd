@@ -3,50 +3,114 @@ import "./css/AddNewSpecies.css";
 import ButtonPrimary from "./ButtonPrimary";
 import XButton from "./XButton";
 import AddNewSpeciesOrigin from "./AddNewSpeciesOrigin";
+import { useState } from "react";
+import { useAuthUser, useAuthHeader } from "react-auth-kit";
+import Input from "./Input";
+import TextArea from "./TextArea";
 
 function AddNewSpecies() {
-  // const [name, setName] = useState('');
-  // const [origin, setOrigin] = useState('');
-  // const [imageurl, setImageurl] = useState('');
-  // const [spawningConditions, setSpawningConditions] = useState(getNewConditions());
-  // const [piningConditions, setPiningConditions] = useState(getNewConditions());
-  // const [fruitingConditions, setFruitingConditions] = useState(getNewConditions());
 
-  // function getNewConditions() {
-  //   return {
-  //     "temperature": 0,
-  //     "humidity": 0,
-  //     "co2": 0,
-  //     "light": 0
-  //   }
-  // }
-  // function clearName(textarea) {
-  //   if (textarea.value === textarea.defaultValue) {
-  //     textarea.value = '';
-  //   }
-  // }
+  function newConditions() {
+    return {
+      "tempHigh": "",
+      "tempLow": "",
+      "humidityHigh": "",
+      "humidityLow": "",
+      "co2High": "",
+      "co2Low": "",
+      "lightHigh": "",
+      "lightLow": ""
+    }
+  }
 
-  // function updateCondition(oldCondition, stat, value) {
-  //   let newCondition = {...oldCondition};
-  //   switch (stat) {
-  //     case "temp":
-  //       newCondition.temperature = value;
-  //       break;
-  //     case "humidity":
-  //       newCondition.humidity = value;
-  //       break;
-  //     case "co2":
-  //       newCondition.co2 = value;
-  //       break;
-  //     case "light":
-  //       newCondition.light = value;
-  //       break;
-  //     default:
-  //       return;
+  const [spawnRunConditions, setSpawnRunConditions] = useState(newConditions());
+  const [pinningConditions, setPinningConditions] = useState(newConditions());
+  const [fruitingConditions, setFruitingConditions] = useState(newConditions());
 
-  //   }
-  //   return newCondition;
-  // }
+  const [mushroomName, setMushroomName] = useState("");
+  const [origin, setOrigin] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+
+  const auth = useAuthUser();
+  const authHeader = useAuthHeader();
+
+  async function submitNewMushroom() {
+    const username = auth().name;
+    const mushroom = {
+      name: mushroomName,
+      description: description,
+      origin: origin,
+      idealConditionCreationDtos: [
+        {
+          "developmentStage": "spawn run",
+          "tempHigh": spawnRunConditions.tempHigh,
+          "tempLow": spawnRunConditions.tempLow,
+          "humidityHigh": spawnRunConditions.humidityHigh,
+          "humidityLow": spawnRunConditions.humidityLow,
+          "co2High": spawnRunConditions.co2High,
+          "co2Low": spawnRunConditions.co2Low,
+          "lightHigh": spawnRunConditions.lightHigh,
+          "lightLow": spawnRunConditions.lightLow
+        },
+        {
+          "developmentStage": "pinning",
+          "tempHigh": pinningConditions.tempHigh,
+          "tempLow": pinningConditions.tempLow,
+          "humidityHigh": pinningConditions.humidityHigh,
+          "humidityLow": pinningConditions.humidityLow,
+          "co2High": pinningConditions.co2High,
+          "co2Low": pinningConditions.co2Low,
+          "lightHigh": pinningConditions.lightHigh,
+          "lightLow": pinningConditions.lightLow
+        },
+        {
+          "developmentStage": "fruiting",
+          "tempHigh": fruitingConditions.tempHigh,
+          "tempLow": fruitingConditions.tempLow,
+          "humidityHigh": fruitingConditions.humidityHigh,
+          "humidityLow": fruitingConditions.humidityLow,
+          "co2High": fruitingConditions.co2High,
+          "co2Low": fruitingConditions.co2Low,
+          "lightHigh": fruitingConditions.lightHigh,
+          "lightLow": fruitingConditions.lightLow
+        }
+      ],
+      username: username,
+      imageUrl: imageUrl
+    }
+
+    console.log(mushroom);
+    console.log(JSON.stringify(mushroom));
+
+    async function submit(mushroom) {
+      let url = ""
+      switch (username) {
+        case "admin":
+          url += "https://fungeye-383609.ey.r.appspot.com/mushroom/default";
+          break;
+        default:
+          url += "https://fungeye-383609.ey.r.appspot.com/mushroom/custom/conditions";
+          break;
+      }
+      await fetch(
+        url,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: authHeader(),
+          },
+          body: JSON.stringify(mushroom)
+        },
+      )
+      .catch(err => {
+        console.log(err);
+      });
+    }
+    await submit(mushroom);
+  }
 
   return (
     <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
@@ -55,26 +119,62 @@ function AddNewSpecies() {
       </div>
       <div className="dashboard column align-items-center">
         <div id="new-species-title" className="mushroom-title text-dark ultra">
-          Add new species
+          {/* {isEdit? "Edit Species" : "Add New Species"} */}
+          Add New Species
         </div>
-        <div className="origin-row row">
-          <AddNewSpeciesOrigin />
-          <div className="origindescription" placeholder="Description">
-            <textarea rows="10" cols="30" placeholder="Description"></textarea>
+        <div className="row ans-inputs-row">
+          <div className="rounded-20 column align-items-center">
+            <Input
+              title="Mushroom Name"
+              placeholder="Mushroom name..."
+              value={mushroomName}
+              onChange={(event) => {
+                setMushroomName(event.target.value);
+              }}
+              wide={true}
+            />
+            <Input
+              title="Origin"
+              placeholder="Origin..."
+              value={origin}
+              onChange={(event) => {
+                setOrigin(event.target.value);
+              }}
+              wide={true}
+            />
+            <Input
+              title="Image URL"
+              placeholder="Image URL..."
+              value={imageUrl}
+              onChange={(event) => {
+                setImageUrl(event.target.value);
+              }}
+              wide={true}
+            />
+          </div>
+          <div>
+            <TextArea onChange={(event) => {
+                setDescription(event.target.value);
+              }} value={description} title="Description"/>
           </div>
         </div>
+
         <div className="ans-info text-dark">
           Provide ideal growing conditions for each phase...
         </div>
         <div className="phases column align-items-center gap-20">
           <div className="row gap-20">
-            <AddNewSpeciesForm2 title="Spawning" />
-            <AddNewSpeciesForm2 title="Pining" />
+            {!spawnRunConditions ? (
+              <div>Loading</div>
+            ) :
+              <AddNewSpeciesForm2 conditions={spawnRunConditions} setConditions={setSpawnRunConditions} title="Spawning" />
+            }
+            <AddNewSpeciesForm2 conditions={pinningConditions} setConditions={setPinningConditions} title="Pinning" />
           </div>
-          <AddNewSpeciesForm2 title="Fruiting" />
+          <AddNewSpeciesForm2 conditions={fruitingConditions} setConditions={setFruitingConditions} title="Fruiting" />
         </div>
         <div className="text-dark">
-          <ButtonPrimary wide={true} text="Add Mushroom" />
+          <ButtonPrimary onClick={async () => { await submitNewMushroom() }} wide={true} text="Add Mushroom" />
         </div>
       </div>
     </div>

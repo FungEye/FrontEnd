@@ -12,10 +12,13 @@ import "../css/History.css";
 export default function Chart(props) {
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
+      let date = payload[0].payload.dateTime.split("T")[0];
+      let time = payload[0].payload.dateTime.split("T")[1];
       return (
         <div className="custom-tooltip">
           <p className="h-xs varela">Value: {payload[0].value}</p>
-          <p className="h-xs varela">Date time : {payload[0].payload.date}</p>
+          <p className="h-xs varela">Date: {date}</p>{" "}
+          <p className="h-xs varela">Time: {time}</p>
         </div>
       );
     }
@@ -34,7 +37,7 @@ export default function Chart(props) {
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip content={CustomTooltip} />
-        <Line type="monotone" dataKey="value" stroke="#763D2D" />
+        <Line type="monotone" dataKey="value" stroke="#763D2D" dot={false} />
       </LineChart>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useSignIn } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import pic from "../mushroom.png";
+import pic from "../img/mushroom.png";
 import "./css/RegisterLogin.css";
 import "./css/General.css";
 import ButtonPrimary from "./ButtonPrimary";
@@ -44,7 +44,7 @@ export default function RegisterLogin() {
     );
     if (rawResponse.ok) {
       const content = await rawResponse.json();
-      saveToken(content.token);
+      saveToken(content.accessToken);
     }
   }
 
@@ -55,7 +55,7 @@ export default function RegisterLogin() {
       tokenType: "Bearer",
       authState: { name: username },
     });
-    navigate("/dashboard");
+    navigate("/overview");
   }
 
   async function registerClick() {

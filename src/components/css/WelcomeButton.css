@@ -16,6 +16,7 @@
     width: 400px;
     height: 100px;
     background-color:#EED1AB;
+    max-width: 90%;
 }
 
 .button-54:active {
