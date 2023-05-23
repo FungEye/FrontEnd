@@ -5,6 +5,8 @@ import useScript from "../hooks/useScript";
 import OverviewBox from "./OverviewBox";
 import ButtonPrimary from "./ButtonPrimary";
 import { Link } from "react-router-dom";
+import { useAuthUser, useAuthHeader } from "react-auth-kit";
+import { useEffect, useState, useCallback } from "react";
 function OverviewPage(props) {
   useScript(`
       var coll = document.getElementsByClassName("collapse-container");
@@ -26,43 +28,64 @@ function OverviewPage(props) {
 
 }`);
 
-  let grow1 = {
-    status: "Good",
-    mushroom: {
-      shroomname: "Oyster",
-      imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
-    },
-    lastMeasured: {
-      day: 11,
-      month: 5,
-      year: 2023,
-      hour: 9,
-      minute: 30,
-    },
-  };
-  let grow2 = {
-    status: "Alarming",
-    mushroom: {
-      shroomname: "Shiitake",
-      imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
-    },
-    lastMeasured: {
-      day: 11,
-      month: 5,
-      year: 2023,
-      hour: 11,
-      minute: 29,
-    },
-  };
+  const auth = useAuthUser();
+  const authHeader = useAuthHeader();
+  const username = auth().name;
+  const [grows, setGrows] = useState(null);
+  const [boxes, setBoxes] = useState(null);
 
-  let box1 = {
-    id: 1,
-    shroomgrowing: "Portobello",
-  };
+  const getLatestMeasurements = useCallback(() => {
+    fetch(
+      `https://fungeye-383609.ey.r.appspot.com/${username}/measurements/latest`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: authHeader(),
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) return response.json();
+      })
+      .then((m) => {
+        if (m === []) {
+          setGrows({noGrows: true})
+        }
+        else {
+          setGrows(m);
+        }
+        console.log(m);
+      })
+      .catch((err) => console.log(err));
+    // eslint-disable-next-line
+  }, [username]);
 
-  let box2 = {
-    id: 2,
-  };
+  const getBoxes = useCallback(() => {
+    fetch(
+      `https://fungeye-383609.ey.r.appspot.com/${username}/boxes`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: authHeader(),
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) return response.json();
+      })
+      .then((m) => {
+        setBoxes(m);
+        console.log(m);
+      })
+      .catch((err) => console.log(err));
+    // eslint-disable-next-line
+  }, [username]);
+
+  
+  useEffect(() => {
+    getLatestMeasurements();
+    getBoxes();
+   }, [getLatestMeasurements, getBoxes]);
 
   //TODO add functionality for setting up a box when Robert has fixed his modal
   // const setUpBox = () => {};
@@ -73,32 +96,70 @@ function OverviewPage(props) {
     navigate("/mushrooms");
   };
 
-  //TODO replace with actual grows that are fetched!
-  let grows;
-  if (props.emptyGrows) {
-    grows = [];
-  } else {
-    grows = [grow1, grow2];
-  }
   let growList;
 
-  if (grows.length > 0) {
-    growList = grows.map((x) => <OPActiveGrow grow={x} />);
-  } else {
+  if (!grows) {
     growList = (
-      <div className="column align-items-center gap-10">
-        <div className="op-info-value"> You have no Active Grows yet!</div>
-        <ButtonPrimary text="Start Grow" onClick={() => goToMushrooms()} />
+      <div className="op-grow-loading">
+        Loading...
       </div>
-    );
+    )
   }
 
+  else {
+    document.getElementById("active-grows").click();
+    document.getElementById("active-grows").click();
+    if (grows.noGrows) {
+      growList = (
+        <div className="column align-items-center gap-10">
+          <div className="op-info-value"> You have no Active Grows yet!</div>
+          <ButtonPrimary text="Start Grow" onClick={() => goToMushrooms()} />
+        </div>
+      )
+    }
+  
+    else {
+      document.getElementById("active-grows").click();
+      document.getElementById("active-grows").click();
+      growList = grows.map((x) => <OPActiveGrow grow={x} />);
+    }
+  }
+
+  let boxList;
+
+  if (!boxes) {
+    boxList = (
+      <div className="op-grow-loading">
+        Loading...
+      </div>
+    )
+  }
+
+  else {
+    if (boxes.noBoxes) {
+      boxList = (
+        <div className="column align-items-center gap-10">
+          <div className="op-info-value"> You have no Boxes yet!</div>
+          <ButtonPrimary text="Set Up Box" />
+        </div>
+      );
+    }
+  
+    else {
+      boxList = boxes.map((x) => (
+        <OverviewBox box={x}/>
+      ));
+  }
+}
+
+  
+
+  /*
   //TODO replace with actual boxes!
-  let boxes;
   if (props.emptyBoxes) {
-    boxes = [];
+    setBoxes([]);
   } else {
-    boxes = [box1, box2];
+    setBoxes([box1, box2])
   }
   let boxList;
 
@@ -114,6 +175,7 @@ function OverviewPage(props) {
       </div>
     );
   }
+  */
 
   let collapsibleWidth = 450;
 

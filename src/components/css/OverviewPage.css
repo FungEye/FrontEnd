@@ -11,8 +11,9 @@
 }
 
 .op-icon {
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
+    border-radius: 5px;
 }
 
 .op-grow {
@@ -22,7 +23,7 @@
 }
 
 .op-shroom-name {
-    font-size: 24px;
+    font-size: 22px;
 }
 
 .op-title {
@@ -59,4 +60,8 @@
 .yieldsLink {
     cursor: "pointer";
     text-decoration: "underline"
+}
+
+.op-grow-loading {
+    height: 50px;
 }

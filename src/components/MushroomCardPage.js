@@ -37,7 +37,6 @@ function MushroomCardPage() {
 
     return (
         <div className="column mushroom-page gap-20">
-            <button onClick={() => getData()} >lol</button>
             {!mushrooms ? (
                 <div className="column pt-15 text-light poppins">
                     Loading...
