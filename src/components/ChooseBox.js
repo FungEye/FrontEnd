@@ -20,9 +20,9 @@ function ChooseBox(props) {
   const auth = useAuthUser();
   const authenticated = useIsAuthenticated();
 
-  console.log(boxList);
+  //console.log(boxList);
   const lastBoxNumber = boxList.findLast((box) => box).boxNumber;
-  console.log(lastBoxNumber);
+  //console.log(lastBoxNumber);
   const boxCards = boxList.map((item) => (
     <BoxCard box={item} lastBoxNumber={lastBoxNumber} key={item.boxNumber} />
   ));
@@ -64,7 +64,7 @@ function ChooseBox(props) {
       }
     )
       .then((response) => {
-        console.log("RESPONSE", response);
+        console.log("RESPONSE", response.body);
         if (response.ok) return response.json();
       })
       .then((b) => {
@@ -72,7 +72,7 @@ function ChooseBox(props) {
         setBoxList(b);
       })
       .catch((err) => console.log(err));
-  }, [authHeader, auth]);
+  }, [authHeader]);
 
   useEffect(() => {
     if (authenticated) fetchEmptyBoxes();
