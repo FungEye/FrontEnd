@@ -1,14 +1,15 @@
 async function getMushrooms(authHeader) {
-
-    let response = await fetch("https://fungeye-383609.ey.r.appspot.com/mushrooms",
+    fetch("https://fungeye-383609.ey.r.appspot.com/mushrooms",
         {
             method: "GET",
             headers: {
                 Authorization: authHeader,
-              },
+            },
         })
-    let mushrooms = await response.json();
-    return mushrooms;
+        .then((response) => {
+            if (response.ok) return response.json();
+        })
+        .catch((err) => console.log(err));
 }
 
-export {getMushrooms}
+export { getMushrooms }
