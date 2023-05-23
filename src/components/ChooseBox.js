@@ -11,22 +11,25 @@ import { useAuthUser, useAuthHeader } from "react-auth-kit";
 function ChooseBox(props) {
   const navigate = useNavigate();
   const { mushroomId } = useParams();
-  console.log(mushroomId);
   const containerRef = useRef(null);
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  let boxList = props.boxList;
   const auth = useAuthUser();
   const authHeader = useAuthHeader();
+  let boxList = props.boxList;
+  let currentDate = new Date();
+  let currentMonth = currentDate.getMonth() + 1;
+  const [selectedBoxId, setSelectedBoxId] = useState(null);
+  //const lastBoxNumber = boxList.findLast((box) => box).boxNumber;
 
-  console.log(boxList);
-  const lastBoxNumber = boxList.findLast((box) => box).boxNumber;
-  console.log(lastBoxNumber);
+  const handleBoxSelect = (boxId) => {
+    setSelectedBoxId(boxId);
+  };
+
   const boxCards = boxList.map((item) => (
-    <BoxCard box={item} lastBoxNumber={lastBoxNumber} key={item.boxNumber} />
+    <BoxCard key={item.boxNumber} box={item} onSelect={handleBoxSelect} />
   ));
 
-  // Change the destination
   function handleClick(event) {
     navigate("/mushrooms");
   }
@@ -39,15 +42,15 @@ function ChooseBox(props) {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        boxId: 1,
+        boxId: selectedBoxId,
         mushroomId: mushroomId,
-        username: "",
+        username: auth().name,
         date: {
-          year: 1,
-          month: 1,
-          day: 1,
+          year: currentDate.getFullYear(),
+          month: currentMonth,
+          day: currentDate.getDate(),
         },
-        developmentStage: "",
+        developStage: "spawn run",
       }),
     })
       .then((response) => {

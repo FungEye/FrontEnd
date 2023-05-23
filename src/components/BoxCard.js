@@ -2,10 +2,12 @@ import "./css/General.css";
 import "./css/BoxCard.css";
 import boxPic from "../img/box.png";
 import ButtonPrimary from "./ButtonPrimary";
-import { useNavigate } from "react-router-dom";
-function BoxCard(props) {
-  let box = props.box;
-  const navigate = useNavigate();
+//import { useNavigate } from "react-router-dom";
+function BoxCard({ box, onSelect }) {
+  //const navigate = useNavigate();
+  const handleSelectClick = () => {
+    onSelect(box.boxNumber);
+  };
 
   return (
     <div className="box-card bg-light rounded-20 column jc-center slightly-faded">
@@ -18,7 +20,8 @@ function BoxCard(props) {
       <div className="row jc-space-evenly w-100">
         <ButtonPrimary
           text="PICK"
-          onClick={() => navigate(`/dashboard/${box.boxNumber}/new`)}
+          //onClick={() => navigate(`/dashboard/${box.boxNumber}/new`)}
+          onClick={handleSelectClick}
         />
       </div>
     </div>
