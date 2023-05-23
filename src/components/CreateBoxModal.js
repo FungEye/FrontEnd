@@ -55,9 +55,11 @@ const ChooseBoxModal = (props) => {
           <div className="modal-body ultra text-dark align-self-center bc-box-name">
             NEW BOX
           </div>
-          <div className="inputContainer">
+
+          <div className="modal-question text-dark">Please enter the EUI</div>
+          <div className="modal-body">
             <Input
-              title="EUI"
+              title=""
               placeholder="EUI"
               value={eui}
               type="text"
@@ -71,14 +73,10 @@ const ChooseBoxModal = (props) => {
               }}
             />
           </div>
-
-          <div className="modal-question text-dark">
-            Your new box will have ID # {props.lastBoxNumber + 1}. Proceed?
-          </div>
           <div className="modal-error">{props.err}</div>
           <div className="modal-footer modal-question">
-            <ButtonSecondary onClick={props.onClose} text="No" />
-            <ButtonPrimary onClick={createNewBox} text="Yes" />
+            <ButtonSecondary onClick={props.onClose} text="Cancel" />
+            <ButtonPrimary onClick={createNewBox} text="Create" />
           </div>
         </div>
       </div>
