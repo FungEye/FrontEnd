@@ -6,6 +6,8 @@ import BoxCard from "./BoxCard";
 import ButtonPrimary from "./ButtonPrimary";
 import CreateBoxModal from "./CreateBoxModal";
 import { useParams } from "react-router-dom";
+import { useAuthUser, useAuthHeader } from "react-auth-kit";
+
 function ChooseBox(props) {
   const navigate = useNavigate();
   const { mushroomId } = useParams();
@@ -14,6 +16,8 @@ function ChooseBox(props) {
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   let boxList = props.boxList;
+  const auth = useAuthUser();
+  const authHeader = useAuthHeader();
 
   console.log(boxList);
   const lastBoxNumber = boxList.findLast((box) => box).boxNumber;
@@ -25,6 +29,35 @@ function ChooseBox(props) {
   // Change the destination
   function handleClick(event) {
     navigate("/mushrooms");
+  }
+
+  function createGrow() {
+    fetch("https://fungeye-383609.ey.r.appspot.com/grow", {
+      method: "POST",
+      headers: {
+        Authorization: authHeader(),
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        boxId: 1,
+        mushroomId: mushroomId,
+        username: "",
+        date: {
+          year: 1,
+          month: 1,
+          day: 1,
+        },
+        developmentStage: "",
+      }),
+    })
+      .then((response) => {
+        console.log(response);
+        if (response.ok) return response.json();
+      })
+      .then((m) => {
+        console.log(m.id);
+      })
+      .catch((err) => console.log(err.message));
   }
 
   function scrollLeft() {
