@@ -35,7 +35,7 @@ function AddNewSpecies() {
   const auth = useAuthUser();
   const authHeader = useAuthHeader();
 
-  function submitMushroom() {
+  function submitNewMushroom() {
     const username = auth().name;
     const mushroom = {
       name: mushroomName,
@@ -106,7 +106,7 @@ function AddNewSpecies() {
         },
       );
     }
-    // submit(mushroom);
+    submit(mushroom);
   }
 
   return (
@@ -171,7 +171,7 @@ function AddNewSpecies() {
           <AddNewSpeciesForm2 conditions={fruitingConditions} setConditions={setFruitingConditions} title="Fruiting" />
         </div>
         <div className="text-dark">
-          <ButtonPrimary onClick={() => { submitMushroom() }} wide={true} text="Add Mushroom" />
+          <ButtonPrimary onClick={() => { submitNewMushroom() }} wide={true} text="Add Mushroom" />
         </div>
       </div>
     </div>
