@@ -1,19 +1,15 @@
 import "./css/YieldCard.css";
 import "./css/General.css";
-import ButtonPrimary from "./ButtonPrimary";
-import shroomPic from "../img/oyster.png";
 import { getDateString } from "../util/DateTimeFormatter";
 import { useNavigate } from "react-router-dom";
 
 function YieldCard(props) {
   let myYield = props.myYield;
-  let growId = props.id;
+  // let growId = props.id;
   let mushroomName = myYield.mushroomName;
   let comment = myYield.comment;
   let harvestDate = getDateString(myYield.harvestDate);
   let weight = myYield.weight;
-
-  //TODO add this when backend has fixed it or do the workaround of getting all the mushrooms
   let imgUrl = myYield.imageUrl;
 
   const navigate = useNavigate();
@@ -28,6 +24,7 @@ function YieldCard(props) {
         <img
           className="op-icon"
           src={imgUrl}
+          alt="mushroom"
         />
         <div
           onClick={() => {

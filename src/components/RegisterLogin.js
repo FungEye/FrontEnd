@@ -9,7 +9,6 @@ import ButtonSecondary from "./ButtonSecondary";
 import Input from "./Input";
 import useValidate from "../hooks/useValidate";
 import useHash from "../hooks/useHash";
-import { setErrMsg } from "..//util/ErrorMessages";
 import ErrorModal from "./ErrorModal";
 export default function RegisterLogin() {
   const [isLogin, setIsLogin] = useState(true);
