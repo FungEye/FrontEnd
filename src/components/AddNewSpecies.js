@@ -83,9 +83,6 @@ function AddNewSpecies({ isEdit }) {
       imageUrl: imageUrl,
     };
 
-    console.log(mushroom);
-    console.log(JSON.stringify(mushroom));
-
     async function submit(mushroom) {
       let url = "";
 
@@ -98,7 +95,7 @@ function AddNewSpecies({ isEdit }) {
             "https://fungeye-383609.ey.r.appspot.com/mushroom/custom/conditions";
           break;
       }
-      await fetch(url, {
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -109,18 +106,26 @@ function AddNewSpecies({ isEdit }) {
       }).catch((err) => {
         console.log(err);
       });
+      response.ok
+        ? setMessage("Mushroom added successfully.")
+        : setMessage("Error while adding mushroom.");
+      setTimeout(() => {
+        setMessage("");
+        if (response.ok) navigate("/mushrooms");
+      }, 5000);
     }
     await submit(mushroom);
   }
 
   function editMushroom() {
-    const username = auth().name;
     const mushroom = {
+      id: mushroomId,
       name: mushroomName,
       description: description,
       origin: origin,
-      idealConditionCreationDtos: [
+      idealConditionCreation: [
         {
+          mushroomId: mushroomId,
           developmentStage: "spawn run",
           tempHigh: spawnRunConditions.tempHigh,
           tempLow: spawnRunConditions.tempLow,
@@ -132,6 +137,7 @@ function AddNewSpecies({ isEdit }) {
           lightLow: spawnRunConditions.lightLow,
         },
         {
+          mushroomId: mushroomId,
           developmentStage: "pinning",
           tempHigh: pinningConditions.tempHigh,
           tempLow: pinningConditions.tempLow,
@@ -143,6 +149,7 @@ function AddNewSpecies({ isEdit }) {
           lightLow: pinningConditions.lightLow,
         },
         {
+          mushroomId: mushroomId,
           developmentStage: "fruiting",
           tempHigh: fruitingConditions.tempHigh,
           tempLow: fruitingConditions.tempLow,
@@ -154,7 +161,6 @@ function AddNewSpecies({ isEdit }) {
           lightLow: fruitingConditions.lightLow,
         },
       ],
-      username: username,
       imageUrl: imageUrl,
     };
 
@@ -348,7 +354,9 @@ function AddNewSpecies({ isEdit }) {
                 />
               ) : null}
             </div>
-            <p>{message}</p>
+            <p className="poppins text-dark errorMessage-newSpecies">
+              {message}
+            </p>
           </div>
         </>
       ) : (
