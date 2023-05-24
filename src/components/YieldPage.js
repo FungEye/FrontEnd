@@ -50,9 +50,6 @@ function YieldPage(props) {
         <h4 className="text-light ">A history of your harvests.</h4>
         <button onClick={() => {getYields()}}>get Yields</button>
       </div>
-      <div className="filter-cont">
-        <AutocompleteInput></AutocompleteInput>
-      </div>
       <div className="yield-cont">
         {yieldCardList}
       </div>
