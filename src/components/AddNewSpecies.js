@@ -40,6 +40,7 @@ function AddNewSpecies({ isEdit }) {
 
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [message, setMessage] = useState((""));
 
   async function submitNewMushroom() {
     const username = auth().name;
@@ -361,6 +362,7 @@ function AddNewSpecies({ isEdit }) {
                   text={"Archive mushroom"}
                 />
               ) : null}
+              <div className="text-dark">{message}</div>
             </div>
           </div>
         </>
