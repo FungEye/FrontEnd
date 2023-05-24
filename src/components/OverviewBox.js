@@ -25,7 +25,7 @@ function OverviewBox(props) {
   }
 
 
-  if (simpleGrowDto.length == 0) {
+  if (simpleGrowDto.length === 0) {
     description = <div className="op-info-value">Vacant</div>;
     buttonAndTrash = (
       <div className="align-items-center op-box-btn-and-icon">

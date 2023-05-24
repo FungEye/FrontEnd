@@ -1,7 +1,6 @@
 import "./css/Dashboard.css";
 import { useState, useEffect } from "react";
 import { useAuthHeader } from "react-auth-kit";
-import ButtonSecondary from "./ButtonSecondary";
 import ButtonPrimary from "./ButtonPrimary";
 import OneCondition from "./OneCondition";
 import Status from "./Status";
@@ -13,18 +12,22 @@ function Dashboard({ isNew }) {
   const [time, setTime] = useState(null);
   const [date, setDate] = useState(null);
   const [toggleMessage, setToggleMessage] = useState("");
-  // const [status, setStatus] = useState("Good");
   const [status] = useState("Good");
-  const [shroomname] = useState("Oyster");
-  // const [shroomname, setShroomName] = useState("Oyster");
+  const [mushroomName] = useState("?");
   const [error, setError] = useState("");
+  const [developmentStage, setDevelopmentStage] = useState("...")
   const authHeader = useAuthHeader();
+
+  /*
+  const [yieldWeight, setYieldWeight] = useState("");
+  const [comment, setComment] = useState("");
+  */
 
   useEffect(() => {
     const fetchData = () => {
       setError("");
       fetch(
-        `https://fungeye-383609.ey.r.appspot.com/box${boxId}/measurements/latest`,
+        `https://fungeye-383609.ey.r.appspot.com/box${boxId}/measurements/latest?stage=true`,
         {
           method: "GET",
           headers: {
@@ -40,8 +43,12 @@ function Dashboard({ isNew }) {
         .then((m) => {
           console.log(m);
           setMeasurement(m);
+          let devStage = m.developmentStage;
+          let devStageCap = devStage.charAt(0).toUpperCase() + devStage.slice(1);
+          setDevelopmentStage(devStageCap)
           setTime(getTimeString(m.id.dateTime));
           setDate(getDateString(m.id.dateTime));
+          // setMushroomName(m.)
         })
         .catch((err) => setError("Failed to fetch data."));
     };
@@ -74,40 +81,42 @@ function Dashboard({ isNew }) {
   return (
     <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
       <div className="dashboard column align-items-center">
-        <div className="mushroom-title text-dark ultra">{shroomname}</div>
+        <div className="mushroom-title text-dark ultra">{mushroomName}</div>
         <div className="box text-dark w-100">Box #{boxId}</div>
         <div className="date text-dark">
           <b>{date}</b>
         </div>
         <div className="text-dark row jc-space-evenly align-items-center w-100 ">
-          {!isNew ? (
-            <div className="column pt-15">
-              <ButtonSecondary text="<" />
-              <div className="small-time">11:11</div>
-            </div>
-          ) : null}
+
           <div className="big-time p-10">
             <b>
               {isNew
                 ? "No measurements yet, come back later"
                 : time == null
-                ? "Loading date..."
-                : time}
+                  ? "Loading date..."
+                  : time}
             </b>
           </div>
-          {!isNew ? (
-            <div className="column pt-15">
-              <ButtonSecondary text=">" />
-              <div className="small-time">11:33</div>
-            </div>
-          ) : null}
         </div>
         {!isNew ? (
           <>
-            <div className="status-text text-dark">
-              <b>Status:</b>
+            <div className="row status-row">
+            <div className="column">
+                <div className="status-text text-dark">
+                  <b>Growth Phase:</b>
+                  <Status status={developmentStage}/>
+                </div>
+              </div>
+              <div className="column">
+                <div className="status-text text-dark">
+                  <b>Status:</b>
+                </div>
+                <Status status={status} />
+              </div>
+              
             </div>
-            <Status status={status} />
+
+
             <div className="toggle text-dark p-10">
               <ButtonPrimary text="Light" onClick={toggle} />
               <p className="poppins text-dark">{toggleMessage}</p>

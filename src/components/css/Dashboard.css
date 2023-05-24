@@ -86,6 +86,10 @@
     height: 160px;
 }
 
+.status-row {
+    gap: 20px;
+}
+
 .toggle {
     width: 70%;
     max-height: 60px

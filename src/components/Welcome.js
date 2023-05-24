@@ -7,7 +7,7 @@ function Welcome() {
   const navigate = useNavigate();
 
   function handleClick(event) {
-    navigate("/dashboard");
+    navigate("/dashboard/1");
   }
 
   return (
