@@ -141,10 +141,13 @@ function App() {
           element={<ManageSpecies isEdit={true} />}
         /> */}
 
-        <Route path="/addnewspecies" element={<AddNewSpecies />} />
+        <Route path="/new" element={<AddNewSpecies />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/:boxId" element={<Dashboard />} />
-        <Route path="/editaddnewspecies" element={<EditAddNewSpecies />} />
+        <Route
+          path="/edit/:mushroomId"
+          element={<AddNewSpecies isEdit={true} />}
+        />
         <Route
           path="/dashboard"
           element={isAuthenticated() ? <Dashboard /> : <RegisterLogin />}

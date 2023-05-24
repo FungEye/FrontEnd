@@ -4,8 +4,6 @@ import "./css/AddNewSpecies2.css";
 import { useState } from "react";
 
 function AddNewSpeciesForm2({ title, conditions, setConditions }) {
-
-
   // const [minTemperature, setMinTemperature] = useState("");
   // const [maxTemperature, setMaxTemperature] = useState("");
   // const [minHumidity, setMinHumidity] = useState("");
@@ -84,10 +82,14 @@ function AddNewSpeciesForm2({ title, conditions, setConditions }) {
           maxPossible={69}
           step={0.1}
           onMinChange={(event) => {
-            setConditions(updateCondition(conditions, "temp", "min", event.target.value));
+            setConditions(
+              updateCondition(conditions, "temp", "min", event.target.value)
+            );
           }}
           onMaxChange={(event) => {
-            setConditions(updateCondition(conditions, "temp", "max", event.target.value));
+            setConditions(
+              updateCondition(conditions, "temp", "max", event.target.value)
+            );
           }}
         />
 
@@ -99,10 +101,14 @@ function AddNewSpeciesForm2({ title, conditions, setConditions }) {
           maxPossible={100}
           step={1}
           onMinChange={(event) => {
-            setConditions(updateCondition(conditions, "humidity", "min", event.target.value));
+            setConditions(
+              updateCondition(conditions, "humidity", "min", event.target.value)
+            );
           }}
           onMaxChange={(event) => {
-            setConditions(updateCondition(conditions, "humidity", "max", event.target.value));
+            setConditions(
+              updateCondition(conditions, "humidity", "max", event.target.value)
+            );
           }}
         />
       </div>
@@ -115,10 +121,14 @@ function AddNewSpeciesForm2({ title, conditions, setConditions }) {
           maxPossible={30000}
           step={10}
           onMinChange={(event) => {
-            setConditions(updateCondition(conditions, "co2", "min", event.target.value));
+            setConditions(
+              updateCondition(conditions, "co2", "min", event.target.value)
+            );
           }}
           onMaxChange={(event) => {
-            setConditions(updateCondition(conditions, "co2", "max", event.target.value));
+            setConditions(
+              updateCondition(conditions, "co2", "max", event.target.value)
+            );
           }}
         />
         <FormInput
@@ -129,10 +139,14 @@ function AddNewSpeciesForm2({ title, conditions, setConditions }) {
           minPossible={0}
           step={100}
           onMinChange={(event) => {
-            setConditions(updateCondition(conditions, "light", "min", event.target.value));
+            setConditions(
+              updateCondition(conditions, "light", "min", event.target.value)
+            );
           }}
           onMaxChange={(event) => {
-            setConditions(updateCondition(conditions, "light", "max", event.target.value));
+            setConditions(
+              updateCondition(conditions, "light", "max", event.target.value)
+            );
           }}
         />
       </div>
