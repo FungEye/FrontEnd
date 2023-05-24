@@ -8,10 +8,13 @@ import { useNavigate } from "react-router-dom";
 function YieldCard(props) {
   let myYield = props.myYield;
   let growId = props.id;
-  let mushroomName = myYield.MushroomName;
+  let mushroomName = myYield.mushroomName;
   let comment = myYield.comment;
   let harvestDate = getDateString(myYield.harvestDate);
   let weight = myYield.weight;
+
+  //TODO add this when backend has fixed it or do the workaround of getting all the mushrooms
+  let imgUrl;
 
   const navigate = useNavigate();
 
@@ -27,7 +30,7 @@ function YieldCard(props) {
         </div>
       </div>
       <div className="column yield-col yield-info">
-        <div className="yield-mushroom-name ultra">{"mushroomName"}</div>
+        <div className="yield-mushroom-name ultra">{mushroomName}</div>
         <div className="yield-harvest-date"><b>Harvested on {harvestDate}</b></div>
         <div className="yield-comment varela">{comment}</div>
       </div>

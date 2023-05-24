@@ -25,7 +25,6 @@ function YieldPage(props) {
       })
       .then((data) => {
         setYieldList(data);
-        console.log(yieldList);
       })
       .catch((err) => console.log(err));
     // eslint-disable-next-line
