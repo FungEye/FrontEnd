@@ -25,6 +25,7 @@ function ChooseBox(props) {
 
   //getting the empty boxes of a user
   useEffect(() => {
+    setErrorMessage("");
     fetch(`https://fungeye-383609.ey.r.appspot.com/${username}/boxes/empty`, {
       method: "GET",
       headers: {
@@ -36,7 +37,7 @@ function ChooseBox(props) {
         data.sort((a, b) => a.id - b.id);
         setBoxData(data);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => setErrorMessage(error.message));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username]);
 
@@ -54,6 +55,7 @@ function ChooseBox(props) {
   }
 
   function createGrow() {
+    setErrorMessage("");
     fetch("https://fungeye-383609.ey.r.appspot.com/grow", {
       method: "POST",
       headers: {
@@ -81,7 +83,7 @@ function ChooseBox(props) {
         console.log(m.id);
         navigate(`dashboard/${m.boxId}/new`);
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => setErrorMessage(err.message));
   }
 
   function createGrowTEST() {
@@ -173,6 +175,7 @@ function ChooseBox(props) {
             err={errorMessage}
           />
         </div>
+        <p>{errorMessage}</p>
       </div>
     </div>
   );
