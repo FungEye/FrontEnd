@@ -65,7 +65,6 @@ function OverviewPage(props) {
         else {
           setGrows(m);
         }
-        console.log(m);
       })
       .catch((err) => {
         setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
@@ -89,7 +88,6 @@ function OverviewPage(props) {
       })
       .then((m) => {
         setBoxes(m);
-        console.log(m);
       })
       .catch((err) => {
         setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");

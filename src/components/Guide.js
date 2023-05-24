@@ -5,7 +5,7 @@ import cyclePic from "../img/lifecycle.png";
 function Guide() {
   return (
     <div>
-      <div className="cont-guide bg-black guide-page">
+      <div className="cont-guide bg-black guide-page text-dark">
         <div className="cont-guide bg-light rounded-20">
           <h2 className="ultra">How to use FungEye?</h2>
 

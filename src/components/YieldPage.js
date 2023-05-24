@@ -28,7 +28,6 @@ function YieldPage(props) {
       })
       .then((data) => {
         setYieldList(data);
-        console.log(yieldList);
       })
       .catch((err) => {
         setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
@@ -50,13 +49,14 @@ function YieldPage(props) {
   }
 
   return (
-    <div>
-      <div className="yields-title-container">
-        <h1 className="text-light ultra">Y I E L D S</h1>
-        <h4 className="text-light ">A history of your harvests.</h4>
-        <button onClick={() => { getYields() }}>get Yields</button>
+    <div className="yield-page bg-light rounded-20 text-dark poppins column align-items-center">
+      <div className="yield-page-title ultra">
+        Yields
       </div>
-      <div className="yield-cont">
+      <div>
+        A history of your harvests.
+      </div>
+      <div className="yield-cards w-100 column align-items-center">
         {yieldCardList}
       </div>
       <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />

@@ -6,6 +6,10 @@ import OneCondition from "./OneCondition";
 import Status from "./Status";
 import { getTimeString, getDateString } from "../util/DateTimeFormatter";
 import { useParams } from "react-router-dom";
+import Input from "./Input";
+import TextArea from "./TextArea";
+import { getTodayDate } from "../util/DateTimeFormatter";
+
 import { setErrMsg } from "../util/ErrorMessages";
 import ErrorModal from "./ErrorModal";
 
@@ -18,16 +22,15 @@ function Dashboard({ isNew }) {
   const [status] = useState("Good");
   const [mushroomName] = useState("?");
   const [error, setError] = useState("");
-  const [developmentStage, setDevelopmentStage] = useState("...")
+  const [developmentStage, setDevelopmentStage] = useState("...");
   const authHeader = useAuthHeader();
 
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  /*
+  
   const [yieldWeight, setYieldWeight] = useState("");
   const [comment, setComment] = useState("");
-  */
 
   useEffect(() => {
     const fetchData = () => {
@@ -49,11 +52,11 @@ function Dashboard({ isNew }) {
           }
         })
         .then((m) => {
-          console.log(m);
           setMeasurement(m);
           let devStage = m.developmentStage;
-          let devStageCap = devStage.charAt(0).toUpperCase() + devStage.slice(1);
-          setDevelopmentStage(devStageCap)
+          let devStageCap =
+            devStage.charAt(0).toUpperCase() + devStage.slice(1);
+          setDevelopmentStage(devStageCap);
           setTime(getTimeString(m.id.dateTime));
           setDate(getDateString(m.id.dateTime));
           // setMushroomName(m.)
@@ -67,6 +70,48 @@ function Dashboard({ isNew }) {
     if (!isNew) fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  async function submit(yieldObj) {
+    console.log(yieldObj);
+    let url = "https://fungeye-383609.ey.r.appspot.com/harvest/";
+    await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: authHeader(),
+      },
+      body: JSON.stringify(yieldObj),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return res.text().then((text) => {
+          throw new Error(text);
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  async function submitYields() {
+    const today = getTodayDate();
+    const yieldObject = {
+      //TODO change growid to the one we are gonna get from backend
+      // instead of hardcoded.
+      growId: 2,
+      weight: yieldWeight,
+      harvestDate: {
+        year: today.year,
+        month: today.month,
+        day: today.day,
+      },
+      comment: comment,
+    };
+    await submit(yieldObject);
+  }
 
   function toggle() {
     setError("");
@@ -103,14 +148,13 @@ function Dashboard({ isNew }) {
           <b>{date}</b>
         </div>
         <div className="text-dark row jc-space-evenly align-items-center w-100 ">
-
           <div className="big-time p-10">
             <b>
               {isNew
                 ? "No measurements yet, come back later"
                 : time == null
-                  ? "Loading date..."
-                  : time}
+                ? "Loading date..."
+                : time}
             </b>
           </div>
         </div>
@@ -129,7 +173,7 @@ function Dashboard({ isNew }) {
                 </div>
                 <Status status={status} />
               </div>
-
+              
             </div>
 
 
@@ -165,10 +209,31 @@ function Dashboard({ isNew }) {
           </>
         ) : null}
       </div>
+      <div className="dashboard-register-yields align-items-center column">
+        <div className="text-dark register-yields-text varela">
+          Register Yields?
+        </div>
+        <Input
+          title="Weight (grams)"
+          value={yieldWeight}
+          onChange={(event) => {
+            setYieldWeight(event.target.value);
+          }}
+        />
+        <TextArea
+          onChange={(event) => {
+            setComment(event.target.value);
+          }}
+          value={comment}
+          title="Comment"
+        />
+        <ButtonPrimary text="Submit" onClick={() => submitYields()} />
+      </div>
       <p>{error}</p>
       <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
 
     </div>
   );
 }
+
 export default Dashboard;
