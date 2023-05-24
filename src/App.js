@@ -29,10 +29,14 @@ function App() {
           path="/boxes/:mushroomId"
           element={isAuthenticated() ? <ChooseBox /> : <Navigate to="/login" />}
         />
-        <Route path="/newSpecies" element={isAuthenticated() ? <AddNewSpecies /> : <Navigate to="/login" />} />
+
+        <Route path="/new" element={isAuthenticated() ? <AddNewSpecies /> : <Navigate to="/login" />} />
+          path="/edit/:mushroomId"
+          element={<AddNewSpecies isEdit={true} />
         {/* add to empty dashboard page an error modal saying "you have not specified a boxId for the dashboard." */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/:boxId" element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />} />
+
         <Route
           path="/dashboard"
           element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />}

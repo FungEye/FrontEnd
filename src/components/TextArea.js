@@ -5,6 +5,7 @@ function TextArea(props) {
             <textarea value={props.value} onChange={props.onChange} rows={8} cols={40} className="textarea bg-light text-dark varela rounded-20"></textarea>
         </div>
     )
+
 }
 
-export default TextArea
+export default TextArea;

@@ -4,8 +4,10 @@ import ButtonSecondary from "./ButtonSecondary";
 import XButton from "./XButton";
 import ConditionsCarousel from "./ConditionsCarousel";
 import { useNavigate } from "react-router-dom";
+import { useAuthUser } from "react-auth-kit";
 function MushroomDetailsModal(props) {
   const navigate = useNavigate();
+  const username = useAuthUser()().name;
 
   if (!props.show) {
     return null;
@@ -45,6 +47,14 @@ function MushroomDetailsModal(props) {
                   <b>Description: </b>
                   {mushroom.description}
                 </div>
+              </div>
+              <div className="edit-button-container p-10">
+                {username === "admin" ? (
+                  <ButtonPrimary
+                    text="Edit"
+                    onClick={() => navigate(`/edit/${mushroomId}`)}
+                  />
+                ) : null}
               </div>
               <div className="row btns jc-center">
                 <ButtonSecondary text="Back" onClick={() => setShow(false)} />
