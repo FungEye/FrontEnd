@@ -7,11 +7,14 @@ import ReactDOM from "react-dom";
 import Input from "./Input";
 import { useState } from "react";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
+import { setErrMsg } from "../util/ErrorMessages";
 
 const ChooseBoxModal = (props) => {
   const [eui, setEui] = useState("");
   const auth = useAuthUser();
   const authHeader = useAuthHeader();
+  const[errorMessage, setErrorMessage] = useState("");
+
   function createNewBox() {
     console.log(authHeader());
     console.log(eui);
@@ -25,15 +28,18 @@ const ChooseBoxModal = (props) => {
       },
       body: JSON.stringify({ username: auth().name, eui: eui }),
     })
-      .then((response) => {
-        console.log(response);
-        if (response.ok) return response.json();
-      })
+    .then((response) => {
+      if (response.ok) return response.json();
+      else {
+        setErrMsg(setErrorMessage, response.status);
+      }
+    })
       .then((m) => {
         props.onSelect(m.id);
       })
-      .catch((err) => console.log(err.message));
-  }
+      .catch((err) => setErrorMessage("Something went wrong. Are you sure your EUI is 16 characters long, all numbers?"));
+    }
+  
 
   return ReactDOM.createPortal(
     <CSSTransition
@@ -56,7 +62,10 @@ const ChooseBoxModal = (props) => {
             NEW BOX
           </div>
 
-          <div className="modal-question text-dark">Please enter the EUI</div>
+          <div className="error">
+            {errorMessage}
+          </div>
+          <div className="modal-question text-dark">Please enter the EUI. It must be 16 characters long.</div>
           <div className="modal-body">
             <Input
               title=""
@@ -75,7 +84,7 @@ const ChooseBoxModal = (props) => {
           </div>
           <div className="modal-error">{props.err}</div>
           <div className="modal-footer modal-question">
-            <ButtonSecondary onClick={props.onClose} text="Cancel" />
+            <ButtonSecondary onClick={() => { setErrorMessage(""); props.onClose()}} text="Cancel" />
             <ButtonPrimary onClick={createNewBox} text="Create" />
           </div>
         </div>
@@ -84,5 +93,6 @@ const ChooseBoxModal = (props) => {
     document.body
   );
 };
+
 
 export default ChooseBoxModal;

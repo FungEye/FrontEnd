@@ -7,14 +7,13 @@ import { useNavigate } from "react-router-dom";
 function MushroomDetailsModal(props) {
   const navigate = useNavigate();
 
-  
   if (!props.show) {
     return null;
   }
 
   let mushroom = props.mushroom;
   let setShow = props.setShow;
-  let mushroomId = 69;
+  let mushroomId = mushroom.id;
   let shroomdata = mushroom.idealConditionDtos;
 
   return (

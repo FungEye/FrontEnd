@@ -10,6 +10,9 @@ import Input from "./Input";
 import TextArea from "./TextArea";
 import { getTodayDate } from "../util/DateTimeFormatter";
 
+import { setErrMsg } from "../util/ErrorMessages";
+import ErrorModal from "./ErrorModal";
+
 function Dashboard({ isNew }) {
   const { boxId } = useParams();
   const [measurement, setMeasurement] = useState(null);
@@ -22,6 +25,10 @@ function Dashboard({ isNew }) {
   const [developmentStage, setDevelopmentStage] = useState("...");
   const authHeader = useAuthHeader();
 
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  
   const [yieldWeight, setYieldWeight] = useState("");
   const [comment, setComment] = useState("");
 
@@ -39,8 +46,10 @@ function Dashboard({ isNew }) {
       )
         .then((response) => {
           if (response.ok) return response.json();
-          else if (response.status === 401)
-            setError("You have to login first.");
+          else {
+            setErrMsg(setErrorMessage, response.status);
+            setShowErrorModal(true);
+          }
         })
         .then((m) => {
           setMeasurement(m);
@@ -52,7 +61,10 @@ function Dashboard({ isNew }) {
           setDate(getDateString(m.id.dateTime));
           // setMushroomName(m.)
         })
-        .catch((err) => setError("Failed to fetch data."));
+        .catch((err) => {
+          setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+          setShowErrorModal(true);
+        });
     };
 
     if (!isNew) fetchData();
@@ -113,10 +125,15 @@ function Dashboard({ isNew }) {
         console.log(response);
         if (response.ok)
           setToggleMessage("Light in your box has been toggled.");
-        else if (response.status === 401) setError("You have to login first.");
+        else {
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
       })
-      .catch((err) => setError("Failed to fetch data."));
-
+      .catch((err) => {
+        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setShowErrorModal(true);
+      });
     setTimeout(() => {
       setToggleMessage("");
     }, 5000);
@@ -156,6 +173,7 @@ function Dashboard({ isNew }) {
                 </div>
                 <Status status={status} />
               </div>
+              
             </div>
 
 
@@ -212,6 +230,8 @@ function Dashboard({ isNew }) {
         <ButtonPrimary text="Submit" onClick={() => submitYields()} />
       </div>
       <p>{error}</p>
+      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
+
     </div>
   );
 }

@@ -14,6 +14,7 @@ import YieldPage from "./components/YieldPage";
 import RecipePage from "./components/RecipePage";
 import RecipeDetailPage from "./components/RecipeDetailPage";
 import OverviewPage from "./components/OverviewPage";
+import ErrorModal from "./components/ErrorModal";
 function App() {
   const isAuthenticated = useIsAuthenticated();
   return (
