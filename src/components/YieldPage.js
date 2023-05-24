@@ -1,7 +1,6 @@
 import "./css/General.css";
 import "./css/YieldPage.css";
 import YieldCard from "./YieldCard";
-import AutocompleteInput from "./AutocompleteInput";
 import { useEffect, useCallback, useState } from "react";
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
 function YieldPage(props) {

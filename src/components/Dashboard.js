@@ -1,7 +1,6 @@
 import "./css/Dashboard.css";
 import { useState, useEffect } from "react";
 import { useAuthHeader } from "react-auth-kit";
-import ButtonSecondary from "./ButtonSecondary";
 import OneCondition from "./OneCondition";
 import Status from "./Status";
 import { getTimeString, getDateString } from "../util/DateTimeFormatter";
@@ -12,13 +11,15 @@ function Dashboard({ isNew }) {
   const [time, setTime] = useState(null);
   const [date, setDate] = useState(null);
   const [status] = useState("Good");
-  const [mushroomName, setMushroomName] = useState("?");
+  const [mushroomName] = useState("?");
   const [error, setError] = useState("");
   const [developmentStage, setDevelopmentStage] = useState("...")
   const authHeader = useAuthHeader();
 
+  /*
   const [yieldWeight, setYieldWeight] = useState("");
   const [comment, setComment] = useState("");
+  */
 
   useEffect(() => {
     const fetchData = () => {
