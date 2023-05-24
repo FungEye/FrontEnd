@@ -123,7 +123,7 @@ function AddNewSpecies({ isEdit }) {
       name: mushroomName,
       description: description,
       origin: origin,
-      idealConditionCreation: [
+      idealConditions: [
         {
           mushroomId: mushroomId,
           developmentStage: "spawn run",
@@ -167,6 +167,7 @@ function AddNewSpecies({ isEdit }) {
     console.log(mushroom);
     console.log(JSON.stringify(mushroom));
 
+    console.log(authHeader());
     fetch(`https://fungeye-383609.ey.r.appspot.com/mushroom/update`, {
       method: "PUT",
       headers: {
@@ -211,54 +212,56 @@ function AddNewSpecies({ isEdit }) {
   }
 
   useEffect(() => {
-    fetch(`https://fungeye-383609.ey.r.appspot.com/mushroom/${mushroomId}`, {
-      method: "GET",
-      headers: {
-        Authorization: authHeader(),
-      },
-    })
-      .then((response) => {
-        if (response.ok) return response.json();
+    if (isEdit) {
+      fetch(`https://fungeye-383609.ey.r.appspot.com/mushroom/${mushroomId}`, {
+        method: "GET",
+        headers: {
+          Authorization: authHeader(),
+        },
       })
-      .then((m) => {
-        setDescription(m.description);
+        .then((response) => {
+          if (response.ok) return response.json();
+        })
+        .then((m) => {
+          setDescription(m.description);
 
-        setMushroomName(m.name);
-        setOrigin(m.origin);
-        setImageUrl(m.imageUrl);
-      })
-      .catch((err) => console.log(err));
+          setMushroomName(m.name);
+          setOrigin(m.origin);
+          setImageUrl(m.imageUrl);
+        })
+        .catch((err) => console.log(err));
 
-    fetch(`https://fungeye-383609.ey.r.appspot.com/ideal/${mushroomId}`, {
-      method: "GET",
-      headers: {
-        Authorization: authHeader(),
-      },
-    })
-      .then((response) => {
-        if (response.ok) return response.json();
+      fetch(`https://fungeye-383609.ey.r.appspot.com/ideal/${mushroomId}`, {
+        method: "GET",
+        headers: {
+          Authorization: authHeader(),
+        },
       })
-      .then((m) => {
-        let spawnRun = m;
-        let pinning = m;
-        let fruiting = m;
-        setSpawnRunConditions(
-          spawnRun.filter((e) => e.developmentStage === "spawn run")[0]
-        );
-        setPinningConditions(
-          pinning.filter((e) => e.developmentStage === "pinning")[0]
-        );
-        setFruitingConditions(
-          fruiting.filter((e) => e.developmentStage === "fruiting")[0]
-        );
-      })
-      .catch((err) => console.log(err));
+        .then((response) => {
+          if (response.ok) return response.json();
+        })
+        .then((m) => {
+          let spawnRun = m;
+          let pinning = m;
+          let fruiting = m;
+          setSpawnRunConditions(
+            spawnRun.filter((e) => e.developmentStage === "spawn run")[0]
+          );
+          setPinningConditions(
+            pinning.filter((e) => e.developmentStage === "pinning")[0]
+          );
+          setFruitingConditions(
+            fruiting.filter((e) => e.developmentStage === "fruiting")[0]
+          );
+        })
+        .catch((err) => console.log(err));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
-      {auth().name === "admin" ? (
+      {(auth().name !== "admin" && !isEdit) || auth().name === "admin" ? (
         <>
           <div className="align-self-start">
             <XButton onClick={() => navigate("/mushrooms")} />
@@ -268,7 +271,7 @@ function AddNewSpecies({ isEdit }) {
               id="new-species-title"
               className="mushroom-title text-dark ultra"
             >
-              {isEdit ? "Edit Species" : "Add New Species"}
+              {isEdit ? "Edit species" : "Add new species"}
             </div>
             <div className="row ans-inputs-row">
               <div className="rounded-20 column align-items-center">
@@ -313,7 +316,7 @@ function AddNewSpecies({ isEdit }) {
 
             <div className="ans-info text-dark">
               {!isEdit ? "Provide" : "Edit"} ideal growing conditions for each
-              phase...
+              phase.
             </div>
             <div className="phases column align-items-center gap-20">
               <div className="row gap-20">
@@ -360,7 +363,7 @@ function AddNewSpecies({ isEdit }) {
           </div>
         </>
       ) : (
-        <p>
+        <p className="poppins text-dark errorMessage-newSpecies">
           Oh my good! You are so clever to modify the URL, but unfortunately you
           cannot modify mushrooms.
         </p>

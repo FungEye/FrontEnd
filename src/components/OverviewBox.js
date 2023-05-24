@@ -24,8 +24,7 @@ function OverviewBox(props) {
     navigate("/dashboard");
   }
 
-
-  if (simpleGrowDto.length == 0) {
+  if (simpleGrowDto.length === 0) {
     description = <div className="op-info-value">Vacant</div>;
     buttonAndTrash = (
       <div className="align-items-center op-box-btn-and-icon">
@@ -38,9 +37,7 @@ function OverviewBox(props) {
         ></img>
       </div>
     );
-
   } else {
-
     let mushroomName = simpleGrowDto[0].mushroomName;
     console.log(mushroomName);
 
