@@ -6,6 +6,8 @@ import OneCondition from "./OneCondition";
 import Status from "./Status";
 import { getTimeString, getDateString } from "../util/DateTimeFormatter";
 import { useParams } from "react-router-dom";
+import ButtonPrimary from "./ButtonPrimary";
+
 function Dashboard({ isNew }) {
   const { boxId } = useParams();
   const [measurement, setMeasurement] = useState(null);
@@ -30,6 +32,17 @@ function Dashboard({ isNew }) {
           },
         }
       )
+      fetch(
+        `http://fungeye-383609.ey.r.appspot.com/${boxId}/light`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: authHeader(),
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then((response) => {
           if (response.ok) return response.json();
           else if (response.status === 401)
@@ -43,7 +56,7 @@ function Dashboard({ isNew }) {
         })
         .catch((err) => setError("Failed to fetch data."));
     };
-
+    
     if (!isNew) fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -85,6 +98,9 @@ function Dashboard({ isNew }) {
               <b>Status:</b>
             </div>
             <Status status={status} />
+            <div className="togglelight">
+            <ButtonPrimary onClick={async () => {  }} wide={true} text="Toggle Light" />
+            </div>
             <div className="measurements jc-center flex-wrap">
               <OneCondition
                 title="Temperature"
