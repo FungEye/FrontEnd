@@ -8,9 +8,6 @@ function OverviewBox(props) {
   let box = props.box;
   let boxId = box.id;
   let simpleGrowDto = box.simpleGrowDtos;
-
-  console.log(simpleGrowDto);
-
   let description;
   let buttonAndTrash;
 
@@ -39,8 +36,6 @@ function OverviewBox(props) {
     );
   } else {
     let mushroomName = simpleGrowDto[0].mushroomName;
-    console.log(mushroomName);
-
     description = (
       <div className="row op-info-row text-dark">
         <div className="op-info-value">Growing</div>

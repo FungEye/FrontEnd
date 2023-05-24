@@ -10,7 +10,7 @@
 }
 
 .header {
-    padding-left: 2rem;
+    padding-left: 2rem !important;
 }
 
 .header,
@@ -26,8 +26,6 @@ nav {
     background-color: var(--beige);
     color: var(--brown);
     overflow: hidden;
-    padding: 0px;
-    margin: 0;
 }
 
 nav {

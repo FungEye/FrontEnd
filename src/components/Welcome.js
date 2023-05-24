@@ -5,9 +5,8 @@ import Typewriter from "typewriter-effect";
 
 function Welcome() {
   const navigate = useNavigate();
-
   function handleClick(event) {
-    navigate("/dashboard");
+    navigate("/dashboard/1");
   }
 
   return (
@@ -28,7 +27,6 @@ function Welcome() {
           Go to dashboard!
         </button>
       </div>
-
       <div className="footer">Fungeye 2023</div>
     </div>
   );

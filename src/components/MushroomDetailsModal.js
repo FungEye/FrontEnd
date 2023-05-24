@@ -8,6 +8,7 @@ import { useAuthUser } from "react-auth-kit";
 function MushroomDetailsModal(props) {
   const navigate = useNavigate();
   const username = useAuthUser()().name;
+
   if (!props.show) {
     return null;
   }

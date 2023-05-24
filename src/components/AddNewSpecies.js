@@ -2,17 +2,17 @@ import AddNewSpeciesForm2 from "./AddNewSpeciesForm2";
 import "./css/AddNewSpecies.css";
 import ButtonPrimary from "./ButtonPrimary";
 import XButton from "./XButton";
-import AddNewSpeciesOrigin from "./AddNewSpeciesOrigin";
 import { useState, useEffect } from "react";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
 import { useParams, useNavigate } from "react-router-dom";
 import Input from "./Input";
 import TextArea from "./TextArea";
+import { setErrMsg } from "../util/ErrorMessages";
+import ErrorModal from "./ErrorModal";
 
 function AddNewSpecies({ isEdit }) {
   const { mushroomId } = useParams();
   const navigate = useNavigate();
-  const [message, setMessage] = useState("");
   function newConditions() {
     return {
       tempHigh: "",
@@ -37,6 +37,9 @@ function AddNewSpecies({ isEdit }) {
 
   const auth = useAuthUser();
   const authHeader = useAuthHeader();
+
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function submitNewMushroom() {
     const username = auth().name;
@@ -103,16 +106,18 @@ function AddNewSpecies({ isEdit }) {
           Authorization: authHeader(),
         },
         body: JSON.stringify(mushroom),
-      }).catch((err) => {
-        console.log(err);
-      });
-      response.ok
-        ? setMessage("Mushroom added successfully.")
-        : setMessage("Error while adding mushroom.");
-      setTimeout(() => {
-        setMessage("");
-        if (response.ok) navigate("/mushrooms");
-      }, 5000);
+      }).then((response) => {
+          if (!response.ok) {
+            setErrMsg(setErrorMessage, response.status);
+            setShowErrorModal(true);
+          }
+          else{
+          navigate("/mushrooms")}
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
     }
     await submit(mushroom);
   }
@@ -357,9 +362,6 @@ function AddNewSpecies({ isEdit }) {
                 />
               ) : null}
             </div>
-            <p className="poppins text-dark errorMessage-newSpecies">
-              {message}
-            </p>
           </div>
         </>
       ) : (
@@ -368,6 +370,8 @@ function AddNewSpecies({ isEdit }) {
           cannot modify mushrooms.
         </p>
       )}
+      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
+
     </div>
   );
 }

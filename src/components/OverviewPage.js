@@ -7,6 +7,9 @@ import ButtonPrimary from "./ButtonPrimary";
 import { Link } from "react-router-dom";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
 import { useEffect, useState, useCallback } from "react";
+import { setErrMsg } from "../util/ErrorMessages";
+import ErrorModal from "./ErrorModal";
+
 function OverviewPage(props) {
   useScript(`
       var coll = document.getElementsByClassName("collapse-container");
@@ -34,6 +37,10 @@ function OverviewPage(props) {
   const [grows, setGrows] = useState(null);
   const [boxes, setBoxes] = useState(null);
 
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
   const getLatestMeasurements = useCallback(() => {
     fetch(
       `https://fungeye-383609.ey.r.appspot.com/${username}/measurements/latest`,
@@ -46,17 +53,23 @@ function OverviewPage(props) {
     )
       .then((response) => {
         if (response.ok) return response.json();
+        else {
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
       })
       .then((m) => {
         if (m === []) {
-          setGrows({noGrows: true})
+          setGrows({ noGrows: true })
         }
         else {
           setGrows(m);
         }
-        console.log(m);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setShowErrorModal(true);
+      });
     // eslint-disable-next-line
   }, [username]);
 
@@ -75,17 +88,19 @@ function OverviewPage(props) {
       })
       .then((m) => {
         setBoxes(m);
-        console.log(m);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setShowErrorModal(true);
+      });
     // eslint-disable-next-line
   }, [username]);
 
-  
+
   useEffect(() => {
     getLatestMeasurements();
     getBoxes();
-   }, [getLatestMeasurements, getBoxes]);
+  }, [getLatestMeasurements, getBoxes]);
 
   //TODO add functionality for setting up a box when Robert has fixed his modal
   // const setUpBox = () => {};
@@ -117,7 +132,7 @@ function OverviewPage(props) {
         </div>
       )
     }
-  
+
     else {
       document.getElementById("active-grows").click();
       document.getElementById("active-grows").click();
@@ -144,41 +159,15 @@ function OverviewPage(props) {
         </div>
       );
     }
-  
+
     else {
       document.getElementById("your-boxes").click();
       document.getElementById("your-boxes").click();
       boxList = boxes.map((x) => (
-        <OverviewBox box={x}/>
+        <OverviewBox box={x} />
       ));
+    }
   }
-}
-
-  
-
-  /*
-  //TODO replace with actual boxes!
-  if (props.emptyBoxes) {
-    setBoxes([]);
-  } else {
-    setBoxes([box1, box2])
-  }
-  let boxList;
-
-  if (boxes.length > 0) {
-    boxList = boxes.map((x) => (
-      <OverviewBox boxId={x.id} shroomgrowing={x.shroomgrowing} />
-    ));
-  } else {
-    boxList = (
-      <div className="column align-items-center gap-10">
-        <div className="op-info-value"> You have no Boxes yet!</div>
-        <ButtonPrimary text="Set Up Box" />
-      </div>
-    );
-  }
-  */
-
   let collapsibleWidth = 450;
 
   return (
@@ -218,6 +207,7 @@ function OverviewPage(props) {
           </div>
         }
       />
+      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
     </div>
   );
 }

@@ -1,17 +1,8 @@
 import FormInput from "./FormInput";
 import "./css/AddNewSpecies2.css";
 
-import { useState } from "react";
-
 function AddNewSpeciesForm2({ title, conditions, setConditions }) {
-  // const [minTemperature, setMinTemperature] = useState("");
-  // const [maxTemperature, setMaxTemperature] = useState("");
-  // const [minHumidity, setMinHumidity] = useState("");
-  // const [maxHumidity, setMaxHumidity] = useState("");
-  // const [minCo2, setMinCo2] = useState("");
-  // const [maxCo2, setMaxCo2] = useState("");
-  // const [minLight, setMinLight] = useState("");
-  // const [maxLight, setMaxLight] = useState("");
+
 
   function updateCondition(oldCondition, stat, minOrMax, value) {
     let newCondition = { ...oldCondition };
