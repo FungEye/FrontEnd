@@ -20,21 +20,20 @@ function YieldCard(props) {
   }
 
   return (
-    <div className="yield-card bg-light border-dark rounded-20 mt-15 row">
-      <div className="icon-and-history column">
-        <img className="img-100px" src="https://cdn-icons-png.flaticon.com/512/3656/3656824.png"/>
+    <div className="yield-card bg-light border-dark rounded-20 mt-15 row align-items-center jc-space-between">
+      <div className="icon-and-history column yield-col">
+        <img className="op-icon" src="https://demuths.co.uk/img/u/images/_256x256_crop_center-center_70_none/CA7F8E74-AAC1-4989-B402-DD4D84A1FA07.jpeg"/>
         <div onClick={() => {goToHistory()}} className="yields-history-link">history 
         </div>
       </div>
-      <div className="column">
+      <div className="column yield-col yield-info">
         <div className="yield-mushroom-name ultra">{"mushroomName"}</div>
         <div className="yield-harvest-date"><b>Harvested on {harvestDate}</b></div>
-        <div className="yield-comment">{comment}</div>
+        <div className="yield-comment varela">{comment}</div>
       </div>
-      <div className="column">
+      <div className="column yield-col yield-value">
         <div className="yield-grams-value">{weight}</div>
         <div className="yield-grams-label">grams</div>
-        <div className="yield-recipes-link">recipes</div>
       </div>
       {/* <div className="yield-card-flex">
         <div className="yield-card-1st-column">

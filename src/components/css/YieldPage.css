@@ -1,9 +1,15 @@
 .yield-page {
     width: 700px;
+    margin: 50px auto;
+    padding: 20px;
 }
 
 .filter-cont{
     position:relative;
+}
+
+.yield-page-title {
+    font-size: 36px;
 }
 
 .autocomplete-dropdown{

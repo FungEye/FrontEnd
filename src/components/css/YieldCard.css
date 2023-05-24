@@ -1,4 +1,32 @@
 .yield-card{
-    min-height: 200px;
     width: 90%;
+    padding: 10px;
+}
+
+.yields-history-link {
+    text-decoration: underline;
+}
+
+.yield-col {
+    padding: 0 30px;
+}
+
+.yield-grams-value {
+    font-size: 36px;
+}
+
+.yield-grams-label {
+    margin-top: -15px;
+}
+
+.yield-mushroom-name {
+    font-size: 24px;
+}
+
+.yield-info{
+    max-width: 300px;
+}
+
+.yield-value {
+    width: 75px;
 }
