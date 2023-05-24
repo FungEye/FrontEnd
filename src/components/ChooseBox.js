@@ -7,19 +7,23 @@ import ButtonPrimary from "./ButtonPrimary";
 import CreateBoxModal from "./CreateBoxModal";
 import { useParams } from "react-router-dom";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
+import ErrorModal from "./ErrorModal";
+import { setErrMsg } from "../util/ErrorMessages";
 
 function ChooseBox() {
   const navigate = useNavigate();
   const { mushroomId } = useParams();
   const containerRef = useRef(null);
   const [show, setShow] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const [boxData, setBoxData] = useState([]);
   const auth = useAuthUser();
   const authHeader = useAuthHeader();
   let currentDate = new Date();
   let currentMonth = currentDate.getMonth() + 1;
   let username = auth().name;
+
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   //getting the empty boxes of a user
   useEffect(() => {
@@ -30,12 +34,21 @@ function ChooseBox() {
         Authorization: authHeader(),
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) return response.json();
+        else {
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
+      })
       .then((data) => {
         data.sort((a, b) => a.id - b.id);
         setBoxData(data);
       })
-      .catch((error) => setErrorMessage(error.message));
+      .catch((err) => {
+        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setShowErrorModal(true);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username]);
 
@@ -69,14 +82,20 @@ function ChooseBox() {
       }),
     })
       .then((response) => {
-        console.log(response);
         if (response.ok) return response.json();
+        else {
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
       })
       .then((m) => {
         console.log(m.boxId);
         navigate(`/dashboard/${m.boxId}/new`);
       })
-      .catch((err) => setErrorMessage(err.message));
+      .catch((err) => {
+        setErrorMessage(err.message);
+        setShowErrorModal(true)
+      });
   }
 
   function handleClick(event) {
@@ -148,6 +167,7 @@ function ChooseBox() {
         </div>
         <p>{errorMessage}</p>
       </div>
+      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
     </div>
   );
 }

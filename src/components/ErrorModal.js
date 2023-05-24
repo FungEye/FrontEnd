@@ -28,7 +28,7 @@ function ErrorModal(props) {
                         <div className="error-message">{errorMessage}</div>
                         </div>
                     </div>
-                    <ButtonPrimary text="Back" />
+                    <ButtonPrimary text="Back" onClick={() => {setShow(false)}} />
                 </div>
             </div>
         </div>

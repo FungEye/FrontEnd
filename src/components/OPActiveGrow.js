@@ -6,6 +6,8 @@ import { useState, useCallback } from "react";
 import { getFullDateTimeString } from "../util/DateTimeFormatter";
 import { useAuthHeader } from "react-auth-kit";
 import { useEffect } from "react";
+import { setErrMsg } from "../util/ErrorMessages";
+import ErrorModal from "./ErrorModal";
 
 function OPActiveGrow(props) {
   let grow = props.grow;
@@ -19,6 +21,8 @@ function OPActiveGrow(props) {
   console.log({ lastMeasuredString });
   const [box, setBox] = useState(null);
   const [mushroom, setMushroom] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const navigate = useNavigate();
   const authHeader = useAuthHeader();
@@ -35,6 +39,11 @@ function OPActiveGrow(props) {
     )
       .then((response) => {
         if (response.ok) return response.json();
+        else {
+          console.log("caught in 1");
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
       })
       .then((m) => {
         setBox(m);
@@ -51,21 +60,28 @@ function OPActiveGrow(props) {
       })
       .then((response) => {
         if (response.ok) return response.json();
+        else {
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
       })
       .then((m) => {
         console.log("MUSHROOM")
         console.log(m)
         setMushroom(m);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setShowErrorModal(true);
+      });
     // eslint-disable-next-line
   }, []);
 
-  
+
   useEffect(() => {
     getBox();
-   }, [getBox]);
-   
+  }, [getBox]);
+
 
   function goToDashboard() {
     if (mushroom) {
@@ -104,6 +120,7 @@ function OPActiveGrow(props) {
           </div>
         </div>
       }
+      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
     </div>
   );
 }

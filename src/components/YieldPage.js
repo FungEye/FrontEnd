@@ -3,12 +3,15 @@ import "./css/YieldPage.css";
 import YieldCard from "./YieldCard";
 import { useEffect, useCallback, useState } from "react";
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
+import ErrorModal from "./ErrorModal";
 function YieldPage(props) {
 
   const [yieldList, setYieldList] = useState([]);
   const authHeader = useAuthHeader();
   const auth = useAuthUser();
   const username = auth().name;
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   // let yieldsList = props.yieldsList;
   const getYields = useCallback(() => {
@@ -27,7 +30,10 @@ function YieldPage(props) {
         setYieldList(data);
         console.log(yieldList);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setShowErrorModal(true);
+      });
     // eslint-disable-next-line
   }, []);
 
@@ -53,6 +59,7 @@ function YieldPage(props) {
       <div className="yield-cont">
         {yieldCardList}
       </div>
+      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
     </div>
   );
 }

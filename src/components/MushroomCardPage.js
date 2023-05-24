@@ -3,11 +3,15 @@ import MushroomCard from "./MushroomCard";
 import MushroomDetailsModal from "./MushroomDetailsModal";
 import "./css/MushroomCardPage.css";
 import { useAuthHeader } from "react-auth-kit";
+import { setErrMsg } from "../util/ErrorMessages";
+import ErrorModal from "./ErrorModal";
 
 function MushroomCardPage() {
     const [mushrooms, setMushrooms] = useState(null);
     const [show, setShow] = useState(false);
     const [mushroomOnModal, setMushroomOnModal] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [showErrorModal, setShowErrorModal] = useState(false);
     const authHeader = useAuthHeader();
 
     const getData = useCallback(() => {
@@ -22,11 +26,18 @@ function MushroomCardPage() {
         )
           .then((response) => {
             if (response.ok) return response.json();
+            else {
+              setErrMsg(setErrorMessage, response.status);
+              setShowErrorModal(true);
+            }
           })
           .then((m) => {
             setMushrooms(m);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+            setShowErrorModal(true);
+          });
           // eslint-disable-next-line
       }, []);
 
@@ -51,6 +62,7 @@ function MushroomCardPage() {
             }
 
             <MushroomDetailsModal show={show} setShow={setShow} mushroom={mushroomOnModal} />
+            <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
         </div>
 
     )

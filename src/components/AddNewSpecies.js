@@ -6,6 +6,8 @@ import { useState } from "react";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
 import Input from "./Input";
 import TextArea from "./TextArea";
+import { setErrMsg } from "../util/ErrorMessages";
+import ErrorModal from "./ErrorModal";
 
 function AddNewSpecies() {
 
@@ -33,6 +35,9 @@ function AddNewSpecies() {
 
   const auth = useAuthUser();
   const authHeader = useAuthHeader();
+
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function submitNewMushroom() {
     const username = auth().name;
@@ -104,9 +109,15 @@ function AddNewSpecies() {
           body: JSON.stringify(mushroom)
         },
       )
-      .catch(err => {
-        console.log(err);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            setErrMsg(setErrorMessage, response.status);
+            setShowErrorModal(true);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
     await submit(mushroom);
   }
@@ -153,8 +164,8 @@ function AddNewSpecies() {
           </div>
           <div>
             <TextArea onChange={(event) => {
-                setDescription(event.target.value);
-              }} value={description} title="Description"/>
+              setDescription(event.target.value);
+            }} value={description} title="Description" />
           </div>
         </div>
 
@@ -176,6 +187,7 @@ function AddNewSpecies() {
           <ButtonPrimary onClick={async () => { await submitNewMushroom() }} wide={true} text="Add Mushroom" />
         </div>
       </div>
+      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
     </div>
   );
 }
