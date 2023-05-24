@@ -52,9 +52,9 @@ function Navbar() {
         </p>
         <p className="navItemsText  poppins" onClick={() => goTo("/guide")}>
           Guide
-        </p>{" "}
-        <p className="navItemsText poppins" onClick={() => goTo("/recipes")}>
-          Recipes
+        </p>
+        <p className="navItemsText poppins" onClick={() => goTo("/history/1")}>
+          History
         </p>
         <div className="poppins column jc-space-around align-items-center login">
           <p className="poppins navItemsText">

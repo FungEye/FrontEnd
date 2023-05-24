@@ -11,13 +11,14 @@ function Dashboard({ isNew }) {
   const [measurement, setMeasurement] = useState(null);
   const [time, setTime] = useState(null);
   const [date, setDate] = useState(null);
-  // const [status, setStatus] = useState("Good");
   const [status] = useState("Good");
-  const [shroomname] = useState("Oyster");
-  // const [shroomname, setShroomName] = useState("Oyster");
+  const [mushroomName, setMushroomName] = useState("?");
   const [error, setError] = useState("");
   const [developmentStage, setDevelopmentStage] = useState("...")
   const authHeader = useAuthHeader();
+
+  const [yieldWeight, setYieldWeight] = useState("");
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
     const fetchData = () => {
@@ -44,6 +45,7 @@ function Dashboard({ isNew }) {
           setDevelopmentStage(devStageCap)
           setTime(getTimeString(m.id.dateTime));
           setDate(getDateString(m.id.dateTime));
+          // setMushroomName(m.)
         })
         .catch((err) => setError("Failed to fetch data."));
     };
@@ -55,7 +57,7 @@ function Dashboard({ isNew }) {
   return (
     <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
       <div className="dashboard column align-items-center">
-        <div className="mushroom-title text-dark ultra">{shroomname}</div>
+        <div className="mushroom-title text-dark ultra">{mushroomName}</div>
         <div className="box text-dark w-100">Box #{boxId}</div>
         <div className="date text-dark">
           <b>{date}</b>
