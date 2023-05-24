@@ -30,7 +30,7 @@ function Welcome() {
             autoStart: true,
             loop: true,
             delay: 100,
-            strings: [`Welcome to FungEye${username ? ` ${username}!` : "!"}`],
+            strings: [`Welcome to FungEye${username ? `, ${username}!` : "!"}`],
           }}
         />
       </h1>
