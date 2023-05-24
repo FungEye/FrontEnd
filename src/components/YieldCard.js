@@ -3,18 +3,40 @@ import "./css/General.css";
 import ButtonPrimary from "./ButtonPrimary";
 import shroomPic from "../img/oyster.png";
 import {getDateString} from "../util/DateTimeFormatter";
+import { useNavigate } from "react-router-dom";
 
 function YieldCard(props) {
   let myYield = props.myYield;
+  let growId = props.id;
   let mushroomName = myYield.MushroomName;
   let comment = myYield.comment;
   let harvestDate = getDateString(myYield.harvestDate);
   let weight = myYield.weight;
 
+  const navigate = useNavigate();
+
+  function goToHistory() {
+    navigate(`/history/${growId}`);
+  }
 
   return (
-    <div className="yield-card rounded-20 mt-15 ">
-      <div className="yield-card-flex">
+    <div className="yield-card bg-light border-dark rounded-20 mt-15 row">
+      <div className="icon-and-history column">
+        <img className="img-100px" src="https://cdn-icons-png.flaticon.com/512/3656/3656824.png"/>
+        <div onClick={() => {goToHistory()}} className="yields-history-link">history 
+        </div>
+      </div>
+      <div className="column">
+        <div className="yield-mushroom-name ultra">{"mushroomName"}</div>
+        <div className="yield-harvest-date"><b>Harvested on {harvestDate}</b></div>
+        <div className="yield-comment">{comment}</div>
+      </div>
+      <div className="column">
+        <div className="yield-grams-value">{weight}</div>
+        <div className="yield-grams-label">grams</div>
+        <div className="yield-recipes-link">recipes</div>
+      </div>
+      {/* <div className="yield-card-flex">
         <div className="yield-card-1st-column">
           <img className="img-100px" src={shroomPic} alt="shroom"></img>
           <ButtonPrimary text="history"></ButtonPrimary>
@@ -34,7 +56,7 @@ function YieldCard(props) {
           <p className="text-dark">Harvest Date: {harvestDate}</p>
           <ButtonPrimary text="recipes" />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
