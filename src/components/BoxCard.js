@@ -6,7 +6,7 @@ import ButtonPrimary from "./ButtonPrimary";
 function BoxCard({ box, onSelect }) {
   //const navigate = useNavigate();
   const handleSelectClick = () => {
-    onSelect(box.boxNumber);
+    onSelect(box.id);
   };
 
   return (

@@ -30,7 +30,7 @@ const ChooseBoxModal = (props) => {
         if (response.ok) return response.json();
       })
       .then((m) => {
-        console.log(m.id);
+        props.onSelect(m.id);
       })
       .catch((err) => console.log(err.message));
   }
