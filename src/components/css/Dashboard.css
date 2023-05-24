@@ -89,14 +89,7 @@
 .status-row {
     gap: 20px;
 }
-
-.dashboard-register-yields {
-    gap: 20px;
-}
-
-.register-yields-text {
-    font-size: 24px;
-}
+=========
 .toggle {
     width: 70%;
     max-height: 60px

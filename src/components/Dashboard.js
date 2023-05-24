@@ -1,6 +1,7 @@
 import "./css/Dashboard.css";
 import { useState, useEffect } from "react";
 import { useAuthHeader } from "react-auth-kit";
+import ButtonPrimary from "./ButtonPrimary";
 import OneCondition from "./OneCondition";
 import Status from "./Status";
 import { getTimeString, getDateString } from "../util/DateTimeFormatter";
@@ -157,6 +158,8 @@ function Dashboard({ isNew }) {
                 <Status status={status} />
               </div>
             </div>
+
+
             <div className="toggle text-dark p-10">
               <ButtonPrimary text="Light" onClick={toggle} />
               <p className="poppins text-dark">{toggleMessage}</p>
