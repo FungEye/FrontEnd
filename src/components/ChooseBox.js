@@ -20,8 +20,6 @@ function ChooseBox() {
   let currentDate = new Date();
   let currentMonth = currentDate.getMonth() + 1;
   let username = auth().name;
-  const [selectedBoxId, setSelectedBoxId] = useState(null);
-  //const lastBoxNumber = boxList.findLast((box) => box).boxNumber;
 
   //getting the empty boxes of a user
   useEffect(() => {
@@ -42,19 +40,14 @@ function ChooseBox() {
   }, [username]);
 
   const handleBoxSelect = (boxId) => {
-    setSelectedBoxId(boxId);
-    createGrow();
+    createGrow(boxId);
   };
-
+  //Creating box cards with empty boxes
   const boxCards = boxData.map((item) => (
     <BoxCard key={item.id} box={item} onSelect={handleBoxSelect} />
   ));
 
-  function handleClick(event) {
-    navigate("/mushrooms");
-  }
-
-  function createGrow() {
+  function createGrow(boxId) {
     setErrorMessage("");
     fetch("https://fungeye-383609.ey.r.appspot.com/grow", {
       method: "POST",
@@ -64,13 +57,13 @@ function ChooseBox() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        boxId: selectedBoxId,
-        mushroomId: mushroomId,
+        boxId: parseInt(boxId),
+        mushroomId: parseInt(mushroomId),
         username: username,
         date: {
-          year: currentDate.getFullYear(),
-          month: currentMonth,
-          day: currentDate.getDate(),
+          year: parseInt(currentDate.getFullYear()),
+          month: parseInt(currentMonth),
+          day: parseInt(currentDate.getDate()),
         },
         developStage: "spawn run",
       }),
@@ -80,39 +73,14 @@ function ChooseBox() {
         if (response.ok) return response.json();
       })
       .then((m) => {
-        console.log(m.id);
-        navigate(`dashboard/${m.boxId}/new`);
+        console.log(m.boxId);
+        navigate(`/dashboard/${m.boxId}/new`);
       })
       .catch((err) => setErrorMessage(err.message));
   }
 
-  function createGrowTEST() {
-    fetch(`https://fungeye-383609.ey.r.appspot.com/grow`, {
-      method: "POST",
-      headers: {
-        Authorization: authHeader(),
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        boxId: 38,
-        mushroomId: 1,
-        username: "Kamil",
-        date: {
-          year: currentDate.getFullYear(),
-          month: currentMonth,
-          day: currentDate.getDate(),
-        },
-        developStage: "spawn run",
-      }),
-    })
-      .then((response) => {
-        console.log(response);
-        if (response.ok) return response.json();
-      })
-      .then((m) => {
-        console.log(m.id);
-      })
-      .catch((err) => console.log(err.message));
+  function handleClick(event) {
+    navigate("/mushrooms");
   }
 
   function scrollLeft() {
@@ -144,23 +112,26 @@ function ChooseBox() {
         {"<"}
         Back
       </p>
-      <button onClick={() => createGrowTEST()}>
-        TRY THE {"CREATEGROWTEST()"} FUNCTION
-      </button>
       <div className="cont-box column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
         <h1 className="poppins text-dark align-items-left">Box Selection</h1>
         <h3 className="varela text-dark align-items-left">Vacant boxes:</h3>
-        <div className="box-cards-container ">
-          <div className="scroll-arrow left-arrow" onClick={scrollLeft}>
-            &lt;
+        {boxCards.length !== 0 ? (
+          <div className="box-cards-container ">
+            <div className="scroll-arrow left-arrow" onClick={scrollLeft}>
+              &lt;
+            </div>
+            <div className="box-cards" ref={containerRef}>
+              {boxCards}
+            </div>
+            <div className="scroll-arrow right-arrow" onClick={scrollRight}>
+              &gt;
+            </div>
           </div>
-          <div className="box-cards" ref={containerRef}>
-            {boxCards}
-          </div>
-          <div className="scroll-arrow right-arrow" onClick={scrollRight}>
-            &gt;
-          </div>
-        </div>
+        ) : errorMessage === "" ? (
+          <p>Loading...</p>
+        ) : (
+          <p>An error occurred, read the message below.</p>
+        )}
         <div className="box-creation">
           <h1 className="poppins text-dark ">Set up a new box:</h1>
           <br></br>
@@ -171,6 +142,7 @@ function ChooseBox() {
             title="Boxes"
             onClose={() => setShow(false)}
             show={show}
+            onSelect={handleBoxSelect}
             err={errorMessage}
           />
         </div>
