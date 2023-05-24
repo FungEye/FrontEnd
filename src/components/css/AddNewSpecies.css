@@ -6,17 +6,20 @@
     height: 100%;
     margin: 0 auto;
     margin-top: 50px;
-    width: 700px;
+    width: 800px;
     padding: 10px 10px 20px 10px;
     box-sizing: border-box;
-
 }
 
-.ans-button{
+.ans-button {
     margin-top: 15px;
     width: 120px;
     height: 55px;
 
+}
+
+.ans-inputs-row {
+    gap: 50px;
 }
 
 .ans-info {
@@ -31,7 +34,8 @@
 .phases {
     margin-bottom: 30px;
 }
-.origin-row{
+
+.origin-row {
     align-items: center;
 }
 
@@ -40,4 +44,8 @@
     background-color: #fff6e6;
     padding: 2px 10px 2px 10px;
     border: none;
+}
+
+.errorMessage-newSpecies {
+    max-height: 50px
 }

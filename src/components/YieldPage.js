@@ -1,36 +1,65 @@
 import "./css/General.css";
 import "./css/YieldPage.css";
 import YieldCard from "./YieldCard";
-import AutocompleteInput from "./AutocompleteInput";
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
+import { useAuthHeader, useAuthUser } from "react-auth-kit";
+import ErrorModal from "./ErrorModal";
 function YieldPage(props) {
+
+  const [yieldList, setYieldList] = useState([]);
+  const authHeader = useAuthHeader();
+  const auth = useAuthUser();
+  const username = auth().name;
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
   // let yieldsList = props.yieldsList;
   const getYields = useCallback(() => {
-    fetch(`https://fungeye-383609.ey.r.appspot.com/harvest/1`)
+    fetch(`https://fungeye-383609.ey.r.appspot.com/harvest/${username}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: authHeader(),
+        },
+      }
+    )
       .then((res) => {
-        console.log(res);
         if (res.ok) return res.json();
       })
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+      .then((data) => {
+        setYieldList(data);
+      })
+      .catch((err) => {
+        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setShowErrorModal(true);
+      });
+    // eslint-disable-next-line
   }, []);
+
 
   useEffect(() => {
     getYields();
   }, [getYields]);
+
+
+  let yieldCardList;
+
+  if (yieldList) {
+    yieldCardList = yieldList.map(x => (<YieldCard key={x.id} myYield={x} />))
+  }
+
   return (
-    <div>
-      <div className="yields-title-container">
-        <h1 className="text-light ultra">Y I E L D S</h1>
-        <h4 className="text-light ">A history of your harvests.</h4>
+    <div className="yield-page bg-light rounded-20 text-dark poppins column align-items-center">
+      <div className="yield-page-title ultra">
+        Yields
       </div>
-      <div className="filter-cont">
-        <AutocompleteInput></AutocompleteInput>
+      <div>
+        A history of your harvests.
       </div>
-      <div className="yield-cont">
-        <YieldCard></YieldCard>
-        <YieldCard></YieldCard>
+      <div className="yield-cards w-100 column align-items-center">
+        {yieldCardList}
       </div>
+      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
     </div>
   );
 }

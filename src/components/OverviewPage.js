@@ -5,6 +5,11 @@ import useScript from "../hooks/useScript";
 import OverviewBox from "./OverviewBox";
 import ButtonPrimary from "./ButtonPrimary";
 import { Link } from "react-router-dom";
+import { useAuthUser, useAuthHeader } from "react-auth-kit";
+import { useEffect, useState, useCallback } from "react";
+import { setErrMsg } from "../util/ErrorMessages";
+import ErrorModal from "./ErrorModal";
+
 function OverviewPage(props) {
   useScript(`
       var coll = document.getElementsByClassName("collapse-container");
@@ -26,43 +31,76 @@ function OverviewPage(props) {
 
 }`);
 
-  let grow1 = {
-    status: "Good",
-    mushroom: {
-      shroomname: "Oyster",
-      imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
-    },
-    lastMeasured: {
-      day: 11,
-      month: 5,
-      year: 2023,
-      hour: 9,
-      minute: 30,
-    },
-  };
-  let grow2 = {
-    status: "Alarming",
-    mushroom: {
-      shroomname: "Shiitake",
-      imgurl: "https://cdn-icons-png.flaticon.com/512/2069/2069395.png",
-    },
-    lastMeasured: {
-      day: 11,
-      month: 5,
-      year: 2023,
-      hour: 11,
-      minute: 29,
-    },
-  };
+  const auth = useAuthUser();
+  const authHeader = useAuthHeader();
+  const username = auth().name;
+  const [grows, setGrows] = useState(null);
+  const [boxes, setBoxes] = useState(null);
 
-  let box1 = {
-    id: 1,
-    shroomgrowing: "Portobello",
-  };
 
-  let box2 = {
-    id: 2,
-  };
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
+  const getLatestMeasurements = useCallback(() => {
+    fetch(
+      `https://fungeye-383609.ey.r.appspot.com/${username}/measurements/latest`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: authHeader(),
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) return response.json();
+        else {
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
+      })
+      .then((m) => {
+        if (m === []) {
+          setGrows({ noGrows: true })
+        }
+        else {
+          setGrows(m);
+        }
+      })
+      .catch((err) => {
+        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setShowErrorModal(true);
+      });
+    // eslint-disable-next-line
+  }, [username]);
+
+  const getBoxes = useCallback(() => {
+    fetch(
+      `https://fungeye-383609.ey.r.appspot.com/${username}/boxes`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: authHeader(),
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) return response.json();
+      })
+      .then((m) => {
+        setBoxes(m);
+      })
+      .catch((err) => {
+        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setShowErrorModal(true);
+      });
+    // eslint-disable-next-line
+  }, [username]);
+
+
+  useEffect(() => {
+    getLatestMeasurements();
+    getBoxes();
+  }, [getLatestMeasurements, getBoxes]);
 
   //TODO add functionality for setting up a box when Robert has fixed his modal
   // const setUpBox = () => {};
@@ -73,48 +111,63 @@ function OverviewPage(props) {
     navigate("/mushrooms");
   };
 
-  //TODO replace with actual grows that are fetched!
-  let grows;
-  if (props.emptyGrows) {
-    grows = [];
-  } else {
-    grows = [grow1, grow2];
-  }
   let growList;
 
-  if (grows.length > 0) {
-    growList = grows.map((x) => <OPActiveGrow grow={x} />);
-  } else {
+  if (!grows) {
     growList = (
-      <div className="column align-items-center gap-10">
-        <div className="op-info-value"> You have no Active Grows yet!</div>
-        <ButtonPrimary text="Start Grow" onClick={() => goToMushrooms()} />
+      <div className="op-grow-loading">
+        Loading...
       </div>
-    );
+    )
   }
 
-  //TODO replace with actual boxes!
-  let boxes;
-  if (props.emptyBoxes) {
-    boxes = [];
-  } else {
-    boxes = [box1, box2];
+  else {
+    document.getElementById("active-grows").click();
+    document.getElementById("active-grows").click();
+    if (grows.noGrows) {
+      growList = (
+        <div className="column align-items-center gap-10">
+          <div className="op-info-value"> You have no Active Grows yet!</div>
+          <ButtonPrimary text="Start Grow" onClick={() => goToMushrooms()} />
+        </div>
+      )
+    }
+
+    else {
+      document.getElementById("active-grows").click();
+      document.getElementById("active-grows").click();
+      growList = grows.map((x) => <OPActiveGrow grow={x} />);
+    }
   }
+
   let boxList;
 
-  if (boxes.length > 0) {
-    boxList = boxes.map((x) => (
-      <OverviewBox boxId={x.id} shroomgrowing={x.shroomgrowing} />
-    ));
-  } else {
+  if (!boxes) {
     boxList = (
-      <div className="column align-items-center gap-10">
-        <div className="op-info-value"> You have no Boxes yet!</div>
-        <ButtonPrimary text="Set Up Box" />
+      <div className="op-grow-loading">
+        Loading...
       </div>
-    );
+    )
   }
 
+  else {
+    if (boxes.noBoxes) {
+      boxList = (
+        <div className="column align-items-center gap-10">
+          <div className="op-info-value"> You have no Boxes yet!</div>
+          <ButtonPrimary text="Set Up Box" />
+        </div>
+      );
+    }
+
+    else {
+      document.getElementById("your-boxes").click();
+      document.getElementById("your-boxes").click();
+      boxList = boxes.map((x) => (
+        <OverviewBox box={x} />
+      ));
+    }
+  }
   let collapsibleWidth = 450;
 
   return (
@@ -154,6 +207,7 @@ function OverviewPage(props) {
           </div>
         }
       />
+      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
     </div>
   );
 }

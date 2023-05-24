@@ -8,6 +8,8 @@ import CarouselGraph from "./HistoryChartsCarousel";
 import CarouselTable from "./HistoryTableCarousel";
 import { useAuthHeader } from "react-auth-kit";
 import { useParams } from "react-router-dom";
+import { setErrMsg } from "../../util/ErrorMessages";
+import ErrorModal from "../ErrorModal";
 
 export default function History() {
   const [isGraph, setIsGraph] = useState(true);
@@ -16,6 +18,8 @@ export default function History() {
   const { boxId } = useParams();
   const [graphData, setGraphData] = useState([]);
   const [tableData, setTableData] = useState([]);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchGraphData = () => {
@@ -31,14 +35,19 @@ export default function History() {
       )
         .then((response) => {
           if (response.ok) return response.json();
-          else if (response.status === 401)
-            setError("You have to login first.");
+          else {
+            setErrMsg(setErrorMessage, response.status);
+            setShowErrorModal(true);
+          }
         })
         .then((m) => {
-  
+
           setGraphData(m);
         })
-        .catch((err) => setError("Failed to fetch data."));
+        .catch((err) => {
+          setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+          setShowErrorModal(true);
+        });
     };
 
     const fetchTableData = () => {
@@ -54,13 +63,18 @@ export default function History() {
       )
         .then((response) => {
           if (response.ok) return response.json();
-          else if (response.status === 401)
-            setError("You have to login first.");
+          else {
+            setErrMsg(setErrorMessage, response.status);
+            setShowErrorModal(true);
+          }
         })
         .then((m) => {
           setTableData(m);
         })
-        .catch((err) => setError("Failed to fetch data."));
+        .catch((err) => {
+          setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+          setShowErrorModal(true);
+        });
     };
 
     fetchGraphData();
@@ -110,6 +124,7 @@ export default function History() {
         </div>
         <p>{error}</p>
       </div>
+      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
     </div>
   );
 }

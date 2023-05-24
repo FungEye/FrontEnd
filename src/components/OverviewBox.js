@@ -5,9 +5,9 @@ import "./css/General.css";
 import { useNavigate } from "react-router-dom";
 
 function OverviewBox(props) {
-  let boxId = props.boxId;
-  let shroomgrowing = props.shroomgrowing;
-
+  let box = props.box;
+  let boxId = box.id;
+  let simpleGrowDto = box.simpleGrowDtos;
   let description;
   let buttonAndTrash;
 
@@ -21,18 +21,8 @@ function OverviewBox(props) {
     navigate("/dashboard");
   }
 
-  if (shroomgrowing) {
-    description = (
-      <div className="row op-info-row text-dark">
-        <div className="op-info-value">Growing</div>
-        <div className="op-info" onClick={() => goToDashboard()}>
-          {shroomgrowing}
-        </div>
-      </div>
-    );
-  } else {
+  if (simpleGrowDto.length === 0) {
     description = <div className="op-info-value">Vacant</div>;
-
     buttonAndTrash = (
       <div className="align-items-center op-box-btn-and-icon">
         <ButtonPrimary text="Start Grow" onClick={goToMushrooms} />
@@ -42,6 +32,16 @@ function OverviewBox(props) {
           alt={"Trash"}
           src={trashIcon}
         ></img>
+      </div>
+    );
+  } else {
+    let mushroomName = simpleGrowDto[0].mushroomName;
+    description = (
+      <div className="row op-info-row text-dark">
+        <div className="op-info-value">Growing</div>
+        <div className="op-info" onClick={() => goToDashboard()}>
+          {mushroomName}
+        </div>
       </div>
     );
   }

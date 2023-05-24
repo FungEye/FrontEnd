@@ -2,22 +2,89 @@ import { useNavigate } from "react-router-dom";
 import Status from "./Status";
 import "./css/OverviewPage.css";
 import "./css/General.css";
+import { useState, useCallback } from "react";
 import { getFullDateTimeString } from "../util/DateTimeFormatter";
+import { useAuthHeader } from "react-auth-kit";
+import { useEffect } from "react";
+import { setErrMsg } from "../util/ErrorMessages";
+import ErrorModal from "./ErrorModal";
 
 function OPActiveGrow(props) {
   let grow = props.grow;
-  let mushroom = grow.mushroom;
-  let shroomname = mushroom.shroomname;
-  let imgurl = mushroom.imgurl;
-  let status = grow.status;
-  let lastMeasured = grow.lastMeasured;
-  // import that function that gets the string from a date object or whatever
+  //TODO add the function to compare the measurements with the desired conditions
+  let status = "Alarming";
+  let lastMeasured = grow.id.dateTime;
   let lastMeasuredString = getFullDateTimeString(lastMeasured);
+  let boxId = grow.id.boxId;
+    const [box, setBox] = useState(null);
+  const [mushroom, setMushroom] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const navigate = useNavigate();
+  const authHeader = useAuthHeader();
+
+  const getBox = useCallback(() => {
+    fetch(
+      `https://fungeye-383609.ey.r.appspot.com/box${boxId}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: authHeader(),
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) return response.json();
+        else {
+          console.log("caught in 1");
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
+      })
+      .then((m) => {
+        setBox(m);
+        const mushroomId = m.grows[0].mushroomId;
+        console.log("mushroom id" + mushroomId);
+        return fetch(`https://fungeye-383609.ey.r.appspot.com/mushroom/${mushroomId}`
+          ,
+          {
+            method: "GET",
+            headers: {
+              Authorization: authHeader(),
+            },
+          });
+      })
+      .then((response) => {
+        if (response.ok) return response.json();
+        else {
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
+      })
+      .then((m) => {
+        console.log("MUSHROOM")
+        console.log(m)
+        setMushroom(m);
+      })
+      .catch((err) => {
+        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setShowErrorModal(true);
+      });
+    // eslint-disable-next-line
+  }, []);
+
+
+  useEffect(() => {
+    getBox();
+  }, [getBox]);
+
 
   function goToDashboard() {
-    navigate("/dashboard");
+    if (mushroom) {
+      console.log(box);
+      navigate(`/dashboard/${box.id}`);
+    }
   }
 
   // TODO change the onClick from going to the general dashboard to
@@ -30,18 +97,27 @@ function OPActiveGrow(props) {
       onClick={() => goToDashboard()}
       className="op-grow row bg-light align-items-center rounded-20 very-slightly-faded border-dark varela pointer"
     >
-      <img className="op-icon" alt={"Mushroom"} src={imgurl}></img>
-      <div className="column w-100 align-items-start">
-        <div className="op-shroom-name ultra text-dark">{shroomname}</div>
-        <div className="row op-info-row text-dark align-items-center">
-          <div className="op-info">Status: </div>
-          <Status status={status} mini={true} />
+      {!mushroom ? (
+        <div className="column op-grow-loading">
+          Grow is here. Loading info...
         </div>
-        <div className="row op-info-row text-dark">
-          <div className="op-info">Last Measured:</div>
-          <div className="op-info-value">{lastMeasuredString}</div>
+      ) :
+        <div className="op-info-row row align-items-center jc-center">
+          <img className="op-icon" alt={"Mushroom"} src={mushroom.imageUrl}></img>
+          <div className="column w-100 align-items-start">
+            <div className="op-shroom-name ultra text-dark">{mushroom.name}</div>
+            <div className="row op-info-row text-dark align-items-center">
+              <div className="op-info">Status: </div>
+              <Status status={status} mini={true} />
+            </div>
+            <div className="row op-info-row text-dark">
+              <div className="op-info">Last Measured:</div>
+              <div className="op-info-value">{lastMeasuredString}</div>
+            </div>
+          </div>
         </div>
-      </div>
+      }
+      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
     </div>
   );
 }
