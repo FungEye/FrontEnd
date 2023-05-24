@@ -19,7 +19,7 @@ function Dashboard({ isNew }) {
   // const [shroomname, setShroomName] = useState("Oyster");
   const [error, setError] = useState("");
   const authHeader = useAuthHeader();
-
+  
   useEffect(() => {
     const fetchData = () => {
       setError("");
@@ -60,7 +60,18 @@ function Dashboard({ isNew }) {
     if (!isNew) fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  async function togglelight(sendDownlinkMessage) {
+    let url = `http://fungeye-383609.ey.r.appspot.com/${boxId}/light`;
+    await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: authHeader(),
+      },
+      body: JSON.stringify(sendDownlinkMessage),
+    });
+  }
   return (
     <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
       <div className="dashboard column align-items-center">
@@ -99,7 +110,7 @@ function Dashboard({ isNew }) {
             </div>
             <Status status={status} />
             <div className="togglelight">
-            <ButtonPrimary onClick={async () => {  }} wide={true} text="Toggle Light" />
+            <ButtonPrimary onClick={() => this.sendDownlinkMessage()} wide={true} text="Toggle Light" />
             </div>
             <div className="measurements jc-center flex-wrap">
               <OneCondition
