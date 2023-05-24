@@ -2,6 +2,8 @@ import { useEffect, useState, useCallback } from "react";
 import MushroomCard from "./MushroomCard";
 import MushroomDetailsModal from "./MushroomDetailsModal";
 import "./css/MushroomCardPage.css";
+import ErrorModal from "./ErrorModal";
+import { setErrMsg } from "../util/ErrorMessages";
 
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
 
@@ -11,6 +13,11 @@ function MushroomCardPage() {
   const [mushroomOnModal, setMushroomOnModal] = useState(null);
   const authHeader = useAuthHeader();
   const authUser = useAuthUser();
+
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
   const getData = useCallback(() => {
     fetch(
       `https://fungeye-383609.ey.r.appspot.com/mushrooms/custom/${
@@ -25,6 +32,10 @@ function MushroomCardPage() {
     )
       .then((response) => {
         if (response.ok) return response.json();
+        else {
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
       })
       .then((m) => {
         let mushroomsWithNoDuplicates = [];
