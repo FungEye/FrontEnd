@@ -14,7 +14,7 @@ function YieldCard(props) {
   let weight = myYield.weight;
 
   //TODO add this when backend has fixed it or do the workaround of getting all the mushrooms
-  let imgUrl;
+  let imgUrl = myYield.imageUrl;
 
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ function YieldCard(props) {
       <div className="icon-and-history column yield-col">
         <img
           className="op-icon"
-          src="https://demuths.co.uk/img/u/images/_256x256_crop_center-center_70_none/CA7F8E74-AAC1-4989-B402-DD4D84A1FA07.jpeg"
+          src={imgUrl}
         />
         <div
           onClick={() => {
