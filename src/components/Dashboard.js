@@ -16,7 +16,7 @@ function Dashboard({ isNew }) {
   const [shroomname] = useState("Oyster");
   // const [shroomname, setShroomName] = useState("Oyster");
   const [error, setError] = useState("");
-  const [developmentStage, setDevelopmentStage] = useState("")
+  const [developmentStage, setDevelopmentStage] = useState("...")
   const authHeader = useAuthHeader();
 
   useEffect(() => {
