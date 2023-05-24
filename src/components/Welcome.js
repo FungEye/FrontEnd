@@ -6,17 +6,20 @@ import { useAuthUser, useIsAuthenticated } from "react-auth-kit";
 
 function Welcome() {
   const navigate = useNavigate();
-  const isAuthenticated = useIsAuthenticated(); // Note the parentheses to invoke the function
+  const isAuthenticated = useIsAuthenticated();
   const auth = useAuthUser();
   let username = null;
 
   if (isAuthenticated()) {
-    // Invoke the function to get the boolean value
     username = auth().name;
   }
 
   function handleClick(event) {
-    navigate("/dashboard");
+    if (isAuthenticated()) {
+      navigate("/overview");
+    } else {
+      navigate("/login");
+    }
   }
 
   return (
@@ -33,7 +36,7 @@ function Welcome() {
       </h1>
       <h3 className="motto">Empowering you to grow mushrooms like a pro.</h3>
       <button className="button-54" onClick={handleClick}>
-        See my boxes!
+        {isAuthenticated() ? "See my overview!" : "Log in/Register"}
       </button>
     </div>
   );
