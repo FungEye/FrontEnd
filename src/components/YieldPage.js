@@ -28,13 +28,14 @@ function YieldPage(props) {
         console.log(yieldList);
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line
   }, []);
 
-  
+
   useEffect(() => {
     getYields();
   }, [getYields]);
-  
+
 
   let yieldCardList;
 
@@ -47,7 +48,7 @@ function YieldPage(props) {
       <div className="yields-title-container">
         <h1 className="text-light ultra">Y I E L D S</h1>
         <h4 className="text-light ">A history of your harvests.</h4>
-        <button onClick={() => {getYields()}}>get Yields</button>
+        <button onClick={() => { getYields() }}>get Yields</button>
       </div>
       <div className="yield-cont">
         {yieldCardList}
