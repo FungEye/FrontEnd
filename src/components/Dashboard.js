@@ -16,6 +16,7 @@ function Dashboard({ isNew }) {
   const [measurement, setMeasurement] = useState(null);
   const [time, setTime] = useState(null);
   const [date, setDate] = useState(null);
+  const [toggleMessage, setToggleMessage] = useState("");
   const [status] = useState("Good");
   const [mushroomName] = useState("?");
   const [error, setError] = useState("");
@@ -104,7 +105,27 @@ function Dashboard({ isNew }) {
       "comment": comment,
     }
     submit(yieldObject);
+  }
 
+  function toggle() {
+    setError("");
+    fetch(`https://fungeye-383609.ey.r.appspot.com/${boxId}/light`, {
+      method: "POST",
+      headers: {
+        Authorization: authHeader(),
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        if (response.ok)
+          setToggleMessage("Light in your box has been toggled.");
+        else if (response.status === 401) setError("You have to login first.");
+      })
+      .catch((err) => setError("Failed to fetch data."));
+
+    setTimeout(() => {
+      setToggleMessage("");
+    }, 5000);
   }
 
   return (
@@ -142,9 +163,11 @@ function Dashboard({ isNew }) {
                 </div>
                 <Status status={status} />
               </div>
-
             </div>
-
+            <div className="toggle text-dark p-10">
+              <ButtonPrimary text="Light" onClick={toggle} />
+              <p className="poppins text-dark">{toggleMessage}</p>
+            </div>
 
             <div className="measurements jc-center flex-wrap">
               <OneCondition
@@ -190,4 +213,5 @@ function Dashboard({ isNew }) {
     </div>
   );
 }
+
 export default Dashboard;
