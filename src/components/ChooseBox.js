@@ -26,20 +26,29 @@ function ChooseBox(props) {
 
   //getting the empty boxes of a user
   useEffect(() => {
-    fetch(`https://fungeye-383609.ey.r.appspot.com/${username}/boxes/empty`)
+    fetch(`https://fungeye-383609.ey.r.appspot.com/${username}/boxes/empty`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: authHeader(),
+        },
+      })
       .then((response) => response.json())
       .then((data) => {
-        console.log("DATA: " + data);
+        console.log(data);
         setBoxData(data);
       })
       .catch((error) => console.error(error));
   }, [username]);
+
+
   const handleBoxSelect = (boxId) => {
     setSelectedBoxId(boxId);
+    createGrow();
   };
 
-  const boxCards = boxList.map((item) => (
-    <BoxCard key={item.boxNumber} box={item} onSelect={handleBoxSelect} />
+  const boxCards = boxData.map((item) => (
+    <BoxCard key={item.id} box={item} onSelect={handleBoxSelect} />
   ));
 
   function handleClick(event) {
@@ -52,6 +61,7 @@ function ChooseBox(props) {
       headers: {
         Authorization: authHeader(),
         Accept: "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         boxId: selectedBoxId,
@@ -133,7 +143,7 @@ function ChooseBox(props) {
         {"<"}
         Back
       </p>
-      <button onClick={createGrowTEST()}>
+      <button onClick={() => createGrowTEST()}>
         TRY THE {"CREATEGROWTEST()"} FUNCTION
       </button>
       <div className="cont-box column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
