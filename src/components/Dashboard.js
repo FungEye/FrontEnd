@@ -16,13 +16,14 @@ function Dashboard({ isNew }) {
   const [shroomname] = useState("Oyster");
   // const [shroomname, setShroomName] = useState("Oyster");
   const [error, setError] = useState("");
+  const [developmentStage, setDevelopmentStage] = useState("")
   const authHeader = useAuthHeader();
 
   useEffect(() => {
     const fetchData = () => {
       setError("");
       fetch(
-        `https://fungeye-383609.ey.r.appspot.com/box${boxId}/measurements/latest`,
+        `https://fungeye-383609.ey.r.appspot.com/box${boxId}/measurements/latest?stage=true`,
         {
           method: "GET",
           headers: {
@@ -38,6 +39,9 @@ function Dashboard({ isNew }) {
         .then((m) => {
           console.log(m);
           setMeasurement(m);
+          let devStage = m.developmentStage;
+          let devStageCap = devStage.charAt(0).toUpperCase() + devStage.slice(1);
+          setDevelopmentStage(devStageCap)
           setTime(getTimeString(m.id.dateTime));
           setDate(getDateString(m.id.dateTime));
         })
@@ -57,34 +61,36 @@ function Dashboard({ isNew }) {
           <b>{date}</b>
         </div>
         <div className="text-dark row jc-space-evenly align-items-center w-100 ">
-          {!isNew ? (
-            <div className="column pt-15">
-              <ButtonSecondary text="<" />
-              <div className="small-time">11:11</div>
-            </div>
-          ) : null}
+
           <div className="big-time p-10">
             <b>
               {isNew
                 ? "No measurements yet, come back later"
                 : time == null
-                ? "Loading date..."
-                : time}
+                  ? "Loading date..."
+                  : time}
             </b>
           </div>
-          {!isNew ? (
-            <div className="column pt-15">
-              <ButtonSecondary text=">" />
-              <div className="small-time">11:33</div>
-            </div>
-          ) : null}
         </div>
         {!isNew ? (
           <>
-            <div className="status-text text-dark">
-              <b>Status:</b>
+            <div className="row status-row">
+            <div className="column">
+                <div className="status-text text-dark">
+                  <b>Growth Phase:</b>
+                  <Status status={developmentStage}/>
+                </div>
+              </div>
+              <div className="column">
+                <div className="status-text text-dark">
+                  <b>Status:</b>
+                </div>
+                <Status status={status} />
+              </div>
+              
             </div>
-            <Status status={status} />
+
+
             <div className="measurements jc-center flex-wrap">
               <OneCondition
                 title="Temperature"

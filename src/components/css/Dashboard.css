@@ -83,3 +83,7 @@ width: 60%;
     width: 270px;
     height: 160px;
 }
+
+.status-row {
+    gap: 20px;
+}
