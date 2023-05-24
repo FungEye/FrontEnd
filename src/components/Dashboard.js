@@ -5,6 +5,12 @@ import OneCondition from "./OneCondition";
 import Status from "./Status";
 import { getTimeString, getDateString } from "../util/DateTimeFormatter";
 import { useParams } from "react-router-dom";
+import Input from "./Input";
+import TextArea from "./TextArea";
+import ButtonPrimary from "./ButtonPrimary";
+import { getTodayDate } from "../util/DateTimeFormatter";
+
+
 function Dashboard({ isNew }) {
   const { boxId } = useParams();
   const [measurement, setMeasurement] = useState(null);
@@ -16,10 +22,10 @@ function Dashboard({ isNew }) {
   const [developmentStage, setDevelopmentStage] = useState("...")
   const authHeader = useAuthHeader();
 
-  /*
+
   const [yieldWeight, setYieldWeight] = useState("");
   const [comment, setComment] = useState("");
-  */
+
 
   useEffect(() => {
     const fetchData = () => {
@@ -39,7 +45,6 @@ function Dashboard({ isNew }) {
             setError("You have to login first.");
         })
         .then((m) => {
-          console.log(m);
           setMeasurement(m);
           let devStage = m.developmentStage;
           let devStageCap = devStage.charAt(0).toUpperCase() + devStage.slice(1);
@@ -55,74 +60,121 @@ function Dashboard({ isNew }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
-      <div className="dashboard column align-items-center">
-        <div className="mushroom-title text-dark ultra">{mushroomName}</div>
-        <div className="box text-dark w-100">Box #{boxId}</div>
-        <div className="date text-dark">
-          <b>{date}</b>
-        </div>
-        <div className="text-dark row jc-space-evenly align-items-center w-100 ">
+  async function submitYields() {
 
-          <div className="big-time p-10">
-            <b>
-              {isNew
-                ? "No measurements yet, come back later"
-                : time == null
-                  ? "Loading date..."
-                  : time}
-            </b>
-          </div>
-        </div>
-        {!isNew ? (
-          <>
-            <div className="row status-row">
-            <div className="column">
-                <div className="status-text text-dark">
-                  <b>Growth Phase:</b>
-                  <Status status={developmentStage}/>
-                </div>
-              </div>
-              <div className="column">
-                <div className="status-text text-dark">
-                  <b>Status:</b>
-                </div>
-                <Status status={status} />
-              </div>
-              
-            </div>
+    const today = getTodayDate();
+    const yieldObject = {
+      //TODO change growid to the one we are gonna get from backend
+      // instead of hardcoded.
+      "growId": 2,
+      "weight": {yieldWeight},
+      "harvestDate": {
+        "year": today.year,
+        "month": today.month,
+        "day": today.day
+      },
+      "comment": comment,
+    }
 
+    await fetch(
+      `https://fungeye-383609.ey.r.appspot.com/harvest`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: authHeader(),
+        },
+        body: JSON.stringify(yieldObject)
+      },
+    )
+      .catch(err => {
+        console.log(err);
+      });
 
-            <div className="measurements jc-center flex-wrap">
-              <OneCondition
-                title="Temperature"
-                measurement={
-                  measurement == null ? null : measurement.temperature
-                }
-                unit="ºC"
-              />
-              <OneCondition
-                title="Humidity"
-                measurement={measurement == null ? null : measurement.humidity}
-                unit="%"
-              />
-              <OneCondition
-                title="CO2"
-                measurement={measurement == null ? null : measurement.co2}
-                unit="ppm"
-              />
-              <OneCondition
-                title="Light"
-                measurement={measurement == null ? null : measurement.light}
-                unit="lux"
-              />
-            </div>
-          </>
-        ) : null}
+  }
+
+return (
+  <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
+    <div className="dashboard column align-items-center">
+      <div className="mushroom-title text-dark ultra">{mushroomName}</div>
+      <div className="box text-dark w-100">Box #{boxId}</div>
+      <div className="date text-dark">
+        <b>{date}</b>
       </div>
-      <p>{error}</p>
+      <div className="text-dark row jc-space-evenly align-items-center w-100 ">
+
+        <div className="big-time p-10">
+          <b>
+            {isNew
+              ? "No measurements yet, come back later"
+              : time == null
+                ? "Loading date..."
+                : time}
+          </b>
+        </div>
+      </div>
+      {!isNew ? (
+        <>
+          <div className="row status-row">
+            <div className="column">
+              <div className="status-text text-dark">
+                <b>Growth Phase:</b>
+                <Status status={developmentStage} />
+              </div>
+            </div>
+            <div className="column">
+              <div className="status-text text-dark">
+                <b>Status:</b>
+              </div>
+              <Status status={status} />
+            </div>
+
+          </div>
+
+
+          <div className="measurements jc-center flex-wrap">
+            <OneCondition
+              title="Temperature"
+              measurement={
+                measurement == null ? null : measurement.temperature
+              }
+              unit="ºC"
+            />
+            <OneCondition
+              title="Humidity"
+              measurement={measurement == null ? null : measurement.humidity}
+              unit="%"
+            />
+            <OneCondition
+              title="CO2"
+              measurement={measurement == null ? null : measurement.co2}
+              unit="ppm"
+            />
+            <OneCondition
+              title="Light"
+              measurement={measurement == null ? null : measurement.light}
+              unit="lux"
+            />
+          </div>
+        </>
+      ) : null}
     </div>
-  );
+    <div className="dashboard-register-yields align-items-center column">
+      <div className="text-dark register-yields-text varela">Register Yields?</div>
+      <Input title="Weight (grams)"
+        value={yieldWeight}
+        onChange={(event) => {
+          setYieldWeight(event.target.value);
+        }} />
+      <TextArea onChange={(event) => {
+        setComment(event.target.value);
+      }} value={comment}
+        title="Comment" />
+      <ButtonPrimary text="Submit" onClick={() => { submitYields() }} />
+    </div>
+    <p>{error}</p>
+  </div>
+);
 }
 export default Dashboard;
