@@ -9,15 +9,12 @@ import { useEffect } from "react";
 
 function OPActiveGrow(props) {
   let grow = props.grow;
-  console.log(props.grow);
   //TODO add the function to compare the measurements with the desired conditions
   let status = "Alarming";
   let lastMeasured = grow.id.dateTime;
   let lastMeasuredString = getFullDateTimeString(lastMeasured);
   let boxId = grow.id.boxId;
-  console.log(boxId);
-  console.log({ lastMeasuredString });
-  const [box, setBox] = useState(null);
+    const [box, setBox] = useState(null);
   const [mushroom, setMushroom] = useState(null);
 
   const navigate = useNavigate();

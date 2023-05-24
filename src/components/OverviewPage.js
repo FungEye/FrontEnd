@@ -54,7 +54,6 @@ function OverviewPage(props) {
         else {
           setGrows(m);
         }
-        console.log(m);
       })
       .catch((err) => console.log(err));
     // eslint-disable-next-line
@@ -75,7 +74,6 @@ function OverviewPage(props) {
       })
       .then((m) => {
         setBoxes(m);
-        console.log(m);
       })
       .catch((err) => console.log(err));
     // eslint-disable-next-line
