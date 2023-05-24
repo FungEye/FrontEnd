@@ -2,6 +2,7 @@ import "./css/Dashboard.css";
 import { useState, useEffect } from "react";
 import { useAuthHeader } from "react-auth-kit";
 import ButtonSecondary from "./ButtonSecondary";
+import ButtonPrimary from "./ButtonPrimary";
 import OneCondition from "./OneCondition";
 import Status from "./Status";
 import { getTimeString, getDateString } from "../util/DateTimeFormatter";
@@ -11,6 +12,7 @@ function Dashboard({ isNew }) {
   const [measurement, setMeasurement] = useState(null);
   const [time, setTime] = useState(null);
   const [date, setDate] = useState(null);
+  const [toggleMessage, setToggleMessage] = useState("");
   // const [status, setStatus] = useState("Good");
   const [status] = useState("Good");
   const [shroomname] = useState("Oyster");
@@ -47,6 +49,27 @@ function Dashboard({ isNew }) {
     if (!isNew) fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  function toggle() {
+    setError("");
+    fetch(`https://fungeye-383609.ey.r.appspot.com/${boxId}/light`, {
+      method: "POST",
+      headers: {
+        Authorization: authHeader(),
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        if (response.ok)
+          setToggleMessage("Light in your box has been toggled.");
+        else if (response.status === 401) setError("You have to login first.");
+      })
+      .catch((err) => setError("Failed to fetch data."));
+
+    setTimeout(() => {
+      setToggleMessage("");
+    }, 5000);
+  }
 
   return (
     <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
@@ -85,6 +108,11 @@ function Dashboard({ isNew }) {
               <b>Status:</b>
             </div>
             <Status status={status} />
+            <div className="toggle text-dark p-10">
+              <ButtonPrimary text="Light" onClick={toggle} />
+              <p className="poppins text-dark">{toggleMessage}</p>
+            </div>
+
             <div className="measurements jc-center flex-wrap">
               <OneCondition
                 title="Temperature"
