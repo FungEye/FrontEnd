@@ -17,7 +17,6 @@ function ChooseBox(props) {
   const [boxData, setBoxData] = useState([]);
   const auth = useAuthUser();
   const authHeader = useAuthHeader();
-  let boxList = boxData;
   let currentDate = new Date();
   let currentMonth = currentDate.getMonth() + 1;
   let username = auth().name;
@@ -26,21 +25,20 @@ function ChooseBox(props) {
 
   //getting the empty boxes of a user
   useEffect(() => {
-    fetch(`https://fungeye-383609.ey.r.appspot.com/${username}/boxes/empty`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: authHeader(),
-        },
-      })
+    fetch(`https://fungeye-383609.ey.r.appspot.com/${username}/boxes/empty`, {
+      method: "GET",
+      headers: {
+        Authorization: authHeader(),
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        data.sort((a, b) => a.id - b.id);
         setBoxData(data);
       })
       .catch((error) => console.error(error));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username]);
-
 
   const handleBoxSelect = (boxId) => {
     setSelectedBoxId(boxId);
@@ -66,7 +64,7 @@ function ChooseBox(props) {
       body: JSON.stringify({
         boxId: selectedBoxId,
         mushroomId: mushroomId,
-        username: auth().name,
+        username: username,
         date: {
           year: currentDate.getFullYear(),
           month: currentMonth,
@@ -81,6 +79,7 @@ function ChooseBox(props) {
       })
       .then((m) => {
         console.log(m.id);
+        navigate(`dashboard/${m.boxId}/new`);
       })
       .catch((err) => console.log(err.message));
   }
