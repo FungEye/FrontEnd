@@ -12,7 +12,10 @@ function BoxCard({ box, onSelect }) {
   return (
     <div className="box-card bg-light rounded-20 column jc-center slightly-faded">
       <div className="row jc-space-between w-100 mw-100 mc-top-row">
-        <div className="ultra text-dark align-self-center bc-box-name">
+        <div
+          className="ultra text-dark align-self-center bc-box-name"
+          data-test="box-label"
+        >
           BOX {box.id}
         </div>
         <img className="img-100px" src={boxPic} alt="box" />

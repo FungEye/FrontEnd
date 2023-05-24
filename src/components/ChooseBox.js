@@ -8,7 +8,7 @@ import CreateBoxModal from "./CreateBoxModal";
 import { useParams } from "react-router-dom";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
 
-function ChooseBox(props) {
+function ChooseBox() {
   const navigate = useNavigate();
   const { mushroomId } = useParams();
   const containerRef = useRef(null);
@@ -171,7 +171,6 @@ function ChooseBox(props) {
             title="Boxes"
             onClose={() => setShow(false)}
             show={show}
-            lastBoxNumber={props.lastBoxNumber}
             err={errorMessage}
           />
         </div>
