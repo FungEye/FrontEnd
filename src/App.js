@@ -31,9 +31,9 @@ function App() {
         />
 
         <Route path="/new" element={isAuthenticated() ? <AddNewSpecies /> : <Navigate to="/login" />} />
+        <Route
           path="/edit/:mushroomId"
-          element={<AddNewSpecies isEdit={true} />
-        {/* add to empty dashboard page an error modal saying "you have not specified a boxId for the dashboard." */}
+          element={<AddNewSpecies isEdit={true} />}/>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/:boxId" element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />} />
 
