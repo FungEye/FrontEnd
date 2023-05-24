@@ -43,7 +43,7 @@ function Navbar() {
         </p>
         <p
           className="navItemsText  poppins"
-          onClick={() => goTo("/addnewspecies")}
+          onClick={() => goTo("/newSpecies")}
         >
           New
         </p>
