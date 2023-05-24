@@ -8,7 +8,6 @@ import { getTimeString, getDateString } from "../util/DateTimeFormatter";
 import { useParams } from "react-router-dom";
 import Input from "./Input";
 import TextArea from "./TextArea";
-import ButtonPrimary from "./ButtonPrimary";
 import { getTodayDate } from "../util/DateTimeFormatter";
 
 function Dashboard({ isNew }) {
