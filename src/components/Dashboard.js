@@ -17,13 +17,16 @@ function Dashboard({ isNew }) {
   const [date, setDate] = useState(null);
   const [toggleMessage, setToggleMessage] = useState("");
   const [status] = useState("Good");
-  const [mushroomName] = useState("?");
+  const [mushroomName, setMushroomName] = useState("?");
   const [error, setError] = useState("");
   const [developmentStage, setDevelopmentStage] = useState("...");
   const authHeader = useAuthHeader();
 
   const [yieldWeight, setYieldWeight] = useState("");
   const [comment, setComment] = useState("");
+  const [yieldsMessage, setYieldsMessage] = useState("");
+
+  const [grow, setGrow] = useState(null);
 
   useEffect(() => {
     const fetchData = () => {
@@ -43,6 +46,7 @@ function Dashboard({ isNew }) {
             setError("You have to login first.");
         })
         .then((m) => {
+          console.log(m);
           setMeasurement(m);
           let devStage = m.developmentStage;
           let devStageCap =
@@ -50,7 +54,36 @@ function Dashboard({ isNew }) {
           setDevelopmentStage(devStageCap);
           setTime(getTimeString(m.id.dateTime));
           setDate(getDateString(m.id.dateTime));
-          // setMushroomName(m.)
+          const growId = m.growId;
+          return fetch(`https://fungeye-383609.ey.r.appspot.com/grow/${growId}`,
+            {
+              method: "GET",
+              headers: {
+                Authorization: authHeader(),
+              },
+            });
+
+        })
+        .then((response) => {
+          if (response.ok) return response.json();
+        })
+        .then((m) => {
+          setGrow(m);
+          const mushroomId = m.mushroomId;
+          return fetch(`https://fungeye-383609.ey.r.appspot.com/mushroom/${mushroomId}`
+            ,
+            {
+              method: "GET",
+              headers: {
+                Authorization: authHeader(),
+              },
+            });
+        })
+        .then((response) => {
+          if (response.ok) return response.json();
+        })
+        .then((m) => {
+          setMushroomName(m.name);
         })
         .catch((err) => setError("Failed to fetch data."));
     };
@@ -73,23 +106,24 @@ function Dashboard({ isNew }) {
     })
       .then((res) => {
         if (res.ok) {
+          setYieldWeight("");
+          setComment("");
+          setYieldsMessage("Seemed successful!")
           return res.json();
         }
         return res.text().then((text) => {
-          throw new Error(text);
+          setYieldsMessage("Error? :" + text);
         });
       })
       .catch((err) => {
-        console.log(err);
+        setYieldsMessage("Error? :" + err.message);
       });
   }
 
   async function submitYields() {
     const today = getTodayDate();
     const yieldObject = {
-      //TODO change growid to the one we are gonna get from backend
-      // instead of hardcoded.
-      growId: 2,
+      growId: grow.id,
       weight: yieldWeight,
       harvestDate: {
         year: today.year,
@@ -136,8 +170,8 @@ function Dashboard({ isNew }) {
               {isNew
                 ? "No measurements yet, come back later"
                 : time == null
-                ? "Loading date..."
-                : time}
+                  ? "Loading date..."
+                  : time}
             </b>
           </div>
         </div>
@@ -209,6 +243,9 @@ function Dashboard({ isNew }) {
           value={comment}
           title="Comment"
         />
+        <div className="">
+          {yieldsMessage}
+        </div>
         <ButtonPrimary text="Submit" onClick={() => submitYields()} />
       </div>
       <p>{error}</p>
