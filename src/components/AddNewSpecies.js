@@ -362,8 +362,8 @@ function AddNewSpecies({ isEdit }) {
                   text={"Archive mushroom"}
                 />
               ) : null}
-              <div className="text-dark">{message}</div>
             </div>
+            <div className="text-dark">{message}</div>
           </div>
         </>
       ) : (
