@@ -99,7 +99,7 @@ function AddNewSpecies({ isEdit }) {
             "https://fungeye-383609.ey.r.appspot.com/mushroom/custom/conditions";
           break;
       }
-      const response = await fetch(url, {
+      await fetch(url, {
         method: "POST",
         headers: {
           Accept: "application/json",
