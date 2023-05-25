@@ -7,7 +7,7 @@ import ButtonPrimary from "./ButtonPrimary";
 import { Link } from "react-router-dom";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
 import { useEffect, useState, useCallback } from "react";
-import { setErrMsg } from "../util/ErrorMessages";
+import { setErrMsg, errorMessages } from "../util/ErrorMessages";
 import ErrorModal from "./ErrorModal";
 
 function OverviewPage(props) {
@@ -67,7 +67,7 @@ function OverviewPage(props) {
         }
       })
       .catch((err) => {
-        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setErrorMessage(errorMessages.errBefore);
         setShowErrorModal(true);
       });
     // eslint-disable-next-line
@@ -84,13 +84,17 @@ function OverviewPage(props) {
       }
     )
       .then((response) => {
-        if (response.ok) return response.json();
+        if (response.ok) return response.json()
+        else {
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
       })
       .then((m) => {
         setBoxes(m);
       })
       .catch((err) => {
-        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setErrorMessage(errorMessages.errBefore);
         setShowErrorModal(true);
       });
     // eslint-disable-next-line
@@ -171,7 +175,7 @@ function OverviewPage(props) {
   let collapsibleWidth = 450;
 
   return (
-    <div className="op-container bg-light rounded-20 column align-items-center very-slightly-faded">
+    <div className="op-container maxw-95 bg-light rounded-20 column align-items-center very-slightly-faded">
       <div className="op-title ultra text-dark">Overview</div>
       <Collapsible
         id="active-grows"

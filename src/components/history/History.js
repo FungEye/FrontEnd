@@ -7,8 +7,8 @@ import { useState, useEffect } from "react";
 import CarouselGraph from "./HistoryChartsCarousel";
 import CarouselTable from "./HistoryTableCarousel";
 import { useAuthHeader } from "react-auth-kit";
-import { useParams } from "react-router-dom";
-import { setErrMsg } from "../../util/ErrorMessages";
+import { useNavigate, useParams } from "react-router-dom";
+import { setErrMsg, errorMessages } from "../../util/ErrorMessages";
 import ErrorModal from "../ErrorModal";
 
 export default function History() {
@@ -20,6 +20,8 @@ export default function History() {
   const [tableData, setTableData] = useState([]);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchGraphData = () => {
@@ -45,7 +47,7 @@ export default function History() {
           setGraphData(m);
         })
         .catch((err) => {
-          setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+          setErrorMessage(errorMessages.errBefore);
           setShowErrorModal(true);
         });
     };
@@ -72,7 +74,7 @@ export default function History() {
           setTableData(m);
         })
         .catch((err) => {
-          setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+          setErrorMessage(errorMessages.errBefore);
           setShowErrorModal(true);
         });
     };
@@ -92,29 +94,26 @@ export default function History() {
 
   return (
     <div className="historyPageContainer row jc-center align-items-center">
-      <div className="historyContainer column bg-light rounded-20">
-        <div className="backButtonContainer bg-dark row justify-self-start align-items-center">
-          <ButtonSecondary
-            text="< Back"
-            onClick={() => console.log("Back button pressed")}
-          />
-        </div>
+      <div className="historyContainer maxw-95 column bg-light rounded-20">
+        <ButtonSecondary
+          text="< Back"
+          onClick={() => { navigate("/overview/")}}
+        />
         <div className="titleContainer w-100 align-items-center jc-center ">
-          <p className="ultra text-dark historyTitle">
+          <div className="ultra text-dark historyTitle">
             History of measurements
-          </p>
+          </div>
         </div>
-        <div className="contentContainer row w-100 h-75 p-10 ">
-          <div className="leftContainer w-50 h-100 column jc-space-around align-items-center">
+        <div className="content-container align-items-center jc-space-between flex-wrap row w-100 p-10 ">
+          <div className="left-container column jc-space-evenly align-items-center">
             {/* Here will be name, date, boxID, viewToggle and useful. Column */}
-            <p className="varela text-dark h-name">Shiitake</p>
-            <p className="varela text-dark h-sm">Started: 27/04/2023</p>
-            <p className="varela text-dark h-sm">Grow #3</p>
+            <div className="varela text-dark h-name">Shiitake</div>
+            <div className="varela text-dark h-sm">Started: 27/04/2023</div>
+            <div className="varela text-dark h-sm">Grow #3</div>
             <HistoryToggle isGraph={isGraph} toggle={toggle} />
             <HistoryUseful />
           </div>
-          <div className="rightContainer row jc-start align-items-center  w-50 h-75 p-10 ">
-            {/* Here will be the carousel or table with historical data. Column */}
+          <div className="right-container row jc-start align-items-center h-75 p-10 ">
             {isGraph ? (
               <CarouselGraph data={graphData} />
             ) : (

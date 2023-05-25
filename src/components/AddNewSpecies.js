@@ -245,6 +245,10 @@ function AddNewSpecies({ isEdit }) {
       })
         .then((response) => {
           if (response.ok) return response.json();
+          else {
+            setErrMsg(setErrorMessage, response.status);
+            setShowErrorModal(true);
+          }
         })
         .then((m) => {
           let spawnRun = m;
@@ -266,20 +270,20 @@ function AddNewSpecies({ isEdit }) {
   }, []);
 
   return (
-    <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
+    <div className="cont maxw-95 column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
       {(auth().name !== "admin" && !isEdit) || auth().name === "admin" ? (
         <>
           <div className="align-self-start">
             <XButton onClick={() => navigate("/mushrooms")} />
           </div>
-          <div className="dashboard column align-items-center">
+          <div className="dashboard column align-items-center maxw-95">
             <div
               id="new-species-title"
               className="mushroom-title text-dark ultra"
             >
               {isEdit ? "Edit species" : "Add new species"}
             </div>
-            <div className="row ans-inputs-row">
+            <div className="row ans-inputs-row flex-wrap jc-center">
               <div className="rounded-20 column align-items-center">
                 <Input
                   title="Mushroom Name"
@@ -325,7 +329,7 @@ function AddNewSpecies({ isEdit }) {
               phase.
             </div>
             <div className="phases column align-items-center gap-20">
-              <div className="row gap-20">
+              <div className="row gap-20 flex-wrap jc-center">
                 {!spawnRunConditions ? (
                   <div>Loading</div>
                 ) : (

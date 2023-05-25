@@ -6,7 +6,7 @@ import { useState, useCallback } from "react";
 import { getFullDateTimeString } from "../util/DateTimeFormatter";
 import { useAuthHeader } from "react-auth-kit";
 import { useEffect } from "react";
-import { setErrMsg } from "../util/ErrorMessages";
+import { setErrMsg, errorMessages } from "../util/ErrorMessages";
 import ErrorModal from "./ErrorModal";
 
 function OPActiveGrow(props) {
@@ -37,7 +37,6 @@ function OPActiveGrow(props) {
       .then((response) => {
         if (response.ok) return response.json();
         else {
-          console.log("caught in 1");
           setErrMsg(setErrorMessage, response.status);
           setShowErrorModal(true);
         }
@@ -68,7 +67,7 @@ function OPActiveGrow(props) {
         setMushroom(m);
       })
       .catch((err) => {
-        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setErrorMessage(errorMessages.errBefore);
         setShowErrorModal(true);
       });
     // eslint-disable-next-line
@@ -110,7 +109,7 @@ function OPActiveGrow(props) {
               <div className="op-info">Status: </div>
               <Status status={status} mini={true} />
             </div>
-            <div className="row op-info-row text-dark">
+            <div className="row op-info-row text-dark flex-wrap">
               <div className="op-info">Last Measured:</div>
               <div className="op-info-value">{lastMeasuredString}</div>
             </div>

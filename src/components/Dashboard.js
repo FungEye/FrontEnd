@@ -9,8 +9,7 @@ import { useParams } from "react-router-dom";
 import Input from "./Input";
 import TextArea from "./TextArea";
 import { getTodayDate } from "../util/DateTimeFormatter";
-
-import { setErrMsg } from "../util/ErrorMessages";
+import { setErrMsg, errorMessages } from "../util/ErrorMessages";
 import ErrorModal from "./ErrorModal";
 
 function Dashboard({ isNew }) {
@@ -28,7 +27,7 @@ function Dashboard({ isNew }) {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  
+
   const [yieldWeight, setYieldWeight] = useState("");
   const [comment, setComment] = useState("");
   const [yieldsMessage, setYieldsMessage] = useState("");
@@ -74,7 +73,11 @@ function Dashboard({ isNew }) {
 
         })
         .then((response) => {
-          if (response.ok) return response.json();
+          if (response.ok) return response.json()
+          else {
+            setErrMsg(setErrorMessage, response.status);
+            setShowErrorModal(true);
+          }
         })
         .then((m) => {
           setGrow(m);
@@ -90,12 +93,17 @@ function Dashboard({ isNew }) {
         })
         .then((response) => {
           if (response.ok) return response.json();
+          else {
+            setErrMsg(setErrorMessage, response.status);
+            setShowErrorModal(true);
+          }
         })
+
         .then((m) => {
           setMushroomName(m.name);
         })
         .catch((err) => {
-          setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+          setErrorMessage(errorMessages.errBefore);
           setShowErrorModal(true);
         });
     };
@@ -165,7 +173,7 @@ function Dashboard({ isNew }) {
         }
       })
       .catch((err) => {
-        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setErrorMessage(errorMessages.errBefore);
         setShowErrorModal(true);
       });
     setTimeout(() => {
@@ -174,7 +182,7 @@ function Dashboard({ isNew }) {
   }
 
   return (
-    <div className="cont column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
+    <div className="cont maxw-95 column varela bg-light rounded-20 column jc-center very-slightly-faded border-dark">
       <div className="dashboard column align-items-center">
         <div className="mushroom-title text-dark ultra">{mushroomName}</div>
         <div className="box text-dark w-100">Box #{boxId}</div>
@@ -194,7 +202,7 @@ function Dashboard({ isNew }) {
         </div>
         {!isNew ? (
           <>
-            <div className="row status-row">
+            <div className="row status-row flex-wrap jc-center">
               <div className="column">
                 <div className="status-text text-dark">
                   <b>Growth Phase:</b>
@@ -207,12 +215,12 @@ function Dashboard({ isNew }) {
                 </div>
                 <Status status={status} />
               </div>
-              
+
             </div>
 
 
             <div className="toggle text-dark p-10">
-              <ButtonPrimary text="Light" onClick={toggle} />
+              <ButtonPrimary wide={true} text="Toggle Light in Box" onClick={toggle} />
               <p className="poppins text-dark">{toggleMessage}</p>
             </div>
 

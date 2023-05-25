@@ -3,6 +3,7 @@ import "./css/YieldPage.css";
 import YieldCard from "./YieldCard";
 import { useEffect, useCallback, useState } from "react";
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
+import { errorMessages } from "../util/ErrorMessages";
 import ErrorModal from "./ErrorModal";
 function YieldPage(props) {
 
@@ -30,7 +31,7 @@ function YieldPage(props) {
         setYieldList(data);
       })
       .catch((err) => {
-        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setErrorMessage(errorMessages.errBefore);
         setShowErrorModal(true);
       });
     // eslint-disable-next-line
@@ -49,7 +50,7 @@ function YieldPage(props) {
   }
 
   return (
-    <div className="yield-page bg-light rounded-20 text-dark poppins column align-items-center">
+    <div className="yield-page maxw-95 bg-light rounded-20 text-dark poppins column align-items-center">
       <div className="yield-page-title ultra">
         Yields
       </div>
