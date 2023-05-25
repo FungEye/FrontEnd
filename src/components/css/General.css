@@ -240,4 +240,33 @@
     object-fit: cover;
 }
 
+.maxw-95 {
+    max-width: 95%;
+    box-sizing: border-box;
+}
+
+.jc-start {
+    justify-content: start;
+}
+
+.maxh-95 {
+    max-height: 95%;
+    overflow-y: scroll;
+}
+
+@media only screen and (min-width: 514px) {
+    .jc-start-big-center-small {
+        justify-content: flex-start;
+    }
+}
+
+
+
+@media only screen and (max-width: 513px) {
+    .jc-start-big-center-small {
+        justify-content: center;
+    }
+}
+
+
 
