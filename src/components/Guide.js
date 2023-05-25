@@ -11,8 +11,8 @@ function Guide() {
 
           <p className="guide-p poppins text-dark">
             All you need is the grow-kit, and an account on FungEye to be able
-            to track the growth of your mushrooms, and get valuable tips for
-            your grows.
+            to begin tracking the growth of your mushrooms, and get valuable
+            tips for your grows.
           </p>
         </div>
 
@@ -39,8 +39,20 @@ function Guide() {
           <h2 className="ultra">What do I have to do?</h2>
 
           <p className="guide-p poppins text-dark">
-            A step-by-step guide for users will be written here, when we will
-            know more.
+            1. After registering, navigate to the Mushrooms page, and select the
+            species you wish to grow.
+            <br></br>
+            <br></br>
+            2. Click "Pick" on your preferred species. This will send you to the
+            Box Selection page.
+            <br></br>
+            <br></br>
+            3. Click "Pick" on the box you wish to start the grow within.
+            Otherwise, create a new box - you will need to enter the EUI for it.
+            <br></br>
+            <br></br>
+            4. Congratulations! Your grow has started. A confirmation of this
+            will be displayed.
           </p>
         </div>
       </div>

@@ -64,7 +64,7 @@ export default function RegisterLogin() {
       tokenType: "Bearer",
       authState: { name: username },
     });
-    navigate("/overview");
+    navigate("/");
   }
 
   async function registerClick() {
