@@ -19,7 +19,7 @@ function YieldCard(props) {
   }
 
   return (
-    <div className="yield-card bg-light border-dark rounded-20 mt-15 row align-items-center jc-space-between">
+    <div className="yield-card maxw-95 flex-wrap bg-light border-dark rounded-20 mt-15 row align-items-center">
       <div className="icon-and-history column yield-col">
         <img
           className="op-icon"

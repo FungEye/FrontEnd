@@ -50,7 +50,7 @@ function YieldPage(props) {
   }
 
   return (
-    <div className="yield-page bg-light rounded-20 text-dark poppins column align-items-center">
+    <div className="yield-page maxw-95 bg-light rounded-20 text-dark poppins column align-items-center">
       <div className="yield-page-title ultra">
         Yields
       </div>
