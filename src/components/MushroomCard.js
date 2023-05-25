@@ -12,8 +12,6 @@ function MushroomCard(props) {
   let showDetails = props.showDetails;
   const navigate = useNavigate();
 
-  console.log(mushroom);
-
   return (
     <div className="mushroom-card bg-light rounded-20 column jc-center slightly-faded">
       <div className="row w-100 mw-100 mc-top-row">

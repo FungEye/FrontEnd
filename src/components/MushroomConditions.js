@@ -27,7 +27,6 @@ function MushroomConditions(props) {
             max = "dataMax+100";
             break;
         case "light":
-            console.log(data)
             title = "Light (lux)"
             break;
         default:

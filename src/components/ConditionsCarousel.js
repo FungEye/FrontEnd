@@ -30,8 +30,6 @@ function ConditionsCarousel(props) {
         navigation
         pagination={{ clickable: true }}
         speed={800}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log('slide change')}
         centeredSlides={true}
       >
         <SwiperSlide><MushroomConditions type="temperature" conditions={temperature} /></SwiperSlide>

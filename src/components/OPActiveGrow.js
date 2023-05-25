@@ -44,7 +44,6 @@ function OPActiveGrow(props) {
       .then((m) => {
         setBox(m);
         const mushroomId = m.grows[0].mushroomId;
-        console.log("mushroom id" + mushroomId);
         return fetch(`https://fungeye-383609.ey.r.appspot.com/mushroom/${mushroomId}`
           ,
           {
@@ -62,8 +61,6 @@ function OPActiveGrow(props) {
         }
       })
       .then((m) => {
-        console.log("MUSHROOM")
-        console.log(m)
         setMushroom(m);
       })
       .catch((err) => {
@@ -81,7 +78,6 @@ function OPActiveGrow(props) {
 
   function goToDashboard() {
     if (mushroom) {
-      console.log(box);
       navigate(`/dashboard/${box.id}`);
     }
   }

@@ -16,9 +16,6 @@ const ChooseBoxModal = (props) => {
   const[errorMessage, setErrorMessage] = useState("");
 
   function createNewBox() {
-    console.log(authHeader());
-    console.log(eui);
-    console.log("AUTH().NAME: " + auth().name);
     fetch("https://fungeye-383609.ey.r.appspot.com/box", {
       method: "POST",
       headers: {

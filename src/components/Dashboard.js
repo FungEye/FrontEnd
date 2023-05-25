@@ -54,7 +54,6 @@ function Dashboard({ isNew }) {
           }
         })
         .then((m) => {
-          console.log(m);
           setMeasurement(m);
           let devStage = m.developmentStage;
           let devStageCap =
@@ -113,7 +112,6 @@ function Dashboard({ isNew }) {
   }, []);
 
   async function submit(yieldObj) {
-    console.log(yieldObj);
     let url = "https://fungeye-383609.ey.r.appspot.com/harvest/";
     await fetch(url, {
       method: "POST",
@@ -164,7 +162,6 @@ function Dashboard({ isNew }) {
       },
     })
       .then((response) => {
-        console.log(response);
         if (response.ok)
           setToggleMessage("Light in your box has been toggled.");
         else {

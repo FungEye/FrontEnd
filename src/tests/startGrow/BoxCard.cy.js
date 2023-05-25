@@ -3,9 +3,6 @@ import BoxCard from "../../components/BoxCard";
 import { HashRouter } from "react-router-dom";
 describe("<BoxCard />", () => {
   let item = { id: 1 };
-  function handleBoxSelect() {
-    console.log("handleBoxSelect clicked");
-  }
 
   beforeEach(() => {
     cy.mount(

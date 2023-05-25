@@ -8,9 +8,7 @@ function ErrorModal(props) {
     }
     let errorMessage = props.message;
     let setShow = props.setShow;
-
-    console.log(props);
-
+    
     return (
         <div className="md-modal">
             <div className="md-modal-content error-modal">

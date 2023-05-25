@@ -89,7 +89,6 @@ function ChooseBox() {
         }
       })
       .then((m) => {
-        console.log(m.boxId);
         navigate(`/dashboard/${m.boxId}/new`);
       })
       .catch((err) => {

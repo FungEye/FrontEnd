@@ -108,15 +108,17 @@ function AddNewSpecies({ isEdit }) {
         },
         body: JSON.stringify(mushroom),
       }).then((response) => {
-          if (!response.ok) {
-            setErrMsg(setErrorMessage, response.status);
-            setShowErrorModal(true);
-          }
-          else{
-          navigate("/mushrooms")}
-        })
+        if (!response.ok) {
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
+        else {
+          navigate("/mushrooms")
+        }
+      })
         .catch(err => {
-          console.log(err);
+          setErrorMessage(err.message);
+          setShowErrorModal(true);
         });
 
     }
@@ -169,11 +171,6 @@ function AddNewSpecies({ isEdit }) {
       ],
       imageUrl: imageUrl,
     };
-
-    console.log(mushroom);
-    console.log(JSON.stringify(mushroom));
-
-    console.log(authHeader());
     fetch(`https://fungeye-383609.ey.r.appspot.com/mushroom/update`, {
       method: "PUT",
       headers: {
@@ -184,17 +181,15 @@ function AddNewSpecies({ isEdit }) {
       body: JSON.stringify(mushroom),
     })
       .then((response) => {
-        console.log(response);
-
         response.ok
           ? setMessage("Mushroom edited successfully.")
-          : setMessage("Error while editing mushroom.");
+          : (() => { setErrMsg(setErrorMessage, response.status); setShowErrorModal(true); })
         setTimeout(() => {
           setMessage("");
           if (response.ok) navigate("/mushrooms");
         }, 5000);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => { setErrMsg(err.message); setShowErrorModal(true); });
   }
 
   function archiveMushroom() {
@@ -235,7 +230,7 @@ function AddNewSpecies({ isEdit }) {
           setOrigin(m.origin);
           setImageUrl(m.imageUrl);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => { setErrMsg(err.message); setShowErrorModal(true); });
 
       fetch(`https://fungeye-383609.ey.r.appspot.com/ideal/${mushroomId}`, {
         method: "GET",
@@ -264,7 +259,7 @@ function AddNewSpecies({ isEdit }) {
             fruiting.filter((e) => e.developmentStage === "fruiting")[0]
           );
         })
-        .catch((err) => console.log(err));
+        .catch((err) => { setErrMsg(err.message); setShowErrorModal(true); });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
