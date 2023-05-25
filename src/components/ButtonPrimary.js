@@ -6,7 +6,7 @@ function ButtonPrimary(props) {
     if (props.wide) {
         classes += " wide";
     }
-    return <button data-test={props.text} className={classes} onClick={props.onClick}>{props.text}</button>
+    return <button id={props.id} data-test={props.text} className={classes} onClick={props.onClick}>{props.text}</button>
 }
 
 export default ButtonPrimary

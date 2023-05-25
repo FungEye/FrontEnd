@@ -354,6 +354,7 @@ function AddNewSpecies({ isEdit }) {
                 }}
                 wide={true}
                 text={isEdit ? "Save changes" : "Add mushroom"}
+                id={isEdit ? "save-changes-btn" : "add-mushroom-btn"}
               />
               {isEdit ? (
                 <ButtonPrimary
