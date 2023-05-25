@@ -254,6 +254,16 @@
     overflow-y: scroll;
 }
 
+.maxw-100 {
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.margin-auto {
+    margin: auto;
+}
+
 @media only screen and (min-width: 514px) {
     .jc-start-big-center-small {
         justify-content: flex-start;
