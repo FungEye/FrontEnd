@@ -8,7 +8,7 @@ import CreateBoxModal from "./CreateBoxModal";
 import { useParams } from "react-router-dom";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
 import ErrorModal from "./ErrorModal";
-import { setErrMsg } from "../util/ErrorMessages";
+import { setErrMsg, errorMessages } from "../util/ErrorMessages";
 
 function ChooseBox() {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ function ChooseBox() {
         setBoxData(data);
       })
       .catch((err) => {
-        setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+        setErrorMessage(errorMessages.errBefore);
         setShowErrorModal(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps

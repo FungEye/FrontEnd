@@ -37,7 +37,8 @@ const ChooseBoxModal = (props) => {
       .then((m) => {
         props.onSelect(m.id);
       })
-      .catch((err) => setErrorMessage("Something went wrong. Are you sure your EUI is 16 characters long, all numbers?"));
+      .catch((err) =>
+       setErrorMessage("Something went wrong. Are you sure your EUI is 16 characters long, all numbers?"));
     }
   
 

@@ -8,7 +8,7 @@ import CarouselGraph from "./HistoryChartsCarousel";
 import CarouselTable from "./HistoryTableCarousel";
 import { useAuthHeader } from "react-auth-kit";
 import { useParams } from "react-router-dom";
-import { setErrMsg } from "../../util/ErrorMessages";
+import { setErrMsg, errorMessages } from "../../util/ErrorMessages";
 import ErrorModal from "../ErrorModal";
 
 export default function History() {
@@ -45,7 +45,7 @@ export default function History() {
           setGraphData(m);
         })
         .catch((err) => {
-          setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+          setErrorMessage(errorMessages.errBefore);
           setShowErrorModal(true);
         });
     };
@@ -72,7 +72,7 @@ export default function History() {
           setTableData(m);
         })
         .catch((err) => {
-          setErrorMessage("Something went wrong in the request before it could reach the server. Check the url of your request?");
+          setErrorMessage(errorMessages.errBefore);
           setShowErrorModal(true);
         });
     };
