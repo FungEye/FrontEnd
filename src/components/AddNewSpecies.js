@@ -181,9 +181,10 @@ function AddNewSpecies({ isEdit }) {
       body: JSON.stringify(mushroom),
     })
       .then((response) => {
-        response.ok
+        console.log("lol");
+        response.ok()
           ? setMessage("Mushroom edited successfully.")
-          : (() => { setErrMsg(setErrorMessage, response.status); setShowErrorModal(true); })
+          : setMessage("Operation failed.")
         setTimeout(() => {
           setMessage("");
           if (response.ok) navigate("/mushrooms");
