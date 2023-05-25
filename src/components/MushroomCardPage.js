@@ -3,7 +3,7 @@ import MushroomCard from "./MushroomCard";
 import MushroomDetailsModal from "./MushroomDetailsModal";
 import "./css/MushroomCardPage.css";
 import ErrorModal from "./ErrorModal";
-import { setErrMsg } from "../util/ErrorMessages";
+import { setErrMsg, errorMessages } from "../util/ErrorMessages";
 
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
 
@@ -50,7 +50,10 @@ function MushroomCardPage() {
         });
         setMushrooms(mushroomsWithNoDuplicates);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessage(errorMessages.errBefore);
+        setShowErrorModal(true);
+      });
     // eslint-disable-next-line
   }, []);
 

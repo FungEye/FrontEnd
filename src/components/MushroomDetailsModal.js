@@ -20,13 +20,13 @@ function MushroomDetailsModal(props) {
 
   return (
     <div className="md-modal">
-      <div className="md-modal-content">
+      <div className="md-modal-content maxw-95 maxh-95">
         <div className="md-modal-header align-items-center bg-dark row jc-space-between text-light poppins very-slightly-faded">
           <div>Mushroom Details</div>
           <XButton onClick={() => setShow(false)} />
         </div>
         <div className="md-modal-body bg-light column very-slightly-faded">
-          <div className="md-modal-body-top row align-items-center jc-space-between">
+          <div className="md-modal-body-top flex-wrap row align-items-center jc-space-between">
             <div className="ultra md-modal-body-title text-dark">
               {mushroom.name}
             </div>
@@ -36,7 +36,7 @@ function MushroomDetailsModal(props) {
               alt="mushroomicon"
             ></img>
           </div>
-          <div className="md-modal-body-info row">
+          <div className="md-modal-body-info flex-wrap row">
             <div id="md-modal-body-left" className="column jc-space-between">
               <div className="md-modal-info-text column text-dark">
                 <div>
