@@ -9,6 +9,7 @@ import ButtonSecondary from "./ButtonSecondary";
 import Input from "./Input";
 import useValidate from "../hooks/useValidate";
 import useHash from "../hooks/useHash";
+import ErrorModal from "./ErrorModal";
 export default function RegisterLogin() {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
@@ -25,6 +26,10 @@ export default function RegisterLogin() {
   const hash = useHash(password);
   const signIn = useSignIn();
   const navigate = useNavigate();
+
+
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     clearInputs();
@@ -46,6 +51,10 @@ export default function RegisterLogin() {
       const content = await rawResponse.json();
       saveToken(content.accessToken);
     }
+    else {
+      setErrorMessage("Unauthorized! Those are probably the wrong credentials.")
+      setShowErrorModal(true);
+    }
   }
 
   function saveToken(token) {
@@ -55,7 +64,7 @@ export default function RegisterLogin() {
       tokenType: "Bearer",
       authState: { name: username },
     });
-    navigate("/overview");
+    navigate("/");
   }
 
   async function registerClick() {
@@ -166,6 +175,7 @@ export default function RegisterLogin() {
           onClick={isLogin ? loginClick : registerClick}
         />
       </div>
+      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
     </div>
   );
 }

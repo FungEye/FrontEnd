@@ -12,8 +12,9 @@
 }
 
 .historyContainer {
-    width: 50%;
-    height: 700px;
+    box-sizing: border-box;
+    padding: 20px;
+    width: 800px;
 }
 
 .backButtonContainer {
@@ -120,8 +121,8 @@
     background: #8f4935;
 }
 
-.rightContainer {
-    padding-top: 50px;
+.right-container {
+    padding-top: 20px;
 }
 
 :root {
@@ -129,13 +130,23 @@
 
 }
 
+.contentContainer {
+    padding: 20px;
+    box-sizing: border-box;
+}
+
 .conditions-carousel-history {
     height: 350px;
-    width: 80%;
+    width: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 20px;
+}
+
+.left-container {
+    gap: 20px;
+    padding: 20px;
 }
 
 .swiper-button-next,
@@ -147,5 +158,25 @@
     background: #bbbbbb;
     padding: 5px;
     opacity: 0.5;
+}
 
+@media only screen and (min-width: 787px) {
+    .content-container {
+        justify-content: space-evenly;
+    }
+}
+
+
+@media only screen and (max-width: 786px) {
+    .content-container {
+        justify-content: center;
+    }
+}
+
+
+
+@media only screen and (max-width: 440px) {
+    .right-container {
+       transform: scale(0.8);
+    }
 }

@@ -30,21 +30,23 @@ function Navbar() {
   };
 
   return (
-    <div className="header">
+    <div className="header jc-space-between">
       <h3 className="title ultra" onClick={() => navigate("/")}>
         FungEye
       </h3>
       <nav ref={navRef}>
+      <p className="navItemsText  poppins" onClick={() => goTo("/dashboard/1")}>
+          Dashboard
+        </p>
         <p className="navItemsText  poppins" onClick={() => goTo("/overview")}>
           Overview
         </p>
         <p className="navItemsText  poppins" onClick={() => goTo("/mushrooms")}>
           Mushrooms
         </p>
-        <p
-          className="navItemsText  poppins"
-          onClick={() => goTo("/addnewspecies")}
-        >
+
+        <p className="navItemsText  poppins" onClick={() => goTo("/new")}>
+
           New
         </p>
         <p className="navItemsText  poppins" onClick={() => goTo("/yields")}>
@@ -56,15 +58,16 @@ function Navbar() {
         <p className="navItemsText poppins" onClick={() => goTo("/history/1")}>
           History
         </p>
-        <div className="poppins column jc-space-around align-items-center login">
+        <div className="login bg-dark text-light jc-center flex-wrap">
           <p className="poppins navItemsText">
             {isAuthenticated() ? auth().name : null}
           </p>
+          <p className="navItemsText">|</p>
           <p
             className="poppins navItemsText"
             onClick={() => (isAuthenticated() ? logOut() : goTo("/login"))}
           >
-            {isAuthenticated() ? "Log out 🔓" : "Log in 🔒"}
+            {isAuthenticated() ? " Log out 🔓" : "Log in 🔒"}
           </p>
         </div>
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>

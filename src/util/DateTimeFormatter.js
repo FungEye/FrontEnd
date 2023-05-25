@@ -45,5 +45,14 @@ function getFullDateTimeString(x) {
     return result;
 }
 
+function getTodayDate() {
+    const date = new Date();
+    return {
+        "day": date.getDate(),
+        "month": date.getMonth()+1,
+        "year": date.getFullYear()
+    }
+}
 
-export { getTimeString, getDateString, getFullDateString, getDateTimeString, getFullDateTimeString }
+
+export { getTodayDate, getTimeString, getDateString, getFullDateString, getDateTimeString, getFullDateTimeString }

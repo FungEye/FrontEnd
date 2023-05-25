@@ -15,3 +15,16 @@
 .swiper-button-next, .swiper-button-prev {
     scale: 60%;
 }
+
+@media only screen and (max-width: 894px) {
+    .conditions-carousel {
+        transform: scale(0.7);
+        transform-origin: top;
+    }
+    .md-modal-body-info {
+        justify-content: center;
+    }
+    .md-modal-info-text {
+        width: 100%;
+    }
+}

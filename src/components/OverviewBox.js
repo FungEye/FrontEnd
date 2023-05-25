@@ -8,9 +8,6 @@ function OverviewBox(props) {
   let box = props.box;
   let boxId = box.id;
   let simpleGrowDto = box.simpleGrowDtos;
-
-  console.log(simpleGrowDto);
-
   let description;
   let buttonAndTrash;
 
@@ -23,7 +20,6 @@ function OverviewBox(props) {
   function goToDashboard() {
     navigate("/dashboard");
   }
-
 
   if (simpleGrowDto.length === 0) {
     description = <div className="op-info-value">Vacant</div>;
@@ -38,12 +34,8 @@ function OverviewBox(props) {
         ></img>
       </div>
     );
-
   } else {
-
     let mushroomName = simpleGrowDto[0].mushroomName;
-    console.log(mushroomName);
-
     description = (
       <div className="row op-info-row text-dark">
         <div className="op-info-value">Growing</div>
@@ -55,7 +47,7 @@ function OverviewBox(props) {
   }
 
   return (
-    <div className="op-grow row border-dark bg-light text-dark varela rounded-20 very-slightly-faded align-items-center">
+    <div className="op-grow flex-wrap row border-dark bg-light text-dark varela rounded-20 very-slightly-faded align-items-center jc-start-big-center-small">
       <img
         className="op-icon"
         alt="Icon"
@@ -63,7 +55,7 @@ function OverviewBox(props) {
           "https://cdn.icon-icons.com/icons2/945/PNG/512/Office_-12_icon-icons.com_73953.png"
         }
       ></img>
-      <div className="column w-100 align-items-start">
+      <div className="column align-items-start">
         <div className="op-shroom-name ultra text-dark">Box #{boxId}</div>
         {description}
       </div>

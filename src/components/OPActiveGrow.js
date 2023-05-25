@@ -6,19 +6,20 @@ import { useState, useCallback } from "react";
 import { getFullDateTimeString } from "../util/DateTimeFormatter";
 import { useAuthHeader } from "react-auth-kit";
 import { useEffect } from "react";
+import { setErrMsg, errorMessages } from "../util/ErrorMessages";
+import ErrorModal from "./ErrorModal";
 
 function OPActiveGrow(props) {
   let grow = props.grow;
-  console.log(props.grow);
   //TODO add the function to compare the measurements with the desired conditions
   let status = "Alarming";
   let lastMeasured = grow.id.dateTime;
   let lastMeasuredString = getFullDateTimeString(lastMeasured);
   let boxId = grow.id.boxId;
-  console.log(boxId);
-  console.log({ lastMeasuredString });
-  const [box, setBox] = useState(null);
+    const [box, setBox] = useState(null);
   const [mushroom, setMushroom] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const navigate = useNavigate();
   const authHeader = useAuthHeader();
@@ -35,6 +36,10 @@ function OPActiveGrow(props) {
     )
       .then((response) => {
         if (response.ok) return response.json();
+        else {
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
       })
       .then((m) => {
         setBox(m);
@@ -51,21 +56,28 @@ function OPActiveGrow(props) {
       })
       .then((response) => {
         if (response.ok) return response.json();
+        else {
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
       })
       .then((m) => {
         console.log("MUSHROOM")
         console.log(m)
         setMushroom(m);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessage(errorMessages.errBefore);
+        setShowErrorModal(true);
+      });
     // eslint-disable-next-line
   }, []);
 
-  
+
   useEffect(() => {
     getBox();
-   }, [getBox]);
-   
+  }, [getBox]);
+
 
   function goToDashboard() {
     if (mushroom) {
@@ -97,13 +109,14 @@ function OPActiveGrow(props) {
               <div className="op-info">Status: </div>
               <Status status={status} mini={true} />
             </div>
-            <div className="row op-info-row text-dark">
+            <div className="row op-info-row text-dark flex-wrap">
               <div className="op-info">Last Measured:</div>
               <div className="op-info-value">{lastMeasuredString}</div>
             </div>
           </div>
         </div>
       }
+      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
     </div>
   );
 }

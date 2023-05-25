@@ -3,12 +3,16 @@ import "./css/YieldPage.css";
 import YieldCard from "./YieldCard";
 import { useEffect, useCallback, useState } from "react";
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
+import { errorMessages } from "../util/ErrorMessages";
+import ErrorModal from "./ErrorModal";
 function YieldPage(props) {
 
   const [yieldList, setYieldList] = useState([]);
   const authHeader = useAuthHeader();
   const auth = useAuthUser();
   const username = auth().name;
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   // let yieldsList = props.yieldsList;
   const getYields = useCallback(() => {
@@ -25,9 +29,11 @@ function YieldPage(props) {
       })
       .then((data) => {
         setYieldList(data);
-        console.log(yieldList);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessage(errorMessages.errBefore);
+        setShowErrorModal(true);
+      });
     // eslint-disable-next-line
   }, []);
 
@@ -44,15 +50,17 @@ function YieldPage(props) {
   }
 
   return (
-    <div>
-      <div className="yields-title-container">
-        <h1 className="text-light ultra">Y I E L D S</h1>
-        <h4 className="text-light ">A history of your harvests.</h4>
-        <button onClick={() => { getYields() }}>get Yields</button>
+    <div className="yield-page maxw-95 bg-light rounded-20 text-dark poppins column align-items-center">
+      <div className="yield-page-title ultra">
+        Yields
       </div>
-      <div className="yield-cont">
+      <div>
+        A history of your harvests.
+      </div>
+      <div className="yield-cards w-100 column align-items-center">
         {yieldCardList}
       </div>
+      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
     </div>
   );
 }

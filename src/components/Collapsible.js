@@ -6,7 +6,7 @@ function Collapsible(props) {
 
   return (
     <div
-      className="border-dark rounded-20 bg-light overflow-hidden"
+      className="border-dark rounded-20 bg-light overflow-hidden maxw-95"
       style={{ width: width + "px" }}
     >
       <button

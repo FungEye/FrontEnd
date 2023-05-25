@@ -1,37 +1,46 @@
 .yield-card{
-    width: 1000px;
-   
-    background-color: #eed1ab ;
-    min-height: 200px;;
+    width: 90%;
+    padding: 10px;
 }
 
-.yield-card-flex{
-    display:flex;
-    flex-direction: row;
+.yields-history-link {
+    text-decoration: underline;
 }
 
-.yield-card-1st-column{
-    display: flex;
-    flex-direction: column;
-    width:25%;
-
+.yield-col {
+    padding: 0 30px;
 }
 
-.yield-card-2nd-column{
-    display: flex;
-    flex-direction: column;
-    
-
+.yield-grams-value {
+    font-size: 36px;
 }
 
-.yield-card-3rd-column{
-    display: flex;
-    flex-direction: column;
-
+.yield-grams-label {
+    margin-top: -15px;
 }
 
-.yield-card-yields-column{
-    display: flex;
-    flex-direction: column;
+.yield-mushroom-name {
+    font-size: 24px;
+}
 
+.yield-info{
+    max-width: 300px;
+}
+
+.yield-value {
+    width: 75px;
+}
+
+@media only screen and (min-width: 640px) {
+    .yield-card {
+        justify-content: space-between;
+    }
+}
+
+
+
+@media only screen and (max-width: 639px) {
+    .yield-card {
+        justify-content: center;
+    }
 }

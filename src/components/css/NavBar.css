@@ -10,7 +10,7 @@
 }
 
 .header {
-    padding-left: 2rem;
+    padding-left: 2rem !important;
 }
 
 .header,
@@ -20,7 +20,6 @@ nav {
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     min-height: 80px;
     width: 100%;
     background-color: var(--beige);
@@ -63,7 +62,7 @@ nav .navItemsText:hover {
 }
 
 .header .nav-btn {
-    padding: 5px;
+    padding: 15px;
     cursor: pointer;
     background: transparent;
     border: none;
@@ -80,9 +79,21 @@ nav .navItemsText:hover {
 nav {
     display: flex;
     align-items: space-around;
-    padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+.login {
+    padding: 10px;
+    gap: 10px;
+    border-radius: 10px;
+}
+
+
+@media only screen and (min-width: 1024px) {
+    .nav-close-btn {
+        display: none;
+    }
 }
 
 
@@ -95,7 +106,7 @@ nav {
 
     .header nav {
         position: fixed;
-        top: -100vh;
+        top: -100%;
         left: 0;
         height: 100%;
         width: 100%;
@@ -117,8 +128,8 @@ nav {
         width: 50%;
     }
 
-    .header .responsive_nav {
-        transform: translateY(100vh);
+    .responsive_nav {
+        transform: translateY(100%);
     }
 
     .navItemsText {
