@@ -20,7 +20,7 @@ export default function History() {
   const [tableData, setTableData] = useState([]);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [startingDate, setStartingDate] = useState("Loading...");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,7 +43,6 @@ export default function History() {
           }
         })
         .then((m) => {
-
           setGraphData(m);
         })
         .catch((err) => {
@@ -71,7 +70,9 @@ export default function History() {
           }
         })
         .then((m) => {
+          console.log(m);
           setTableData(m);
+          displayDate(m);
         })
         .catch((err) => {
           setErrorMessage(errorMessages.errBefore);
@@ -83,6 +84,23 @@ export default function History() {
     fetchTableData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  function displayDate(m) {
+    m.sort((a, b) => b.id.dateTime.month - a.id.dateTime.month);
+    function sortDays(a, b) {
+      if (a.month === b.month) {
+        return a.id.dateTime.month - b.id.dateTime.month;
+      }
+    }
+    m.sort((a, b) => sortDays(a, b));
+    setStartingDate(
+      m[0].id.dateTime.day +
+        "/" +
+        m[0].id.dateTime.month +
+        "/" +
+        m[0].id.dateTime.year
+    );
+  }
 
   function toggle(element) {
     if (isGraph && element === "table") {
@@ -97,7 +115,9 @@ export default function History() {
       <div className="historyContainer maxw-95 column bg-light rounded-20">
         <ButtonSecondary
           text="< Back"
-          onClick={() => { navigate("/overview/")}}
+          onClick={() => {
+            navigate("/overview/");
+          }}
         />
         <div className="titleContainer w-100 align-items-center jc-center ">
           <div className="ultra text-dark historyTitle">
@@ -107,9 +127,8 @@ export default function History() {
         <div className="content-container align-items-center jc-space-between flex-wrap row w-100 p-10 ">
           <div className="left-container column jc-space-evenly align-items-center">
             {/* Here will be name, date, boxID, viewToggle and useful. Column */}
-            <div className="varela text-dark h-name">Shiitake</div>
-            <div className="varela text-dark h-sm">Started: 27/04/2023</div>
-            <div className="varela text-dark h-sm">Grow #3</div>
+            <div className="varela text-dark h-sm">Started: {startingDate}</div>
+            <div className="varela text-dark h-sm">Box #{boxId}</div>
             <HistoryToggle isGraph={isGraph} toggle={toggle} />
             <HistoryUseful />
           </div>
@@ -123,7 +142,11 @@ export default function History() {
         </div>
         <p>{error}</p>
       </div>
-      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
+      <ErrorModal
+        show={showErrorModal}
+        setShow={setShowErrorModal}
+        message={errorMessage}
+      />
     </div>
   );
 }
