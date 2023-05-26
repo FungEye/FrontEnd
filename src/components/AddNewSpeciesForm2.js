@@ -61,8 +61,10 @@ function AddNewSpeciesForm2({ title, conditions, setConditions }) {
     return newCondition;
   }
 
+  const id = title.replace(/ /, "")
+
   return (
-    <div className="form-2 bg-dark rounded-20 column jc-space-evenly very-slightly-faded">
+    <div id={id} className="form-2 bg-dark rounded-20 column jc-space-evenly very-slightly-faded">
       <div className="form-title text-light ultra condition-title">{title}</div>
       <div className="row jc-space-evenly">
         <FormInput

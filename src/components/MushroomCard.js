@@ -13,7 +13,7 @@ function MushroomCard(props) {
   const navigate = useNavigate();
 
   return (
-    <div className="mushroom-card bg-light rounded-20 column jc-center slightly-faded">
+    <div data-test={shroomname} className="mushroom-card bg-light rounded-20 column jc-center slightly-faded">
       <div className="row w-100 mw-100 mc-top-row">
         <div className="ultra text-dark align-self-center mc-mushroom-name w-75">
           {shroomname}

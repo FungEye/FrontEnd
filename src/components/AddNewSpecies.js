@@ -332,7 +332,7 @@ function AddNewSpecies({ isEdit }) {
                   <AddNewSpeciesForm2
                     conditions={spawnRunConditions}
                     setConditions={setSpawnRunConditions}
-                    title="Spawning"
+                    title="Spawn Run"
                   />
                 )}
                 <AddNewSpeciesForm2

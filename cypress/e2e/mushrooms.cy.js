@@ -1,17 +1,18 @@
 import urls from "../util/data"
+import { loginAsAdmin, loginAsKamil } from "../util/loginFunctions";
+import MushroomsPage from "../pages/mushrooms.page";
 
-describe('History Page Suite', () => {
+describe('Mushroom Page Suite', () => {
 
-    beforeEach(() => {
-        cy.visit(`/login`)
-        cy.get("[data-test='Username']").type("Kamil");
-        cy.get("[data-test='Password']").type("qazwsx");
-        cy.get("[data-test='Login']").click();
-        cy.wait(1000);
-        cy.visit("/mushrooms›");
-    })
+    const mushroomsPage = new MushroomsPage();
+
+    function goToPage() {
+        cy.visit("/mushrooms");
+    }
 
     it('Loads page', () => {
+        loginAsKamil();
+        cy.visit("/mushrooms");
         cy.get(".mushroom-page").should("exist");
         cy.get(".start-grow-info").should("exist");
         cy.get(".mushroom-cards").should("exist");
@@ -20,4 +21,23 @@ describe('History Page Suite', () => {
         cy.get("[data-test='Details']").should("exist");
         cy.get("[data-test='Pick']").should("exist");
     })
+
+    it('Check for TestShroom', () => {
+        loginAsKamil();
+        goToPage();
+        mushroomsPage.checkIfTestMushroomIsPresent();
+    })
+
+    it('Archive Test Shroom', () => {
+        loginAsAdmin();
+        goToPage();
+        mushroomsPage.archiveTestMushroomAsAdmin();
+    })
+
+    it.only('Check if Test Shroom is not present', () => {
+        loginAsKamil();
+        goToPage();
+        mushroomsPage.checkIfTestMushroomIsNotPresent();
+    })
+
 })

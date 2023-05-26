@@ -64,17 +64,18 @@ function Navbar() {
           </p>
           <p className="navItemsText">|</p>
           <p
+            id ={isAuthenticated() ? "logout" : "login"}
             className="poppins navItemsText"
             onClick={() => (isAuthenticated() ? logOut() : goTo("/login"))}
           >
             {isAuthenticated() ? " Log out 🔓" : "Log in 🔒"}
           </p>
         </div>
-        <button className="nav-btn nav-close-btn" onClick={showNavbar}>
+        <button id="nav-close-btn" className="nav-btn nav-close-btn" onClick={showNavbar}>
           <FaTimes />
         </button>
       </nav>
-      <button className="nav-btn" onClick={showNavbar}>
+      <button id="nav-expand-btn" className="nav-btn" onClick={showNavbar}>
         <FaBars />
       </button>
     </div>
