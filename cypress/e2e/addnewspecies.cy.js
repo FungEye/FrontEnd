@@ -1,7 +1,4 @@
-import urls from "../util/data"
-
 describe('Add New Species Page Suite', () => {
-
     
     beforeEach(() => {
         cy.visit("/login")
