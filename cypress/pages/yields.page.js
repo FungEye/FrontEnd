@@ -36,6 +36,10 @@ class YieldsPage {
         return cy.get(".yield-grams-value");
     }
 
+    goToHistoryFromFirstMushroom() {
+        //TODO
+    }
+
     checkThatPageLoads() {
         this.pageContainer.should("exist");
         this.pageTitle.should("exist");

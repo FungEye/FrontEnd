@@ -20,6 +20,14 @@ class OverviewPage {
         return cy.get("#past-yields");
     }
 
+    get startAGrowButtons() {
+        return cy.get("[data-test='Start Grow']");
+    }
+
+    get growCards() {
+        return cy.get(".op-grown");
+    }
+
     checkThatPageLoads() {
        this.pageContainer.should("exist");
         this.activeGrowsDiv.should("exist");
