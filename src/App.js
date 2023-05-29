@@ -8,7 +8,7 @@ import RegisterLogin from "./components/Introduction and User Access/RegisterLog
 import { useIsAuthenticated } from "react-auth-kit";
 import MushroomCardPage from "./components/Mushroom Selection Page/MushroomCardPage";
 import NavBar from "./components/Navigation Bar/NavBar";
-import History from "./components/Historical Data Page/History";
+import History from "./components/history/History";
 import Guide from "./components/Introduction and User Access/Guide";
 import YieldPage from "./components/Yields Page/YieldPage";
 import OverviewPage from "./components/Overview Page/OverviewPage";
