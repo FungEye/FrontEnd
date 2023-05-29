@@ -27,7 +27,7 @@ describe('Add New Species Page Suite', () => {
         cy.get("#add-mushroom-btn").should("exist");
     })
 
-    it.only('Add Mushroom - admin flow', () => {
+    it('Add Mushroom - admin flow', () => {
         loginAsAdmin()
         addNewSpeciesPage.navigate();
         addNewSpeciesPage.addTestSpecies();
