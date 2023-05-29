@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./css/AutoCompleteInput.css";
+import "../css/AutoCompleteInput.css";
 
 const AutocompleteInput = () => {
   const [searchText, setSearchText] = useState("");

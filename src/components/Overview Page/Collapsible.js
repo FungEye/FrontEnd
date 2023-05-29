@@ -1,5 +1,5 @@
-import "./css/Collapsible.css";
-import "./css/General.css";
+import "../css/Collapsible.css";
+import "../css/General.css";
 function Collapsible(props) {
   let width = props.width;
   let id = props.id;

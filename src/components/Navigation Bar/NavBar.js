@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import { useAuthUser, useSignOut, useIsAuthenticated } from "react-auth-kit";
 import { FaBars, FaTimes } from "react-icons/fa";
-import "./css/NavBar.css";
+import "../css/NavBar.css";
 import { useNavigate } from "react-router-dom";
-import "./css/General.css";
+import "../css/General.css";
 
 function Navbar() {
   const isAuthenticated = useIsAuthenticated();
@@ -35,7 +35,10 @@ function Navbar() {
         FungEye
       </h3>
       <nav ref={navRef}>
-      <p className="navItemsText  poppins" onClick={() => goTo("/dashboard/1")}>
+        <p
+          className="navItemsText  poppins"
+          onClick={() => goTo("/dashboard/1")}
+        >
           Dashboard
         </p>
         <p className="navItemsText  poppins" onClick={() => goTo("/overview")}>
@@ -46,7 +49,6 @@ function Navbar() {
         </p>
 
         <p className="navItemsText  poppins" onClick={() => goTo("/new")}>
-
           New
         </p>
         <p className="navItemsText  poppins" onClick={() => goTo("/yields")}>
@@ -64,14 +66,18 @@ function Navbar() {
           </p>
           <p className="navItemsText">|</p>
           <p
-            id ={isAuthenticated() ? "logout" : "login"}
+            id={isAuthenticated() ? "logout" : "login"}
             className="poppins navItemsText"
             onClick={() => (isAuthenticated() ? logOut() : goTo("/login"))}
           >
             {isAuthenticated() ? " Log out 🔓" : "Log in 🔒"}
           </p>
         </div>
-        <button id="nav-close-btn" className="nav-btn nav-close-btn" onClick={showNavbar}>
+        <button
+          id="nav-close-btn"
+          className="nav-btn nav-close-btn"
+          onClick={showNavbar}
+        >
           <FaTimes />
         </button>
       </nav>

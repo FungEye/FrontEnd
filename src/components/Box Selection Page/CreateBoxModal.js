@@ -1,10 +1,10 @@
-import "./css/CreateBoxModal.css";
-import "./css/General.css";
-import ButtonPrimary from "../ButtonPrimary";
-import ButtonSecondary from "../ButtonSecondary";
+import "../css/CreateBoxModal.css";
+import "../css/General.css";
+import ButtonPrimary from "../Buttons/ButtonPrimary";
+import ButtonSecondary from "../Buttons/ButtonSecondary";
 import { CSSTransition } from "react-transition-group";
 import ReactDOM from "react-dom";
-import Input from "../Input";
+import Input from "../Input Components/Input";
 import { useState } from "react";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
 import { setErrMsg } from "../../util/ErrorMessages";

@@ -1,10 +1,10 @@
-import "./css/General.css";
-import "./css/YieldPage.css";
+import "../css/General.css";
+import "../css/YieldPage.css";
 import YieldCard from "./YieldCard";
 import { useEffect, useCallback, useState } from "react";
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
 import { errorMessages } from "../../util/ErrorMessages";
-import ErrorModal from "../ErrorModal";
+import ErrorModal from "../Modals/ErrorModal";
 function YieldPage(props) {
   const [yieldList, setYieldList] = useState([]);
   const authHeader = useAuthHeader();

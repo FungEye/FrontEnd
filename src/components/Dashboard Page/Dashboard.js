@@ -1,16 +1,16 @@
-import "./css/Dashboard.css";
+import "../css/Dashboard.css";
 import { useState, useEffect } from "react";
 import { useAuthHeader } from "react-auth-kit";
-import ButtonPrimary from "../ButtonPrimary";
+import ButtonPrimary from "../Buttons/ButtonPrimary";
 import OneCondition from "./OneCondition";
-import Status from "./Status";
+import Status from "../Overview Page/Status";
 import { getTimeString, getDateString } from "../../util/DateTimeFormatter";
 import { useNavigate, useParams } from "react-router-dom";
-import Input from "../Input";
-import TextArea from "../TextArea";
+import Input from "../Input Components/Input";
+import TextArea from "../Input Components/TextArea";
 import { getTodayDate } from "../../util/DateTimeFormatter";
 import { setErrMsg, errorMessages } from "../../util/ErrorMessages";
-import ErrorModal from "../ErrorModal";
+import ErrorModal from "../Modals/ErrorModal";
 
 function Dashboard({ isNew }) {
   const { boxId } = useParams();

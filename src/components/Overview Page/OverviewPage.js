@@ -3,12 +3,12 @@ import OPActiveGrow from "./OPActiveGrow";
 import { useNavigate } from "react-router-dom";
 import useScript from "../../hooks/useScript";
 import OverviewBox from "./OverviewBox";
-import ButtonPrimary from "../ButtonPrimary";
+import ButtonPrimary from "../Buttons/ButtonPrimary";
 import { Link } from "react-router-dom";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
 import { useEffect, useState, useCallback } from "react";
 import { setErrMsg, errorMessages } from "../../util/ErrorMessages";
-import ErrorModal from "../ErrorModal";
+import ErrorModal from "../Modals/ErrorModal";
 
 function OverviewPage(props) {
   useScript(`

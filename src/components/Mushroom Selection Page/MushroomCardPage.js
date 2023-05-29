@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import MushroomCard from "./MushroomCard";
 import MushroomDetailsModal from "./MushroomDetailsModal";
-import "./css/MushroomCardPage.css";
+import "../css/MushroomCardPage.css";
 import ErrorModal from "../Modals/ErrorModal";
 import { setErrMsg, errorMessages } from "../../util/ErrorMessages";
 

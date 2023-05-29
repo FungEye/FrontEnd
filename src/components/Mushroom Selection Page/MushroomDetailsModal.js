@@ -1,4 +1,4 @@
-import "./css/MushroomDetailsModal.css";
+import "../css/MushroomDetailsModal.css";
 import ButtonPrimary from "../Buttons/ButtonPrimary";
 import ButtonSecondary from "../Buttons/ButtonSecondary";
 import XButton from "../Buttons/XButton";

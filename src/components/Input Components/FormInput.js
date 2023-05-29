@@ -1,4 +1,4 @@
-import "./css/AddNewSpecies2.css";
+import "../css/AddNewSpecies2.css";
 
 function FormInput(props) {
   return (

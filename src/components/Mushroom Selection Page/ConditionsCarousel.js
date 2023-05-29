@@ -7,8 +7,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-import "./css/ConditionsCarousel.css";
-import MushroomConditions from "./MushroomConditions";
+import "../css/ConditionsCarousel.css";
+import MushroomConditions from "../Mushroom Selection Page/MushroomConditions";
 import { fromPhasesToStats } from "../../util/ConditionsConverter";
 
 function ConditionsCarousel(props) {

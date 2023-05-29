@@ -1,6 +1,6 @@
 import ButtonPrimary from "../Buttons/ButtonPrimary";
 import XButton from "../Buttons/XButton";
-import "./css/ErrorModal.css";
+import "../css/ErrorModal.css";
 function ErrorModal(props) {
   if (!props.show) {
     return null;

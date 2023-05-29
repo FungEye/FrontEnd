@@ -1,5 +1,5 @@
-import "./css/General.css";
-import "./css/MushroomCard.css";
+import "../css/General.css";
+import "../css/MushroomCard.css";
 import ButtonPrimary from "../Buttons/ButtonPrimary";
 import ButtonSecondary from "../Buttons/ButtonSecondary";
 import { useNavigate } from "react-router-dom";

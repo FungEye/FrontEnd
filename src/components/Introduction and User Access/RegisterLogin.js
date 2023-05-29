@@ -1,15 +1,15 @@
 import { useSignIn } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import pic from "../img/mushroom.png";
-import "./css/RegisterLogin.css";
-import "./css/General.css";
-import ButtonPrimary from "../ButtonPrimary";
-import ButtonSecondary from "../ButtonSecondary";
-import Input from "../Input";
+import pic from "../../img/mushroom.png";
+import "../css/RegisterLogin.css";
+import "../css/General.css";
+import ButtonPrimary from "../Buttons/ButtonPrimary";
+import ButtonSecondary from "../Buttons/ButtonSecondary";
+import Input from "../Input Components/Input";
 import useValidate from "../../hooks/useValidate";
 import useHash from "../../hooks/useHash";
-import ErrorModal from "../ErrorModal";
+import ErrorModal from "../Modals/ErrorModal";
 export default function RegisterLogin() {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");

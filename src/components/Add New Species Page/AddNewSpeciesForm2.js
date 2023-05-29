@@ -1,5 +1,5 @@
-import FormInput from "../FormInput";
-import "./css/AddNewSpecies2.css";
+import FormInput from "../Input Components/FormInput";
+import "../css/AddNewSpecies2.css";
 
 function AddNewSpeciesForm2({ title, conditions, setConditions }) {
   function updateCondition(oldCondition, stat, minOrMax, value) {

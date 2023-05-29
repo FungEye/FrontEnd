@@ -1,5 +1,5 @@
-import "./css/YieldCard.css";
-import "./css/General.css";
+import "../css/YieldCard.css";
+import "../css/General.css";
 import { getDateString } from "../../util/DateTimeFormatter";
 import { useNavigate } from "react-router-dom";
 

@@ -1,5 +1,5 @@
-import "./css/Welcome.css";
-import "./css/WelcomeButton.css";
+import "../css/Welcome.css";
+import "../css/WelcomeButton.css";
 import { useNavigate } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 import { useAuthUser, useIsAuthenticated } from "react-auth-kit";
@@ -43,4 +43,3 @@ function Welcome() {
 }
 
 export default Welcome;
-

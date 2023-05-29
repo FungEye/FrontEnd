@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./css/ChooseBox.css";
-import "./css/General.css";
+import "../css/ChooseBox.css";
+import "../css/General.css";
 import BoxCard from "./BoxCard";
-import ButtonPrimary from "../ButtonPrimary";
+import ButtonPrimary from "../Buttons/ButtonPrimary";
 import CreateBoxModal from "./CreateBoxModal";
 import { useParams } from "react-router-dom";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
-import ErrorModal from "../ErrorModal";
+import ErrorModal from "../Modals/ErrorModal";
 import { setErrMsg, errorMessages } from "../../util/ErrorMessages";
 
 function ChooseBox() {

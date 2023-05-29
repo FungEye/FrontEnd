@@ -1,7 +1,7 @@
-import "./css/MushroomDetailsModal.css";
-import ButtonPrimary from "../ButtonPrimary";
-import ButtonSecondary from "../ButtonSecondary";
-import XButton from "../XButton";
+import "../css/MushroomDetailsModal.css";
+import ButtonPrimary from "../Buttons/ButtonPrimary";
+import ButtonSecondary from "../Buttons/ButtonSecondary";
+import XButton from "../Buttons/XButton";
 
 function ArchiveModal(props) {
   if (!props.show) {

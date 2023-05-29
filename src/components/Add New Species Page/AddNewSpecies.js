@@ -1,14 +1,14 @@
 import AddNewSpeciesForm2 from "./AddNewSpeciesForm2";
-import "./css/AddNewSpecies.css";
-import ButtonPrimary from "../ButtonPrimary";
-import XButton from "../XButton";
+import "../css/AddNewSpecies.css";
+import ButtonPrimary from "../Buttons/ButtonPrimary";
+import XButton from "../Buttons/XButton";
 import { useState, useEffect } from "react";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
 import { useParams, useNavigate } from "react-router-dom";
-import Input from "../Input";
-import TextArea from "../TextArea";
+import Input from "../Input Components/Input";
+import TextArea from "../Input Components/TextArea";
 import { setErrMsg } from "../../util/ErrorMessages";
-import ErrorModal from "../ErrorModal";
+import ErrorModal from "../Modals/ErrorModal";
 
 function AddNewSpecies({ isEdit }) {
   const { mushroomId } = useParams();

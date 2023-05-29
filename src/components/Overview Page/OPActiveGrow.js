@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import Status from "./Status";
-import "./css/OverviewPage.css";
-import "./css/General.css";
+import "../css/OverviewPage.css";
+import "../css/General.css";
 import { useState, useCallback } from "react";
 import { getFullDateTimeString } from "../../util/DateTimeFormatter";
 import { useAuthHeader } from "react-auth-kit";
 import { useEffect } from "react";
 import { setErrMsg, errorMessages } from "../../util/ErrorMessages";
-import ErrorModal from "../ErrorModal";
+import ErrorModal from "../Modals/ErrorModal";
 
 function OPActiveGrow(props) {
   let grow = props.grow;

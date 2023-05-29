@@ -1,7 +1,7 @@
-import ButtonPrimary from "../ButtonPrimary";
-import trashIcon from "../img/trash-2.svg";
-import "./css/OverviewPage.css";
-import "./css/General.css";
+import ButtonPrimary from "../Buttons/ButtonPrimary";
+import trashIcon from "../../img/trash-2.svg";
+import "../css/OverviewPage.css";
+import "../css/General.css";
 import { useNavigate } from "react-router-dom";
 
 function OverviewBox(props) {
