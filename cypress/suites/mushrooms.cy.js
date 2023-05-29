@@ -1,4 +1,3 @@
-import urls from "../util/data"
 import { loginAsAdmin, loginAsKamil } from "../util/loginFunctions";
 import MushroomsPage from "../pages/mushrooms.page";
 

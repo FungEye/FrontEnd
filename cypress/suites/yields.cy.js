@@ -1,4 +1,3 @@
-import urls from "../util/data"
 import { loginAsKamil } from "../util/loginFunctions"
 import { checkThatUrlContains } from "../util/urlChecker";
 import YieldsPage from "../pages/yields.page";

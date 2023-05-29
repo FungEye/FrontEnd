@@ -1,4 +1,3 @@
-import urls from "../util/data"
 import { loginAsKamil } from "../util/loginFunctions"
 import DashboardPage from "../pages/dashboard.page";
 
