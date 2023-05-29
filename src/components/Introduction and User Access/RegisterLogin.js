@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import pic from "../img/mushroom.png";
 import "./css/RegisterLogin.css";
 import "./css/General.css";
-import ButtonPrimary from "./ButtonPrimary";
-import ButtonSecondary from "./ButtonSecondary";
-import Input from "./Input";
-import useValidate from "../hooks/useValidate";
-import useHash from "../hooks/useHash";
-import ErrorModal from "./ErrorModal";
+import ButtonPrimary from "../ButtonPrimary";
+import ButtonSecondary from "../ButtonSecondary";
+import Input from "../Input";
+import useValidate from "../../hooks/useValidate";
+import useHash from "../../hooks/useHash";
+import ErrorModal from "../ErrorModal";
 export default function RegisterLogin() {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
@@ -26,7 +26,6 @@ export default function RegisterLogin() {
   const hash = useHash(password);
   const signIn = useSignIn();
   const navigate = useNavigate();
-
 
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -50,9 +49,10 @@ export default function RegisterLogin() {
     if (rawResponse.ok) {
       const content = await rawResponse.json();
       saveToken(content.accessToken);
-    }
-    else {
-      setErrorMessage("Unauthorized! Those are probably the wrong credentials.")
+    } else {
+      setErrorMessage(
+        "Unauthorized! Those are probably the wrong credentials."
+      );
       setShowErrorModal(true);
     }
   }
@@ -175,7 +175,11 @@ export default function RegisterLogin() {
           onClick={isLogin ? loginClick : registerClick}
         />
       </div>
-      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
+      <ErrorModal
+        show={showErrorModal}
+        setShow={setShowErrorModal}
+        message={errorMessage}
+      />
     </div>
   );
 }

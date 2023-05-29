@@ -3,11 +3,11 @@ import Status from "./Status";
 import "./css/OverviewPage.css";
 import "./css/General.css";
 import { useState, useCallback } from "react";
-import { getFullDateTimeString } from "../util/DateTimeFormatter";
+import { getFullDateTimeString } from "../../util/DateTimeFormatter";
 import { useAuthHeader } from "react-auth-kit";
 import { useEffect } from "react";
-import { setErrMsg, errorMessages } from "../util/ErrorMessages";
-import ErrorModal from "./ErrorModal";
+import { setErrMsg, errorMessages } from "../../util/ErrorMessages";
+import ErrorModal from "../ErrorModal";
 
 function OPActiveGrow(props) {
   let grow = props.grow;
@@ -16,7 +16,7 @@ function OPActiveGrow(props) {
   let lastMeasured = grow.id.dateTime;
   let lastMeasuredString = getFullDateTimeString(lastMeasured);
   let boxId = grow.id.boxId;
-    const [box, setBox] = useState(null);
+  const [box, setBox] = useState(null);
   const [mushroom, setMushroom] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [showErrorModal, setShowErrorModal] = useState(false);
@@ -25,15 +25,12 @@ function OPActiveGrow(props) {
   const authHeader = useAuthHeader();
 
   const getBox = useCallback(() => {
-    fetch(
-      `https://fungeye-383609.ey.r.appspot.com/box${boxId}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: authHeader(),
-        },
-      }
-    )
+    fetch(`https://fungeye-383609.ey.r.appspot.com/box${boxId}`, {
+      method: "GET",
+      headers: {
+        Authorization: authHeader(),
+      },
+    })
       .then((response) => {
         if (response.ok) return response.json();
         else {
@@ -44,14 +41,15 @@ function OPActiveGrow(props) {
       .then((m) => {
         setBox(m);
         const mushroomId = m.grows[0].mushroomId;
-        return fetch(`https://fungeye-383609.ey.r.appspot.com/mushroom/${mushroomId}`
-          ,
+        return fetch(
+          `https://fungeye-383609.ey.r.appspot.com/mushroom/${mushroomId}`,
           {
             method: "GET",
             headers: {
               Authorization: authHeader(),
             },
-          });
+          }
+        );
       })
       .then((response) => {
         if (response.ok) return response.json();
@@ -70,11 +68,9 @@ function OPActiveGrow(props) {
     // eslint-disable-next-line
   }, []);
 
-
   useEffect(() => {
     getBox();
   }, [getBox]);
-
 
   function goToDashboard() {
     if (mushroom) {
@@ -96,11 +92,17 @@ function OPActiveGrow(props) {
         <div className="column op-grow-loading">
           Grow is here. Loading info...
         </div>
-      ) :
+      ) : (
         <div className="op-info-row row align-items-center jc-center">
-          <img className="op-icon" alt={"Mushroom"} src={mushroom.imageUrl}></img>
+          <img
+            className="op-icon"
+            alt={"Mushroom"}
+            src={mushroom.imageUrl}
+          ></img>
           <div className="column w-100 align-items-start">
-            <div className="op-shroom-name ultra text-dark">{mushroom.name}</div>
+            <div className="op-shroom-name ultra text-dark">
+              {mushroom.name}
+            </div>
             <div className="row op-info-row text-dark align-items-center">
               <div className="op-info">Status: </div>
               <Status status={status} mini={true} />
@@ -111,8 +113,12 @@ function OPActiveGrow(props) {
             </div>
           </div>
         </div>
-      }
-      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
+      )}
+      <ErrorModal
+        show={showErrorModal}
+        setShow={setShowErrorModal}
+        message={errorMessage}
+      />
     </div>
   );
 }

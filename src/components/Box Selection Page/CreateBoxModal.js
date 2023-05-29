@@ -1,19 +1,19 @@
 import "./css/CreateBoxModal.css";
 import "./css/General.css";
-import ButtonPrimary from "./ButtonPrimary";
-import ButtonSecondary from "./ButtonSecondary";
+import ButtonPrimary from "../ButtonPrimary";
+import ButtonSecondary from "../ButtonSecondary";
 import { CSSTransition } from "react-transition-group";
 import ReactDOM from "react-dom";
-import Input from "./Input";
+import Input from "../Input";
 import { useState } from "react";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
-import { setErrMsg } from "../util/ErrorMessages";
+import { setErrMsg } from "../../util/ErrorMessages";
 
 const ChooseBoxModal = (props) => {
   const [eui, setEui] = useState("");
   const auth = useAuthUser();
   const authHeader = useAuthHeader();
-  const[errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   function createNewBox() {
     fetch("https://fungeye-383609.ey.r.appspot.com/box", {
@@ -25,19 +25,21 @@ const ChooseBoxModal = (props) => {
       },
       body: JSON.stringify({ username: auth().name, eui: eui }),
     })
-    .then((response) => {
-      if (response.ok) return response.json();
-      else {
-        setErrMsg(setErrorMessage, response.status);
-      }
-    })
+      .then((response) => {
+        if (response.ok) return response.json();
+        else {
+          setErrMsg(setErrorMessage, response.status);
+        }
+      })
       .then((m) => {
         props.onSelect(m.id);
       })
       .catch((err) =>
-       setErrorMessage("Something went wrong. Are you sure your EUI is 16 characters long, all numbers?"));
-    }
-  
+        setErrorMessage(
+          "Something went wrong. Are you sure your EUI is 16 characters long, all numbers?"
+        )
+      );
+  }
 
   return ReactDOM.createPortal(
     <CSSTransition
@@ -60,10 +62,10 @@ const ChooseBoxModal = (props) => {
             NEW BOX
           </div>
 
-          <div className="error">
-            {errorMessage}
+          <div className="error">{errorMessage}</div>
+          <div className="modal-question text-dark">
+            Please enter the EUI. It must be 16 characters long.
           </div>
-          <div className="modal-question text-dark">Please enter the EUI. It must be 16 characters long.</div>
           <div className="modal-body">
             <Input
               title=""
@@ -82,7 +84,13 @@ const ChooseBoxModal = (props) => {
           </div>
           <div className="modal-error">{props.err}</div>
           <div className="modal-footer modal-question">
-            <ButtonSecondary onClick={() => { setErrorMessage(""); props.onClose()}} text="Cancel" />
+            <ButtonSecondary
+              onClick={() => {
+                setErrorMessage("");
+                props.onClose();
+              }}
+              text="Cancel"
+            />
             <ButtonPrimary onClick={createNewBox} text="Create" />
           </div>
         </div>
@@ -91,6 +99,5 @@ const ChooseBoxModal = (props) => {
     document.body
   );
 };
-
 
 export default ChooseBoxModal;

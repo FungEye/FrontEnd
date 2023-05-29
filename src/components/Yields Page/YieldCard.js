@@ -1,6 +1,6 @@
 import "./css/YieldCard.css";
 import "./css/General.css";
-import { getDateString } from "../util/DateTimeFormatter";
+import { getDateString } from "../../util/DateTimeFormatter";
 import { useNavigate } from "react-router-dom";
 
 function YieldCard(props) {
@@ -21,11 +21,7 @@ function YieldCard(props) {
   return (
     <div className="yield-card maxw-95 flex-wrap bg-light border-dark rounded-20 mt-15 row align-items-center">
       <div className="icon-and-history column yield-col">
-        <img
-          className="op-icon"
-          src={imgUrl}
-          alt="mushroom"
-        />
+        <img className="op-icon" src={imgUrl} alt="mushroom" />
         <div
           onClick={() => {
             goToHistory();

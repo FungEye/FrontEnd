@@ -2,8 +2,8 @@ import { useEffect, useState, useCallback } from "react";
 import MushroomCard from "./MushroomCard";
 import MushroomDetailsModal from "./MushroomDetailsModal";
 import "./css/MushroomCardPage.css";
-import ErrorModal from "./ErrorModal";
-import { setErrMsg, errorMessages } from "../util/ErrorMessages";
+import ErrorModal from "../Modals/ErrorModal";
+import { setErrMsg, errorMessages } from "../../util/ErrorMessages";
 
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
 
@@ -13,7 +13,6 @@ function MushroomCardPage() {
   const [mushroomOnModal, setMushroomOnModal] = useState(null);
   const authHeader = useAuthHeader();
   const authUser = useAuthUser();
-
 
   const [errorMessage, setErrorMessage] = useState("");
   const [showErrorModal, setShowErrorModal] = useState(false);
@@ -57,11 +56,9 @@ function MushroomCardPage() {
     // eslint-disable-next-line
   }, []);
 
-
   useEffect(() => {
     getData();
   }, [getData]);
-
 
   return (
     <div className="column mushroom-page gap-20">
@@ -84,7 +81,6 @@ function MushroomCardPage() {
               />
             ))}
           </div>
-
         </div>
       )}
 
@@ -93,7 +89,11 @@ function MushroomCardPage() {
         setShow={setShow}
         mushroom={mushroomOnModal}
       />
-          <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
+      <ErrorModal
+        show={showErrorModal}
+        setShow={setShowErrorModal}
+        message={errorMessage}
+      />
     </div>
   );
 }

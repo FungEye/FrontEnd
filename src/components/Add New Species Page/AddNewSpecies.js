@@ -1,14 +1,14 @@
 import AddNewSpeciesForm2 from "./AddNewSpeciesForm2";
 import "./css/AddNewSpecies.css";
-import ButtonPrimary from "./ButtonPrimary";
-import XButton from "./XButton";
+import ButtonPrimary from "../ButtonPrimary";
+import XButton from "../XButton";
 import { useState, useEffect } from "react";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
 import { useParams, useNavigate } from "react-router-dom";
-import Input from "./Input";
-import TextArea from "./TextArea";
-import { setErrMsg } from "../util/ErrorMessages";
-import ErrorModal from "./ErrorModal";
+import Input from "../Input";
+import TextArea from "../TextArea";
+import { setErrMsg } from "../../util/ErrorMessages";
+import ErrorModal from "../ErrorModal";
 
 function AddNewSpecies({ isEdit }) {
   const { mushroomId } = useParams();
@@ -40,7 +40,7 @@ function AddNewSpecies({ isEdit }) {
 
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [message, setMessage] = useState((""));
+  const [message, setMessage] = useState("");
 
   async function submitNewMushroom() {
     const username = auth().name;
@@ -107,12 +107,13 @@ function AddNewSpecies({ isEdit }) {
           Authorization: authHeader(),
         },
         body: JSON.stringify(mushroom),
-      }).then((response) => {
-        if (response.ok) {
-          navigate("/mushrooms")
-        }
       })
-        .catch(err => {
+        .then((response) => {
+          if (response.ok) {
+            navigate("/mushrooms");
+          }
+        })
+        .catch((err) => {
           setErrorMessage(err.message);
           setShowErrorModal(true);
         });
@@ -182,7 +183,10 @@ function AddNewSpecies({ isEdit }) {
           setShowErrorModal(true);
         }
       })
-      .catch((err) => { setErrMsg(err.message); setShowErrorModal(true); });
+      .catch((err) => {
+        setErrMsg(err.message);
+        setShowErrorModal(true);
+      });
   }
 
   function archiveMushroom() {
@@ -223,7 +227,10 @@ function AddNewSpecies({ isEdit }) {
           setOrigin(m.origin);
           setImageUrl(m.imageUrl);
         })
-        .catch((err) => { setErrMsg(err.message); setShowErrorModal(true); });
+        .catch((err) => {
+          setErrMsg(err.message);
+          setShowErrorModal(true);
+        });
 
       fetch(`https://fungeye-383609.ey.r.appspot.com/ideal/${mushroomId}`, {
         method: "GET",
@@ -252,7 +259,10 @@ function AddNewSpecies({ isEdit }) {
             fruiting.filter((e) => e.developmentStage === "fruiting")[0]
           );
         })
-        .catch((err) => { setErrMsg(err.message); setShowErrorModal(true); });
+        .catch((err) => {
+          setErrMsg(err.message);
+          setShowErrorModal(true);
+        });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -365,8 +375,11 @@ function AddNewSpecies({ isEdit }) {
           cannot modify mushrooms.
         </p>
       )}
-      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
-
+      <ErrorModal
+        show={showErrorModal}
+        setShow={setShowErrorModal}
+        message={errorMessage}
+      />
     </div>
   );
 }

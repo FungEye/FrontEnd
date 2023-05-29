@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import "./css/ChooseBox.css";
 import "./css/General.css";
 import BoxCard from "./BoxCard";
-import ButtonPrimary from "./ButtonPrimary";
+import ButtonPrimary from "../ButtonPrimary";
 import CreateBoxModal from "./CreateBoxModal";
 import { useParams } from "react-router-dom";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
-import ErrorModal from "./ErrorModal";
-import { setErrMsg, errorMessages } from "../util/ErrorMessages";
+import ErrorModal from "../ErrorModal";
+import { setErrMsg, errorMessages } from "../../util/ErrorMessages";
 
 function ChooseBox() {
   const navigate = useNavigate();
@@ -93,7 +93,7 @@ function ChooseBox() {
       })
       .catch((err) => {
         setErrorMessage(err.message);
-        setShowErrorModal(true)
+        setShowErrorModal(true);
       });
   }
 
@@ -166,7 +166,11 @@ function ChooseBox() {
         </div>
         <p>{errorMessage}</p>
       </div>
-      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
+      <ErrorModal
+        show={showErrorModal}
+        setShow={setShowErrorModal}
+        message={errorMessage}
+      />
     </div>
   );
 }

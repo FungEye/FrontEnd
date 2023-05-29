@@ -1,7 +1,7 @@
 import "./css/General.css";
 import "./css/MushroomCard.css";
-import ButtonPrimary from "./ButtonPrimary";
-import ButtonSecondary from "./ButtonSecondary";
+import ButtonPrimary from "../Buttons/ButtonPrimary";
+import ButtonSecondary from "../Buttons/ButtonSecondary";
 import { useNavigate } from "react-router-dom";
 
 function MushroomCard(props) {
@@ -13,7 +13,11 @@ function MushroomCard(props) {
   const navigate = useNavigate();
 
   return (
-    <div mushroom-id={id} data-test={shroomname} className="mushroom-card bg-light rounded-20 column jc-center slightly-faded">
+    <div
+      mushroom-id={id}
+      data-test={shroomname}
+      className="mushroom-card bg-light rounded-20 column jc-center slightly-faded"
+    >
       <div className="row w-100 mw-100 mc-top-row">
         <div className="ultra text-dark align-self-center mc-mushroom-name w-75">
           {shroomname}
@@ -22,10 +26,7 @@ function MushroomCard(props) {
       </div>
       <div className="row jc-space-evenly w-100">
         <ButtonSecondary text="Details" onClick={showDetails} />
-        <ButtonPrimary
-          text="Pick"
-          onClick={() => navigate(`/boxes/${id}`)}
-        />
+        <ButtonPrimary text="Pick" onClick={() => navigate(`/boxes/${id}`)} />
       </div>
     </div>
   );

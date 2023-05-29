@@ -1,4 +1,4 @@
-import ButtonPrimary from "./ButtonPrimary";
+import ButtonPrimary from "../ButtonPrimary";
 import trashIcon from "../img/trash-2.svg";
 import "./css/OverviewPage.css";
 import "./css/General.css";

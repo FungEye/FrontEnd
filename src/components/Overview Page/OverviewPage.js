@@ -1,14 +1,14 @@
 import Collapsible from "./Collapsible";
 import OPActiveGrow from "./OPActiveGrow";
 import { useNavigate } from "react-router-dom";
-import useScript from "../hooks/useScript";
+import useScript from "../../hooks/useScript";
 import OverviewBox from "./OverviewBox";
-import ButtonPrimary from "./ButtonPrimary";
+import ButtonPrimary from "../ButtonPrimary";
 import { Link } from "react-router-dom";
 import { useAuthUser, useAuthHeader } from "react-auth-kit";
 import { useEffect, useState, useCallback } from "react";
-import { setErrMsg, errorMessages } from "../util/ErrorMessages";
-import ErrorModal from "./ErrorModal";
+import { setErrMsg, errorMessages } from "../../util/ErrorMessages";
+import ErrorModal from "../ErrorModal";
 
 function OverviewPage(props) {
   useScript(`
@@ -37,7 +37,6 @@ function OverviewPage(props) {
   const [grows, setGrows] = useState(null);
   const [boxes, setBoxes] = useState(null);
 
-
   const [errorMessage, setErrorMessage] = useState("");
   const [showErrorModal, setShowErrorModal] = useState(false);
 
@@ -65,9 +64,8 @@ function OverviewPage(props) {
       })
       .then((m) => {
         if (m === []) {
-          setGrows({ noGrows: true })
-        }
-        else {
+          setGrows({ noGrows: true });
+        } else {
           console.log(m);
           setGrows(m);
         }
@@ -80,17 +78,14 @@ function OverviewPage(props) {
   }, [username]);
 
   const getBoxes = useCallback(() => {
-    fetch(
-      `https://fungeye-383609.ey.r.appspot.com/${username}/boxes`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: authHeader(),
-        },
-      }
-    )
+    fetch(`https://fungeye-383609.ey.r.appspot.com/${username}/boxes`, {
+      method: "GET",
+      headers: {
+        Authorization: authHeader(),
+      },
+    })
       .then((response) => {
-        if (response.ok) return response.json()
+        if (response.ok) return response.json();
         else {
           setErrMsg(setErrorMessage, response.status);
           setShowErrorModal(true);
@@ -105,7 +100,6 @@ function OverviewPage(props) {
       });
     // eslint-disable-next-line
   }, [username]);
-
 
   useEffect(() => {
     getLatestMeasurements();
@@ -124,14 +118,8 @@ function OverviewPage(props) {
   let growList;
 
   if (!grows) {
-    growList = (
-      <div className="op-grow-loading">
-        Loading...
-      </div>
-    )
-  }
-
-  else {
+    growList = <div className="op-grow-loading">Loading...</div>;
+  } else {
     document.getElementById("active-grows").click();
     document.getElementById("active-grows").click();
     if (grows.noGrows) {
@@ -140,10 +128,8 @@ function OverviewPage(props) {
           <div className="op-info-value"> You have no Active Grows yet!</div>
           <ButtonPrimary text="Start Grow" onClick={() => goToMushrooms()} />
         </div>
-      )
-    }
-
-    else {
+      );
+    } else {
       document.getElementById("active-grows").click();
       document.getElementById("active-grows").click();
       growList = grows.map((x) => <OPActiveGrow grow={x} />);
@@ -153,14 +139,8 @@ function OverviewPage(props) {
   let boxList;
 
   if (!boxes) {
-    boxList = (
-      <div className="op-grow-loading">
-        Loading...
-      </div>
-    )
-  }
-
-  else {
+    boxList = <div className="op-grow-loading">Loading...</div>;
+  } else {
     if (boxes.noBoxes) {
       boxList = (
         <div className="column align-items-center gap-10">
@@ -168,14 +148,10 @@ function OverviewPage(props) {
           <ButtonPrimary text="Set Up Box" />
         </div>
       );
-    }
-
-    else {
+    } else {
       document.getElementById("your-boxes").click();
       document.getElementById("your-boxes").click();
-      boxList = boxes.map((x) => (
-        <OverviewBox box={x} />
-      ));
+      boxList = boxes.map((x) => <OverviewBox box={x} />);
     }
   }
   let collapsibleWidth = 450;
@@ -217,7 +193,11 @@ function OverviewPage(props) {
           </div>
         }
       />
-      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
+      <ErrorModal
+        show={showErrorModal}
+        setShow={setShowErrorModal}
+        message={errorMessage}
+      />
     </div>
   );
 }

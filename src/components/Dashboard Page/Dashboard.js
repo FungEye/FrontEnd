@@ -1,16 +1,16 @@
 import "./css/Dashboard.css";
 import { useState, useEffect } from "react";
 import { useAuthHeader } from "react-auth-kit";
-import ButtonPrimary from "./ButtonPrimary";
+import ButtonPrimary from "../ButtonPrimary";
 import OneCondition from "./OneCondition";
 import Status from "./Status";
-import { getTimeString, getDateString } from "../util/DateTimeFormatter";
+import { getTimeString, getDateString } from "../../util/DateTimeFormatter";
 import { useNavigate, useParams } from "react-router-dom";
-import Input from "./Input";
-import TextArea from "./TextArea";
-import { getTodayDate } from "../util/DateTimeFormatter";
-import { setErrMsg, errorMessages } from "../util/ErrorMessages";
-import ErrorModal from "./ErrorModal";
+import Input from "../Input";
+import TextArea from "../TextArea";
+import { getTodayDate } from "../../util/DateTimeFormatter";
+import { setErrMsg, errorMessages } from "../../util/ErrorMessages";
+import ErrorModal from "../ErrorModal";
 
 function Dashboard({ isNew }) {
   const { boxId } = useParams();
@@ -28,7 +28,6 @@ function Dashboard({ isNew }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
-
 
   const [yieldWeight, setYieldWeight] = useState("");
   const [comment, setComment] = useState("");
@@ -64,17 +63,18 @@ function Dashboard({ isNew }) {
           setTime(getTimeString(m.id.dateTime));
           setDate(getDateString(m.id.dateTime));
           const growId = m.growId;
-          return fetch(`https://fungeye-383609.ey.r.appspot.com/grow/${growId}`,
+          return fetch(
+            `https://fungeye-383609.ey.r.appspot.com/grow/${growId}`,
             {
               method: "GET",
               headers: {
                 Authorization: authHeader(),
               },
-            });
-
+            }
+          );
         })
         .then((response) => {
-          if (response.ok) return response.json()
+          if (response.ok) return response.json();
           else {
             setErrMsg(setErrorMessage, response.status);
             setShowErrorModal(true);
@@ -83,14 +83,15 @@ function Dashboard({ isNew }) {
         .then((m) => {
           setGrow(m);
           const mushroomId = m.mushroomId;
-          return fetch(`https://fungeye-383609.ey.r.appspot.com/mushroom/${mushroomId}`
-            ,
+          return fetch(
+            `https://fungeye-383609.ey.r.appspot.com/mushroom/${mushroomId}`,
             {
               method: "GET",
               headers: {
                 Authorization: authHeader(),
               },
-            });
+            }
+          );
         })
         .then((response) => {
           if (response.ok) return response.json();
@@ -128,7 +129,7 @@ function Dashboard({ isNew }) {
         if (res.ok) {
           setYieldWeight("");
           setComment("");
-          setYieldsMessage("Seemed successful!")
+          setYieldsMessage("Seemed successful!");
           return res.json();
         }
         return res.text().then((text) => {
@@ -195,8 +196,8 @@ function Dashboard({ isNew }) {
               {isNew
                 ? "No measurements yet, come back later"
                 : time == null
-                  ? "Loading date..."
-                  : time}
+                ? "Loading date..."
+                : time}
             </b>
           </div>
         </div>
@@ -215,12 +216,14 @@ function Dashboard({ isNew }) {
                 </div>
                 <Status status={status} />
               </div>
-
             </div>
 
-
             <div className="toggle text-dark p-10">
-              <ButtonPrimary wide={true} text="Toggle Light in Box" onClick={toggle} />
+              <ButtonPrimary
+                wide={true}
+                text="Toggle Light in Box"
+                onClick={toggle}
+              />
               <p className="poppins text-dark">{toggleMessage}</p>
             </div>
 
@@ -269,14 +272,15 @@ function Dashboard({ isNew }) {
           value={comment}
           title="Comment"
         />
-        <div className="">
-          {yieldsMessage}
-        </div>
+        <div className="">{yieldsMessage}</div>
         <ButtonPrimary text="Submit" onClick={() => submitYields()} />
       </div>
       <p>{error}</p>
-      <ErrorModal show={showErrorModal} setShow={setShowErrorModal} message={errorMessage} />
-
+      <ErrorModal
+        show={showErrorModal}
+        setShow={setShowErrorModal}
+        message={errorMessage}
+      />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import "./css/General.css";
 import "./css/BoxCard.css";
 import boxPic from "../img/box.png";
-import ButtonPrimary from "./ButtonPrimary";
+import ButtonPrimary from "../ButtonPrimary";
 //import { useNavigate } from "react-router-dom";
 function BoxCard({ box, onSelect }) {
   //const navigate = useNavigate();
