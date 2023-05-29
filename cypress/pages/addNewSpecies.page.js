@@ -141,7 +141,15 @@ class AddNewSpeciesPage {
 
    changeMushroomOrigin(newOrigin) {
       this.originInput.clear();
-      this.originInput.type(newOrigin);
+      const newOriginString = newOrigin + "";
+      this.originInput.type(newOriginString);
+      this.saveChangesButton.click();
+      cy.wait(2000);
+   }
+
+   changeMushroomDescription(newDescription) {
+      this.descriptionInput.clear();
+      this.descriptionInput.type(newDescription);
       this.saveChangesButton.click();
       cy.wait(2000);
    }

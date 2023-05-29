@@ -9,7 +9,7 @@ function loginAsKamil() {
     cy.get("[data-test='Username']").type("Kamil");
     cy.get("[data-test='Password']").type("qazwsx");
     cy.get("[data-test='Login']").click();
-    cy.wait(2000);
+    cy.wait(3000);
 }
 
 function loginAsAdmin() {
@@ -17,7 +17,7 @@ function loginAsAdmin() {
     cy.get("[data-test='Username']").type("admin");
     cy.get("[data-test='Password']").type("password");
     cy.get("[data-test='Login']").click();
-    cy.wait(2000);
+    cy.wait(3000);
 }
 
 function logOut() {

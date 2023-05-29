@@ -260,6 +260,10 @@
     margin: 0;
 }
 
+.gap-5 {
+    gap: 5px;
+}
+
 .margin-auto {
     margin: auto;
 }

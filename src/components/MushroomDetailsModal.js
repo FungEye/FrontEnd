@@ -39,13 +39,13 @@ function MushroomDetailsModal(props) {
           <div className="md-modal-body-info flex-wrap row">
             <div id="md-modal-body-left" className="column jc-space-between">
               <div className="md-modal-info-text column text-dark">
-                <div>
+                <div className="row gap-5">
                   <b>Origin: </b>
-                  {mushroom.origin}
+                  <div id="md-origin-value">{mushroom.origin}</div>
                 </div>
                 <div className="md-description">
                   <b>Description: </b>
-                  {mushroom.description}
+                  <div id="md-description-value">{mushroom.description}</div>
                 </div>
               </div>
               <div className="edit-button-container p-10">

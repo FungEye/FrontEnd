@@ -45,11 +45,24 @@ class MushroomsPage {
         return cy.get("[data-test='Pick']");
     }
 
+    get originValue() {
+        return cy.get("#md-origin-value");
+    }
+
+
+    get descriptionValue() {
+        return cy.get("#md-description-value");
+    }
+
+    get modalXButton() {
+        return cy.get(".x-button");
+    }
+
     goToEditMushroom(mushroomName) {
         const selector = this.getMushroomCardSelectorByName(mushroomName);
         this.openMushroomDetails(selector);
-        this.editMushroomButton.click();
-        cy.wait(2000);
+        this.pressEditButton();
+        cy.wait(5000);
     }
 
     checkThatPageLoads() {
@@ -62,6 +75,11 @@ class MushroomsPage {
         this.pickButtons.should("exist");
     }
 
+    closeDetailsModal() {
+        this.modalXButton.click();
+        cy.wait(1000);
+    }
+
     getMushroomCardSelectorByName(mushroomName) {
         return cy.get(`[data-test="${mushroomName}"]`);
     }
@@ -71,12 +89,32 @@ class MushroomsPage {
         mushroomCard.children().first().should("contain", name);
     }
 
+    checkMushroomImageURL(mushroomCardSelector, imgurl) {
+        const mushroomCard = mushroomCardSelector;
+        mushroomCard.children().eq(1).should('have.attr', 'src', imgurl)
+    }
+
+    checkMushroomOrigin(mushroomCardSelector, origin) {
+        this.openMushroomDetails(mushroomCardSelector);
+        this.originValue.should("contain", origin);
+
+    }
+
+    checkMushroomDescription(mushroomCardSelector, description) {
+        this.openMushroomDetails(mushroomCardSelector);
+        this.descriptionValue.should("contain", description);
+    }
+
     openMushroomDetails(mushroomCardSelector) {
         mushroomCardSelector.children().eq(1).children().first().click();
     }
 
     checkIfTestMushroomIsPresent() {
         this.checkMushroomName(this.firstTestMushroomCard, "Test Shroom");
+    }
+
+    pressEditButton() {
+        this.editMushroomButton.click();
     }
 
     checkIfTestMushroomIsNotPresent() {
@@ -91,7 +129,7 @@ class MushroomsPage {
     archiveTestMushroomAsAdmin() {
         const addNewSpeciesPage = new AddNewSpeciesPage();
         this.openMushroomDetails(this.firstTestMushroomCard);
-        this.editMushroomButton.click();
+        this.pressEditButton();
         addNewSpeciesPage.archiveMushroomAsAdminButton.click();
         cy.wait(1000);
     }
