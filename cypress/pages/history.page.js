@@ -36,6 +36,22 @@ class HistoryPage {
         return cy.get(".conditions-carousel-history");
     }
 
+    get tableToggle() {
+        return cy.get(".hb-table");
+    }
+
+    get graphToggle() {
+        return cy.get(".hb-graph");
+    }
+
+    get graphRechartsWrapper() {
+        return cy.get(".recharts-wrapper");
+    }
+
+    get tableWrapper() {
+        return cy.get(".MuiTableContainer-root");
+    }
+
     checkThatPageLoads() {
         this.pageContainer.should("exist");
         this.pageCardContainer.should("exist");
@@ -45,6 +61,28 @@ class HistoryPage {
         this.rightContentDiv.should("exist");
         this.toggleDiv.should("exist");
         this.conditionsCarouselHistory.should("exist");
+    }
+
+    toggleTable() {
+        this.tableToggle.click();
+        cy.wait(1000);
+    }
+
+    toggleGraph() {
+        this.graphToggle.click();
+        cy.wait(1000);
+    }
+
+    checkThatTableIsPresent() {
+        cy.wait(1000);
+        this.tableWrapper.should("exist");
+        cy.wait(1000);
+    }
+
+    checkThatGraphIsPresent() {
+        cy.wait(1000);
+        this.graphRechartsWrapper.should("exist");
+        cy.wait(1000);
     }
 }
 

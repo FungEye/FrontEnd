@@ -58,6 +58,11 @@ class MushroomsPage {
         return cy.get(".x-button");
     }
 
+    get modalTitle() {
+        return cy.get(".md-modal-body-title");
+    }
+   
+
     goToEditMushroom(mushroomName) {
         const selector = this.getMushroomCardSelectorByName(mushroomName);
         this.openMushroomDetails(selector);
@@ -84,9 +89,14 @@ class MushroomsPage {
         return cy.get(`[data-test="${mushroomName}"]`);
     }
 
-    checkMushroomName(mushroomCardSelector, name) {
+    checkMushroomNameInCard(mushroomCardSelector, name) {
         const mushroomCard = mushroomCardSelector;
         mushroomCard.children().first().should("contain", name);
+    }
+
+    checkMushroomNameInModal(mushroomCardSelector, name) {
+        this.openMushroomDetails(mushroomCardSelector);
+        this.modalTitle.should("contain", name);
     }
 
     checkMushroomImageURL(mushroomCardSelector, imgurl) {
@@ -105,12 +115,16 @@ class MushroomsPage {
         this.descriptionValue.should("contain", description);
     }
 
+    pickMushroom(selector) {
+        selector.children().eq(1).children().eq(1).click();
+    }
+
     openMushroomDetails(mushroomCardSelector) {
         mushroomCardSelector.children().eq(1).children().first().click();
     }
 
     checkIfTestMushroomIsPresent() {
-        this.checkMushroomName(this.firstTestMushroomCard, "Test Shroom");
+        this.checkMushroomNameInCard(this.firstTestMushroomCard, "Test Shroom");
     }
 
     pressEditButton() {

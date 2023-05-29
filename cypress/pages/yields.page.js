@@ -40,6 +40,10 @@ class YieldsPage {
         return cy.get(".yields-history-link");
     }
 
+    get yieldComments() {
+        return cy.get(".yield-comment");
+    }
+
     goToHistoryFromFirstMushroom() {
         this.yieldsHistoryLinks.first().click();
     }
@@ -54,6 +58,11 @@ class YieldsPage {
         this.yieldValueDivs.should("exist");
         this.yieldGramsLabelDivs.should("exist");
         this.yieldGramsValueDivs.should("exist");
+    }
+
+    lookForYield(grams, comment) {
+        this.yieldGramsValueDivs.should("contain", grams);
+        this.yieldComments.should("contain", comment);
     }
 }
 

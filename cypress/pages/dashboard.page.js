@@ -1,7 +1,7 @@
 class DashboardPage {
 
     navigate() {
-       cy.visit("/dashboard");
+       cy.visit("/dashboard/1");
     }
 
     get pageContainer() {
@@ -26,6 +26,25 @@ class DashboardPage {
 
     get registerYieldsDiv() {
         return cy.get(".dashboard-register-yields")
+    }
+
+    get yieldWeightInput() {
+        return cy.get("[data-test='Weight (grams)']")
+    }
+
+    get yieldCommentInput() {
+        return cy.get("[data-test='Comment']")
+    }
+
+    get registerYieldButton() {
+        return cy.get("[data-test='Submit']")
+    }
+
+    registerYield(grams, comment) {
+        this.yieldWeightInput.type(grams);
+        this.yieldCommentInput.type(comment);
+        this.registerYieldButton.click();
+        cy.wait(2000);
     }
 
     checkThatPageLoads() {

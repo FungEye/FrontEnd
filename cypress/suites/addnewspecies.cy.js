@@ -50,11 +50,11 @@ describe('Edit Species Suite', () => {
         mushroomsPage.goToEditMushroom(oldName);
         addNewSpeciesPage.changeMushroomName(newName);
         const selectorWithNewName = mushroomsPage.getMushroomCardSelectorByName(newName);
-        mushroomsPage.checkMushroomName(selectorWithNewName, newName);
+        mushroomsPage.checkMushroomNameInCard(selectorWithNewName, newName);
         mushroomsPage.goToEditMushroom(newName);
         addNewSpeciesPage.changeMushroomName(oldName);
         const selectorWithOldName = mushroomsPage.getMushroomCardSelectorByName(oldName);
-        mushroomsPage.checkMushroomName(selectorWithOldName, oldName);
+        mushroomsPage.checkMushroomNameInCard(selectorWithOldName, oldName);
     })
 
     it('Edit Mushroom origin', () => {

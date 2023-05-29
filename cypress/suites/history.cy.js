@@ -15,6 +15,10 @@ describe('History Page Suite', () => {
     })
 
     it('Check toggle between graph and table', () => {
-       //TODO
+        historyPage.checkThatGraphIsPresent();
+        historyPage.toggleTable();
+        historyPage.checkThatTableIsPresent();
+        historyPage.toggleGraph();
+        historyPage.checkThatGraphIsPresent();
     })
 })
