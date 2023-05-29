@@ -13,4 +13,8 @@ describe('Guide Page Suite', () => {
     it('Loads page', () => {
         guidePage.checkThatPageLoads();
     })
+
+    
+
+    
 })

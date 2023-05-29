@@ -14,4 +14,10 @@ describe('Dashboard Page Suite', () => {
     it('Loads page', () => {
        dashboardPage.checkThatPageLoads();
     })
+
+    it('Register a yield', () => {
+       //TODO
+    })
+
+    
 })

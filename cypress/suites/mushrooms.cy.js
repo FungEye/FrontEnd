@@ -12,6 +12,14 @@ describe('Mushroom Page Suite', () => {
         mushroomsPage.checkThatPageLoads();
     })
 
+    it('Check that DETAILS button opens the right mushroom modal.', () => {
+        //TODO
+    })
+
+    it('Check that PICK button selects the right mushroom.', () => {
+        //TODO
+    })
+
     it.skip('Check for TestShroom', () => {
         loginAsKamil();
         mushroomsPage.navigate();

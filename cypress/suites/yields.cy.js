@@ -13,4 +13,8 @@ describe('Yields Page Suite', () => {
     it('Loads page', () => {
        yieldsPage.checkThatPageLoads();
     })
+
+    it('Navigate to History from first mushroom card', () => {
+        //TODO
+    })
 })

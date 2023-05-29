@@ -13,4 +13,8 @@ describe('History Page Suite', () => {
     it('Loads page', () => {
         historyPage.checkThatPageLoads();
     })
+
+    it('Check toggle between graph and table', () => {
+       //TODO
+    })
 })
