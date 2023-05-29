@@ -1,15 +1,11 @@
 import urls from "../util/data"
+import { loginAsKamil } from "../util/loginFunctions"
 
 describe('Dashboard Page Suite', () => {
 
 
     beforeEach(() => {
-        cy.visit(`/login`)
-        cy.get("[data-test='Username']").type("Kamil");
-        cy.get("[data-test='Password']").type("qazwsx");
-        cy.get("[data-test='Login']").click();
-        cy.wait(1000);
-        cy.visit("/dashboard/1");
+        loginAsKamil();
     })
 
     it('Loads page', () => {

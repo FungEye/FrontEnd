@@ -1,13 +1,10 @@
 import urls from "../util/data"
+import { loginAsKamil } from "../util/loginFunctions";
 
 describe('Overview Page Suite', () => {
 
     beforeEach(() => {
-        cy.visit(`/login`)
-        cy.get("[data-test='Username']").type("Kamil");
-        cy.get("[data-test='Password']").type("qazwsx");
-        cy.get("[data-test='Login']").click();
-        cy.wait(1000);
+      loginAsKamil();
         goTo("/overview");
     })
 

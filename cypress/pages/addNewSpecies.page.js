@@ -2,7 +2,6 @@ import { testMushroom } from "../util/data";
 
 class AddNewSpeciesPage {
 
-
    navigate() {
       cy.visit("/new");
    }
