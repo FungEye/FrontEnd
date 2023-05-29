@@ -6,10 +6,6 @@ describe('Mushroom Page Suite', () => {
 
     const mushroomsPage = new MushroomsPage();
 
-    function goToPage() {
-        cy.visit("/mushrooms");
-    }
-
     it('Loads page', () => {
         loginAsKamil();
         cy.visit("/mushrooms");
@@ -24,19 +20,19 @@ describe('Mushroom Page Suite', () => {
 
     it('Check for TestShroom', () => {
         loginAsKamil();
-        goToPage();
+        mushroomsPage.navigate();
         mushroomsPage.checkIfTestMushroomIsPresent();
     })
 
     it('Archive Test Shroom', () => {
         loginAsAdmin();
-        goToPage();
+        mushroomsPage.navigate();
         mushroomsPage.archiveTestMushroomAsAdmin();
     })
 
     it.only('Check if Test Shroom is not present', () => {
         loginAsKamil();
-        goToPage();
+        mushroomsPage.navigate();
         mushroomsPage.checkIfTestMushroomIsNotPresent();
     })
 

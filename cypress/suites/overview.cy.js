@@ -3,9 +3,11 @@ import { loginAsKamil } from "../util/loginFunctions";
 
 describe('Overview Page Suite', () => {
 
+    const overviewPage = new OverviewPage();
+
     beforeEach(() => {
       loginAsKamil();
-        goTo("/overview");
+       overviewPage.navigate();
     })
 
     it('Loads page', () => {

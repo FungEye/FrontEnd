@@ -3,9 +3,11 @@ import { loginAsKamil } from "../util/loginFunctions"
 
 describe('History Page Suite', () => {
 
+    const historyPage = new HistoryPage();
 
     beforeEach(() => {
        loginAsKamil();
+       historyPage.navigate();
     })
 
     it('Loads page', () => {

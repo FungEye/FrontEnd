@@ -7,19 +7,9 @@ describe('Add New Species Page Suite', () => {
     const addNewSpeciesPage = new AddNewSpeciesPage();
     const mushroomsPage = new MushroomsPage();
 
-    function goToPage() {
-        cy.visit("/new");
-        cy.wait(1000);
-    }
-
-    function goToMushroomsPage() {
-        cy.visit("/mushrooms");
-        cy.wait(1000);
-    }
-
     it('Loads page', () => {
         loginAsKamil();
-        goToPage();
+        addNewSpeciesPage.navigate();
         cy.get(".cont").should("exist");
         cy.get("#new-species-title").should("exist");
         cy.get(".ans-inputs-row").should("exist");
@@ -45,7 +35,7 @@ describe('Add New Species Page Suite', () => {
 
     it('Check fields exist', () => {
         loginAsKamil();
-        goToPage();
+        addNewSpeciesPage.navigate();
         addNewSpeciesPage.checkTextFieldsExist();
         addNewSpeciesPage.checkSpawnRunFieldsExist();
         addNewSpeciesPage.checkPinningFieldsExist();
