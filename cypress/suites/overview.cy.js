@@ -6,15 +6,12 @@ describe('Overview Page Suite', () => {
     const overviewPage = new OverviewPage();
 
     beforeEach(() => {
-      loginAsKamil();
-       overviewPage.navigate();
+        loginAsKamil();
+        overviewPage.navigate();
     })
 
     it('Loads page', () => {
-        cy.get(".op-container").should("exist");
-        cy.get("#active-grows").should("exist");
-        cy.get("#your-boxes").should("exist");
-        cy.get("#past-yields").should("exist");
+        overviewPage.checkThatPageLoads();
     })
 
     it("Redirects to dashboard when clicking active grow", () => {

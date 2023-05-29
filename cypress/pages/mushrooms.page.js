@@ -21,8 +21,38 @@ class MushroomsPage {
         return cy.get("[data-test='Edit']");
     }
 
+    get pageContainer() {
+        return cy.get(".mushroom-page");
+    }
+
+    get startGrowInfo() {
+        return cy.get(".start-grow-info");
+    }
+
+    get mushroomCardsContainer() {
+        return cy.get(".mushroom-cards");
+    }
+
     navigate() {
         cy.visit("/mushrooms");
+    }
+
+    get detailsButtons() {
+        return cy.get("[data-test='Details']");
+    }
+
+    get pickButtons() {
+        return cy.get("[data-test='Pick']");
+    }
+
+    checkThatPageLoads() {
+        this.pageContainer.should("exist");
+        this.startGrowInfo.should("exist");
+        this.mushroomCardsContainer.should("exist");
+        cy.wait(3000);
+        this.mushroomCards.should("exist");
+        this.detailsButtons.should("exist");
+        this.pickButtons.should("exist");
     }
 
     checkMushroomName(mushroomCardSelector, name) {

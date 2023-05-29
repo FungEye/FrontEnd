@@ -112,6 +112,30 @@ class AddNewSpeciesPage {
       return cy.get("#add-mushroom-btn");
    }
 
+   get pageContainer() {
+      return cy.get(".cont");
+   }
+
+   get pageTitle() {
+      return cy.get("#new-species-title");
+   }
+
+   get inputRow() {
+      return cy.get(".ans-inputs-row");
+   }
+
+   get phasesCards() {
+      return cy.get(".phases");
+   }
+
+   checkThatPageLoads() {
+      this.pageContainer.should("exist");
+      this.pageTitle.should("exist");
+      this.inputRow.should("exist");
+      this.phasesCards.should("exist");
+      this.addMushroomButton.should("exist");
+   }
+
    checkTextFieldsExist() {
       this.mushroomNameInput.should("exist");
       this.originInput.should("exist");

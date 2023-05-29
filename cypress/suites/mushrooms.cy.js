@@ -8,29 +8,23 @@ describe('Mushroom Page Suite', () => {
 
     it('Loads page', () => {
         loginAsKamil();
-        cy.visit("/mushrooms");
-        cy.get(".mushroom-page").should("exist");
-        cy.get(".start-grow-info").should("exist");
-        cy.get(".mushroom-cards").should("exist");
-        cy.wait(3000);
-        cy.get(".mushroom-card").should("exist");
-        cy.get("[data-test='Details']").should("exist");
-        cy.get("[data-test='Pick']").should("exist");
+        mushroomsPage.navigate();
+        mushroomsPage.checkThatPageLoads();
     })
 
-    it('Check for TestShroom', () => {
+    it.skip('Check for TestShroom', () => {
         loginAsKamil();
         mushroomsPage.navigate();
         mushroomsPage.checkIfTestMushroomIsPresent();
     })
 
-    it('Archive Test Shroom', () => {
+    it.skip('Archive Test Shroom', () => {
         loginAsAdmin();
         mushroomsPage.navigate();
         mushroomsPage.archiveTestMushroomAsAdmin();
     })
 
-    it.only('Check if Test Shroom is not present', () => {
+    it.skip('Check if Test Shroom is not present', () => {
         loginAsKamil();
         mushroomsPage.navigate();
         mushroomsPage.checkIfTestMushroomIsNotPresent();

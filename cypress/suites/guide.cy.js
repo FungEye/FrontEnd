@@ -11,8 +11,6 @@ describe('Guide Page Suite', () => {
     })
 
     it('Loads page', () => {
-        cy.get(".guide-page").should("exist");
-        cy.get(".cont-guide").should("exist");
-        cy.get(".img-600px").should("exist");
+        guidePage.checkThatPageLoads();
     })
 })

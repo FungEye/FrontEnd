@@ -10,11 +10,7 @@ describe('Add New Species Page Suite', () => {
     it('Loads page', () => {
         loginAsKamil();
         addNewSpeciesPage.navigate();
-        cy.get(".cont").should("exist");
-        cy.get("#new-species-title").should("exist");
-        cy.get(".ans-inputs-row").should("exist");
-        cy.get(".phases").should("exist");
-        cy.get("#add-mushroom-btn").should("exist");
+        addNewSpeciesPage.checkThatPageLoads();
     })
 
     it('Add Mushroom - admin flow', () => {
