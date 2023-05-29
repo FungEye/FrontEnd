@@ -33,7 +33,7 @@ describe('Mushroom Page Suite', () => {
             checkThatUrlContains(`/boxes/${id}`);
         })
     })
-})
+});
 
 describe.skip("SKIP: Test Mushroom Suite"), () => {
     it('Check for TestShroom', () => {
