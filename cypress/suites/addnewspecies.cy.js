@@ -103,8 +103,23 @@ describe('Edit Species Suite', () => {
         })
     })
 
-    it.skip('Edit Mushroom image URL', () => {
-        //TODO
+    it.only('Edit Mushroom image URL', () => {
+        loginAsAdmin();
+        mushroomsPage.navigate();
+        const mushroomName = "King Oyster";
+        let mushroomSelector = mushroomsPage.getMushroomCardSelectorByName(mushroomName);
+        const newImgUrl = "https://i.pinimg.com/originals/3a/07/c5/3a07c540e1ee149220a774d1f2cdca31.png";
+        mushroomSelector.children().eq(0).children().eq(1).invoke('attr', 'src')
+        .then((imgurl) => {
+            mushroomsPage.goToEditMushroom(mushroomName);
+            addNewSpeciesPage.changeMushroomImgURL(newImgUrl);
+            const selector3 = mushroomsPage.getMushroomCardSelectorByName(mushroomName);
+            mushroomsPage.checkMushroomImageURL(selector3, newImgUrl)
+            mushroomsPage.goToEditMushroom(mushroomName);
+            addNewSpeciesPage.changeMushroomImgURL(imgurl);
+            const selector5 = mushroomsPage.getMushroomCardSelectorByName(mushroomName);
+            mushroomsPage.checkMushroomImageURL(selector5, imgurl);
+        })
     })
 
 })

@@ -154,6 +154,13 @@ class AddNewSpeciesPage {
       cy.wait(2000);
    }
 
+   changeMushroomImgURL(newImgURL) {
+      this.imageURLInput.clear();
+      this.imageURLInput.type(newImgURL);
+      this.saveChangesButton.click();
+      cy.wait(2000);
+   }
+
    checkThatPageLoads() {
       this.pageContainer.should("exist");
       this.pageTitle.should("exist");

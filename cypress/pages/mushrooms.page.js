@@ -101,7 +101,7 @@ class MushroomsPage {
 
     checkMushroomImageURL(mushroomCardSelector, imgurl) {
         const mushroomCard = mushroomCardSelector;
-        mushroomCard.children().eq(1).should('have.attr', 'src', imgurl)
+        mushroomCard.children().eq(0).children().eq(1).should('have.attr', 'src', imgurl)
     }
 
     checkMushroomOrigin(mushroomCardSelector, origin) {
