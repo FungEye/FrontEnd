@@ -1,6 +1,8 @@
 import NavBar from "../pages/navBar.page";
+import LoginPage from "../pages/login.page";
 
 const navBar = new NavBar();
+const loginPage = new LoginPage();
 
 function loginAsKamil() {
     cy.visit(`/login`)
@@ -11,7 +13,7 @@ function loginAsKamil() {
 }
 
 function loginAsAdmin() {
-    cy.visit(`/login`)
+    cy.visit(`/login`);
     cy.get("[data-test='Username']").type("admin");
     cy.get("[data-test='Password']").type("password");
     cy.get("[data-test='Login']").click();

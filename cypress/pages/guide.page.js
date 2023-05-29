@@ -22,3 +22,5 @@ class GuidePage {
         this.mushroomLifecycleImage.should("exist");
     }
 }
+
+export default GuidePage

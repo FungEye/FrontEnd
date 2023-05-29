@@ -41,12 +41,37 @@ describe('Add New Species Page Suite', () => {
 })
 
 describe('Edit Species Suite', () => {
-    it('Edit Mushroom name', () => {
-        //TODO
+    const mushroomsPage = new MushroomsPage();
+    const addNewSpeciesPage = new AddNewSpeciesPage();
+    it.only('Edit Mushroom name', () => {
+        loginAsAdmin();
+        mushroomsPage.navigate();
+        const oldName = "King Oyster";
+        const newName = "New Name";
+        mushroomsPage.goToEditMushroom(oldName);
+        addNewSpeciesPage.changeMushroomName(newName);
+        const selectorWithNewName = mushroomsPage.getMushroomCardSelectorByName(newName);
+        mushroomsPage.checkMushroomName(selectorWithNewName, newName);
+        mushroomsPage.goToEditMushroom(newName);
+        addNewSpeciesPage.changeMushroomName(oldName);
+        const selectorWithOldName = mushroomsPage.getMushroomCardSelectorByName(oldName);
+        mushroomsPage.checkMushroomName(selectorWithOldName, oldName);
     })
 
     it('Edit Mushroom origin', () => {
-        //TODO
+        loginAsAdmin();
+        mushroomsPage.navigate();
+        const mushroomName = "King Oyster";
+        mushroomsPage.goToEditMushroom(mushroomName);
+        const oldOrigin = addNewSpeciesPage.originInput.invoke('val');
+        const newOrigin = "New Origin";
+        addNewSpeciesPage.changeMushroomOrigin(newOrigin);
+        const selectorWithNewName = mushroomsPage.getMushroomCardSelectorByName(newName);
+        mushroomsPage.checkMushroomName(selectorWithNewName, newName);
+        mushroomsPage.goToEditMushroom(newName);
+        addNewSpeciesPage.changeMushroomName(oldName);
+        const selectorWithOldName = mushroomsPage.getMushroomCardSelectorByName(oldName);
+        mushroomsPage.checkMushroomName(selectorWithOldName, oldName);
     })
 
     it('Edit Mushroom description', () => {

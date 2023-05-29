@@ -35,3 +35,5 @@ class OverviewPage {
         this.pastYieldsDiv.should("exist");
     }
 }
+
+export default OverviewPage

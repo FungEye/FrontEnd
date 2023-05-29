@@ -4,3 +4,5 @@ class LoginPage {
        cy.visit("/login");
     }
 }
+
+export default LoginPage

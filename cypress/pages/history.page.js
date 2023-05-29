@@ -47,3 +47,5 @@ class HistoryPage {
         this.conditionsCarouselHistory.should("exist");
     }
 }
+
+export default HistoryPage

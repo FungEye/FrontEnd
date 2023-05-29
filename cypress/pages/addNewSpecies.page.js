@@ -128,6 +128,24 @@ class AddNewSpeciesPage {
       return cy.get(".phases");
    }
 
+   get saveChangesButton() {
+      return cy.get("#save-changes-btn");
+   }
+
+   changeMushroomName(newName) {
+      this.mushroomNameInput.clear();
+      this.mushroomNameInput.type(newName);
+      this.saveChangesButton.click();
+      cy.wait(2000);
+   }
+
+   changeMushroomOrigin(newOrigin) {
+      this.originInput.clear();
+      this.originInput.type(newOrigin);
+      this.saveChangesButton.click();
+      cy.wait(2000);
+   }
+
    checkThatPageLoads() {
       this.pageContainer.should("exist");
       this.pageTitle.should("exist");

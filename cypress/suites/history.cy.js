@@ -1,5 +1,6 @@
 import urls from "../util/data"
 import { loginAsKamil } from "../util/loginFunctions"
+import HistoryPage from "../pages/history.page";
 
 describe('History Page Suite', () => {
 

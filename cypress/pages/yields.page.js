@@ -37,7 +37,7 @@ class YieldsPage {
     }
 
     get yieldsHistoryLinks() {
-        return cy.get("yields-history-link");
+        return cy.get(".yields-history-link");
     }
 
     goToHistoryFromFirstMushroom() {
@@ -56,3 +56,5 @@ class YieldsPage {
         this.yieldGramsValueDivs.should("exist");
     }
 }
+
+export default YieldsPage

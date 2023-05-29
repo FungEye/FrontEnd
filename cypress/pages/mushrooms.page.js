@@ -45,6 +45,13 @@ class MushroomsPage {
         return cy.get("[data-test='Pick']");
     }
 
+    goToEditMushroom(mushroomName) {
+        const selector = this.getMushroomCardSelectorByName(mushroomName);
+        this.openMushroomDetails(selector);
+        this.editMushroomButton.click();
+        cy.wait(2000);
+    }
+
     checkThatPageLoads() {
         this.pageContainer.should("exist");
         this.startGrowInfo.should("exist");
@@ -53,6 +60,10 @@ class MushroomsPage {
         this.mushroomCards.should("exist");
         this.detailsButtons.should("exist");
         this.pickButtons.should("exist");
+    }
+
+    getMushroomCardSelectorByName(mushroomName) {
+        return cy.get(`[data-test="${mushroomName}"]`);
     }
 
     checkMushroomName(mushroomCardSelector, name) {

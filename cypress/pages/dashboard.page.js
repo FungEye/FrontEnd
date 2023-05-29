@@ -25,7 +25,7 @@ class DashboardPage {
     }
 
     get registerYieldsDiv() {
-        cy.get(".dashboard-register-yields")
+        return cy.get(".dashboard-register-yields")
     }
 
     checkThatPageLoads() {
@@ -37,3 +37,5 @@ class DashboardPage {
         this.registerYieldsDiv.should("exist");
     }
 }
+
+export default DashboardPage
