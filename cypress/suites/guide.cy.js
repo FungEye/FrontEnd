@@ -14,7 +14,4 @@ describe('Guide Page Suite', () => {
         guidePage.checkThatPageLoads();
     })
 
-    
-
-    
 })

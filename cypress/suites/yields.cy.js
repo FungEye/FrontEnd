@@ -1,5 +1,6 @@
 import urls from "../util/data"
 import { loginAsKamil } from "../util/loginFunctions"
+import { checkThatUrlContains } from "../util/urlChecker";
 
 describe('Yields Page Suite', () => {
 
@@ -15,6 +16,7 @@ describe('Yields Page Suite', () => {
     })
 
     it('Navigate to History from first mushroom card', () => {
-        //TODO
+        yieldsPage.goToHistoryFromFirstMushroom();
+        checkThatUrlContains("/history");
     })
 })

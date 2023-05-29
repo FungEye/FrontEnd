@@ -42,19 +42,19 @@ describe('Add New Species Page Suite', () => {
 
 describe('Edit Species Suite', () => {
     it('Edit Mushroom name', () => {
-        
+        //TODO
     })
 
     it('Edit Mushroom origin', () => {
-        
+        //TODO
     })
 
     it('Edit Mushroom description', () => {
-        
+        //TODO
     })
 
     it('Edit Mushroom image URL', () => {
-        
+        //TODO
     })
 
 })

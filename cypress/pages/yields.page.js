@@ -36,8 +36,12 @@ class YieldsPage {
         return cy.get(".yield-grams-value");
     }
 
+    get yieldsHistoryLinks() {
+        return cy.get("yields-history-link");
+    }
+
     goToHistoryFromFirstMushroom() {
-        //TODO
+        this.yieldsHistoryLinks.first().click();
     }
 
     checkThatPageLoads() {
