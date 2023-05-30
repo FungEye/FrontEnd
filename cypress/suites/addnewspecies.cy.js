@@ -1,7 +1,6 @@
 import { logOut, loginAsAdmin, loginAsKamil } from "../util/loginFunctions";
 import MushroomsPage from "../pages/mushrooms.page";
-import AddNewSpeciesPage from "../pages/addNewSpecies.page";
-
+import AddNewSpeciesPage from "../pages/addnewspecies.page";
 describe('Add New Species Page Suite', () => {
 
     const addNewSpeciesPage = new AddNewSpeciesPage();
@@ -103,7 +102,7 @@ describe('Edit Species Suite', () => {
         })
     })
 
-    it.only('Edit Mushroom image URL', () => {
+    it('Edit Mushroom image URL', () => {
         loginAsAdmin();
         mushroomsPage.navigate();
         const mushroomName = "King Oyster";

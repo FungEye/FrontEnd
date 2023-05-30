@@ -17,7 +17,7 @@ describe('Dashboard Page Suite', () => {
        dashboardPage.checkThatPageLoads();
     })
 
-    it.only('Register a yield', () => {
+    it('Register a yield', () => {
         const randomNumber = (Math.random()*1000 + Math.random()*100 + Math.random()*10 + Math.random()*0.1).toFixed(2);
         console.log(randomNumber);
         const comment = "here is my random yield!";
