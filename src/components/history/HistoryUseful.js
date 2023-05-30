@@ -15,13 +15,7 @@ export default function HistoryUseful() {
           className=" usefulLinks textHover varela"
           onClick={() => navigate("/mushrooms")}
         >
-          >See mushroom details
-        </div>
-        <div
-          className=" usefulLinks textHover varela"
-          onClick={() => navigate("/recipes")}
-        >
-          >See recipes
+          {">"}See mushroom details
         </div>
       </div>
     </div>

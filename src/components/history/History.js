@@ -1,4 +1,4 @@
-import ButtonSecondary from "../ButtonSecondary";
+import ButtonSecondary from "../Buttons/ButtonSecondary";
 import "../css/History.css";
 import "../css/General.css";
 import HistoryToggle from "./HistoryToggle";
@@ -9,7 +9,7 @@ import CarouselTable from "./HistoryTableCarousel";
 import { useAuthHeader } from "react-auth-kit";
 import { useNavigate, useParams } from "react-router-dom";
 import { setErrMsg, errorMessages } from "../../util/ErrorMessages";
-import ErrorModal from "../ErrorModal";
+import ErrorModal from "../Modals/ErrorModal";
 
 export default function History() {
   const [isGraph, setIsGraph] = useState(true);
