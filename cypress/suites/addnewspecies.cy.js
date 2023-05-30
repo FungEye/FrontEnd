@@ -103,7 +103,7 @@ describe('Edit Species Suite', () => {
         })
     })
 
-    it.only('Edit Mushroom image URL', () => {
+    it('Edit Mushroom image URL', () => {
         loginAsAdmin();
         mushroomsPage.navigate();
         const mushroomName = "King Oyster";

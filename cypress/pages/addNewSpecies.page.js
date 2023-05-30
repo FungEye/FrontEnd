@@ -1,15 +1,12 @@
 import { testMushroom } from "../util/data";
 
 class AddNewSpeciesPage {
-
    navigate() {
       cy.visit("/new");
    }
-
    get archiveMushroomAsAdminButton() {
       return cy.get("[data-test='Archive mushroom']");
    }
-
    get mushroomNameInput() {
       return cy.get("[data-test='Mushroom Name']");
    }
