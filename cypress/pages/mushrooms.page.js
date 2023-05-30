@@ -1,4 +1,4 @@
-import AddNewSpeciesPage from "./addNewSpecies.page";
+import AddNewSpeciesPage from "./addnewspecies.page";
 class MushroomsPage {
 
     get mushroomCards() {
