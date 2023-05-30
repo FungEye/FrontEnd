@@ -25,7 +25,7 @@ class OverviewPage {
     }
 
     get growCards() {
-        return cy.get(".op-grown");
+        return cy.get(".op-grow");
     }
 
     checkThatPageLoads() {
