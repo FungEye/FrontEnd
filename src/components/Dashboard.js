@@ -5,7 +5,7 @@ import ButtonPrimary from "./ButtonPrimary";
 import OneCondition from "./OneCondition";
 import Status from "./Status";
 import { getTimeString, getDateString } from "../util/DateTimeFormatter";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Input from "./Input";
 import TextArea from "./TextArea";
 import { getTodayDate } from "../util/DateTimeFormatter";
@@ -26,6 +26,8 @@ function Dashboard({ isNew }) {
 
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
 
   const [yieldWeight, setYieldWeight] = useState("");
@@ -151,6 +153,7 @@ function Dashboard({ isNew }) {
       comment: comment,
     };
     await submit(yieldObject);
+    navigate("/yields");
   }
 
   function toggle() {

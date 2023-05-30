@@ -108,11 +108,7 @@ function AddNewSpecies({ isEdit }) {
         },
         body: JSON.stringify(mushroom),
       }).then((response) => {
-        if (!response.ok) {
-          setErrMsg(setErrorMessage, response.status);
-          setShowErrorModal(true);
-        }
-        else {
+        if (response.ok) {
           navigate("/mushrooms")
         }
       })
@@ -120,7 +116,6 @@ function AddNewSpecies({ isEdit }) {
           setErrorMessage(err.message);
           setShowErrorModal(true);
         });
-
     }
     await submit(mushroom);
   }
@@ -181,14 +176,11 @@ function AddNewSpecies({ isEdit }) {
       body: JSON.stringify(mushroom),
     })
       .then((response) => {
-        console.log("lol");
-        response.ok()
-          ? setMessage("Mushroom edited successfully.")
-          : setMessage("Operation failed.")
-        setTimeout(() => {
-          setMessage("");
-          if (response.ok) navigate("/mushrooms");
-        }, 5000);
+        if (response.ok) navigate("/mushrooms");
+        else {
+          setErrMsg(setErrorMessage, response.status);
+          setShowErrorModal(true);
+        }
       })
       .catch((err) => { setErrMsg(err.message); setShowErrorModal(true); });
   }
@@ -332,7 +324,7 @@ function AddNewSpecies({ isEdit }) {
                   <AddNewSpeciesForm2
                     conditions={spawnRunConditions}
                     setConditions={setSpawnRunConditions}
-                    title="Spawning"
+                    title="Spawn Run"
                   />
                 )}
                 <AddNewSpeciesForm2

@@ -41,6 +41,11 @@ function OverviewPage(props) {
   const [errorMessage, setErrorMessage] = useState("");
   const [showErrorModal, setShowErrorModal] = useState(false);
 
+  //TODO fix this... get the grows for a user instead
+  // and then get each grow by grow id
+  // and inside each grow, also each mushroom
+  // to give it the mushroom name and image url
+  // Yikes!
   const getLatestMeasurements = useCallback(() => {
     fetch(
       `https://fungeye-383609.ey.r.appspot.com/${username}/measurements/latest`,
@@ -63,6 +68,7 @@ function OverviewPage(props) {
           setGrows({ noGrows: true })
         }
         else {
+          console.log(m);
           setGrows(m);
         }
       })
