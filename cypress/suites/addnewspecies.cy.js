@@ -1,7 +1,6 @@
 import { logOut, loginAsAdmin, loginAsKamil } from "../util/loginFunctions";
 import MushroomsPage from "../pages/mushrooms.page";
-import AddNewSpeciesPage from "../pages/addNewSpecies.page";
-
+import AddNewSpeciesPage from "../pages/addnewspecies.page";
 describe('Add New Species Page Suite', () => {
 
     const addNewSpeciesPage = new AddNewSpeciesPage();
