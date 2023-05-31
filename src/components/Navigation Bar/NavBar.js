@@ -41,9 +41,6 @@ function Navbar() {
         >
           Dashboard
         </p>
-        <p className="navItemsText  poppins" onClick={() => goTo("/overview")}>
-          Overview
-        </p>
         <p className="navItemsText  poppins" onClick={() => goTo("/mushrooms")}>
           Mushrooms
         </p>
